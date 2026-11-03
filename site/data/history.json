@@ -272,5 +272,70 @@
    "result": null,
    "closing": 4.2
   }
+ ],
+ "slips": [
+  {
+   "legs": [
+    {
+     "match_id": 575381,
+     "comp": "CL",
+     "date": "2026-11-03T20:00:00Z",
+     "home": "Atleti",
+     "away": "Bayern",
+     "key": "OU3.5",
+     "side": "Under",
+     "label": "Under 3.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.6007,
+     "fair": 1.66,
+     "est": 1.7,
+     "est_src": "διάμεσος 6 εταιρειών",
+     "best": 1.71,
+     "book": "LeoVegas (SE)",
+     "result": null
+    },
+    {
+     "match_id": 575391,
+     "comp": "CL",
+     "date": "2026-11-04T20:00:00Z",
+     "home": "Dortmund",
+     "away": "Real Betis",
+     "key": "OU3.5",
+     "side": "Under",
+     "label": "Under 3.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.5955,
+     "fair": 1.68,
+     "est": 1.68,
+     "est_src": "διάμεσος 6 εταιρειών",
+     "best": 1.68,
+     "book": "Unibet (SE)",
+     "result": null
+    },
+    {
+     "match_id": 560640,
+     "comp": "PL",
+     "date": "2026-11-07T15:00:00Z",
+     "home": "Arsenal",
+     "away": "Hull City",
+     "key": "OU3.5",
+     "side": "Under",
+     "label": "Under 3.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.6262,
+     "fair": 1.6,
+     "est": 1.67,
+     "est_src": "διάμεσος 7 εταιρειών",
+     "best": 1.68,
+     "book": "Unibet (SE)",
+     "result": null
+    }
+   ],
+   "odds": 4.77,
+   "p": 0.224,
+   "ev": 0.0684,
+   "created": "2026-11-03T15:30:30.391639+00:00",
+   "result": null
+  }
  ]
 }
