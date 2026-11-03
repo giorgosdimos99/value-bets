@@ -262,21 +262,49 @@ def fdorg_standings(comp):
 
 # ---------------- The Odds API (δωρεάν κλειδί, 500 credits/μήνα) ----------------
 
-def odds_api(sport):
-    """Επιστρέφει (events, remaining). Χρησιμοποιεί cache για να μη ξοδεύει credits."""
+def odds_events(sport):
+    """Λίστα επόμενων αγώνων από The Odds API. Δεν κοστίζει credits."""
+    if not config.ODDS_API_KEY:
+        return []
+    key = f"events_{sport}.json"
+    hit = _cached(key, 2)
+    if hit is not None:
+        return hit
+    try:
+        raw, _ = _get(f"https://api.the-odds-api.com/v4/sports/{sport}/events?apiKey={config.ODDS_API_KEY}")
+        out = [{"id": e["id"], "date": e["commence_time"], "home": e["home_team"], "away": e["away_team"]}
+               for e in json.loads(raw)]
+    except Exception as e:
+        print(f"  ! events {sport}: {e}")
+        return _cached(key, 0, stale_ok=True) or []
+    _save_cache(key, out)
+    return out
+
+
+def odds_api(sport, markets=None):
+    """Επιστρέφει (events, remaining). Χρησιμοποιεί cache για να μη ξοδεύει credits.
+
+    Ζητάει νέες αποδόσεις μόνο αν υπάρχει αγώνας στις επόμενες ODDS_WINDOW_HOURS ώρες.
+    """
     if not config.ODDS_API_KEY:
         return None, None
     key = f"odds_{sport}.json"
     hit = _cached(key, config.ODDS_REFRESH_HOURS)
     if hit is not None:
         return hit["events"], hit.get("remaining")
+    now = datetime.now(timezone.utc)
+    soon = [e for e in odds_events(sport)
+            if now < datetime.fromisoformat(e["date"].replace("Z", "+00:00")) < now + timedelta(hours=config.ODDS_WINDOW_HOURS)]
+    if not soon:
+        old = _cached(key, 0, stale_ok=True)
+        return (old["events"] if old else None), (old or {}).get("remaining")
     meta = _cached("odds_meta.json", 24) or {}  # μια φορά τη μέρα ξαναδοκιμάζει (τα credits μηδενίζονται κάθε μήνα)
     if meta.get("remaining") is not None and meta["remaining"] < config.ODDS_MIN_REMAINING:
         print("  ! Odds API: λίγα credits, παράλειψη")
         old = _cached(key, 0, stale_ok=True)
         return (old["events"] if old else None), meta["remaining"]
     q = urllib.parse.urlencode({"apiKey": config.ODDS_API_KEY, "regions": config.ODDS_REGIONS,
-                                "markets": config.ODDS_MARKETS, "oddsFormat": "decimal"})
+                                "markets": markets or config.ODDS_MARKETS, "oddsFormat": "decimal"})
     try:
         raw, hdr = _get(f"https://api.the-odds-api.com/v4/sports/{sport}/odds?{q}")
     except Exception as e:
@@ -294,6 +322,8 @@ def odds_api(sport):
                     o = {x["name"]: x["price"] for x in m["outcomes"]}
                     if ev["home_team"] in o and ev["away_team"] in o and "Draw" in o:
                         mk["1X2"] = {"1": o[ev["home_team"]], "X": o["Draw"], "2": o[ev["away_team"]]}
+                    elif ev["home_team"] in o and ev["away_team"] in o:  # μπάσκετ: νικητής με παράταση
+                        mk["ML"] = {"H": o[ev["home_team"]], "A": o[ev["away_team"]]}
                 elif m["key"] == "totals":
                     for x in m["outcomes"]:
                         mk.setdefault(f"OU{x.get('point')}", {})[x["name"]] = x["price"]

@@ -9,6 +9,8 @@ def outcome(key, side, r):
     if key == "1X2":
         res = "1" if hg > ag else "X" if hg == ag else "2"
         return 1 if res == side else 0
+    if key == "ML":  # μπάσκετ: δεν υπάρχει ισοπαλία (παράταση)
+        return 1 if (hg > ag) == (side == "H") else 0
     if key == "DC":
         res = "1" if hg > ag else "X" if hg == ag else "2"
         return 1 if res in side else 0

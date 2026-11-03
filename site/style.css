@@ -97,6 +97,11 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .form span { display: inline-block; width: 16px; height: 16px; border-radius: 4px; font-size: 10px; line-height: 16px; text-align: center; margin-right: 2px; font-weight: 700; color: #0b0f14; }
 .form .W { background: var(--accent); } .form .D { background: #8b98a8; } .form .L { background: var(--red); }
 
+/* Παίκτες */
+.ptable td { vertical-align: top; }
+.ptable small.pc { display: block; color: var(--muted); font-size: 11px; white-space: nowrap; }
+.slip.extreme { border-color: rgba(245, 185, 66, .35); }
+
 /* Ημέρες */
 .day-chips { display: flex; gap: 6px; overflow-x: auto; margin: 4px 0 6px; scrollbar-width: none; }
 .day-chips::-webkit-scrollbar { display: none; }

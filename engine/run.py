@@ -8,7 +8,7 @@
 import json
 from datetime import datetime, timedelta, timezone
 
-from . import config, history, markets, model, names, slip, sources
+from . import basket, config, history, markets, model, names, players, slip, sources
 from .settle import outcome
 
 
@@ -42,9 +42,16 @@ def _same_match(a, b, hours=36):
 
 def fixtures_for(cid, comp, fx_csv):
     now = datetime.now(timezone.utc)
-    fx = sources.fdorg_matches(comp["fdorg"], days_back=0)
+    fx = sources.fdorg_matches(comp["fdorg"], days_back=0) if comp["fdorg"] else None
     if fx is not None:
         return [m for m in fx if m["status"] in ("SCHEDULED", "TIMED")]
+    if comp["odds"] and config.ODDS_API_KEY:  # πρόγραμμα από The Odds API (δωρεάν)
+        horizon = now + timedelta(days=config.DAYS_AHEAD)
+        evs = [e for e in sources.odds_events(comp["odds"])
+               if now < datetime.fromisoformat(e["date"].replace("Z", "+00:00")) < horizon]
+        if evs:
+            return [{"id": f"{cid}-{e['id']}", "date": e["date"], "home": e["home"], "away": e["away"],
+                     "status": "SCHEDULED"} for e in evs]
     # χωρίς κλειδί: μόνο ό,τι υπάρχει στο fixtures.csv
     out = []
     for m in fx_csv:
@@ -55,12 +62,33 @@ def fixtures_for(cid, comp, fx_csv):
     return out
 
 
+def standings_from(results):
+    """Βαθμολογία από τα αποτελέσματα (για πρωταθλήματα που δεν έχει το football-data.org)."""
+    if not results:
+        return None
+    t = {}
+    for m in sorted(results, key=lambda r: r["date"]):
+        for team, gf, ga in ((m["home"], m["hg"], m["ag"]), (m["away"], m["ag"], m["hg"])):
+            r = t.setdefault(team, {"team": team, "p": 0, "w": 0, "d": 0, "l": 0, "gf": 0, "ga": 0, "pts": 0, "f": ""})
+            r["p"] += 1; r["gf"] += int(gf); r["ga"] += int(ga)
+            res = "W" if gf > ga else "D" if gf == ga else "L"
+            r["w" if res == "W" else "d" if res == "D" else "l"] += 1
+            r["pts"] += 3 if res == "W" else 1 if res == "D" else 0
+            r["f"] += res
+    rows = sorted(t.values(), key=lambda r: (-r["pts"], -(r["gf"] - r["ga"]), -r["gf"]))
+    for i, r in enumerate(rows, 1):
+        r["pos"] = i
+        r["form"] = r.pop("f")[-5:]
+    return [{"group": None, "rows": rows}]
+
+
 DEFAULT_R = {"league": None, "att": 0.9, "def": 1.1, "catt": 1.0, "cdef": 1.0, "cards": 1.0, "stats": {}}
 
 
 def _lookup(m, cid, ctx):
     ratings = ctx["ratings"]
-    pool = ratings if cid == "CL" else {t: r for t, r in ratings.items() if r["league"] == "E0"}
+    code = config.COMPETITIONS[cid]["fdcouk"]
+    pool = {t: r for t, r in ratings.items() if r["league"] == code} if code else ratings
     th = names.match(m["home"], list(pool)) or names.match(m.get("home_full"), list(pool))
     ta = names.match(m["away"], list(pool)) or names.match(m.get("away_full"), list(pool))
     rh, ra = pool.get(th, DEFAULT_R), pool.get(ta, DEFAULT_R)
@@ -113,7 +141,7 @@ def analyse(m, cid, ctx, books):
 
     # διαιτητής: football-data.org ή fixtures.csv -> ιστορικό καρτών του
     ref_name = m.get("referee") or next((f.get("ref") for f in fx_csv if f.get("ref") and _same_match(f, m)), None)
-    ref = history.find_referee(ref_name, ctx["refs"], "E0" if cid == "PL" else None)
+    ref = history.find_referee(ref_name, ctx["refs"], config.COMPETITIONS[cid]["fdcouk"])
     if ref:
         lk *= ref["factor"]
 
@@ -163,15 +191,22 @@ def update_history(matches, results, slip_now=None, extra_results=()):
                 for p in hist["picks"]:
                     if (p["match_id"], p["key"], p["side"]) == k and p["result"] is None:
                         p["closing"] = s["best"]
-    # δελτίο: κρατάμε την τελευταία πρόταση πριν ξεκινήσει ο πρώτος αγώνας του
-    if slip_now:
-        sig = [(l["match_id"], l["key"], l["side"]) for l in slip_now["legs"]]
-        open_slips = [s for s in hist["slips"] if s.get("result") is None
-                      and min(l["date"] for l in s["legs"]) > datetime.now(timezone.utc).isoformat()]
-        if not any([(l["match_id"], l["key"], l["side"]) for l in s["legs"]] == sig for s in hist["slips"]):
-            for s in open_slips:  # αντικαθίσταται από νεότερη πρόταση
-                hist["slips"].remove(s)
-            hist["slips"].append({**slip_now, "created": datetime.now(timezone.utc).isoformat(), "result": None})
+    # δελτία ανά ημέρα: κρατάμε την τελευταία πρόταση (ανά ημέρα και είδος) πριν ξεκινήσει ο πρώτος αγώνας
+    now_iso = datetime.now(timezone.utc).isoformat()
+    for day in slip_now or []:
+        for kind in ("simple", "extreme"):
+            s_new = day.get(kind)
+            if not s_new:
+                continue
+            sig = [(l["match_id"], l["key"], l["side"]) for l in s_new["legs"]]
+            if any(s.get("day") == day["day"] and s.get("kind", "simple") == kind
+                   and [(l["match_id"], l["key"], l["side"]) for l in s["legs"]] == sig for s in hist["slips"]):
+                continue
+            for s in [s for s in hist["slips"] if s.get("day") == day["day"] and s.get("kind", "simple") == kind
+                      and s.get("result") is None and min(l["date"] for l in s["legs"]) > now_iso]:
+                hist["slips"].remove(s)  # αντικαθίσταται από νεότερη πρόταση
+            if min(l["date"] for l in s_new["legs"]) > now_iso:
+                hist["slips"].append({**s_new, "day": day["day"], "kind": kind, "created": now_iso, "result": None})
 
     # εκκαθάριση με αποτελέσματα από όλα τα πρωταθλήματα (+ Champions League από football-data.org)
     allres = [r for rs in results.values() for r in rs] + [r for r in extra_results if r.get("hg") is not None]
@@ -233,7 +268,7 @@ def main():
     all_matches = []
     for cid, comp in config.COMPETITIONS.items():
         fixtures = fixtures_for(cid, comp, fx_csv)
-        events, remaining = sources.odds_api(comp["odds"])
+        events, remaining = sources.odds_api(comp["odds"], comp.get("odds_markets"))
         if remaining is not None:
             out["credits"] = remaining
         matches = []
@@ -247,22 +282,39 @@ def main():
                     for b, mk in e["books"].items():
                         books.setdefault(b, {}).update(mk)
             matches.append(analyse(m, cid, ctx, books))
-        standings = sources.fdorg_standings(comp["fdorg"])
+        if cid == "PL":
+            players.attach_fpl(matches, ctx)
+        standings = sources.fdorg_standings(comp["fdorg"]) if comp["fdorg"] else standings_from(results.get(comp["fdcouk"], []))
         teams = []
         if comp["fdcouk"]:
             teams = sorted(({"team": t, **r["stats"], "att": round(r["att"], 2), "def": round(r["def"], 2)}
                             for t, r in ratings.items() if r["league"] == comp["fdcouk"]),
                            key=lambda x: -(x["att"] / x["def"]))
-        recent = sources.fdorg_matches(comp["fdorg"], days_back=10, days_ahead=0) or []
+        if comp["fdorg"]:
+            recent = [r for r in sources.fdorg_matches(comp["fdorg"], days_back=10, days_ahead=0) or []
+                      if r["status"] == "FINISHED"]
+        else:
+            recent = sorted(results.get(comp["fdcouk"], []), key=lambda r: r["date"])
         out["competitions"][cid] = {
-            "name": comp["name"], "matches": matches, "standings": standings, "teams": teams,
-            "recent": [r for r in recent if r["status"] == "FINISHED"][-15:],
+            "name": comp["name"], "sport": "football", "matches": matches, "standings": standings, "teams": teams,
+            "recent": recent[-15:],
         }
         all_matches += matches
         print(f"  {cid}: {len(matches)} αγώνες, {sum(len(m['values']) for m in matches)} value")
-    out["slip"] = slip.build(all_matches)
+
+    print("• Μπάσκετ")
+    for cid, comp in config.BASKET.items():
+        bres = basket.build(cid, comp, ctx["margins"])
+        if remaining_b := bres.pop("credits", None):
+            out["credits"] = remaining_b
+        out["competitions"][cid] = bres
+        all_matches += bres["matches"]
+        print(f"  {cid}: {len(bres['matches'])} αγώνες, {sum(len(m['values']) for m in bres['matches'])} value")
+
+    out["slips"] = slip.build_daily(all_matches)
+    out["slip"] = (out["slips"][0]["simple"] if out["slips"] else None)
     fd_results = [r for c in out["competitions"].values() for r in c["recent"]]
-    hist = update_history(all_matches, results, out["slip"], fd_results)
+    hist = update_history(all_matches, results, out["slips"], fd_results)
     settled = [p for p in hist["picks"] if p["result"] is not None]
     out["track"] = {
         "picks": len(settled),

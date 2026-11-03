@@ -1,50 +1,59 @@
-"""Προτεινόμενο δελτίο: 2-4 επιλογές από διαφορετικούς αγώνες, συνολική απόδοση κάτω από 10."""
+"""Προτεινόμενα δελτία ανά ημέρα, μόνο με αγώνες της ίδιας ημέρας (ώρα Ελλάδας).
+
+- Απλό: συνολική απόδοση ≥ 5, χωρίς ανώτατο όριο, 2-4 επιλογές, υψηλή πιθανότητα ανά επιλογή.
+- Ακραίο: συνολική απόδοση ≥ 20, χωρίς ανώτατο όριο, 3-6 επιλογές.
+Σε κάθε περίπτωση διαλέγεται ο συνδυασμός με το καλύτερο αναμενόμενο αποτέλεσμα (EV).
+"""
 from datetime import datetime, timedelta, timezone
 from itertools import combinations
 
-MAX_TOTAL = 10.0
-MIN_TOTAL = 4.0
-MIN_LEG_P = 0.50
-LEG_ODDS = (1.30, 2.60)
+ATHENS = timezone(timedelta(hours=2))  # χειμερινή ώρα (αρκεί για ομαδοποίηση ανά ημέρα)
 MAX_DISAGREE = 0.08   # το μοντέλο δεν απέχει πάνω από 8 μονάδες από την αγορά (αλλιώς μάλλον λάθος του)
 MIN_LEG_EV = -0.03    # το πολύ 3% κάτω από τη δίκαιη (περίπου το μισό γκανιότ των εταιρειών)
-MIN_SLIP_P = 0.18     # τουλάχιστον 18% πιθανότητα να βγει
-WINDOW_DAYS = 5
+
+KINDS = {
+    "simple": {"min_total": 5.0, "legs": (2, 4), "leg_p": 0.45, "leg_odds": (1.30, 3.0), "min_p": 0.10, "pool": 22},
+    "extreme": {"min_total": 20.0, "legs": (3, 6), "leg_p": 0.30, "leg_odds": (1.50, 4.5), "min_p": 0.02, "pool": 18},
+}
 
 
-def _legs(matches):
+def _day(iso):
+    return datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(ATHENS).strftime("%Y-%m-%d")
+
+
+def _legs(matches, rule):
     now = datetime.now(timezone.utc)
     legs = []
     for m in matches:
         start = datetime.fromisoformat(m["date"].replace("Z", "+00:00"))
-        if not (now < start < now + timedelta(days=WINDOW_DAYS)) or m["confidence"] == "χαμηλή":
+        if start <= now or m["confidence"] == "χαμηλή":
             continue
+        lo, hi = rule["leg_odds"]
         cand = [s for s in m["markets"]
-                if s["p"] >= MIN_LEG_P and s["est"] and LEG_ODDS[0] <= s["est"] <= LEG_ODDS[1]
-                and s["pp"] == 0 and s["est_ev"] is not None and s["est_ev"] >= MIN_LEG_EV
+                if s["p"] >= rule["leg_p"] and s.get("est") and lo <= s["est"] <= hi
+                and s["pp"] == 0 and s.get("est_ev") is not None and s["est_ev"] >= MIN_LEG_EV
                 and s.get("p_book") is not None and abs(s["p"] - s["p_book"]) <= MAX_DISAGREE
                 and s["group"] != "Διπλή ευκαιρία"]
-        cand.sort(key=lambda s: (-s["p"], -s["est_ev"]))
+        cand.sort(key=lambda s: (-s["est_ev"], -s["p"]))
         for s in cand[:2]:
             legs.append({"match": m, "s": s})
-    legs.sort(key=lambda x: -x["s"]["p"])
-    return legs[:26]  # αρκετές για αναζήτηση, χωρίς να εκτοξεύεται ο χρόνος
+    legs.sort(key=lambda x: (-x["s"]["est_ev"], -x["s"]["p"]))
+    return legs[:rule["pool"]]
 
 
-def build(matches):
-    legs = _legs(matches)
+def _best(legs, rule):
     best = None
-    for k in (2, 3, 4):
+    kmin, kmax = rule["legs"]
+    for k in range(kmin, kmax + 1):
         for combo in combinations(legs, k):
-            if len({id(x["match"]) for x in combo}) < k:
+            if len({x["match"]["id"] for x in combo}) < k:
                 continue
             odds = p = 1.0
             for x in combo:
                 odds *= x["s"]["est"]
                 p *= x["s"]["p"]
-            if not (MIN_TOTAL <= odds < MAX_TOTAL) or p < MIN_SLIP_P:
+            if odds < rule["min_total"] or p < rule["min_p"]:
                 continue
-            # το δελτίο με το καλύτερο αναμενόμενο αποτέλεσμα· ισοπαλία -> πιθανότερο
             key = (round(p * odds - 1, 3), p)
             if best is None or key > best[0]:
                 best = (key, combo, odds, p)
@@ -62,3 +71,17 @@ def build(matches):
         } for x in sorted(combo, key=lambda x: x["match"]["date"])],
         "odds": round(odds, 2), "p": round(p, 4), "ev": round(p * odds - 1, 4),
     }
+
+
+def build_daily(matches):
+    by_day = {}
+    for m in matches:
+        by_day.setdefault(_day(m["date"]), []).append(m)
+    out = []
+    for day in sorted(by_day):
+        entry = {"day": day, "matches": len(by_day[day])}
+        for kind, rule in KINDS.items():
+            entry[kind] = _best(_legs(by_day[day], rule), rule)
+        if entry["simple"] or entry["extreme"]:
+            out.append(entry)
+    return out

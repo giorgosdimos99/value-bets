@@ -50,7 +50,13 @@ CROSS_EXP = 2.0                 # πόσο έντονα μετράει η δια
 COMPETITIONS = {
     "PL": {"name": "Premier League", "fdorg": "PL", "odds": "soccer_epl", "fdcouk": "E0"},
     "CL": {"name": "Champions League", "fdorg": "CL", "odds": "soccer_uefa_champs_league", "fdcouk": None},
+    # football-data.org δεν έχει Super League στο δωρεάν πακέτο: πρόγραμμα από The Odds API (δωρεάν "events")
+    "GR": {"name": "Super League", "fdorg": None, "odds": "soccer_greece_super_league", "fdcouk": "G1",
+           "odds_markets": "h2h,totals"},
 }
+# Μπάσκετ (ξεχωριστό μοντέλο: engine/basket.py)
+BASKET = {"EL": {"name": "EuroLeague", "feed": "E", "odds": "basketball_euroleague"}}
+ODDS_WINDOW_HOURS = 36   # αποδόσεις ζητάμε μόνο αν υπάρχει αγώνας μέσα σε τόσες ώρες (εξοικονόμηση credits)
 
 DAYS_AHEAD = 10          # πόσες μέρες μπροστά κοιτάμε αγώνες
 HALF_LIFE_DAYS = 90      # πόσο γρήγορα "ξεχνάμε" παλιά παιχνίδια
