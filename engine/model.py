@@ -1,0 +1,186 @@
+"""Μοντέλο: ισχύς ομάδων (xG + γκολ) -> αναμενόμενα γκολ -> πίνακας σκορ (Poisson / Dixon-Coles)."""
+import math
+from collections import defaultdict
+from datetime import datetime, timezone
+
+from . import config
+
+MAX_GOALS = 10
+RHO = -0.06  # διόρθωση Dixon-Coles για χαμηλά σκορ (0-0, 1-1 κ.λπ.)
+
+
+def _w(date_iso, now, season_factor=1.0):
+    if not date_iso:
+        return 0.0
+    age = (now - datetime.fromisoformat(date_iso)).days
+    return season_factor * 0.5 ** (max(age, 0) / config.HALF_LIFE_DAYS)
+
+
+def _blend(goals, xg):
+    if xg is None:
+        return goals
+    return config.XG_WEIGHT * xg + (1 - config.XG_WEIGHT) * goals
+
+
+def _fit_pair(matches, f_home, f_away, iters=12):
+    """Γενική επαναληπτική εκτίμηση επίθεσης/άμυνας για μια μετρική (γκολ ή κόρνερ)."""
+    tw = sum(m["_w"] for m in matches) or 1.0
+    h_avg = sum(m["_w"] * f_home(m) for m in matches) / tw
+    a_avg = sum(m["_w"] * f_away(m) for m in matches) / tw
+    teams = {m["home"] for m in matches} | {m["away"] for m in matches}
+    att = {t: 1.0 for t in teams}
+    dfn = {t: 1.0 for t in teams}
+    P = config.PRIOR_MATCHES
+    for _ in range(iters):
+        na, da = defaultdict(float), defaultdict(float)
+        nd, dd = defaultdict(float), defaultdict(float)
+        for m in matches:
+            w, h, a = m["_w"], m["home"], m["away"]
+            na[h] += w * f_home(m); da[h] += w * h_avg * dfn[a]
+            na[a] += w * f_away(m); da[a] += w * a_avg * dfn[h]
+            nd[h] += w * f_away(m); dd[h] += w * a_avg * att[a]
+            nd[a] += w * f_home(m); dd[a] += w * h_avg * att[h]
+        att = {t: (na[t] + P) / (da[t] + P) for t in teams}
+        dfn = {t: (nd[t] + P) / (dd[t] + P) for t in teams}
+        ma = sum(att.values()) / len(att)
+        md = sum(dfn.values()) / len(dfn)
+        att = {t: v / ma for t, v in att.items()}
+        dfn = {t: v / md for t, v in dfn.items()}
+    return att, dfn, h_avg, a_avg
+
+
+def fit_league(code, cur, prev):
+    """Επιστρέφει dict ομάδα -> ratings + στατιστικά, για ένα πρωτάθλημα."""
+    now = datetime.now(timezone.utc)
+    ms = []
+    for m in cur:
+        ms.append({**m, "_w": _w(m["date"], now, 1.0)})
+    for m in prev:
+        ms.append({**m, "_w": _w(m["date"], now, 0.6)})
+    ms = [m for m in ms if m["_w"] > 0.01 and m["hg"] is not None]
+    if len(ms) < 20:
+        return {}, None
+    att, dfn, h_avg, a_avg = _fit_pair(ms, lambda m: _blend(m["hg"], m["hxg"]), lambda m: _blend(m["ag"], m["axg"]))
+    cms = [m for m in ms if m["hc"] is not None and m["ac"] is not None]
+    catt, cdef, hc_avg, ac_avg = _fit_pair(cms, lambda m: m["hc"], lambda m: m["ac"]) if len(cms) > 20 else ({}, {}, 5.5, 4.5)
+
+    # κάρτες: τάση κάθε ομάδας (σύνολο καρτών στα ματς της) σε σχέση με τον μέσο όρο
+    def cards(m):
+        return (m["hy"] or 0) + (m["ay"] or 0) + (m["hr"] or 0) + (m["ar"] or 0)
+    kms = [m for m in ms if m["hy"] is not None]
+    tw = sum(m["_w"] for m in kms) or 1
+    card_avg = sum(m["_w"] * cards(m) for m in kms) / tw if kms else 4.0
+    cn, cd = defaultdict(float), defaultdict(float)
+    for m in kms:
+        for t in (m["home"], m["away"]):
+            cn[t] += m["_w"] * cards(m); cd[t] += m["_w"]
+    card_f = {t: ((cn[t] + 3 * card_avg) / (cd[t] + 3)) / card_avg for t in cd}
+
+    # διαιτητές
+    rn, rd = defaultdict(float), defaultdict(int)
+    for m in kms:
+        if m.get("ref"):
+            rn[m["ref"]] += cards(m); rd[m["ref"]] += 1
+    referees = {r: ((rn[r] + 4 * card_avg) / (rd[r] + 4)) / card_avg for r in rd}
+
+    cur_teams = {m["home"] for m in cur} | {m["away"] for m in cur}
+    out = {}
+    for t in cur_teams:
+        tm = sorted([m for m in cur if t in (m["home"], m["away"])], key=lambda m: m["date"] or "")
+        out[t] = {
+            "league": code, "att": att.get(t, 0.85), "def": dfn.get(t, 1.15),
+            "catt": catt.get(t, 1.0), "cdef": cdef.get(t, 1.0), "cards": card_f.get(t, 1.0),
+            "stats": team_stats(t, tm),
+        }
+    league = {"h_avg": h_avg, "a_avg": a_avg, "hc_avg": hc_avg, "ac_avg": ac_avg,
+              "card_avg": card_avg, "referees": referees}
+    return out, league
+
+
+def team_stats(team, ms):
+    n = len(ms)
+    if not n:
+        return {}
+    s = defaultdict(float)
+    form = []
+    for m in ms:
+        home = m["home"] == team
+        gf, ga = (m["hg"], m["ag"]) if home else (m["ag"], m["hg"])
+        s["gf"] += gf; s["ga"] += ga
+        s["xgf"] += (m["hxg"] if home else m["axg"]) or 0
+        s["xga"] += (m["axg"] if home else m["hxg"]) or 0
+        s["sot"] += (m["hst"] if home else m["ast"]) or 0
+        s["cf"] += (m["hc"] if home else m["ac"]) or 0
+        s["ca"] += (m["ac"] if home else m["hc"]) or 0
+        s["cards"] += ((m["hy"] or 0) + (m["hr"] or 0)) if home else ((m["ay"] or 0) + (m["ar"] or 0))
+        s["btts"] += 1 if gf > 0 and ga > 0 else 0
+        s["o25"] += 1 if gf + ga > 2.5 else 0
+        s["cs"] += 1 if ga == 0 else 0
+        form.append("W" if gf > ga else "D" if gf == ga else "L")
+    r = lambda x: round(x, 2)
+    return {
+        "p": n, "gf": r(s["gf"] / n), "ga": r(s["ga"] / n), "xgf": r(s["xgf"] / n), "xga": r(s["xga"] / n),
+        "sot": r(s["sot"] / n), "cf": r(s["cf"] / n), "ca": r(s["ca"] / n), "cards": r(s["cards"] / n),
+        "btts": r(s["btts"] / n), "o25": r(s["o25"] / n), "cs": r(s["cs"] / n), "form": "".join(form[-5:]),
+    }
+
+
+def expected(home_r, away_r, league, cross=False):
+    """Αναμενόμενα γκολ/κόρνερ/κάρτες για έναν αγώνα."""
+    lh = league["h_avg"] * home_r["att"] * away_r["def"]
+    la = league["a_avg"] * away_r["att"] * home_r["def"]
+    if cross:
+        sh = config.RATING_LEAGUES.get(home_r["league"], (None, config.DEFAULT_LEAGUE_STRENGTH))[1]
+        sa = config.RATING_LEAGUES.get(away_r["league"], (None, config.DEFAULT_LEAGUE_STRENGTH))[1]
+        k = config.CROSS_EXP
+        lh *= (sh / sa) ** k
+        la *= (sa / sh) ** k
+    lc = league["hc_avg"] * home_r["catt"] * away_r["cdef"] + league["ac_avg"] * away_r["catt"] * home_r["cdef"]
+    lk = league["card_avg"] * (home_r["cards"] + away_r["cards"]) / 2
+    return lh, la, lc, lk
+
+
+def _pois(k, lam):
+    return math.exp(-lam) * lam ** k / math.factorial(k)
+
+
+def score_matrix(lh, la):
+    M = [[_pois(i, lh) * _pois(j, la) for j in range(MAX_GOALS + 1)] for i in range(MAX_GOALS + 1)]
+    M[0][0] *= 1 - lh * la * RHO
+    M[0][1] *= 1 + lh * RHO
+    M[1][0] *= 1 + la * RHO
+    M[1][1] *= 1 - RHO
+    s = sum(map(sum, M))
+    return [[v / s for v in row] for row in M]
+
+
+def _market_probs(lh, la):
+    M = score_matrix(lh, la)
+    n = len(M)
+    ph = sum(M[i][j] for i in range(n) for j in range(n) if i > j)
+    pa = sum(M[i][j] for i in range(n) for j in range(n) if i < j)
+    po = sum(M[i][j] for i in range(n) for j in range(n) if i + j > 2.5)
+    return ph, pa, po
+
+
+def implied_lambdas(p1, p2, pover=None):
+    """Βρίσκει τα αναμενόμενα γκολ που "βλέπει" η αγορά (από 1X2 και Over/Under 2.5 χωρίς γκανιότα)."""
+    def err(lh, la):
+        ph, pa, po = _market_probs(lh, la)
+        e = (ph - p1) ** 2 + (pa - p2) ** 2
+        if pover is not None:
+            e += (po - pover) ** 2
+        return e
+    best = min(((err(h / 10, a / 10), h / 10, a / 10) for h in range(2, 46, 2) for a in range(2, 46, 2)))
+    _, bh, ba = best
+    for step in (0.05, 0.01):
+        cand = [(err(bh + i * step, ba + j * step), bh + i * step, ba + j * step)
+                for i in range(-4, 5) for j in range(-4, 5) if bh + i * step > 0.05 and ba + j * step > 0.05]
+        _, bh, ba = min(cand)
+    return bh, ba
+
+
+def pois_over(lam, line):
+    """P(X > line) για Poisson (line με .5)."""
+    k = int(math.floor(line))
+    return 1 - sum(_pois(i, lam) for i in range(k + 1))

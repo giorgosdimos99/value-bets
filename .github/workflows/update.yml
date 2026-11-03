@@ -1,0 +1,43 @@
+name: Ενημέρωση δεδομένων
+
+on:
+  schedule:
+    - cron: "0 */3 * * *"   # κάθε 3 ώρες
+  workflow_dispatch: {}      # χειροκίνητα από το GitHub
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Τρέξιμο μηχανής
+        env:
+          FOOTBALL_DATA_ORG_KEY: ${{ secrets.FOOTBALL_DATA_ORG_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python -m engine.run
+      - name: Αποθήκευση δεδομένων στο repo
+        run: |
+          git config user.name "value-bets-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add site/data .cache
+          git diff --staged --quiet || git commit -m "Ενημέρωση δεδομένων"
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - uses: actions/deploy-pages@v4
