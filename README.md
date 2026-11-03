@@ -1,5 +1,7 @@
 # Value Bets
 
+**Online:** https://giorgosdimos99.github.io/value-bets
+
 Προσωπική εφαρμογή για Premier League και Champions League. Δείχνει στατιστικά, πιθανότητες, δίκαιες αποδόσεις και value επιλογές, και κρατάει τα στοιχήματά σου.
 
 ## Πώς δουλεύει
