@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 */3 * * *"   # κάθε 3 ώρες
   workflow_dispatch: {}      # χειροκίνητα από το GitHub
+  push:                      # και όταν αλλάζει ο κώδικας
+    branches: [main]
+    paths-ignore: ["site/data/**", ".cache/**"]
 
 permissions:
   contents: write
