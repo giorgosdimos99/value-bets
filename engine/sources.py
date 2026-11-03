@@ -206,6 +206,32 @@ def fdorg_matches(comp, days_back=0, days_ahead=config.DAYS_AHEAD):
     return out
 
 
+def fdorg_season(comp, season):
+    """Όλοι οι ολοκληρωμένοι αγώνες μιας σεζόν (π.χ. 2025 = 2025/26)."""
+    if not config.FOOTBALL_DATA_ORG_KEY:
+        return []
+    key = f"fdorg_season_{comp}_{season}.json"
+    current = season >= datetime.now(timezone.utc).year - (0 if datetime.now(timezone.utc).month >= 7 else 1)
+    hit = _cached(key, 12 if current else 24 * 60)
+    if hit is not None:
+        return hit
+    try:
+        raw, _ = _get(f"https://api.football-data.org/v4/competitions/{comp}/matches?season={season}&status=FINISHED",
+                      {"X-Auth-Token": config.FOOTBALL_DATA_ORG_KEY})
+        data = json.loads(raw)
+    except Exception as e:
+        print(f"  ! football-data.org {comp} {season}: {e}")
+        return _cached(key, 0, stale_ok=True) or []
+    out = [{"date": m["utcDate"], "home": m["homeTeam"].get("shortName") or m["homeTeam"].get("name"),
+            "away": m["awayTeam"].get("shortName") or m["awayTeam"].get("name"),
+            "home_full": m["homeTeam"].get("name"), "away_full": m["awayTeam"].get("name"),
+            "hg": m["score"]["fullTime"]["home"], "ag": m["score"]["fullTime"]["away"]}
+           for m in data.get("matches", []) if m["score"]["fullTime"]["home"] is not None]
+    _save_cache(key, out)
+    time.sleep(6.5)
+    return out
+
+
 def fdorg_standings(comp):
     if not config.FOOTBALL_DATA_ORG_KEY:
         return None

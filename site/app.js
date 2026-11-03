@@ -1,7 +1,7 @@
 (() => {
   const $ = (s, el = document) => el.querySelector(s);
   const view = $("#view");
-  const state = { tab: "value", comp: "ALL", data: null, history: null };
+  const state = { tab: "value", comp: "ALL", day: "ALL", data: null, history: null };
   const BOOKS = ["Stoiximan", "Superbet", "Άλλη"];
 
   // ---------- βοηθητικά ----------
@@ -20,11 +20,35 @@
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ιδιωτική περιήγηση */ } },
   };
 
-  function matches() {
+  // ---------- ημέρες ----------
+  const dayKey = iso => { const d = new Date(iso); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+  function dayLabel(key) {
+    const today = dayKey(new Date().toISOString());
+    const tmr = dayKey(new Date(Date.now() + 864e5).toISOString());
+    const d = new Date(key + "T12:00:00");
+    const base = d.toLocaleDateString("el-GR", { weekday: "long", day: "numeric", month: "long" });
+    return key === today ? `Σήμερα · ${base}` : key === tmr ? `Αύριο · ${base}` : base.charAt(0).toUpperCase() + base.slice(1);
+  }
+  function chipLabel(key) {
+    const today = dayKey(new Date().toISOString());
+    const tmr = dayKey(new Date(Date.now() + 864e5).toISOString());
+    if (key === today) return "Σήμερα";
+    if (key === tmr) return "Αύριο";
+    return new Date(key + "T12:00:00").toLocaleDateString("el-GR", { weekday: "short", day: "numeric", month: "short" });
+  }
+  const groupByDay = list => list.reduce((acc, x) => { const k = dayKey(x.date); (acc[k] = acc[k] || []).push(x); return acc; }, {});
+  function dayChips(all) {
+    const days = Object.keys(groupByDay(all)).sort();
+    if (state.day !== "ALL" && !days.includes(state.day)) state.day = "ALL";
+    return `<div class="day-chips">${["ALL", ...days].map(d => `<button data-day="${d}" class="${state.day === d ? "active" : ""}">${d === "ALL" ? "Όλες" : chipLabel(d)}<small>${d === "ALL" ? all.length : groupByDay(all)[d].length}</small></button>`).join("")}</div>`;
+  }
+
+  function matches(byDay = false) {
     if (!state.data) return [];
     return Object.entries(state.data.competitions)
       .filter(([c]) => state.comp === "ALL" || state.comp === c)
       .flatMap(([, v]) => v.matches)
+      .filter(m => !byDay || state.day === "ALL" || dayKey(m.date) === state.day)
       .sort((a, b) => a.date.localeCompare(b.date));
   }
   const findMatch = id => Object.values(state.data.competitions).flatMap(c => c.matches).find(m => String(m.id) === String(id));
@@ -63,11 +87,12 @@
   }
 
   function renderValue() {
-    const ms = matches();
-    const values = ms.flatMap(m => m.values.map(s => ({ m, s }))).sort((a, b) => b.s.ev - a.s.ev);
-    const solid = ms.flatMap(m => m.solid.slice(0, 2).map(s => ({ m, s }))).sort((a, b) => b.s.p - a.s.p).slice(0, 12);
+    const all = matches();
+    const ms = matches(true);
+    const values = ms.flatMap(m => m.values.map(s => ({ m, s, date: m.date })));
+    const solid = ms.flatMap(m => m.solid.slice(0, 2).map(s => ({ m, s, date: m.date })));
     let h = "";
-    if (!ms.length) {
+    if (!all.length) {
       view.innerHTML = `<div class="empty"><b>Δεν υπάρχουν αγώνες ακόμα</b>Μόλις βγει το επόμενο πρόγραμμα θα εμφανιστούν εδώ.</div>`;
       return;
     }
@@ -80,12 +105,14 @@
         <div class="note" style="margin:10px 0 0">Οι αποδόσεις είναι <b>εκτίμηση</b> για Stoiximan/Superbet (διάμεσος εταιρειών ή πραγματικό γκανιότ 4 σεζόν). Έλεγξε την πραγματική πριν παίξεις.</div>
         <button class="btn" style="margin-top:10px;width:100%" data-slipbet>+ Πέρασέ το στα στοιχήματά μου</button></div>`;
     }
+    h += dayChips(all);
+    const vg = groupByDay(values), sg = groupByDay(solid);
     h += `<h2>Value επιλογές (${values.length})</h2>`;
     h += values.length
-      ? `<div class="grid">${values.map(({ m, s }) => pickCard(m, s, "value")).join("")}</div>`
+      ? Object.keys(vg).sort().map(k => `<h3 class="day-sub">${dayLabel(k)}</h3><div class="grid">${vg[k].sort((a, b) => b.s.ev - a.s.ev).map(({ m, s }) => pickCard(m, s, "value")).join("")}</div>`).join("")
       : `<div class="note">Δεν βρέθηκε value στις διαθέσιμες αποδόσεις. Άνοιξε έναν αγώνα και βάλε την απόδοση της Stoiximan/Superbet για να δεις αν συμφέρει.</div>`;
     h += `<h2>Λογικές επιλογές</h2><div class="note">Υψηλή πιθανότητα με βάση τα στατιστικά. Παίζεται μόνο αν η απόδοση της στοιχηματικής είναι <b>πάνω</b> από τη δίκαιη.</div>`;
-    h += `<div class="grid">${solid.map(({ m, s }) => pickCard(m, s, "solid")).join("")}</div>`;
+    h += Object.keys(sg).sort().map(k => `<h3 class="day-sub">${dayLabel(k)}</h3><div class="grid">${sg[k].sort((a, b) => b.s.p - a.s.p).slice(0, 6).map(({ m, s }) => pickCard(m, s, "solid")).join("")}</div>`).join("");
     view.innerHTML = h;
   }
 
@@ -105,8 +132,11 @@
   }
 
   function renderMatches() {
-    const ms = matches();
-    view.innerHTML = ms.length ? `<div class="grid">${ms.map(matchCard).join("")}</div>` : `<div class="empty"><b>Κανένας αγώνας</b>Δεν υπάρχουν προγραμματισμένοι αγώνες τις επόμενες μέρες.</div>`;
+    const all = matches();
+    if (!all.length) { view.innerHTML = `<div class="empty"><b>Κανένας αγώνας</b>Δεν υπάρχουν προγραμματισμένοι αγώνες τις επόμενες μέρες.</div>`; return; }
+    const groups = groupByDay(matches(true));
+    view.innerHTML = dayChips(all) + Object.keys(groups).sort().map(k =>
+      `<h2 class="day-head">${dayLabel(k)} <span>${groups[k].length} αγώνες</span></h2><div class="grid">${groups[k].map(matchCard).join("")}</div>`).join("");
   }
 
   function renderTeams() {
@@ -157,7 +187,7 @@
         ${row("Σουτ στην εστία", hs.sot, as.sot)}${row("Κόρνερ υπέρ", hs.cf, as.cf)}${row("Κάρτες", hs.cards, as.cards)}
         ${row("G/G", hs.btts, as.btts, pct)}${row("Over 2.5", hs.o25, as.o25, pct)}${row("Ανέπαφη εστία", hs.cs, as.cs, pct)}</div>`;
     }
-    if (m.market_xg) h += `<div class="note">Αναμενόμενα γκολ: μοντέλο <b>${f2(m.model_xg[0])}–${f2(m.model_xg[1])}</b>, αγορά <b>${f2(m.market_xg[0])}–${f2(m.market_xg[1])}</b>. Τελικά (20% μοντέλο, 80% αγορά, από backtest): <b>${f2(m.xg[0])}–${f2(m.xg[1])}</b>.</div>`;
+    if (m.market_xg) h += `<div class="note">Αναμενόμενα γκολ: μοντέλο <b>${f2(m.model_xg[0])}–${f2(m.model_xg[1])}</b>, αγορά <b>${f2(m.market_xg[0])}–${f2(m.market_xg[1])}</b>. Τελικά (20% μοντέλο, 80% αγορά, από backtest): <b>${f2(m.xg[0])}–${f2(m.xg[1])}</b>.${m.comp === "CL" && state.data.goal_factor?.CL?.matches ? ` Στο Champions League μπαίνουν περισσότερα γκολ από τα εγχώρια πρωταθλήματα (${state.data.goal_factor.CL.actual_goals}/αγώνα σε ${state.data.goal_factor.CL.matches} αγώνες), γι' αυτό το μοντέλο διορθώνεται ×${state.data.goal_factor.CL.factor}.` : ""}</div>`;
     const r = m.ref_stats;
     h += `<h2>Διαιτητής</h2>`;
     h += r ? `<div class="card"><b>${esc(r.name)}</b> <span class="pill muted">${r.n} αγώνες (4 σεζόν)</span>
@@ -318,6 +348,8 @@
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
 
   view.addEventListener("click", e => {
+    const chip = e.target.closest("[data-day]");
+    if (chip) { state.day = chip.dataset.day; return render(); }
     const card = e.target.closest("[data-match]");
     if (card) return openMatch(card.dataset.match);
     if (e.target.closest("[data-newbet]")) return openBetForm();

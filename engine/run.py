@@ -55,16 +55,51 @@ def fixtures_for(cid, comp, fx_csv):
     return out
 
 
-def analyse(m, cid, ctx, books):
-    ratings, leagues, fx_csv = ctx["ratings"], ctx["leagues"], ctx["fx_csv"]
+DEFAULT_R = {"league": None, "att": 0.9, "def": 1.1, "catt": 1.0, "cdef": 1.0, "cards": 1.0, "stats": {}}
+
+
+def _lookup(m, cid, ctx):
+    ratings = ctx["ratings"]
     pool = ratings if cid == "CL" else {t: r for t, r in ratings.items() if r["league"] == "E0"}
     th = names.match(m["home"], list(pool)) or names.match(m.get("home_full"), list(pool))
     ta = names.match(m["away"], list(pool)) or names.match(m.get("away_full"), list(pool))
-    default = {"league": None, "att": 0.9, "def": 1.1, "catt": 1.0, "cdef": 1.0, "cards": 1.0, "stats": {}}
-    rh, ra = pool.get(th, default), pool.get(ta, default)
-    cross = rh["league"] != ra["league"]
-    lg = leagues.get(rh["league"]) or leagues.get("E0")
+    rh, ra = pool.get(th, DEFAULT_R), pool.get(ta, DEFAULT_R)
+    lg = ctx["leagues"].get(rh["league"]) or ctx["leagues"].get("E0")
+    return th, ta, rh, ra, rh["league"] != ra["league"], lg
+
+
+def comp_goal_factor(cid, ctx):
+    """Πόσο πιο "ανοιχτή" είναι μια διοργάνωση από ό,τι προβλέπει το μοντέλο με βάση τα εγχώρια πρωταθλήματα.
+
+    Συγκρίνει τα πραγματικά γκολ των τελευταίων 3 σεζόν της διοργάνωσης με την πρόβλεψη του μοντέλου
+    για τους ίδιους αγώνες (πρόσφατες σεζόν μετράνε περισσότερο, συρρίκνωση προς το 1).
+    """
+    if cid != "CL":
+        return 1.0, None
+    now = datetime.now(timezone.utc)
+    cur = now.year if now.month >= 7 else now.year - 1
+    act = pred = ws = 0.0
+    n = 0
+    for season, w in ((cur, 1.0), (cur - 1, 0.6), (cur - 2, 0.35)):
+        for m in sources.fdorg_season("CL", season):
+            th, ta, rh, ra, cross, lg = _lookup(m, cid, ctx)
+            if not (th and ta):
+                continue
+            lh, la, _, _ = model.expected(rh, ra, lg, cross=cross)
+            act += w * (m["hg"] + m["ag"]); pred += w * (lh + la); ws += w; n += 1
+    if not n:
+        return 1.0, None
+    P = 40 * pred / ws  # ~40 "μέσοι" αγώνες χωρίς απόκλιση
+    k = (act + P) / (pred + P)
+    return round(k, 3), {"matches": n, "actual_goals": round(act / ws, 2), "model_goals": round(pred / ws, 2)}
+
+
+def analyse(m, cid, ctx, books):
+    fx_csv = ctx["fx_csv"]
+    th, ta, rh, ra, cross, lg = _lookup(m, cid, ctx)
     lh, la, lc, lk = model.expected(rh, ra, lg, cross=cross)
+    k = ctx["goal_factor"].get(cid, 1.0)
+    lh, la = lh * k, la * k
     model_xg = [round(lh, 2), round(la, 2)]
     market_xg = None
     x12, ou = markets.market_view(books)
@@ -179,12 +214,20 @@ def main():
     print("• Επόμενοι αγώνες & αποδόσεις")
     fx_csv = sources.fdcouk_fixtures()
     ctx = {"ratings": ratings, "leagues": leagues, "fx_csv": fx_csv, "refs": refs,
-           "margins": margins_tbl, "hist": hist_matches}
+           "margins": margins_tbl, "hist": hist_matches, "goal_factor": {}}
+    goal_info = {}
+    for cid in config.COMPETITIONS:
+        ctx["goal_factor"][cid], goal_info[cid] = comp_goal_factor(cid, ctx)
+    if goal_info.get("CL"):
+        gi = goal_info["CL"]
+        print(f"  Champions League: πραγματικά {gi['actual_goals']} γκολ/αγώνα vs μοντέλο {gi['model_goals']}"
+              f" ({gi['matches']} αγώνες) -> διόρθωση ×{ctx['goal_factor']['CL']}")
     cur_refs = {history.ref_key(m["ref"]) for m in results.get("E0", []) if m.get("ref")}
     out = {"updated": datetime.now(timezone.utc).isoformat(), "competitions": {}, "credits": None,
            "sources": {"fixtures": "football-data.org" if config.FOOTBALL_DATA_ORG_KEY else "football-data.co.uk",
                        "odds": bool(config.ODDS_API_KEY), "history_matches": len(hist_matches)},
            "margins": margins_tbl,
+           "goal_factor": {c: {"factor": ctx["goal_factor"][c], **(goal_info[c] or {})} for c in goal_info},
            "referees": sorted((v for (lg, k), v in refs.items() if lg == "E0" and k in cur_refs),
                               key=lambda v: -v["cards"])}
     all_matches = []
