@@ -97,6 +97,17 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .form span { display: inline-block; width: 16px; height: 16px; border-radius: 4px; font-size: 10px; line-height: 16px; text-align: center; margin-right: 2px; font-weight: 700; color: #0b0f14; }
 .form .W { background: var(--accent); } .form .D { background: #8b98a8; } .form .L { background: var(--red); }
 
+/* Προτεινόμενο δελτίο */
+.slip { border-color: rgba(34, 197, 94, .35); }
+.slip .leg { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.slip .leg .match { color: var(--muted); font-size: 12px; }
+.slip .leg .lo { text-align: right; }
+.slip .leg .lo b { display: block; font-size: 16px; }
+.slip .leg .lo span { color: var(--muted); font-size: 12px; }
+.slip-foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+.slip-foot span { display: block; color: var(--muted); font-size: 11px; }
+.slip-foot b { font-size: 20px; }
+
 /* Sheet (λεπτομέρειες αγώνα) */
 .sheet-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.55); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 10; }
 .sheet-backdrop.open { opacity: 1; pointer-events: auto; }

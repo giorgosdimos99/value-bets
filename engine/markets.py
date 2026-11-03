@@ -1,5 +1,5 @@
 """Πιθανότητες για τις συνηθισμένες αγορές των στοιχηματικών + σύγκριση με αποδόσεις (value)."""
-from . import config
+from . import config, history
 from .model import pois_over
 
 GOAL_LINES = [0.5, 1.5, 2.5, 3.5, 4.5]
@@ -66,10 +66,10 @@ def selections(M, lc, lk):
     for L in (0.5, 1.5, 2.5):
         h = sum(p for i, j, p in cells if i > L)
         a = sum(p for i, j, p in cells if j > L)
-        out.append(_sel("Γκολ γηπεδούχου", f"HT_OU{L:g}", "Over", f"1: Over {L:g}", h))
-        out.append(_sel("Γκολ γηπεδούχου", f"HT_OU{L:g}", "Under", f"1: Under {L:g}", 1 - h))
-        out.append(_sel("Γκολ φιλοξενούμενου", f"AT_OU{L:g}", "Over", f"2: Over {L:g}", a))
-        out.append(_sel("Γκολ φιλοξενούμενου", f"AT_OU{L:g}", "Under", f"2: Under {L:g}", 1 - a))
+        out.append(_sel("Γκολ γηπεδούχου", f"HT_OU{L:g}", "Over", f"Γηπεδούχος Over {L:g}", h))
+        out.append(_sel("Γκολ γηπεδούχου", f"HT_OU{L:g}", "Under", f"Γηπεδούχος Under {L:g}", 1 - h))
+        out.append(_sel("Γκολ φιλοξενούμενου", f"AT_OU{L:g}", "Over", f"Φιλοξενούμενος Over {L:g}", a))
+        out.append(_sel("Γκολ φιλοξενούμενου", f"AT_OU{L:g}", "Under", f"Φιλοξενούμενος Under {L:g}", 1 - a))
     for L in CORNER_LINES:
         po = pois_over(lc, L)
         out.append(_sel("Κόρνερ", f"CO{L:g}", "Over", f"Κόρνερ Over {L:g}", po))
@@ -87,8 +87,30 @@ def _devig(prices):
     return {k: v / s for k, v in inv.items()} if s else {}
 
 
-def price(sels, books):
-    """Προσθέτει σε κάθε επιλογή: τελική πιθανότητα, δίκαιη απόδοση, καλύτερη απόδοση, EV."""
+def _est(s, book_view, mains, margins_tbl):
+    """Εκτιμώμενη απόδοση Stoiximan/Superbet.
+
+    1) Αν υπάρχουν αποδόσεις από κανονικές εταιρείες: ο διάμεσός τους.
+    2) Αλλιώς: η πιθανότητα όπως τη "βλέπει" η αγορά, μείον το πραγματικό γκανιότ (Bet365 vs Pinnacle, 4 σεζόν).
+    """
+    pb, pp = book_view.get((s["key"], s["side"]), (None, s["pp"]))
+    s["p_book"] = round(pb, 4) if pb is not None else None
+    if len(mains) >= 2:
+        v = sorted(mains)
+        return round(v[len(v) // 2], 2), f"διάμεσος {len(v)} εταιρειών"
+    if pb is None:
+        pb = s["pw"]
+    p_eff = pb / (1 - pp) if pp < 1 else pb  # ακέραια χάντικαπ: δίκαιη απόδοση = (1 - επιστροφή) / νίκη
+    mk = "1X2" if s["key"] in ("1X2", "DC") else "OU"
+    o = history.estimate_odds(p_eff, mk, margins_tbl)
+    src = "εκτίμηση από γκανιότ" + (" (κόρνερ/κάρτες: χωρίς δεδομένα αγοράς)" if s["key"][:2] in ("CO", "KO") else "")
+    return o, src
+
+
+def price(sels, books, book_view=None, margins_tbl=None):
+    """Προσθέτει σε κάθε επιλογή: τελική πιθανότητα, δίκαιη απόδοση, καλύτερη/εκτιμώμενη απόδοση, EV."""
+    book_view = book_view or {}
+    margins_tbl = margins_tbl or {}
     for s in sels:
         pw, pp = s["pw"], s["pp"]
         s["p"] = round(pw, 4)
@@ -106,6 +128,9 @@ def price(sels, books):
         s["odds"] = all_odds
         s["best"], s["book"] = best, best_book
         s["ev"] = round(pw * best + pp - 1, 4) if best else None
+        mains = [o for b, o in all_odds.items() if not any(x in b for x in NOT_A_BOOK)]
+        s["est"], s["est_src"] = _est(s, book_view, mains, margins_tbl)
+        s["est_ev"] = round(pw * s["est"] + pp - 1, 4) if s["est"] else None
         # ακέραια χάντικαπ (+1, -2...) δίνονται από κάποιες εταιρείες ως ευρωπαϊκά (χωρίς επιστροφή): όχι value
         reliable = pp == 0 or s["key"] == "AH+0"
         s["value"] = bool(best and reliable and s["ev"] >= config.MIN_EDGE and config.MIN_ODDS <= best <= config.MAX_ODDS)

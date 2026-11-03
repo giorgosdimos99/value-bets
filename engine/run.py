@@ -8,22 +8,25 @@
 import json
 from datetime import datetime, timedelta, timezone
 
-from . import config, markets, model, names, sources
+from . import config, history, markets, model, names, slip, sources
 from .settle import outcome
 
 
 def build_ratings():
-    ratings, leagues, results = {}, {}, {}
+    ratings, leagues, results, hist = {}, {}, {}, []
     for code in config.RATING_LEAGUES:
         cur = sources.fdcouk_league(code, config.SEASON)
         prev = sources.fdcouk_league(code, config.PREV_SEASON)
+        older = [m for s in config.HISTORY_SEASONS if s != config.PREV_SEASON
+                 for m in sources.fdcouk_league(code, s)]
         r, lg = model.fit_league(code, cur, prev)
         if lg:
             ratings.update(r)
             leagues[code] = lg
             results[code] = cur
-        print(f"  {code}: {len(cur)} αγώνες, {len(r)} ομάδες")
-    return ratings, leagues, results
+        hist += older + prev + cur
+        print(f"  {code}: {len(cur)} αγώνες φέτος, {len(older) + len(prev)} ιστορικοί, {len(r)} ομάδες")
+    return ratings, leagues, results, hist
 
 
 def _same_match(a, b, hours=36):
@@ -52,7 +55,8 @@ def fixtures_for(cid, comp, fx_csv):
     return out
 
 
-def analyse(m, cid, ratings, leagues, books, fx_csv):
+def analyse(m, cid, ctx, books):
+    ratings, leagues, fx_csv = ctx["ratings"], ctx["leagues"], ctx["fx_csv"]
     pool = ratings if cid == "CL" else {t: r for t, r in ratings.items() if r["league"] == "E0"}
     th = names.match(m["home"], list(pool)) or names.match(m.get("home_full"), list(pool))
     ta = names.match(m["away"], list(pool)) or names.match(m.get("away_full"), list(pool))
@@ -72,13 +76,20 @@ def analyse(m, cid, ratings, leagues, books, fx_csv):
         lh = w * lh + (1 - w) * mh
         la = w * la + (1 - w) * ma
 
-    # διαιτητής (αν είναι γνωστός από το fixtures.csv)
-    ref = next((f.get("ref") for f in fx_csv if f.get("ref") and _same_match(f, m)), None)
-    rf = lg.get("referees", {}).get(ref, 1.0) if ref else 1.0
-    lk *= 0.5 + 0.5 * rf
+    # διαιτητής: football-data.org ή fixtures.csv -> ιστορικό καρτών του
+    ref_name = m.get("referee") or next((f.get("ref") for f in fx_csv if f.get("ref") and _same_match(f, m)), None)
+    ref = history.find_referee(ref_name, ctx["refs"], "E0" if cid == "PL" else None)
+    if ref:
+        lk *= ref["factor"]
+
+    # πώς "βλέπει" ο στοιχηματικός τον αγώνα (για εκτίμηση αποδόσεων σε αγορές χωρίς τιμές)
+    book_view = {}
+    if market_xg:
+        for s in markets.selections(model.score_matrix(*market_xg), lc, lk):
+            book_view[(s["key"], s["side"])] = (s["pw"], s["pp"])
 
     M = model.score_matrix(lh, la)
-    sels = markets.price(markets.selections(M, lc, lk), books)
+    sels = markets.price(markets.selections(M, lc, lk), books, book_view, ctx["margins"])
     scores = sorted(((i, j, M[i][j]) for i in range(6) for j in range(6)), key=lambda x: -x[2])[:6]
     confidence = "υψηλή" if th and ta and not cross else "μέτρια" if th and ta else "χαμηλή"
     return {
@@ -86,8 +97,10 @@ def analyse(m, cid, ratings, leagues, books, fx_csv):
         "home": m["home"], "away": m["away"],
         "home_crest": m.get("home_crest"), "away_crest": m.get("away_crest"),
         "home_stats": rh.get("stats"), "away_stats": ra.get("stats"),
+        "home_split": rh.get("stats_home"), "away_split": ra.get("stats_away"),
+        "h2h": history.h2h(th or m["home"], ta or m["away"], ctx["hist"]),
         "xg": [round(lh, 2), round(la, 2)], "model_xg": model_xg, "market_xg": market_xg, "corners": round(lc, 1), "cards": round(lk, 1),
-        "referee": ref, "confidence": confidence,
+        "referee": ref_name, "ref_stats": ref, "confidence": confidence,
         "ratings": {"home": [round(rh["att"], 2), round(rh["def"], 2)], "away": [round(ra["att"], 2), round(ra["def"], 2)]},
         "scores": [{"s": f"{i}-{j}", "p": round(p, 3)} for i, j, p in scores],
         "markets": sels,
@@ -97,9 +110,10 @@ def analyse(m, cid, ratings, leagues, books, fx_csv):
     }
 
 
-def update_history(matches, results):
+def update_history(matches, results, slip_now=None, extra_results=()):
     path = config.DATA_OUT / "history.json"
     hist = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"picks": []}
+    hist.setdefault("slips", [])
     known = {(p["match_id"], p["key"], p["side"]) for p in hist["picks"]}
     for m in matches:
         for s in m["values"]:
@@ -114,15 +128,40 @@ def update_history(matches, results):
                 for p in hist["picks"]:
                     if (p["match_id"], p["key"], p["side"]) == k and p["result"] is None:
                         p["closing"] = s["best"]
-    # εκκαθάριση με αποτελέσματα από όλα τα πρωταθλήματα
-    allres = [r for rs in results.values() for r in rs]
-    for p in hist["picks"]:
-        if p["result"] is not None:
-            continue
-        r = next((r for r in allres if _same_match(r, p, hours=30)), None)
+    # δελτίο: κρατάμε την τελευταία πρόταση πριν ξεκινήσει ο πρώτος αγώνας του
+    if slip_now:
+        sig = [(l["match_id"], l["key"], l["side"]) for l in slip_now["legs"]]
+        open_slips = [s for s in hist["slips"] if s.get("result") is None
+                      and min(l["date"] for l in s["legs"]) > datetime.now(timezone.utc).isoformat()]
+        if not any([(l["match_id"], l["key"], l["side"]) for l in s["legs"]] == sig for s in hist["slips"]):
+            for s in open_slips:  # αντικαθίσταται από νεότερη πρόταση
+                hist["slips"].remove(s)
+            hist["slips"].append({**slip_now, "created": datetime.now(timezone.utc).isoformat(), "result": None})
+
+    # εκκαθάριση με αποτελέσματα από όλα τα πρωταθλήματα (+ Champions League από football-data.org)
+    allres = [r for rs in results.values() for r in rs] + [r for r in extra_results if r.get("hg") is not None]
+
+    def settle(item):
+        r = next((r for r in allres if _same_match(r, item, hours=30)), None)
         if r:
-            p["result"] = outcome(p["key"], p["side"], r)
-            p["score"] = f"{int(r['hg'])}-{int(r['ag'])}"
+            item["score"] = f"{int(r['hg'])}-{int(r['ag'])}"
+            return outcome(item["key"], item["side"], r)
+        return None
+
+    for p in hist["picks"]:
+        if p["result"] is None:
+            p["result"] = settle(p)
+    for s in hist["slips"]:
+        if s["result"] is not None:
+            continue
+        for l in s["legs"]:
+            if l.get("result") is None:
+                l["result"] = settle(l)
+        res = [l.get("result") for l in s["legs"]]
+        if 0 in res:
+            s["result"] = 0
+        elif all(x is not None for x in res):
+            s["result"] = 1
     path.write_text(json.dumps(hist, ensure_ascii=False, indent=1), encoding="utf-8")
     return hist
 
@@ -130,12 +169,24 @@ def update_history(matches, results):
 def main():
     config.DATA_OUT.mkdir(parents=True, exist_ok=True)
     print("• Ισχύς ομάδων")
-    ratings, leagues, results = build_ratings()
+    ratings, leagues, results, hist_matches = build_ratings()
+    if not results.get("E0") or not any(r["league"] == "E0" for r in ratings.values()):
+        raise SystemExit("✗ Δεν κατέβηκαν τα δεδομένα της Premier League. Δεν ενημερώνω τίποτα.")
+    print("• Διαιτητές & γκανιότ στοιχηματικών")
+    refs = history.referees(hist_matches)
+    margins_tbl = history.margins(hist_matches)
+    print(f"  {len(refs)} διαιτητές, γκανιότ 1X2 {margins_tbl['1X2']['overround']} ({margins_tbl['1X2']['n']} αγώνες)")
     print("• Επόμενοι αγώνες & αποδόσεις")
     fx_csv = sources.fdcouk_fixtures()
+    ctx = {"ratings": ratings, "leagues": leagues, "fx_csv": fx_csv, "refs": refs,
+           "margins": margins_tbl, "hist": hist_matches}
+    cur_refs = {history.ref_key(m["ref"]) for m in results.get("E0", []) if m.get("ref")}
     out = {"updated": datetime.now(timezone.utc).isoformat(), "competitions": {}, "credits": None,
            "sources": {"fixtures": "football-data.org" if config.FOOTBALL_DATA_ORG_KEY else "football-data.co.uk",
-                       "odds": bool(config.ODDS_API_KEY)}}
+                       "odds": bool(config.ODDS_API_KEY), "history_matches": len(hist_matches)},
+           "margins": margins_tbl,
+           "referees": sorted((v for (lg, k), v in refs.items() if lg == "E0" and k in cur_refs),
+                              key=lambda v: -v["cards"])}
     all_matches = []
     for cid, comp in config.COMPETITIONS.items():
         fixtures = fixtures_for(cid, comp, fx_csv)
@@ -152,7 +203,7 @@ def main():
                 if _same_match(e, m):
                     for b, mk in e["books"].items():
                         books.setdefault(b, {}).update(mk)
-            matches.append(analyse(m, cid, ratings, leagues, books, fx_csv))
+            matches.append(analyse(m, cid, ctx, books))
         standings = sources.fdorg_standings(comp["fdorg"])
         teams = []
         if comp["fdcouk"]:
@@ -166,7 +217,9 @@ def main():
         }
         all_matches += matches
         print(f"  {cid}: {len(matches)} αγώνες, {sum(len(m['values']) for m in matches)} value")
-    hist = update_history(all_matches, results)
+    out["slip"] = slip.build(all_matches)
+    fd_results = [r for c in out["competitions"].values() for r in c["recent"]]
+    hist = update_history(all_matches, results, out["slip"], fd_results)
     settled = [p for p in hist["picks"] if p["result"] is not None]
     out["track"] = {
         "picks": len(settled),
@@ -174,6 +227,14 @@ def main():
                             for p in settled), 2),
     }
     (config.DATA_OUT / "data.json").write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
+    bt = config.DATA_OUT / "backtest.json"
+    try:
+        stale = (datetime.now(timezone.utc) - datetime.fromisoformat(json.loads(bt.read_text(encoding="utf-8"))["created"])).days >= 7
+    except (OSError, ValueError, KeyError):
+        stale = True
+    if stale:  # μία φορά την εβδομάδα
+        from . import backtest
+        backtest.main()
     print(f"✓ Έτοιμο: {config.DATA_OUT / 'data.json'}")
 
 

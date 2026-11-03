@@ -49,13 +49,26 @@ def _fit_pair(matches, f_home, f_away, iters=12):
     return att, dfn, h_avg, a_avg
 
 
-def fit_league(code, cur, prev):
+def with_proxy_xg(matches):
+    """Σεζόν χωρίς xG: εκτίμηση από σουτ στην εστία × (γκολ / σουτ στην εστία της ίδιας σεζόν)."""
+    sot = [m for m in matches if m["hst"] is not None and m["ast"] is not None]
+    shots = sum(m["hst"] + m["ast"] for m in sot)
+    conv = sum(m["hg"] + m["ag"] for m in sot) / shots if shots else 0.3
+    out = []
+    for m in matches:
+        if m["hxg"] is None and m["hst"] is not None and m["ast"] is not None:
+            m = {**m, "hxg": m["hst"] * conv, "axg": m["ast"] * conv}
+        out.append(m)
+    return out
+
+
+def fit_league(code, cur, prev, now=None, with_stats=True):
     """Επιστρέφει dict ομάδα -> ratings + στατιστικά, για ένα πρωτάθλημα."""
-    now = datetime.now(timezone.utc)
+    now = now or datetime.now(timezone.utc)
     ms = []
-    for m in cur:
+    for m in with_proxy_xg(cur):
         ms.append({**m, "_w": _w(m["date"], now, 1.0)})
-    for m in prev:
+    for m in with_proxy_xg(prev):
         ms.append({**m, "_w": _w(m["date"], now, 0.6)})
     ms = [m for m in ms if m["_w"] > 0.01 and m["hg"] is not None]
     if len(ms) < 20:
@@ -76,24 +89,19 @@ def fit_league(code, cur, prev):
             cn[t] += m["_w"] * cards(m); cd[t] += m["_w"]
     card_f = {t: ((cn[t] + 3 * card_avg) / (cd[t] + 3)) / card_avg for t in cd}
 
-    # διαιτητές
-    rn, rd = defaultdict(float), defaultdict(int)
-    for m in kms:
-        if m.get("ref"):
-            rn[m["ref"]] += cards(m); rd[m["ref"]] += 1
-    referees = {r: ((rn[r] + 4 * card_avg) / (rd[r] + 4)) / card_avg for r in rd}
-
     cur_teams = {m["home"] for m in cur} | {m["away"] for m in cur}
     out = {}
     for t in cur_teams:
-        tm = sorted([m for m in cur if t in (m["home"], m["away"])], key=lambda m: m["date"] or "")
         out[t] = {
             "league": code, "att": att.get(t, 0.85), "def": dfn.get(t, 1.15),
             "catt": catt.get(t, 1.0), "cdef": cdef.get(t, 1.0), "cards": card_f.get(t, 1.0),
-            "stats": team_stats(t, tm),
         }
-    league = {"h_avg": h_avg, "a_avg": a_avg, "hc_avg": hc_avg, "ac_avg": ac_avg,
-              "card_avg": card_avg, "referees": referees}
+        if with_stats:
+            tm = sorted([m for m in cur if t in (m["home"], m["away"])], key=lambda m: m["date"] or "")
+            out[t]["stats"] = team_stats(t, tm)
+            out[t]["stats_home"] = team_stats(t, [m for m in tm if m["home"] == t])
+            out[t]["stats_away"] = team_stats(t, [m for m in tm if m["away"] == t])
+    league = {"h_avg": h_avg, "a_avg": a_avg, "hc_avg": hc_avg, "ac_avg": ac_avg, "card_avg": card_avg}
     return out, league
 
 

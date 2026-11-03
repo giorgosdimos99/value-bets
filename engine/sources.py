@@ -2,7 +2,9 @@
 import csv
 import io
 import json
+import subprocess
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -12,10 +14,24 @@ from . import config
 UA = {"User-Agent": "value-bets/1.0 (personal use)"}
 
 
-def _get(url, headers=None, timeout=40):
+def _get(url, headers=None, timeout=40, tries=3):
     req = urllib.request.Request(url, headers={**UA, **(headers or {})})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read(), dict(r.headers)
+    for i in range(tries):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read(), dict(r.headers)
+        except urllib.error.HTTPError:
+            raise  # 4xx/5xx: δεν έχει νόημα να ξαναδοκιμάσουμε (π.χ. λάθος κλειδί)
+        except Exception as e:
+            # Το football-data.co.uk δεν στέλνει πάντα το ενδιάμεσο πιστοποιητικό. Η Python τότε αποτυγχάνει,
+            # ενώ το curl (Windows/Linux) το βρίσκει μόνο του. Ο έλεγχος SSL γίνεται κανονικά από το curl.
+            if "CERTIFICATE_VERIFY_FAILED" in str(e) and "football-data.co.uk/" in url:
+                out = subprocess.run(["curl", "-sSfL", "--max-time", str(timeout), "-A", UA["User-Agent"], url],
+                                     capture_output=True, check=True)
+                return out.stdout, {}
+            if i == tries - 1:
+                raise
+            time.sleep(2 * (i + 1))
 
 
 def _cached(name, max_age_h, stale_ok=False):
@@ -58,9 +74,35 @@ def _parse_date(d, t):
 
 # ---------------- football-data.co.uk (χωρίς κλειδί) ----------------
 
+def _odds_row(r):
+    def tri(*prefixes):
+        for p in prefixes:
+            h, d, a = _num(r.get(p + "H")), _num(r.get(p + "D")), _num(r.get(p + "A"))
+            if h and d and a:
+                return [h, d, a]
+        return None
+
+    def ou(*prefixes):
+        for p in prefixes:
+            o, u = _num(r.get(p + ">2.5")), _num(r.get(p + "<2.5"))
+            if o and u:
+                return [o, u]
+        return None
+
+    def ah(line_col, h_col, a_col):
+        ln, h, a = _num(r.get(line_col)), _num(r.get(h_col)), _num(r.get(a_col))
+        return [ln, h, a] if ln is not None and h and a else None
+
+    return {
+        "b1x2": tri("B365"), "p1x2": tri("PS", "PP"), "bc1x2": tri("B365C"), "pc1x2": tri("PSC", "PPC"),
+        "bou": ou("B365"), "pou": ou("P", "PP"), "bcou": ou("B365C"), "pcou": ou("PC", "PPC"),
+        "bah": ah("AHh", "B365AHH", "B365AHA"), "pah": ah("AHh", "PAHH", "PAHA"),
+        "a1x2": tri("Avg", "BbAv"), "aou": ou("Avg", "BbAv"),
+    }
+
 def fdcouk_league(code, season):
     """Ολοκληρωμένοι αγώνες ενός πρωταθλήματος με γκολ, xG, σουτ, κόρνερ, κάρτες, αποδόσεις."""
-    key = f"fdcouk_{code}_{season}.json"
+    key = f"fdcouk3_{code}_{season}.json"
     hit = _cached(key, 6 if season == config.SEASON else 24 * 30)
     if hit is not None:
         return hit
@@ -69,7 +111,7 @@ def fdcouk_league(code, season):
         raw, _ = _get(url)
     except Exception as e:
         print(f"  ! {code} {season}: {e}")
-        return []
+        return _cached(key, 0, stale_ok=True) or []  # τα τελευταία που είχαμε
     rows = []
     for r in csv.DictReader(io.StringIO(raw.decode("utf-8-sig", errors="replace"))):
         if not r.get("HomeTeam") or r.get("FTHG") in (None, ""):
@@ -85,10 +127,10 @@ def fdcouk_league(code, season):
             "hc": _num(r.get("HC")), "ac": _num(r.get("AC")),
             "hy": _num(r.get("HY")), "ay": _num(r.get("AY")),
             "hr": _num(r.get("HR")), "ar": _num(r.get("AR")),
+            "hf": _num(r.get("HF")), "af": _num(r.get("AF")),
             "ref": (r.get("Referee") or "").strip(),
-            # Pinnacle closing (για μελλοντικό έλεγχο CLV)
-            "psch": _num(r.get("PSCH") or r.get("PPCH")), "pscd": _num(r.get("PSCD") or r.get("PPCD")),
-            "psca": _num(r.get("PSCA") or r.get("PPCA")),
+            # αποδόσεις πριν τον αγώνα: b = Bet365 (μαλακή εταιρεία), p = Pinnacle (sharp), c = κλείσιμο
+            "odds": _odds_row(r),
         })
     _save_cache(key, rows)
     return rows
@@ -135,7 +177,7 @@ def fdorg_matches(comp, days_back=0, days_ahead=config.DAYS_AHEAD):
         "dateFrom": (now - timedelta(days=days_back)).strftime("%Y-%m-%d"),
         "dateTo": (now + timedelta(days=days_ahead)).strftime("%Y-%m-%d"),
     })
-    key = f"fdorg_{comp}_{days_back}_{days_ahead}.json"
+    key = f"fdorg2_{comp}_{days_back}_{days_ahead}.json"
     hit = _cached(key, 2)
     if hit is not None:
         return hit
@@ -157,6 +199,7 @@ def fdorg_matches(comp, days_back=0, days_ahead=config.DAYS_AHEAD):
             "home_full": m["homeTeam"].get("name"), "away_full": m["awayTeam"].get("name"),
             "home_crest": m["homeTeam"].get("crest"), "away_crest": m["awayTeam"].get("crest"),
             "hg": ft.get("home"), "ag": ft.get("away"),
+            "referee": next((x.get("name") for x in m.get("referees") or [] if x.get("type") == "REFEREE"), None),
         })
     _save_cache(key, out)
     time.sleep(6.5)  # όριο 10 κλήσεις/λεπτό

@@ -38,6 +38,7 @@
       state.data = { competitions: {}, updated: null };
     }
     try { state.history = await (await fetch("data/history.json?ts=" + Date.now())).json(); } catch { state.history = { picks: [] }; }
+    try { state.backtest = await (await fetch("data/backtest.json?ts=" + Date.now())).json(); } catch { state.backtest = null; }
     $("#updated").innerHTML = state.data.updated
       ? `Ενημέρωση<br>${new Date(state.data.updated).toLocaleString("el-GR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}`
       : "Χωρίς δεδομένα";
@@ -69,6 +70,15 @@
     if (!ms.length) {
       view.innerHTML = `<div class="empty"><b>Δεν υπάρχουν αγώνες ακόμα</b>Μόλις βγει το επόμενο πρόγραμμα θα εμφανιστούν εδώ.</div>`;
       return;
+    }
+    const sl = state.data.slip;
+    if (sl) {
+      h += `<h2>Προτεινόμενο δελτίο</h2><div class="card slip">
+        ${sl.legs.map(l => `<div class="leg" data-match="${l.match_id}"><div><b>${esc(l.label)}</b><div class="match">${esc(l.home)} – ${esc(l.away)} · ${dt(l.date)}</div></div>
+          <div class="lo"><b>${f2(l.est)}</b><span>${pct(l.p)}</span></div></div>`).join("")}
+        <div class="slip-foot"><div><span>Συνολική απόδοση</span><b>${f2(sl.odds)}</b></div><div><span>Πιθανότητα</span><b>${pct(sl.p)}</b></div><div><span>EV</span><b class="${evCls(sl.ev)}">${evTxt(sl.ev)}</b></div></div>
+        <div class="note" style="margin:10px 0 0">Οι αποδόσεις είναι <b>εκτίμηση</b> για Stoiximan/Superbet (διάμεσος εταιρειών ή πραγματικό γκανιότ 4 σεζόν). Έλεγξε την πραγματική πριν παίξεις.</div>
+        <button class="btn" style="margin-top:10px;width:100%" data-slipbet>+ Πέρασέ το στα στοιχήματά μου</button></div>`;
     }
     h += `<h2>Value επιλογές (${values.length})</h2>`;
     h += values.length
@@ -114,6 +124,11 @@
         h += st.rows.map(r => `<tr><td>${r.pos}</td><td><b>${esc(r.team)}</b></td><td class="num">${r.p}</td><td class="num">${r.w}-${r.d}-${r.l}</td><td class="num">${r.gf}:${r.ga}</td><td class="num"><b>${r.pts}</b></td><td>${formHtml((r.form || "").replace(/,/g, ""))}</td></tr>`).join("");
         h += `</tbody></table></div>`;
       }
+      if (cid === "PL" && state.data.referees?.length) {
+        h += `<h2>Διαιτητές Premier League (4 σεζόν)</h2><div class="table-wrap"><table><thead><tr><th>Διαιτητής</th><th class="num">Αγώνες</th><th class="num">Κάρτες</th><th class="num">O3.5</th><th class="num">O4.5</th><th class="num">Φάουλ</th><th class="num">Κόκκ.</th><th class="num">Νίκη γηπ.</th></tr></thead><tbody>`;
+        h += state.data.referees.map(r => `<tr><td><b>${esc(r.name)}</b></td><td class="num">${r.n}</td><td class="num ${r.cards > r.league_cards ? "ev-neg" : ""}">${f2(r.cards)}</td><td class="num">${pct(r.o35)}</td><td class="num">${pct(r.o45)}</td><td class="num">${r.fouls ?? "—"}</td><td class="num">${f2(r.reds)}</td><td class="num">${pct(r.home_win)}</td></tr>`).join("");
+        h += `</tbody></table></div><div class="note" style="margin-top:8px">Κόκκινο = περισσότερες κάρτες από τον μέσο όρο του πρωταθλήματος (${f2(state.data.referees[0].league_cards)}).</div>`;
+      }
       if (!(c.teams && c.teams.length) && !(c.standings && c.standings.length)) h += `<div class="note">Η βαθμολογία θα εμφανιστεί όταν μπει το κλειδί του football-data.org.</div>`;
     }
     view.innerHTML = h;
@@ -142,14 +157,28 @@
         ${row("Σουτ στην εστία", hs.sot, as.sot)}${row("Κόρνερ υπέρ", hs.cf, as.cf)}${row("Κάρτες", hs.cards, as.cards)}
         ${row("G/G", hs.btts, as.btts, pct)}${row("Over 2.5", hs.o25, as.o25, pct)}${row("Ανέπαφη εστία", hs.cs, as.cs, pct)}</div>`;
     }
+    if (m.market_xg) h += `<div class="note">Αναμενόμενα γκολ: μοντέλο <b>${f2(m.model_xg[0])}–${f2(m.model_xg[1])}</b>, αγορά <b>${f2(m.market_xg[0])}–${f2(m.market_xg[1])}</b>. Τελικά (20% μοντέλο, 80% αγορά, από backtest): <b>${f2(m.xg[0])}–${f2(m.xg[1])}</b>.</div>`;
+    const r = m.ref_stats;
+    h += `<h2>Διαιτητής</h2>`;
+    h += r ? `<div class="card"><b>${esc(r.name)}</b> <span class="pill muted">${r.n} αγώνες (4 σεζόν)</span>
+      <div class="kpis" style="margin:10px 0 0">
+        <div class="kpi"><span>Κάρτες/αγώνα</span><b>${f2(r.cards)}</b><span>μ.ό. πρωταθλ. ${f2(r.league_cards)}</span></div>
+        <div class="kpi"><span>Over 3.5 κάρτες</span><b>${pct(r.o35)}</b></div>
+        <div class="kpi"><span>Over 4.5 κάρτες</span><b>${pct(r.o45)}</b></div>
+        <div class="kpi"><span>Φάουλ/αγώνα</span><b>${r.fouls ?? "—"}</b></div></div>
+      <div style="color:var(--muted);font-size:12px;margin-top:8px">Γηπεδούχοι ${f2(r.home_cards)} · Φιλοξενούμενοι ${f2(r.away_cards)} κάρτες · Κόκκινες ${f2(r.reds)}/αγώνα · Νίκη γηπεδούχου ${pct(r.home_win)}</div></div>`
+      : `<div class="note">${m.referee ? `Ο διαιτητής ${esc(m.referee)} δεν υπάρχει στο ιστορικό μας.` : "Δεν έχει ανακοινωθεί ακόμα διαιτητής (συνήθως 2–4 μέρες πριν)."}</div>`;
+    if (m.h2h && m.h2h.length) {
+      h += `<h2>Τελευταίες αναμετρήσεις</h2><div class="table-wrap"><table><thead><tr><th>Ημ/νία</th><th>Αγώνας</th><th class="num">Σκορ</th><th class="num">Κόρνερ</th><th class="num">Κάρτες</th></tr></thead><tbody>${m.h2h.map(x => `<tr><td>${x.date}</td><td>${esc(x.home)} – ${esc(x.away)}</td><td class="num"><b>${x.score}</b></td><td class="num">${x.corners ?? "—"}</td><td class="num">${x.cards ?? "—"}</td></tr>`).join("")}</tbody></table></div>`;
+    }
     h += `<h2>Πιθανότερα σκορ</h2><div class="scores">${m.scores.map(s => `<span><b>${s.s}</b> ${pct(s.p)}</span>`).join("")}</div>`;
-    h += `<h2>Αγορές</h2><div class="note">Γράψε την απόδοση της Stoiximan/Superbet στο κουτάκι: αν βγει πράσινο, έχει value. Πάτα το όνομα της επιλογής για να την περάσεις στα στοιχήματά σου.</div>`;
+    h += `<h2>Αγορές</h2><div class="note"><b>Εκτ.</b> = εκτιμώμενη απόδοση Stoiximan/Superbet (διάμεσος εταιρειών ή πραγματικό γκανιότ από ${(state.data.margins?.["1X2"]?.n || 0).toLocaleString("el-GR")} αγώνες). Γράψε την πραγματική απόδοση στο κουτάκι: αν βγει πράσινο, έχει value. Πάτα το όνομα για να την περάσεις στα στοιχήματά σου.</div>`;
     for (const [g, list] of Object.entries(groups)) {
-      h += `<div class="mk-group"><h3>${esc(g)}</h3><div class="mk head"><span>Επιλογή</span><span class="v">Πιθ.</span><span class="v">Δίκαιη</span><span class="v">Αγορά</span><span class="v">Δική σου</span></div>`;
+      h += `<div class="mk-group"><h3>${esc(g)}</h3><div class="mk head"><span>Επιλογή</span><span class="v">Πιθ.</span><span class="v">Δίκαιη</span><span class="v">Εκτ.</span><span class="v">Δική σου</span></div>`;
       h += list.map((s, i) => `<div class="mk ${s.value ? "is-value" : ""}" data-sel="${esc(s.key)}|${esc(s.side)}">
-        <span class="n" data-add>${esc(s.label)} <small class="evout ${evCls(s.ev)}">${s.ev != null ? evTxt(s.ev) : ""}</small></span>
+        <span class="n" data-add>${esc(s.label)} <small class="evout ${evCls(s.est_ev)}">${s.est_ev != null ? evTxt(s.est_ev) : ""}</small></span>
         <span class="v">${pct(s.p)}</span><span class="v">${f2(s.fair)}</span>
-        <span class="v" title="${esc(Object.entries(s.odds || {}).map(([b, o]) => b + ": " + o).join("\n"))}">${s.best ? f2(s.best) : "—"}</span>
+        <span class="v" title="${esc((s.est_src || "") + "\n" + Object.entries(s.odds || {}).map(([b, o]) => b + ": " + o).join("\n"))}">${s.est ? f2(s.est) : "—"}</span>
         <input inputmode="decimal" placeholder="—" data-odds></div>`).join("");
       h += `</div>`;
     }
@@ -161,7 +190,7 @@
       const s = m.markets.find(x => x.key === k && x.side === side);
       const o = parseFloat(inp.value.replace(",", "."));
       const out = rowEl.querySelector(".evout");
-      if (!o || o <= 1) { out.textContent = s.ev != null ? evTxt(s.ev) : ""; out.className = "evout " + evCls(s.ev); rowEl.classList.toggle("is-value", s.value); return; }
+      if (!o || o <= 1) { out.textContent = s.est_ev != null ? evTxt(s.est_ev) : ""; out.className = "evout " + evCls(s.est_ev); rowEl.classList.toggle("is-value", s.value); return; }
       const ev = s.p * o + s.pp - 1;
       out.textContent = evTxt(ev); out.className = "evout " + evCls(ev);
       rowEl.classList.toggle("is-value", ev >= 0.03);
@@ -171,7 +200,7 @@
       const [k, side] = rowEl.dataset.sel.split("|");
       const s = m.markets.find(x => x.key === k && x.side === side);
       const typed = parseFloat((rowEl.querySelector("[data-odds]").value || "").replace(",", "."));
-      openBetForm({ match: `${m.home} – ${m.away}`, comp: m.comp, date: m.date, selection: s.label, group: s.group, odds: typed || s.best || "", p: s.p });
+      openBetForm({ match: `${m.home} – ${m.away}`, comp: m.comp, date: m.date, selection: s.label, group: s.group, odds: typed || s.est || "", p: s.p });
     }));
   }
 
@@ -251,7 +280,27 @@
       <div class="kpi"><span>ROI</span><b>${settled.length ? ((profit / settled.length) * 100).toFixed(1) : 0}%</b></div>
       <div class="kpi"><span>Επιτυχία</span><b>${settled.length ? Math.round((wins / settled.length) * 100) : 0}%</b></div>
       <div class="kpi"><span>Μ.ό. απόδοσης</span><b>${f2(avgOdds)}</b></div></div>`;
-    h += `<h2>Επιλογές (${picks.length})</h2>`;
+    const slips = (state.history?.slips || []).slice().reverse();
+    if (slips.length) {
+      const done = slips.filter(s => s.result !== null);
+      const sp = done.reduce((a, s) => a + (s.result === 1 ? s.odds - 1 : -1), 0);
+      h += `<h2>Προτεινόμενα δελτία (${slips.length})</h2><div class="note">Κέρδη ${done.filter(s => s.result === 1).length}/${done.length} · Αποτέλεσμα <b class="${sp >= 0 ? "ev-pos" : "ev-neg"}">${sp >= 0 ? "+" : ""}${sp.toFixed(2)}</b> μονάδες (με τις εκτιμώμενες αποδόσεις)</div>`;
+      h += slips.slice(0, 10).map(s => `<div class="card"><div style="display:flex;justify-content:space-between"><b>@${f2(s.odds)} · ${pct(s.p)}</b>${s.result === null ? `<span class="pill muted">εκκρεμεί</span>` : s.result === 1 ? `<span class="pill value">ΚΕΡΔΟΣ</span>` : `<span class="pill" style="background:rgba(240,82,82,.12);color:var(--red)">ΧΑΘΗΚΕ</span>`}</div>
+        ${s.legs.map(l => `<div style="font-size:13px;margin-top:6px">${l.result === 1 ? "✓" : l.result === 0 ? "✕" : "·"} ${esc(l.home)} – ${esc(l.away)}: <b>${esc(l.label)}</b> @${f2(l.est)} ${l.score ? `<span style="color:var(--muted)">(${l.score})</span>` : ""}</div>`).join("")}</div>`).join("");
+    }
+    const bt = state.backtest;
+    if (bt) {
+      const cur = bt.weights.find(w => w.w === bt.current_weight) || bt.weights[0];
+      h += `<h2>Backtest: ${esc(bt.league)} ${bt.seasons.map(s => "20" + s.slice(0, 2) + "/" + s.slice(2)).join(", ")}</h2>
+      <div class="note">Το μοντέλο ξανάτρεξε εβδομάδα-εβδομάδα σε <b>${bt.matches.toLocaleString("el-GR")}</b> πραγματικούς αγώνες, μόνο με όσα ήξερε πριν από κάθε αγώνα. Ποντάρισμα 1 μονάδας στις αποδόσεις Bet365 όποτε έβγαινε value ≥3%. <b>CLV</b> = πόσο καλύτερη ήταν η απόδοση από την τελική (κλείσιμο). Θετικό CLV είναι η πιο αξιόπιστη ένδειξη ότι ένα μοντέλο έχει πραγματικό πλεονέκτημα.</div>
+      <div class="table-wrap"><table><thead><tr><th>Βάρος μοντέλου</th><th class="num">Ακρίβεια 1X2</th><th class="num">Στοιχ. 1X2</th><th class="num">ROI</th><th class="num">CLV</th><th class="num">Στοιχ. O/U</th><th class="num">ROI</th><th class="num">CLV</th></tr></thead><tbody>
+      ${bt.weights.map(w => { const a = w.bets["1X2"] || {}, o = w.bets["OU2.5"] || {}; const pc = x => (x == null ? "—" : (x > 0 ? "+" : "") + (x * 100).toFixed(1) + "%");
+        return `<tr ${w.w === bt.current_weight ? 'style="background:var(--accent-soft)"' : ""}><td><b>${w.w === 0 ? "0 (μόνο αγορά)" : w.w === 1 ? "1 (μόνο μοντέλο)" : w.w}</b>${w.w === bt.current_weight ? " ✓" : ""}</td><td class="num">${w.logloss_1x2}</td><td class="num">${a.n || 0}</td><td class="num ${evCls(a.roi)}">${pc(a.roi)}</td><td class="num ${evCls(a.clv)}">${pc(a.clv)}</td><td class="num">${o.n || 0}</td><td class="num ${evCls(o.roi)}">${pc(o.roi)}</td><td class="num ${evCls(o.clv)}">${pc(o.clv)}</td></tr>`; }).join("")}
+      </tbody></table></div><div class="note" style="margin-top:8px">Ακρίβεια = log-loss (μικρότερο = καλύτερο). ✓ = η ρύθμιση που χρησιμοποιεί τώρα η εφαρμογή.</div>
+      <h2>Βαθμονόμηση (πρόβλεψη vs πραγματικότητα)</h2><div class="table-wrap"><table><thead><tr><th>Πιθανότητα μοντέλου</th><th class="num">Περιπτώσεις</th><th class="num">Πρόβλεψη</th><th class="num">Έγινε</th></tr></thead><tbody>
+      ${cur.calibration.map(c => `<tr><td>${c.bucket}</td><td class="num">${c.n}</td><td class="num">${pct(c.pred)}</td><td class="num"><b>${pct(c.actual)}</b></td></tr>`).join("")}</tbody></table></div>`;
+    }
+    h += `<h2>Value επιλογές (${picks.length})</h2>`;
     h += picks.length ? `<div class="table-wrap"><table><thead><tr><th>Ημ/νία</th><th>Αγώνας</th><th>Επιλογή</th><th class="num">Απόδ.</th><th class="num">EV</th><th class="num">Σκορ</th><th>Αποτ.</th></tr></thead><tbody>${picks.slice().reverse().map(p => `<tr><td>${new Date(p.date).toLocaleDateString("el-GR", { day: "numeric", month: "short" })}</td><td>${esc(p.home)} – ${esc(p.away)}</td><td><b>${esc(p.label)}</b></td><td class="num">${f2(p.odds)}</td><td class="num ev-pos">${evTxt(p.ev)}</td><td class="num">${p.score || "—"}</td><td>${p.result === null ? `<span class="pill muted">εκκρεμεί</span>` : p.result === 1 ? `<span class="pill value">✓</span>` : p.result === 0 ? `<span class="pill" style="background:rgba(240,82,82,.12);color:var(--red)">✕</span>` : `<span class="pill muted">επιστρ.</span>`}</td></tr>`).join("")}</tbody></table></div>`
       : `<div class="empty"><b>Δεν υπάρχει ιστορικό ακόμα</b>Θα γεμίσει μόνο του με τις value επιλογές.</div>`;
     view.innerHTML = h;
@@ -272,6 +321,10 @@
     const card = e.target.closest("[data-match]");
     if (card) return openMatch(card.dataset.match);
     if (e.target.closest("[data-newbet]")) return openBetForm();
+    if (e.target.closest("[data-slipbet]")) {
+      const sl = state.data.slip;
+      return openBetForm({ match: `Δελτίο ${sl.legs.length} επιλογών`, selection: sl.legs.map(l => `${l.home}-${l.away}: ${l.label}`).join(" | "), odds: sl.odds, p: sl.p, group: "Δελτίο" });
+    }
     if (e.target.closest("[data-export]")) {
       const blob = new Blob([JSON.stringify(bets(), null, 1)], { type: "application/json" });
       const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "stoixhmata.json"; a.click();
