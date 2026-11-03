@@ -277,6 +277,24 @@
   {
    "legs": [
     {
+     "match_id": 575382,
+     "comp": "CL",
+     "date": "2026-11-03T20:00:00Z",
+     "home": "Villarreal",
+     "away": "PSG",
+     "key": "AH+1.5",
+     "side": "H",
+     "label": "1 (+1.5)",
+     "group": "Ασιατικό χάντικαπ",
+     "p": 0.6856,
+     "fair": 1.46,
+     "est": 1.48,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
      "match_id": 575381,
      "comp": "CL",
      "date": "2026-11-03T20:00:00Z",
@@ -286,30 +304,12 @@
      "side": "Under",
      "label": "Under 3.5",
      "group": "Γκολ Over/Under",
-     "p": 0.6007,
-     "fair": 1.66,
+     "p": 0.5946,
+     "fair": 1.68,
      "est": 1.7,
      "est_src": "διάμεσος 6 εταιρειών",
      "best": 1.71,
      "book": "LeoVegas (SE)",
-     "result": null
-    },
-    {
-     "match_id": 575391,
-     "comp": "CL",
-     "date": "2026-11-04T20:00:00Z",
-     "home": "Dortmund",
-     "away": "Real Betis",
-     "key": "OU3.5",
-     "side": "Under",
-     "label": "Under 3.5",
-     "group": "Γκολ Over/Under",
-     "p": 0.5955,
-     "fair": 1.68,
-     "est": 1.68,
-     "est_src": "διάμεσος 6 εταιρειών",
-     "best": 1.68,
-     "book": "Unibet (SE)",
      "result": null
     },
     {
@@ -331,10 +331,10 @@
      "result": null
     }
    ],
-   "odds": 4.77,
-   "p": 0.224,
-   "ev": 0.0684,
-   "created": "2026-11-03T15:30:30.391639+00:00",
+   "odds": 4.2,
+   "p": 0.2553,
+   "ev": 0.0726,
+   "created": "2026-11-03T15:44:05.779050+00:00",
    "result": null
   }
  ]
