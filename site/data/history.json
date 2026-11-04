@@ -169,8 +169,9 @@
    "odds": 1.92,
    "book": "LeoVegas (SE)",
    "ev": 0.0705,
-   "result": null,
-   "closing": 1.92
+   "result": 0,
+   "closing": 1.92,
+   "score": "0-6"
   },
   {
    "match_id": 575382,
@@ -186,8 +187,9 @@
    "odds": 3.08,
    "book": "Betsson",
    "ev": 0.0442,
-   "result": null,
-   "closing": 3.08
+   "result": 0,
+   "closing": 3.08,
+   "score": "0-6"
   },
   {
    "match_id": 575382,
@@ -203,8 +205,9 @@
    "odds": 4.5,
    "book": "Unibet (NL)",
    "ev": 0.0365,
-   "result": null,
-   "closing": 4.5
+   "result": 0,
+   "closing": 4.5,
+   "score": "0-6"
   },
   {
    "match_id": 575386,
@@ -447,7 +450,8 @@
      "est_src": "εκτίμηση από γκανιότ",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "0-6"
     },
     {
      "match_id": 575381,
@@ -465,7 +469,8 @@
      "est_src": "διάμεσος 6 εταιρειών",
      "best": 1.71,
      "book": "LeoVegas (SE)",
-     "result": null
+     "result": 1,
+     "score": "0-2"
     },
     {
      "match_id": 560640,
@@ -490,7 +495,7 @@
    "p": 0.2553,
    "ev": 0.0726,
    "created": "2026-11-03T15:44:05.779050+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -510,7 +515,8 @@
      "est_src": "εκτίμηση από γκανιότ",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "0-6"
     },
     {
      "match_id": 575381,
@@ -528,7 +534,8 @@
      "est_src": "διάμεσος 6 εταιρειών",
      "best": 1.71,
      "book": "LeoVegas (SE)",
-     "result": null
+     "result": 1,
+     "score": "0-2"
     },
     {
      "match_id": 575379,
@@ -546,7 +553,8 @@
      "est_src": "εκτίμηση από γκανιότ",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "0-3"
     }
    ],
    "odds": 5.88,
@@ -555,7 +563,7 @@
    "day": "2026-11-03",
    "kind": "simple",
    "created": "2026-11-03T16:05:37.395089+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
