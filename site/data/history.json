@@ -444,7 +444,8 @@
    "odds": 1.97,
    "book": "Marathon Bet",
    "ev": 0.0396,
-   "result": null
+   "result": null,
+   "closing": 1.97
   },
   {
    "match_id": "EL-100",
@@ -460,7 +461,8 @@
    "odds": 1.4,
    "book": "Marathon Bet",
    "ev": 0.0536,
-   "result": null
+   "result": null,
+   "closing": 1.4
   }
  ],
  "slips": [
@@ -1325,6 +1327,154 @@
    "day": "2026-11-06",
    "kind": "extreme",
    "created": "2026-11-04T10:39:23.687709+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": "EL-91",
+     "comp": "EL",
+     "date": "2026-11-04T19:45:00.000Z",
+     "home": "Real",
+     "away": "Panathinaikos",
+     "key": "AH+0.5",
+     "side": "H",
+     "label": "1 (+0.5)",
+     "group": "Χάντικαπ",
+     "p": 0.4545,
+     "fair": 2.2,
+     "est": 2.34,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": 575393,
+     "comp": "CL",
+     "date": "2026-11-04T20:00:00Z",
+     "home": "RC Lens",
+     "away": "Como 1907",
+     "key": "OU3.5",
+     "side": "Under",
+     "label": "Under 3.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.6206,
+     "fair": 1.61,
+     "est": 1.64,
+     "est_src": "διάμεσος 6 εταιρειών",
+     "best": 1.65,
+     "book": "Unibet (SE)",
+     "result": null
+    },
+    {
+     "match_id": 575390,
+     "comp": "CL",
+     "date": "2026-11-04T20:00:00Z",
+     "home": "PSV",
+     "away": "Club Brugge",
+     "key": "AT_OU1.5",
+     "side": "Over",
+     "label": "Φιλοξενούμενος Over 1.5",
+     "group": "Γκολ φιλοξενούμενου",
+     "p": 0.463,
+     "fair": 2.16,
+     "est": 2.15,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 8.25,
+   "p": 0.1306,
+   "ev": 0.0775,
+   "day": "2026-11-04",
+   "kind": "simple",
+   "created": "2026-11-04T19:32:40.140028+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": "EL-91",
+     "comp": "EL",
+     "date": "2026-11-04T19:45:00.000Z",
+     "home": "Real",
+     "away": "Panathinaikos",
+     "key": "AH+0.5",
+     "side": "H",
+     "label": "1 (+0.5)",
+     "group": "Χάντικαπ",
+     "p": 0.4545,
+     "fair": 2.2,
+     "est": 2.34,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": 575393,
+     "comp": "CL",
+     "date": "2026-11-04T20:00:00Z",
+     "home": "RC Lens",
+     "away": "Como 1907",
+     "key": "OU3.5",
+     "side": "Under",
+     "label": "Under 3.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.6206,
+     "fair": 1.61,
+     "est": 1.64,
+     "est_src": "διάμεσος 6 εταιρειών",
+     "best": 1.65,
+     "book": "Unibet (SE)",
+     "result": null
+    },
+    {
+     "match_id": 575388,
+     "comp": "CL",
+     "date": "2026-11-04T20:00:00Z",
+     "home": "RB Leipzig",
+     "away": "Man City",
+     "key": "HT_OU1.5",
+     "side": "Over",
+     "label": "Γηπεδούχος Over 1.5",
+     "group": "Γκολ γηπεδούχου",
+     "p": 0.4109,
+     "fair": 2.43,
+     "est": 2.44,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": 575390,
+     "comp": "CL",
+     "date": "2026-11-04T20:00:00Z",
+     "home": "PSV",
+     "away": "Club Brugge",
+     "key": "OU4.5",
+     "side": "Over",
+     "label": "Over 4.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.3093,
+     "fair": 3.23,
+     "est": 3.23,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 30.24,
+   "p": 0.0358,
+   "ev": 0.0842,
+   "day": "2026-11-04",
+   "kind": "extreme",
+   "created": "2026-11-04T19:32:40.140028+00:00",
    "result": null
   }
  ]
