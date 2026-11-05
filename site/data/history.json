@@ -32,7 +32,7 @@
    "book": "LeoVegas (SE)",
    "ev": 0.0919,
    "result": null,
-   "closing": 1.95
+   "closing": 1.96
   },
   {
    "match_id": 560640,
@@ -49,7 +49,7 @@
    "book": "William Hill",
    "ev": 0.1579,
    "result": null,
-   "closing": 2.7
+   "closing": 2.64
   },
   {
    "match_id": 560640,
@@ -117,7 +117,7 @@
    "book": "Unibet (SE)",
    "ev": 0.1058,
    "result": null,
-   "closing": 3.75
+   "closing": 3.9
   },
   {
    "match_id": 575377,
@@ -483,7 +483,8 @@
    "odds": 2.0,
    "book": "William Hill",
    "ev": 0.0703,
-   "result": null
+   "result": null,
+   "closing": 2.0
   },
   {
    "match_id": "EL-96",
@@ -499,7 +500,8 @@
    "odds": 1.88,
    "book": "Unibet (SE)",
    "ev": 0.1301,
-   "result": null
+   "result": null,
+   "closing": 1.88
   },
   {
    "match_id": "EL-96",
@@ -515,7 +517,8 @@
    "odds": 1.95,
    "book": "Marathon Bet",
    "ev": 0.0983,
-   "result": null
+   "result": null,
+   "closing": 1.95
   }
  ],
  "slips": [
@@ -735,71 +738,6 @@
    "kind": "extreme",
    "created": "2026-11-03T16:05:37.395089+00:00",
    "result": 0
-  },
-  {
-   "legs": [
-    {
-     "match_id": 560632,
-     "comp": "PL",
-     "date": "2026-11-07T12:30:00Z",
-     "home": "Leeds United",
-     "away": "Tottenham",
-     "key": "OU2.5",
-     "side": "Under",
-     "label": "Under 2.5",
-     "group": "Γκολ Over/Under",
-     "p": 0.5416,
-     "fair": 1.85,
-     "est": 1.86,
-     "est_src": "διάμεσος 11 εταιρειών",
-     "best": 1.95,
-     "book": "LeoVegas (SE)",
-     "result": null
-    },
-    {
-     "match_id": 560640,
-     "comp": "PL",
-     "date": "2026-11-07T15:00:00Z",
-     "home": "Arsenal",
-     "away": "Hull City",
-     "key": "OU3.5",
-     "side": "Under",
-     "label": "Under 3.5",
-     "group": "Γκολ Over/Under",
-     "p": 0.6262,
-     "fair": 1.6,
-     "est": 1.67,
-     "est_src": "διάμεσος 7 εταιρειών",
-     "best": 1.68,
-     "book": "Unibet (SE)",
-     "result": null
-    },
-    {
-     "match_id": 560641,
-     "comp": "PL",
-     "date": "2026-11-07T17:30:00Z",
-     "home": "Nottingham",
-     "away": "Man City",
-     "key": "AH+0.5",
-     "side": "H",
-     "label": "1 (+0.5)",
-     "group": "Ασιατικό χάντικαπ",
-     "p": 0.4755,
-     "fair": 2.1,
-     "est": 2.12,
-     "est_src": "εκτίμηση από γκανιότ",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 6.59,
-   "p": 0.1613,
-   "ev": 0.062,
-   "day": "2026-11-07",
-   "kind": "simple",
-   "created": "2026-11-03T16:05:37.395089+00:00",
-   "result": null
   },
   {
    "legs": [
@@ -1489,25 +1427,220 @@
      "date": "2026-11-06T20:00:00Z",
      "home": "Everton",
      "away": "Coventry City",
-     "key": "HT_OU1.5",
+     "key": "OU2.5",
      "side": "Under",
-     "label": "Γηπεδούχος Under 1.5",
+     "label": "Under 2.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.462,
+     "fair": 2.16,
+     "est": 2.15,
+     "est_src": "διάμεσος 11 εταιρειών",
+     "best": 2.2,
+     "book": "Tipico",
+     "result": null
+    }
+   ],
+   "odds": 34.15,
+   "p": 0.0316,
+   "ev": 0.0786,
+   "day": "2026-11-06",
+   "kind": "extreme",
+   "created": "2026-11-05T10:31:02.785978+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": 560632,
+     "comp": "PL",
+     "date": "2026-11-07T12:30:00Z",
+     "home": "Leeds United",
+     "away": "Tottenham",
+     "key": "OU2.5",
+     "side": "Under",
+     "label": "Under 2.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.5415,
+     "fair": 1.85,
+     "est": 1.86,
+     "est_src": "διάμεσος 11 εταιρειών",
+     "best": 1.96,
+     "book": "LeoVegas (SE)",
+     "result": null
+    },
+    {
+     "match_id": 560640,
+     "comp": "PL",
+     "date": "2026-11-07T15:00:00Z",
+     "home": "Arsenal",
+     "away": "Hull City",
+     "key": "HT_OU2.5",
+     "side": "Under",
+     "label": "Γηπεδούχος Under 2.5",
      "group": "Γκολ γηπεδούχου",
-     "p": 0.4661,
-     "fair": 2.15,
-     "est": 2.13,
+     "p": 0.5332,
+     "fair": 1.88,
+     "est": 1.96,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": 560641,
+     "comp": "PL",
+     "date": "2026-11-07T17:30:00Z",
+     "home": "Nottingham",
+     "away": "Man City",
+     "key": "AH+0.5",
+     "side": "H",
+     "label": "1 (+0.5)",
+     "group": "Ασιατικό χάντικαπ",
+     "p": 0.4756,
+     "fair": 2.1,
+     "est": 2.12,
      "est_src": "εκτίμηση από γκανιότ",
      "best": null,
      "book": null,
      "result": null
     }
    ],
-   "odds": 33.83,
-   "p": 0.0319,
-   "ev": 0.078,
-   "day": "2026-11-06",
+   "odds": 7.73,
+   "p": 0.1373,
+   "ev": 0.0613,
+   "day": "2026-11-07",
+   "kind": "simple",
+   "created": "2026-11-05T10:31:02.785978+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": 560635,
+     "comp": "PL",
+     "date": "2026-11-08T14:00:00Z",
+     "home": "Crystal Palace",
+     "away": "Liverpool",
+     "key": "OU3.5",
+     "side": "Under",
+     "label": "Under 3.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.6187,
+     "fair": 1.62,
+     "est": 1.6,
+     "est_src": "διάμεσος 7 εταιρειών",
+     "best": 1.61,
+     "book": "LeoVegas (SE)",
+     "result": null
+    },
+    {
+     "match_id": 560636,
+     "comp": "PL",
+     "date": "2026-11-08T14:00:00Z",
+     "home": "Sunderland",
+     "away": "Chelsea",
+     "key": "OU2.5",
+     "side": "Over",
+     "label": "Over 2.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.5389,
+     "fair": 1.86,
+     "est": 1.81,
+     "est_src": "διάμεσος 11 εταιρειών",
+     "best": 1.85,
+     "book": "Unibet (SE)",
+     "result": null
+    },
+    {
+     "match_id": 560637,
+     "comp": "PL",
+     "date": "2026-11-08T14:00:00Z",
+     "home": "Ipswich Town",
+     "away": "Bournemouth",
+     "key": "AT_OU1.5",
+     "side": "Over",
+     "label": "Φιλοξενούμενος Over 1.5",
+     "group": "Γκολ φιλοξενούμενου",
+     "p": 0.5256,
+     "fair": 1.9,
+     "est": 1.85,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 5.36,
+   "p": 0.1752,
+   "ev": -0.0611,
+   "day": "2026-11-08",
+   "kind": "simple",
+   "created": "2026-11-05T10:31:02.785978+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": 560635,
+     "comp": "PL",
+     "date": "2026-11-08T14:00:00Z",
+     "home": "Crystal Palace",
+     "away": "Liverpool",
+     "key": "OU2.5",
+     "side": "Under",
+     "label": "Under 2.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.3953,
+     "fair": 2.53,
+     "est": 2.5,
+     "est_src": "διάμεσος 3 εταιρειών",
+     "best": 2.51,
+     "book": "Betsson",
+     "result": null
+    },
+    {
+     "match_id": 560636,
+     "comp": "PL",
+     "date": "2026-11-08T14:00:00Z",
+     "home": "Sunderland",
+     "away": "Chelsea",
+     "key": "HT_OU1.5",
+     "side": "Over",
+     "label": "Γηπεδούχος Over 1.5",
+     "group": "Γκολ γηπεδούχου",
+     "p": 0.3432,
+     "fair": 2.91,
+     "est": 2.87,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": 560637,
+     "comp": "PL",
+     "date": "2026-11-08T14:00:00Z",
+     "home": "Ipswich Town",
+     "away": "Bournemouth",
+     "key": "OU3.5",
+     "side": "Over",
+     "label": "Over 3.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.3485,
+     "fair": 2.87,
+     "est": 2.8,
+     "est_src": "εκτίμηση από γκανιότ",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 20.09,
+   "p": 0.0473,
+   "ev": -0.0501,
+   "day": "2026-11-08",
    "kind": "extreme",
-   "created": "2026-11-05T01:22:51.280712+00:00",
+   "created": "2026-11-05T10:31:02.785978+00:00",
    "result": null
   }
  ]
