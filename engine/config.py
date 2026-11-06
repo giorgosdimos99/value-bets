@@ -42,20 +42,47 @@ RATING_LEAGUES = {
     "T1": ("Süper Lig", 0.74),
     "G1": ("Super League", 0.70),
     "SC0": ("Premiership", 0.70),
+    "E1": ("Championship", 0.80),
+    "E2": ("League One", 0.66),
+    "D2": ("2. Bundesliga", 0.74),
+    "I2": ("Serie B", 0.70),
+    "SP2": ("Segunda División", 0.72),
+    "F2": ("Ligue 2", 0.68),
 }
 DEFAULT_LEAGUE_STRENGTH = 0.68  # ομάδες από πρωταθλήματα που δεν παρακολουθούμε
 CROSS_EXP = 2.0                 # πόσο έντονα μετράει η διαφορά δύναμης πρωταθλημάτων
 
 # Διοργανώσεις που εμφανίζονται στην εφαρμογή
 COMPETITIONS = {
-    "PL": {"name": "Premier League", "fdorg": "PL", "odds": "soccer_epl", "fdcouk": "E0"},
-    "CL": {"name": "Champions League", "fdorg": "CL", "odds": "soccer_uefa_champs_league", "fdcouk": None},
+    "PL": {"name": "Premier League", "fdorg": "PL", "odds": "soccer_epl", "fdcouk": "E0", "paid_odds": True},
+    "CL": {"name": "Champions League", "fdorg": "CL", "odds": "soccer_uefa_champs_league", "fdcouk": None, "paid_odds": True},
     # football-data.org δεν έχει Super League στο δωρεάν πακέτο: πρόγραμμα από The Odds API (δωρεάν "events")
     "GR": {"name": "Super League", "fdorg": None, "odds": "soccer_greece_super_league", "fdcouk": "G1",
-           "odds_markets": "h2h,totals"},
+           "odds_markets": "h2h,totals", "paid_odds": True},
 }
+# Υπόλοιπα πρωταθλήματα: πρόγραμμα από The Odds API "events" (0 credits), αποδόσεις από το δωρεάν
+# fixtures.csv του football-data.co.uk (Bet365, Pinnacle, μέσος όρος). Δεν ξοδεύουν credits.
+for _cid, _name, _sport, _code in (
+        ("PD", "La Liga", "soccer_spain_la_liga", "SP1"),
+        ("SA", "Serie A", "soccer_italy_serie_a", "I1"),
+        ("BL", "Bundesliga", "soccer_germany_bundesliga", "D1"),
+        ("FL1", "Ligue 1", "soccer_france_ligue_one", "F1"),
+        ("ELC", "Championship", "soccer_efl_champ", "E1"),
+        ("DED", "Eredivisie", "soccer_netherlands_eredivisie", "N1"),
+        ("PPL", "Primeira Liga", "soccer_portugal_primeira_liga", "P1"),
+        ("BEL", "Βέλγιο Pro League", "soccer_belgium_first_div", "B1"),
+        ("TUR", "Τουρκία Süper Lig", "soccer_turkey_super_league", "T1"),
+        ("SCO", "Σκωτία Premiership", "soccer_spl", "SC0"),
+        ("L1", "League One", "soccer_england_league1", "E2"),
+        ("BL2", "2. Bundesliga", "soccer_germany_bundesliga2", "D2"),
+        ("SB", "Serie B", "soccer_italy_serie_b", "I2"),
+        ("SD", "Segunda División", "soccer_spain_segunda_division", "SP2"),
+        ("FL2", "Ligue 2", "soccer_france_ligue_two", "F2")):
+    COMPETITIONS[_cid] = {"name": _name, "fdorg": None, "odds": _sport, "fdcouk": _code, "paid_odds": False, "days": 7}
+
 # Μπάσκετ (ξεχωριστό μοντέλο: engine/basket.py)
-BASKET = {"EL": {"name": "EuroLeague", "feed": "E", "odds": "basketball_euroleague"}}
+BASKET = {"EL": {"name": "EuroLeague", "feed": "E", "odds": "basketball_euroleague"},
+          "EC": {"name": "EuroCup", "feed": "U", "odds": None}}
 ODDS_WINDOW_HOURS = 36   # αποδόσεις ζητάμε μόνο αν υπάρχει αγώνας μέσα σε τόσες ώρες (εξοικονόμηση credits)
 
 DAYS_AHEAD = 10          # πόσες μέρες μπροστά κοιτάμε αγώνες

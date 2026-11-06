@@ -138,7 +138,7 @@ def fdcouk_league(code, season):
 
 def fdcouk_fixtures():
     """Επερχόμενοι αγώνες (ανανεώνεται συνήθως Τρίτη & Παρασκευή) με αποδόσεις."""
-    hit = _cached("fdcouk_fixtures.json", 3)
+    hit = _cached("fdcouk_fixtures2.json", 3)
     if hit is not None:
         return hit
     try:
@@ -160,10 +160,15 @@ def fdcouk_fixtures():
             o, u = _num(r.get(pre + ">2.5")), _num(r.get(pre + "<2.5"))
             if o and u:
                 books.setdefault(bk, {})["OU2.5"] = {"Over": o, "Under": u}
+            line = _num(r.get("AHh"))
+            ah_pre = {"PS": "P", "PP": "P"}.get(pre, pre)
+            h, a = _num(r.get(ah_pre + "AHH")), _num(r.get(ah_pre + "AHA"))
+            if line is not None and h and a and abs(line * 2) % 1 == 0:  # μόνο ακέραιες/μισές γραμμές
+                books.setdefault(bk, {})[f"AH{line:+g}"] = {"H": h, "A": a}
         out.append({"league": r.get("Div"), "date": dt.isoformat() if dt else None,
                     "home": r["HomeTeam"].strip(), "away": r["AwayTeam"].strip(),
                     "ref": (r.get("Referee") or "").strip(), "books": books})
-    _save_cache("fdcouk_fixtures.json", out)
+    _save_cache("fdcouk_fixtures2.json", out)
     return out
 
 

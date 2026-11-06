@@ -14,7 +14,7 @@ import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 
-from . import config, markets, model, sources
+from . import config, markets, model, predictions, sources
 
 FEED = "https://feeds.incrowdsports.com/provider/euroleague-feeds/v2/competitions/{c}/seasons/{s}/games?limit=400"
 BOX = "https://api-live.euroleague.net/v2/competitions/{c}/seasons/{s}/games/{g}/stats"
@@ -263,7 +263,7 @@ def build(cid, comp, margins_tbl):
     R = fit(played_cur, played_prev)
     box = boxscores(comp["feed"], year, played_cur)
 
-    events, remaining = sources.odds_api(comp["odds"], "h2h,spreads,totals")
+    events, remaining = sources.odds_api(comp["odds"], "h2h,spreads,totals") if comp["odds"] else (None, None)
     res["credits"] = remaining
     now = datetime.now(timezone.utc)
     upcoming = [g for g in cur if not g["played"]
@@ -309,7 +309,8 @@ def build(cid, comp, margins_tbl):
                 book_view[(s["key"], s["side"])] = (s["pw"], s["pp"])
         sels = markets.price(sels, books, book_view, margins_tbl)
         hg_, ag_ = team_games(h), team_games(a)
-        conf = "υψηλή" if len(hg_) >= 5 and len(ag_) >= 5 else "μέτρια"
+        # χωρίς αποδόσεις αγοράς το μοντέλο δεν ελέγχεται από κάπου -> το πολύ "μέτρια"
+        conf = "υψηλή" if len(hg_) >= 5 and len(ag_) >= 5 and books else "μέτρια"
 
         def tstats(t, gl):
             if not gl:
@@ -335,7 +336,7 @@ def build(cid, comp, margins_tbl):
             "sd": [round(R["sd_margin"], 1), round(R["sd_total"], 1)],
             "markets": sels,
             "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
-            "solid": markets.solid(sels), "has_odds": bool(books),
+            "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books),
             "players": {"source": "EuroLeague (επίσημα στατιστικά, τελευταίοι 10 αγώνες)",
                         "home": players_for(h, [(0, x) for x in h_box], mh, hs.get("ppg")),
                         "away": players_for(a, [(0, x) for x in a_box], ma, as_.get("ppg"))},

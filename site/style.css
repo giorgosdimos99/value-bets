@@ -97,6 +97,9 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .form span { display: inline-block; width: 16px; height: 16px; border-radius: 4px; font-size: 10px; line-height: 16px; text-align: center; margin-right: 2px; font-weight: 700; color: #0b0f14; }
 .form .W { background: var(--accent); } .form .D { background: #8b98a8; } .form .L { background: var(--red); }
 
+.pick .why { color: var(--text); opacity: .8; font-size: 12px; line-height: 1.35; }
+.comp-filter button small { opacity: .6; font-size: 11px; }
+
 /* Παίκτες */
 .ptable td { vertical-align: top; }
 .ptable small.pc { display: block; color: var(--muted); font-size: 11px; white-space: nowrap; }

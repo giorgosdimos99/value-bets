@@ -97,14 +97,14 @@ def _est(s, book_view, mains, margins_tbl):
     s["p_book"] = round(pb, 4) if pb is not None else None
     if len(mains) >= 2:
         v = sorted(mains)
-        return round(v[len(v) // 2], 2), f"διάμεσος {len(v)} εταιρειών"
+        return round(v[len(v) // 2], 2), f"m{len(v)}"  # διάμεσος n εταιρειών
     if pb is None:
         pb = s["pw"]
     p_eff = pb / (1 - pp) if pp < 1 else pb  # ακέραια χάντικαπ: δίκαιη απόδοση = (1 - επιστροφή) / νίκη
     mk = "1X2" if s["key"] in ("1X2", "DC") else "OU"
     o = history.estimate_odds(p_eff, mk, margins_tbl)
-    src = "εκτίμηση από γκανιότ" + (" (κόρνερ/κάρτες: χωρίς δεδομένα αγοράς)" if s["key"][:2] in ("CO", "KO") else "")
-    return o, src
+    # g = από γκανιότ, gc = από γκανιότ χωρίς καθόλου δεδομένα αγοράς (κόρνερ/κάρτες)
+    return o, "gc" if s["key"][:2] in ("CO", "KO") else "g"
 
 
 def price(sels, books, book_view=None, margins_tbl=None):

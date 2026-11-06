@@ -8,7 +8,7 @@
 import json
 from datetime import datetime, timedelta, timezone
 
-from . import basket, config, history, markets, model, names, players, slip, sources
+from . import basket, config, history, markets, model, names, players, predictions, slip, sources
 from .settle import outcome
 
 
@@ -46,7 +46,7 @@ def fixtures_for(cid, comp, fx_csv):
     if fx is not None:
         return [m for m in fx if m["status"] in ("SCHEDULED", "TIMED")]
     if comp["odds"] and config.ODDS_API_KEY:  # πρόγραμμα από The Odds API (δωρεάν)
-        horizon = now + timedelta(days=config.DAYS_AHEAD)
+        horizon = now + timedelta(days=comp.get("days", config.DAYS_AHEAD))
         evs = [e for e in sources.odds_events(comp["odds"])
                if now < datetime.fromisoformat(e["date"].replace("Z", "+00:00")) < horizon]
         if evs:
@@ -169,6 +169,7 @@ def analyse(m, cid, ctx, books):
         "markets": sels,
         "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
         "solid": markets.solid(sels),
+        "top": predictions.top(sels),
         "has_odds": bool(books),
     }
 
@@ -177,6 +178,24 @@ def update_history(matches, results, slip_now=None, extra_results=()):
     path = config.DATA_OUT / "history.json"
     hist = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"picks": []}
     hist.setdefault("slips", [])
+    hist.setdefault("preds", [])
+    # κύρια πρόβλεψη κάθε αγώνα: ενημερώνεται μέχρι να ξεκινήσει ο αγώνας, μετά "κλειδώνει"
+    now_iso0 = datetime.now(timezone.utc).isoformat()
+    by_id = {p["match_id"]: p for p in hist["preds"]}
+    for m in matches:
+        if not m.get("top") or m["date"].replace("Z", "+00:00") <= now_iso0:
+            continue
+        t = m["top"][0]
+        old = by_id.get(m["id"])
+        if old and old.get("result") is not None:
+            continue
+        row = {"match_id": m["id"], "comp": m["comp"], "date": m["date"], "home": m["home"], "away": m["away"],
+               "key": t["key"], "side": t["side"], "label": t["label"], "group": t["group"],
+               "p": t["p"], "est": t["est"], "result": None}
+        if old:
+            old.update(row)
+        else:
+            hist["preds"].append(row)
     known = {(p["match_id"], p["key"], p["side"]) for p in hist["picks"]}
     for m in matches:
         for s in m["values"]:
@@ -218,8 +237,8 @@ def update_history(matches, results, slip_now=None, extra_results=()):
             return outcome(item["key"], item["side"], r)
         return None
 
-    for p in hist["picks"]:
-        if p["result"] is None:
+    for p in hist["picks"] + hist["preds"]:
+        if p["result"] is None and p["date"].replace("Z", "+00:00") < now_iso0:
             p["result"] = settle(p)
     for s in hist["slips"]:
         if s["result"] is not None:
@@ -268,7 +287,9 @@ def main():
     all_matches = []
     for cid, comp in config.COMPETITIONS.items():
         fixtures = fixtures_for(cid, comp, fx_csv)
-        events, remaining = sources.odds_api(comp["odds"], comp.get("odds_markets"))
+        # πληρωμένες αποδόσεις (credits) μόνο για τις βασικές διοργανώσεις
+        events, remaining = (sources.odds_api(comp["odds"], comp.get("odds_markets"))
+                             if comp.get("paid_odds") else (None, None))
         if remaining is not None:
             out["credits"] = remaining
         matches = []
@@ -311,6 +332,7 @@ def main():
         all_matches += bres["matches"]
         print(f"  {cid}: {len(bres['matches'])} αγώνες, {sum(len(m['values']) for m in bres['matches'])} value")
 
+    predictions.annotate(all_matches)
     out["slips"] = slip.build_daily(all_matches)
     out["slip"] = (out["slips"][0]["simple"] if out["slips"] else None)
     fd_results = [r for c in out["competitions"].values() for r in c["recent"]]
@@ -321,7 +343,15 @@ def main():
         "profit": round(sum((p["odds"] - 1) if p["result"] == 1 else 0 if p["result"] == 0.5 else -1
                             for p in settled), 2),
     }
-    (config.DATA_OUT / "data.json").write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
+    # μικρότερο αρχείο για το κινητό: χωρίς τις αποδόσεις κάθε εταιρείας και χωρίς ακραίες επιλογές
+    for c in out["competitions"].values():
+        for m in c["matches"]:
+            m["markets"] = [{k: v for k, v in s.items() if k not in ("odds", "pw") and v is not None and v is not False}
+                            for s in m["markets"] if 0.02 <= s["p"] <= 0.98 or s["value"]]
+            m["solid"] = m["solid"][:2]
+            for s in m["values"] + m["solid"]:
+                s.pop("odds", None)
+    (config.DATA_OUT / "data.json").write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     bt = config.DATA_OUT / "backtest.json"
     try:
         stale = (datetime.now(timezone.utc) - datetime.fromisoformat(json.loads(bt.read_text(encoding="utf-8"))["created"])).days >= 7
