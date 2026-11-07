@@ -158,12 +158,16 @@ def selections(mx, disp, ht=None, home="Γηπεδούχος", away="Φιλοξ�
         tot = nb_pmf(mT, pT)
         for L in _lines(mT, 2):
             po = p_over(tot, L)
+            if not bookable(k, "T", L, po):
+                continue
             out.append(_s(name, f"S:{k}:T:{L:g}", "Over", f"{name} Over {L:g}", po))
             out.append(_s(name, f"S:{k}:T:{L:g}", "Under", f"{name} Under {L:g}", 1 - po))
         dh, da = nb_pmf(mh, pt), nb_pmf(ma, pt)
         for side, mu, d, who in (("H", mh, dh, home), ("A", ma, da, away)):
             for L in _lines(mu, 1):
                 po = p_over(d, L)
+                if not bookable(k, side, L, po):
+                    continue
                 g = f"{name} {'γηπεδούχου' if side == 'H' else 'φιλοξενούμενου'}"
                 out.append(_s(g, f"S:{k}:{side}:{L:g}", "Over", f"{who}: {name.lower()} Over {L:g}", po))
                 out.append(_s(g, f"S:{k}:{side}:{L:g}", "Under", f"{who}: {name.lower()} Under {L:g}", 1 - po))
@@ -225,12 +229,25 @@ def _pc(x):
     return f"{(x - 1) * 100:+.0f}%"
 
 
-def edges(mx, naive, disp, info, home="", away=""):
-    """Αγορές όπου η πρόβλεψη για τον αγώνα απέχει πολύ από τον μέσο όρο του πρωταθλήματος.
+# Γραμμές που δίνουν στην πράξη οι στοιχηματικές (σύνολο / ανά ομάδα)
+RANGE = {"co": ((6.5, 13.5), (1.5, 8.5)), "sh": ((15.5, 34.5), (5.5, 20.5)), "st": ((4.5, 13.5), (1.5, 8.5)),
+         "fo": ((15.5, 32.5), (6.5, 17.5)), "ca": ((1.5, 7.5), (0.5, 4.5)), "sv": ((3.5, 9.5), (0.5, 6.5))}
+REAL_P = (0.20, 0.80)   # οι εταιρείες δίνουν γραμμές όπου και οι δύο πλευρές έχουν ~1.25-5.00
+PICK_P = (0.52, 0.74)   # επιλογή: πιθανή αλλά με απόδοση που υπάρχει (~1.35-1.90)
 
-    Μια στοιχηματική που "αγκυρώνεται" στον μέσο όρο κάνει λάθος εκεί. Δείχνονται μόνο μετρικές/αγορές
-    (σύνολο ή ανά ομάδα) όπου η έρευνα, σε σεζόν που δεν είδε το μοντέλο, επιβεβαίωσε ότι σε τέτοιες
-    αποκλίσεις το αποτέλεσμα ήταν πιο κοντά στο μοντέλο.
+
+def bookable(k, scope, L, p_over_):
+    lo, hi = RANGE[k][0 if scope == "T" else 1]
+    return lo <= L <= hi and REAL_P[0] <= p_over_ <= REAL_P[1]
+
+
+def edges(mx, naive, disp, info, home="", away=""):
+    """Αγορές όπου, με αυτόν τον αντίπαλο, η πρόβλεψη απέχει πολύ από τον μέσο όρο του πρωταθλήματος.
+
+    Μια στοιχηματική που "αγκυρώνεται" στον μέσο όρο βάζει τη γραμμή πιο κοντά σε αυτόν απ' ό,τι πρέπει.
+    Δείχνουμε ΜΟΝΟ ρεαλιστικές γραμμές (που δίνουν οι εταιρείες, με απόδοση ~1.35-1.90) ανάμεσα στην
+    πρόβλεψή μας και στον μέσο όρο, με την ελάχιστη απόδοση που αξίζει για κάθε γραμμή.
+    Μόνο μετρικές όπου η έρευνα (3 σεζόν ελέγχου) επιβεβαίωσε ότι σε τέτοιες αποκλίσεις είχε δίκιο το μοντέλο.
     """
     out = []
     for k, (mh, ma, mT) in mx.items():
@@ -238,29 +255,44 @@ def edges(mx, naive, disp, info, home="", away=""):
         if k not in naive:
             continue
         d = param(disp, k)
-        pt, pT = d["pt"], d["pT"]
         nh, na = naive[k]
         cands = []
         if (st.get("edge_total") or {}).get("ok"):
-            cands.append(("T", "", mT, nh + na, pT, st["edge_total"]))
+            cands.append(("T", "", mT, nh + na, d["pT"], st["edge_total"]))
         if (st.get("edge_team") or {}).get("ok"):
-            cands += [("H", home, mh, nh, pt, st["edge_team"]), ("A", away, ma, na, pt, st["edge_team"])]
+            cands += [("H", home, mh, nh, d["pt"], st["edge_team"]), ("A", away, ma, na, d["pt"], st["edge_team"])]
         for scope, team, mu, nmu, ph, ev in cands:
-            L = math.floor(nmu) + 0.5  # η "συνηθισμένη" γραμμή του πρωταθλήματος
-            pm = p_over(nb_pmf(mu, ph), L)
-            pn = p_over(nb_pmf(nmu, ph), L)
-            if abs(pm - pn) < EDGE_MIN:
-                continue
-            side, p, q = ("Over", pm, pn) if pm > pn else ("Under", 1 - pm, 1 - pn)
             # βαθμονόμηση από την έρευνα: σε τέτοιες αποκλίσεις το μοντέλο ήταν λίγο πιο σίγουρο απ' ό,τι έπρεπε
+            kc = 1.0
             if ev.get("model") and ev.get("avg") is not None and ev["model"] - ev["avg"] > 0.02:
                 kc = min(max((ev["hit"] - ev["avg"]) / (ev["model"] - ev["avg"]), 0.0), 1.0)
-                p = q + kc * (p - q)
+            muc = nmu + kc * (mu - nmu)
+            L0 = math.floor(nmu) + 0.5
+            dist, ndist = nb_pmf(muc, ph), nb_pmf(nmu, ph)
+            if abs(p_over(dist, L0) - p_over(ndist, L0)) < EDGE_MIN:
+                continue
+            up = muc > nmu
+            side = "Over" if up else "Under"
+            ladder = []
+            lo, hi = sorted((muc, nmu))
+            L = math.floor(lo - 1) + 0.5
+            while L <= hi + 1:
+                po = p_over(dist, L)
+                p = po if up else 1 - po
+                if bookable(k, scope, L, po) and PICK_P[0] <= p <= PICK_P[1] + 0.06:
+                    pa = p_over(ndist, L)
+                    ladder.append({"line": L, "p": round(p, 4), "p_avg": round(pa if up else 1 - pa, 4),
+                                   "fair": round(1 / p, 2), "min_odds": round(1.03 / p, 2)})
+                L += 1
+            ladder = [x for x in ladder if x["p"] - x["p_avg"] >= 0.06]
+            if not ladder:
+                continue
+            main = max((x for x in ladder if x["p"] <= PICK_P[1]), key=lambda x: x["p"], default=ladder[0])
             who = f"{team}: " if team else ""
-            out.append({"stat": k, "name": STATS[k], "scope": scope, "key": f"S:{k}:{scope}:{L:g}", "side": side,
-                        "label": f"{who}{STATS[k]} {side} {L:g}", "p": round(p, 4), "p_avg": round(q, 4),
-                        "exp": round(mu, 1), "avg": round(nmu, 1), "fair": round(1 / p, 2),
-                        "min_odds": round(1.03 / p, 2), "hit": ev.get("hit"), "r_model": ev.get("model"),
-                        "r_avg": ev.get("avg"), "n": ev.get("n")})
+            out.append({"stat": k, "name": STATS[k], "scope": scope, "key": f"S:{k}:{scope}:{main['line']:g}",
+                        "side": side, "label": f"{who}{STATS[k]} {side} {main['line']:g}", "p": main["p"],
+                        "p_avg": main["p_avg"], "exp": round(muc, 1), "avg": round(nmu, 1), "fair": main["fair"],
+                        "min_odds": main["min_odds"], "ladder": ladder[:3] if up else ladder[-3:],
+                        "hit": ev.get("hit"), "r_model": ev.get("model"), "r_avg": ev.get("avg"), "n": ev.get("n")})
     out.sort(key=lambda e: -(e["p"] - e["p_avg"]))
-    return out[:4]
+    return out[:3]

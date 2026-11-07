@@ -7,7 +7,8 @@
 GROUPS = {"Τελικό αποτέλεσμα", "Διπλή ευκαιρία", "Γκολ Over/Under", "Γκολ-Γκολ", "Ισοπαλία όχι στοίχημα",
           "Ασιατικό χάντικαπ", "Γκολ γηπεδούχου", "Γκολ φιλοξενούμενου",
           "Νικητής (με παράταση)", "Χάντικαπ", "Σύνολο πόντων"}
-MIN_ODDS = 1.30
+MIN_ODDS = 1.40       # κάτω από ~1.40 οι εταιρείες συχνά δεν δίνουν καν την αγορά
+STAT_MIN_ODDS = 1.50  # στα στατιστικά οι εταιρείες βάζουν γραμμές με απόδοση ~1.50-2.20
 
 
 def top(sels, n=3):
@@ -25,9 +26,10 @@ def top(sels, n=3):
     return out
 
 
-def stat_top(sels, n=5):
+def stat_top(sels, n=4):
     """Πιθανότερες επιλογές στα στατιστικά (κόρνερ, σουτ, φάουλ, κάρτες, αποκρούσεις, ημίχρονο)."""
-    cand = sorted((s for s in sels if s["est"] and s["est"] >= MIN_ODDS and s["side"] != "X"), key=lambda s: -s["p"])
+    cand = sorted((s for s in sels if s["est"] and s["est"] >= STAT_MIN_ODDS and s["side"] != "X"
+                   and not s["key"].startswith("S:sv:T")), key=lambda s: -s["p"])
     out, seen = [], set()
     for s in cand:
         if s["group"] in seen:
