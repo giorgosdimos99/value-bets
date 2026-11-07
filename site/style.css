@@ -268,3 +268,16 @@ h2::before { content: ""; width: 4px; height: 18px; border-radius: 4px; backgrou
   .comp-filter { padding-top: 10px; }
 }
 @media (min-width: 761px) { .tabs button .ic { margin-right: 6px; } }
+
+/* ---- Δυσκολία αγώνα / αντίπαλος ---- */
+.pill.warn { background: rgba(240, 82, 82, .14); color: var(--red); }
+.fitline { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+.fitline b { color: var(--text); font-weight: 600; }
+.diff { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.diff-t { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.diff-t small { color: var(--muted); font-size: 12px; }
+.tri { display: flex; height: 26px; border-radius: 8px; overflow: hidden; margin-top: 12px; font-size: 11px; font-weight: 600; }
+.tri i { font-style: normal; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; color: #fff; min-width: 0; }
+.tri i:nth-child(1) { background: linear-gradient(90deg, #12b886, #20c997); }
+.tri i:nth-child(2) { background: #3b4252; }
+.tri i:nth-child(3) { background: linear-gradient(90deg, #4c6ef5, #5c7cfa); }

@@ -17,9 +17,15 @@ STATS = {
     "ca": "Κάρτες",
     "sv": "Αποκρούσεις",
 }
-# Διασπορά (variance = μ + φ·μ²) ανά ομάδα και στο σύνολο. Αντικαθίσταται από τις τιμές της έρευνας.
-DEFAULT_DISP = {"co": [0.03, 0.02], "sh": [0.06, 0.03], "st": [0.06, 0.03],
-                "fo": [0.03, 0.02], "ca": [0.10, 0.06], "sv": [0.10, 0.06]}
+# Παράμετροι ανά μετρική (αντικαθίστανται από την έρευνα, engine/stats_research.py):
+#  pt/pT: διασπορά (variance = μ + φ·μ²) ανά ομάδα / στο σύνολο
+#  a/aT : πόσο από την απόκλιση ομάδας-πρωταθλήματος κρατάμε (επιστροφή στον μέσο όρο)
+#  b/bT : "σενάριο αγώνα": πόσο αλλάζει η μετρική με το πόσο φαβορί είναι η ομάδα (sup = P(νίκη) - P(ήττα))
+#  ch/ca/cT: μέσες τιμές του sup (κεντράρισμα)
+_D = {"a": 1.0, "aT": 1.0, "b": 0.0, "bT": 0.0, "ch": 0.0, "ca": 0.0, "cT": 0.0}
+DEFAULT_DISP = {"co": {**_D, "pt": 0.09, "pT": 0.015}, "sh": {**_D, "pt": 0.05, "pT": 0.012},
+                "st": {**_D, "pt": 0.035, "pT": 0.014}, "fo": {**_D, "pt": 0.006, "pT": 0.005},
+                "ca": {**_D, "pt": 0.0, "pT": 0.03}, "sv": {**_D, "pt": 0.08, "pT": 0.03}}
 PROP_RATIO = 1.045  # γκανιότ ~9% στις αγορές στατιστικών (κόρνερ/κάρτες κ.λπ.) -> ~4,5% ανά πλευρά
 EDGE_MIN = 0.10     # απόκλιση πιθανότητας από τον "μέσο όρο του πρωταθλήματος" για να σημειωθεί
 
@@ -50,27 +56,50 @@ def values(m, k):
     return a, b
 
 
-def means(home_r, away_r, league, ref=None, disp=None, info=None):
+def _gs(sup, d):
+    """Συντελεστές "σεναρίου αγώνα" (γηπεδούχος, φιλοξενούμενος, σύνολο) από το πόσο φαβορί είναι η κάθε ομάδα."""
+    if sup is None:
+        return 1.0, 1.0, 1.0
+    clamp = lambda x: min(max(x, 0.6), 1.6)
+    return (clamp(1 + d["b"] * (sup - d["ch"])), clamp(1 + d["b"] * (-sup - d["ca"])),
+            clamp(1 + d["bT"] * (abs(sup) - d["cT"])))
+
+
+def means(home_r, away_r, league, ref=None, disp=None, info=None, sup=None, explain=False):
     """Αναμενόμενες τιμές {μετρική: [γηπεδούχος, φιλοξενούμενος, σύνολο]}.
 
-    disp[k] = [φ ομάδας, φ συνόλου, α, αT]: α/αT = πόσο από την απόκλιση από τον μέσο όρο του
-    πρωταθλήματος κρατάμε ανά ομάδα / στο σύνολο (μετρήθηκε στην έρευνα σε 2023-25). Ο διαιτητής
-    μπαίνει μόνο όπου η έρευνα έδειξε ότι βοηθάει (info[k]["ref_ok"]).
+    1. ομάδα (υπέρ) × αντίπαλος (κατά) × μέσος όρος πρωταθλήματος,
+    2. επιστροφή προς τον μέσο όρο (α ανά ομάδα, αT στο σύνολο, από την έρευνα),
+    3. σενάριο αγώνα: φαβορί/αουτσάιντερ από τις αποδόσεις (β, από την έρευνα),
+    4. διαιτητής, μόνο όπου η έρευνα έδειξε ότι βοηθάει (κάρτες).
+    Με explain=True επιστρέφει και τους επιμέρους συντελεστές για εξήγηση στο site.
     """
-    out = {}
+    out, why = {}, {}
     for k, (ha, aa) in (league.get("sx") or {}).items():
         h = (home_r.get("sx") or {}).get(k, [1.0, 1.0])
         a = (away_r.get("sx") or {}).get(k, [1.0, 1.0])
-        d = list((disp or {}).get(k) or [])
-        al, alT = (d[2] if len(d) > 2 else 1.0), (d[3] if len(d) > 3 else 1.0)
+        d = param(disp, k)
         rh, ra = ha * h[0] * a[1], aa * a[0] * h[1]
-        mh, ma = ha + al * (rh - ha), aa + al * (ra - aa)
-        mT = ha + aa + alT * (rh + ra - ha - aa)
+        mh, ma = ha + d["a"] * (rh - ha), aa + d["a"] * (ra - aa)
+        mT = ha + aa + d["aT"] * (rh + ra - ha - aa)
+        fh, fa, fT = _gs(sup, d)
+        mh, ma, mT = mh * fh, ma * fa, mT * fT
+        rf = 1.0
         if ref and ((info or {}).get(k) or {}).get("ref_ok"):
-            f = ref.get("factor", 1.0) if k == "ca" else (ref.get("ffactor") or 1.0)
-            mh, ma, mT = mh * f, ma * f, mT * f
+            rf = ref.get("factor", 1.0) if k == "ca" else (ref.get("ffactor") or 1.0)
+            mh, ma, mT = mh * rf, ma * rf, mT * rf
         out[k] = [mh, ma, mT]
-    return out
+        # [ομάδα υπέρ, αντίπαλος κατά] για γηπεδούχο και φιλοξενούμενο, σενάριο, διαιτητής
+        why[k] = {"h": [round(h[0], 2), round(a[1], 2)], "a": [round(a[0], 2), round(h[1], 2)],
+                  "gs": [round(fh, 3), round(fa, 3), round(fT, 3)], "ref": round(rf, 3)}
+    return (out, why) if explain else out
+
+
+def param(disp, k):
+    d = (disp or {}).get(k)
+    if isinstance(d, list):  # παλιά μορφή [pt, pT, a, aT]
+        d = {"pt": d[0], "pT": d[1], "a": d[2] if len(d) > 2 else 1.0, "aT": d[3] if len(d) > 3 else 1.0}
+    return {**DEFAULT_DISP[k], **(d or {})}
 
 
 def nb_pmf(mu, phi, kmax=None):
@@ -106,9 +135,10 @@ def _lines(mu, n):
 def disp_table():
     try:
         r = json.loads((config.DATA_OUT / "research.json").read_text(encoding="utf-8"))
-        return {**DEFAULT_DISP, **(r.get("stats_disp") or {})}, r.get("stats") or {}
+        sd = r.get("stats_disp") or {}
+        return {k: param(sd, k) for k in STATS}, r.get("stats") or {}
     except (OSError, ValueError):
-        return dict(DEFAULT_DISP), {}
+        return {k: param({}, k) for k in STATS}, {}
 
 
 def _s(group, key, side, label, p):
@@ -123,7 +153,8 @@ def selections(mx, disp, ht=None, home="Γηπεδούχος", away="Φιλοξ�
     out = []
     for k, (mh, ma, mT) in mx.items():
         name = STATS[k]
-        pt, pT = disp.get(k, DEFAULT_DISP[k])[:2]
+        d = param(disp, k)
+        pt, pT = d["pt"], d["pT"]
         tot = nb_pmf(mT, pT)
         for L in _lines(mT, 2):
             po = p_over(tot, L)
@@ -157,6 +188,43 @@ def selections(mx, disp, ht=None, home="Γηπεδούχος", away="Φιλοξ�
     return [s for s in out if s["fair"]]
 
 
+def verdict(key, side, why, home="", away=""):
+    """Βολεύει ο αντίπαλος και το σενάριο του αγώνα την επιλογή; Επιστρέφει (βαθμός, κείμενο)."""
+    parts = key.split(":")
+    if parts[0] != "S" or parts[1] not in why:
+        return None
+    w, k = why[parts[1]], parts[1]
+    name = STATS[k].lower()
+    scope = parts[2]
+    notes, f = [], 1.0
+    sides = {"H": [("h", 0, home, away)], "A": [("a", 1, away, home)]}.get(scope, [("h", 0, home, away), ("a", 1, away, home)])
+    for tag, i, team, opp in sides:
+        own, opp_f = w[tag]
+        gs = w["gs"][i] if scope != "T" else w["gs"][2] ** 0.5
+        f *= opp_f * gs
+        if scope == "1X2":
+            continue
+        verb = {"fo": "προκαλεί", "ca": "προκαλεί", "sv": "αναγκάζει σε"}.get(k, "επιτρέπει")
+        txt = f"{opp} {verb} {_pc(opp_f)} {name} από τον μ.ό."
+        if abs(gs - 1) >= 0.02:
+            txt += f", σενάριο αγώνα {_pc(gs)} ({team} {'φαβορί' if gs > 1 and k in ('co', 'sh', 'st') else 'αουτσάιντερ' if k in ('co', 'sh', 'st') else 'πιο πιεσμένη' if gs > 1 else 'λιγότερο πιεσμένη'})"
+        notes.append(txt)
+    if scope == "1X2":
+        (oh, fh), (oa, fa) = w["h"], w["a"]
+        sh, sa = oh * fh * w["gs"][0], oa * fa * w["gs"][1]
+        better = side == ("1" if sh > sa else "2")
+        return (1 if better else -1, f"{home} {_pc(sh)} vs {away} {_pc(sa)} (ομάδα × αντίπαλος × σενάριο)")
+    if scope == "T":
+        f = f ** 0.5
+    want_up = side == "Over"
+    score = 1 if (f > 1.03 and want_up) or (f < 0.97 and not want_up) else -1 if (f > 1.03 or f < 0.97) else 0
+    return score, " · ".join(notes)
+
+
+def _pc(x):
+    return f"{(x - 1) * 100:+.0f}%"
+
+
 def edges(mx, naive, disp, info, home="", away=""):
     """Αγορές όπου η πρόβλεψη για τον αγώνα απέχει πολύ από τον μέσο όρο του πρωταθλήματος.
 
@@ -169,7 +237,8 @@ def edges(mx, naive, disp, info, home="", away=""):
         st = info.get(k) or {}
         if k not in naive:
             continue
-        pt, pT = disp.get(k, DEFAULT_DISP[k])[:2]
+        d = param(disp, k)
+        pt, pT = d["pt"], d["pT"]
         nh, na = naive[k]
         cands = []
         if (st.get("edge_total") or {}).get("ok"):
@@ -183,6 +252,10 @@ def edges(mx, naive, disp, info, home="", away=""):
             if abs(pm - pn) < EDGE_MIN:
                 continue
             side, p, q = ("Over", pm, pn) if pm > pn else ("Under", 1 - pm, 1 - pn)
+            # βαθμονόμηση από την έρευνα: σε τέτοιες αποκλίσεις το μοντέλο ήταν λίγο πιο σίγουρο απ' ό,τι έπρεπε
+            if ev.get("model") and ev.get("avg") is not None and ev["model"] - ev["avg"] > 0.02:
+                kc = min(max((ev["hit"] - ev["avg"]) / (ev["model"] - ev["avg"]), 0.0), 1.0)
+                p = q + kc * (p - q)
             who = f"{team}: " if team else ""
             out.append({"stat": k, "name": STATS[k], "scope": scope, "key": f"S:{k}:{scope}:{L:g}", "side": side,
                         "label": f"{who}{STATS[k]} {side} {L:g}", "p": round(p, 4), "p_avg": round(q, 4),

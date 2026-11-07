@@ -26,6 +26,14 @@ def build_ratings():
             results[code] = cur
         hist += older + prev + cur
         print(f"  {code}: {len(cur)} αγώνες φέτος, {len(older) + len(prev)} ιστορικοί, {len(r)} ομάδες")
+    for code in config.NEW_LEAGUES:  # μόνο γκολ (χωρίς στατιστικά)
+        cur, prev = sources.fdcouk_new(code)
+        r, lg = model.fit_league(code, cur, prev)
+        if lg:
+            ratings.update(r)
+            leagues[code] = lg
+            results[code] = cur
+        print(f"  {code}: {len(cur)} αγώνες φέτος, {len(prev)} πέρσι, {len(r)} ομάδες")
     return ratings, leagues, results, hist
 
 
@@ -167,13 +175,19 @@ def analyse(m, cid, ctx, books):
         lh = w * lh + (1 - w) * mh
         la = w * la + (1 - w) * ma
 
+    M = model.score_matrix(lh, la)
+    n_ = len(M)
+    p1 = sum(M[i][j] for i in range(n_) for j in range(n_) if i > j)
+    p2 = sum(M[i][j] for i in range(n_) for j in range(n_) if i < j)
+
     # διαιτητής: football-data.org ή fixtures.csv -> ιστορικό καρτών του
     ref_name = m.get("referee") or next((f.get("ref") for f in fx_csv if f.get("ref") and _same_match(f, m)), None)
     ref = history.find_referee(ref_name, ctx["refs"], config.COMPETITIONS[cid]["fdcouk"])
     if ref:
         lk *= ref["factor"]
     # στατιστικά αγώνα (κόρνερ, σουτ, φάουλ, κάρτες, αποκρούσεις), με τον διαιτητή στις κάρτες/φάουλ
-    mx = stats.means(rh, ra, lg, ref, ctx["disp"], ctx["stat_info"]) if th and ta else {}
+    # + αντίπαλος (κατά) και σενάριο αγώνα (πόσο φαβορί είναι η κάθε ομάδα, από τις αποδόσεις)
+    mx, why = stats.means(rh, ra, lg, ref, ctx["disp"], ctx["stat_info"], sup=p1 - p2, explain=True)         if th and ta else ({}, {})
     naive = {k: list(v) for k, v in (lg.get("sx") or {}).items()}
     if "co" in mx:
         lc = mx["co"][2]
@@ -186,7 +200,6 @@ def analyse(m, cid, ctx, books):
         for s in markets.selections(model.score_matrix(*market_xg), None, None):
             book_view[(s["key"], s["side"])] = (s["pw"], s["pp"])
 
-    M = model.score_matrix(lh, la)
     sels = markets.price(markets.selections(M, None, None), books, book_view, ctx["margins"])
     ht = [lh * lg.get("ht_share", 0.44), la * lg.get("ht_share", 0.44)]
     ssels = stats.selections(mx, ctx["disp"], ht, m["home"], m["away"])
@@ -210,11 +223,45 @@ def analyse(m, cid, ctx, books):
         "stx": {"m": {k: [round(x, 2) for x in v] for k, v in mx.items()},
                 "avg": {k: [round(a, 2), round(b, 2)] for k, (a, b) in naive.items()},
                 "ht": [round(x, 3) for x in ht],
-                "disp": {k: ctx["disp"][k] for k in mx}},
-        "stat_top": predictions.stat_top(ssels),
-        "stat_edges": stats.edges(mx, naive, ctx["disp"], ctx["stat_info"], m["home"], m["away"]),
+                "disp": {k: [ctx["disp"][k]["pt"], ctx["disp"][k]["pT"]] for k in mx},
+                "why": why},
+        "stat_top": _with_verdict(predictions.stat_top(ssels), why, m),
+        "stat_edges": _with_verdict(stats.edges(mx, naive, ctx["disp"], ctx["stat_info"], m["home"], m["away"]), why, m),
+        "difficulty": difficulty(m, th, ta, rh, ra, p1, 1 - p1 - p2, p2, ctx, cross),
         "has_odds": bool(books),
     }
+
+
+def _with_verdict(items, why, m):
+    for t in items:
+        v = stats.verdict(t["key"], t["side"], why, m["home"], m["away"])
+        if v:
+            t["fit"], t["fit_text"] = v
+    return items
+
+
+def _rank(team_r, ctx):
+    """Θέση της ομάδας στο πρωτάθλημά της με βάση τη δύναμη (επίθεση / άμυνα) και πλήθος ομάδων."""
+    lg = team_r.get("league")
+    pool = sorted((r["att"] / r["def"] for r in ctx["ratings"].values() if r["league"] == lg), reverse=True)
+    if not pool:
+        return None, None
+    return 1 + sum(1 for x in pool if x > team_r["att"] / team_r["def"] + 1e-9), len(pool)
+
+
+def difficulty(m, th, ta, rh, ra, p1, px, p2, ctx, cross):
+    """Πόσο εύκολος/δύσκολος είναι ο αγώνας για κάθε ομάδα."""
+    def lvl(pw, pl):
+        return ("πολύ εύκολο" if pw >= 0.65 else "εύκολο" if pw >= 0.5 else "ισορροπημένο" if pw >= pl - 0.08
+                else "δύσκολο" if pw >= 0.2 else "πολύ δύσκολο")
+    out = {"p": [round(p1, 3), round(px, 3), round(p2, 3)]}
+    for side, team, r, pw, pl, opp in (("home", m["home"], rh, p1, p2, ra), ("away", m["away"], ra, p2, p1, rh)):
+        rk, n = _rank(r, ctx) if (th and ta) else (None, None)
+        out[side] = {"level": lvl(pw, pl), "rank": rk, "of": n,
+                     "league": (config.RATING_LEAGUES.get(r.get("league")) or config.NEW_LEAGUES.get(r.get("league"))
+                                or [None])[0] if cross else None,
+                     "form": (r.get("stats") or {}).get("form")}
+    return out
 
 
 def update_history(matches, results, slip_now=None, extra_results=()):
@@ -326,7 +373,7 @@ def main():
     margins_tbl = history.margins(hist_matches)
     print(f"  {len(refs)} διαιτητές, γκανιότ 1X2 {margins_tbl['1X2']['overround']} ({margins_tbl['1X2']['n']} αγώνες)")
     print("• Επόμενοι αγώνες & αποδόσεις")
-    fx_csv = sources.fdcouk_fixtures()
+    fx_csv = sources.fdcouk_fixtures() + sources.fdcouk_new_fixtures()
     disp, stat_info = stats.disp_table()
     ctx = {"ratings": ratings, "leagues": leagues, "fx_csv": fx_csv, "refs": refs, "disp": disp,
            "stat_info": stat_info, "margins": margins_tbl, "hist": hist_matches, "goal_factor": {}}

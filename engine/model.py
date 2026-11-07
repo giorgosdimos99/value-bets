@@ -161,8 +161,8 @@ def expected(home_r, away_r, league, cross=False):
     lh = league["h_avg"] * home_r["att"] * away_r["def"]
     la = league["a_avg"] * away_r["att"] * home_r["def"]
     if cross:
-        sh = config.RATING_LEAGUES.get(home_r["league"], (None, config.DEFAULT_LEAGUE_STRENGTH))[1]
-        sa = config.RATING_LEAGUES.get(away_r["league"], (None, config.DEFAULT_LEAGUE_STRENGTH))[1]
+        sh = config.league_strength(home_r["league"])
+        sa = config.league_strength(away_r["league"])
         k = config.CROSS_EXP
         lh *= (sh / sa) ** k
         la *= (sa / sh) ** k

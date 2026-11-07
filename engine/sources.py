@@ -173,6 +173,70 @@ def fdcouk_fixtures():
     return out
 
 
+def fdcouk_new(code):
+    """Πρωτάθλημα σε "νέα" μορφή (όλες οι σεζόν σε ένα αρχείο, χωρίς στατιστικά): γκολ + αποδόσεις κλεισίματος.
+
+    Επιστρέφει (φετινή σεζόν, προηγούμενη σεζόν) στην ίδια μορφή με το fdcouk_league.
+    """
+    key = f"fdnew_{code}.json"
+    hit = _cached(key, 6)
+    if hit is None:
+        try:
+            raw, _ = _get(f"https://www.football-data.co.uk/new/{code}.csv")
+            hit = []
+            for r in csv.DictReader(io.StringIO(raw.decode("utf-8-sig", errors="replace"))):
+                if not r.get("Home") or r.get("HG") in (None, ""):
+                    continue
+                dt = _parse_date(r.get("Date"), r.get("Time"))
+                if not dt or dt.year < datetime.now().year - 3:
+                    continue
+                m = {k: None for k in ("hthg", "htag", "hxg", "axg", "hs", "as", "hst", "ast", "hc", "ac",
+                                       "hy", "ay", "hr", "ar", "hf", "af")}
+                m.update({"league": code, "season": r.get("Season"), "date": dt.isoformat(),
+                          "home": r["Home"].strip(), "away": r["Away"].strip(),
+                          "hg": _num(r["HG"]), "ag": _num(r["AG"]), "ref": "", "odds": {}})
+                hit.append(m)
+            _save_cache(key, hit)
+        except Exception as e:
+            print(f"  ! {code}: {e}")
+            hit = _cached(key, 0, stale_ok=True) or []
+    seasons = []
+    for m in sorted(hit, key=lambda m: m["date"]):
+        if m["season"] not in seasons:
+            seasons.append(m["season"])
+    cur = [m for m in hit if seasons and m["season"] == seasons[-1]]
+    prev = [m for m in hit if len(seasons) > 1 and m["season"] == seasons[-2]]
+    return cur, prev
+
+
+def fdcouk_new_fixtures():
+    """Επερχόμενοι αγώνες των "νέων" πρωταθλημάτων με αποδόσεις 1X2 (Pinnacle, Bet365, μέσος όρος)."""
+    hit = _cached("fdnew_fixtures.json", 3)
+    if hit is not None:
+        return hit
+    by_country = {v[2]: k for k, v in config.NEW_LEAGUES.items()}
+    out = []
+    try:
+        raw, _ = _get("https://www.football-data.co.uk/new_league_fixtures.csv")
+    except Exception as e:
+        print(f"  ! new_league_fixtures.csv: {e}")
+        return []
+    for r in csv.DictReader(io.StringIO(raw.decode("utf-8-sig", errors="replace"))):
+        code = by_country.get((r.get("Country") or "").strip())
+        if not code or not r.get("Home"):
+            continue
+        dt = _parse_date(r.get("Date"), r.get("Time"))
+        books = {}
+        for bk, pre in (("Bet365", "B365"), ("Pinnacle", "PS"), ("Μέγιστη", "Max"), ("Μέσος όρος", "Avg")):
+            h, d, a = _num(r.get(pre + "H")), _num(r.get(pre + "D")), _num(r.get(pre + "A"))
+            if h and d and a:
+                books.setdefault(bk, {})["1X2"] = {"1": h, "X": d, "2": a}
+        out.append({"league": code, "date": dt.isoformat() if dt else None, "home": r["Home"].strip(),
+                    "away": r["Away"].strip(), "ref": "", "books": books})
+    _save_cache("fdnew_fixtures.json", out)
+    return out
+
+
 # ---------------- football-data.org (δωρεάν κλειδί) ----------------
 
 def fdorg_matches(comp, days_back=0, days_ahead=config.DAYS_AHEAD):

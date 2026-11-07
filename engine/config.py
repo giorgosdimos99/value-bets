@@ -48,6 +48,30 @@ RATING_LEAGUES = {
     "I2": ("Serie B", 0.70),
     "SP2": ("Segunda División", 0.72),
     "F2": ("Ligue 2", 0.68),
+    "E3": ("League Two", 0.58),
+    "EC": ("National League", 0.50),
+    "SC1": ("Σκωτία Championship", 0.56),
+    "SC2": ("Σκωτία League One", 0.46),
+    "SC3": ("Σκωτία League Two", 0.40),
+}
+# Πρωταθλήματα με μόνο αποτελέσματα + αποδόσεις κλεισίματος (football-data.co.uk/new/<code>.csv):
+# μοντέλο γκολ, χωρίς σουτ/κόρνερ/κάρτες. code -> (όνομα, δύναμη, Country στο new_league_fixtures.csv, The Odds API)
+NEW_LEAGUES = {
+    "AUT": ("Αυστρία Bundesliga", 0.70, "Austria", "soccer_austria_bundesliga"),
+    "SWZ": ("Ελβετία Super League", 0.70, "Switzerland", "soccer_switzerland_superleague"),
+    "DNK": ("Δανία Superliga", 0.70, "Denmark", "soccer_denmark_superliga"),
+    "NOR": ("Νορβηγία Eliteserien", 0.62, "Norway", "soccer_norway_eliteserien"),
+    "SWE": ("Σουηδία Allsvenskan", 0.62, "Sweden", "soccer_sweden_allsvenskan"),
+    "POL": ("Πολωνία Ekstraklasa", 0.65, "Poland", "soccer_poland_ekstraklasa"),
+    "RUS": ("Ρωσία Premier League", 0.70, "Russia", "soccer_russia_premier_league"),
+    "BRA": ("Βραζιλία Serie A", 0.78, "Brazil", "soccer_brazil_campeonato"),
+    "ARG": ("Αργεντινή Liga Profesional", 0.72, "Argentina", "soccer_argentina_primera_division"),
+    "MEX": ("Μεξικό Liga MX", 0.68, "Mexico", "soccer_mexico_ligamx"),
+    "USA": ("ΗΠΑ MLS", 0.68, "USA", "soccer_usa_mls"),
+    "JPN": ("Ιαπωνία J1 League", 0.64, "Japan", "soccer_japan_j_league"),
+    "CHN": ("Κίνα Super League", 0.55, "China", "soccer_china_superleague"),
+    "IRL": ("Ιρλανδία Premier Division", 0.48, "Ireland", "soccer_league_of_ireland"),
+    "FIN": ("Φινλανδία Veikkausliiga", 0.48, "Finland", "soccer_finland_veikkausliiga"),
 }
 DEFAULT_LEAGUE_STRENGTH = 0.68  # ομάδες από πρωταθλήματα που δεν παρακολουθούμε
 CROSS_EXP = 2.0                 # πόσο έντονα μετράει η διαφορά δύναμης πρωταθλημάτων
@@ -79,6 +103,28 @@ for _cid, _name, _sport, _code in (
         ("SD", "Segunda División", "soccer_spain_segunda_division", "SP2"),
         ("FL2", "Ligue 2", "soccer_france_ligue_two", "F2")):
     COMPETITIONS[_cid] = {"name": _name, "fdorg": None, "odds": _sport, "fdcouk": _code, "paid_odds": False, "days": 7}
+
+def league_strength(code):
+    if code in RATING_LEAGUES:
+        return RATING_LEAGUES[code][1]
+    if code in NEW_LEAGUES:
+        return NEW_LEAGUES[code][1]
+    return DEFAULT_LEAGUE_STRENGTH
+
+
+for _cid, _name, _sport, _code in (
+        ("L2", "League Two", "soccer_england_league2", "E3"),
+        ("NL", "National League", None, "EC"),
+        ("SC1", "Σκωτία Championship", None, "SC1"),
+        ("SC2", "Σκωτία League One", None, "SC2"),
+        ("SC3", "Σκωτία League Two", None, "SC3")):
+    COMPETITIONS[_cid] = {"name": _name, "fdorg": None, "odds": _sport, "fdcouk": _code, "paid_odds": False, "days": 7}
+# Europa League: ομάδες από όλα τα πρωταθλήματα (όπως το Champions League), πρόγραμμα από The Odds API
+COMPETITIONS["UEL"] = {"name": "Europa League", "fdorg": None, "odds": "soccer_uefa_europa_league", "fdcouk": None,
+                       "paid_odds": False, "days": 7}
+for _code, (_name, _s, _country, _sport) in NEW_LEAGUES.items():
+    COMPETITIONS[_code] = {"name": _name, "fdorg": None, "odds": _sport, "fdcouk": _code, "paid_odds": False,
+                           "days": 7, "goals_only": True}
 
 # Μπάσκετ (ξεχωριστό μοντέλο: engine/basket.py)
 BASKET = {"EL": {"name": "EuroLeague", "feed": "E", "odds": "basketball_euroleague"},
