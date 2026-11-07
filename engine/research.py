@@ -178,6 +178,8 @@ def main():
     print("• Έρευνα: συλλογή προβλέψεων")
     rows = collect()
     res = analyse(rows)
+    from . import stats_research  # κόρνερ, σουτ, φάουλ, κάρτες, αποκρούσεις, ημίχρονο
+    res["stats"], res["stats_disp"] = stats_research.main()
     (config.DATA_OUT / "research.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"✓ {res['matches']} αγώνες, μοτίβα: {[(p['league'], p['side']) for p in res['patterns']]}")
     return res

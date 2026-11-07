@@ -25,6 +25,20 @@ def top(sels, n=3):
     return out
 
 
+def stat_top(sels, n=5):
+    """Πιθανότερες επιλογές στα στατιστικά (κόρνερ, σουτ, φάουλ, κάρτες, αποκρούσεις, ημίχρονο)."""
+    cand = sorted((s for s in sels if s["est"] and s["est"] >= MIN_ODDS and s["side"] != "X"), key=lambda s: -s["p"])
+    out, seen = [], set()
+    for s in cand:
+        if s["group"] in seen:
+            continue
+        seen.add(s["group"])
+        out.append(dict(s))
+        if len(out) == n:
+            break
+    return out
+
+
 def level(p):
     return "πολύ πιθανό" if p >= 0.70 else "πιθανό" if p >= 0.60 else "μέτριο"
 
@@ -60,8 +74,22 @@ def reason(t, m):
             f"φόρμα {H} {hs.get('form', '—')}, {A} {as_.get('form', '—')}")
 
 
+def stat_reason(t, m):
+    sx = m.get("stx") or {}
+    k = t["key"].split(":")
+    if k[0] == "H1":
+        return f"Αναμενόμενα γκολ Α΄ ημιχρόνου {sum(sx.get('ht') or [0]):.2f}"
+    mh, ma, mt = ((sx.get("m") or {}).get(k[1]) or [0, 0, 0])[:3]
+    avg = sum((sx.get("avg") or {}).get(k[1], [0, 0]))
+    return (f"Αναμενόμενα: {m['home']} {mh:.1f}, {m['away']} {ma:.1f} (σύνολο {mt:.1f}) · "
+            f"μ.ό. πρωταθλήματος {avg:.1f}")
+
+
 def annotate(matches):
     for m in matches:
+        for t in m.get("stat_top", []):
+            t["level"] = level(t["p"])
+            t["why"] = stat_reason(t, m)
         for t in m.get("top", []):
             t["level"] = level(t["p"])
             t["why"] = reason(t, m)

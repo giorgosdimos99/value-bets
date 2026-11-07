@@ -105,6 +105,67 @@
       <button class="btn ghost" style="margin-top:10px;width:100%" data-slipbet="${day}|${kind}">+ Στα στοιχήματά μου</button></div>`;
   }
 
+
+  // ---- Στατιστικά αγώνα: ίδιοι υπολογισμοί με το engine/stats.py (Negative Binomial) ----
+  const STATN = { co: "Κόρνερ", sh: "Σουτ", st: "Σουτ στην εστία", fo: "Φάουλ", ca: "Κάρτες", sv: "Αποκρούσεις" };
+  const STAT_ICON = { co: "🚩", sh: "🎯", st: "🥅", fo: "🦵", ca: "🟨", sv: "🧤" };
+  const PROP_RATIO = 1.045;
+  function nb(mu, phi, kmax) {
+    mu = Math.max(mu, 1e-6); kmax = kmax || Math.floor(mu * 3 + 25);
+    const out = [];
+    if (phi <= 1e-6) { let p = Math.exp(-mu); for (let k = 0; k <= kmax; k++) { out.push(p); p *= mu / (k + 1); } return out; }
+    const r = 1 / phi, q = mu / (r + mu);
+    let p = Math.exp(r * Math.log(r / (r + mu)));
+    for (let k = 0; k <= kmax; k++) { out.push(p); p *= (k + r) / (k + 1) * q; }
+    return out;
+  }
+  const pOver = (d, L) => Math.max(0, 1 - d.slice(0, Math.floor(L) + 1).reduce((a, b) => a + b, 0));
+  const lines = (mu, n) => { const b = Math.floor(mu) + 0.5, o = []; for (let i = -n; i <= n; i++) if (b + i > 0) o.push(b + i); return o; };
+  function statSel(group, key, side, label, p) {
+    const fair = p > 0.001 ? 1 / p : null;
+    const est = fair ? Math.max(Math.round((fair / PROP_RATIO) * 100) / 100, 1.01) : null;
+    return { group, key, side, label, p, fair, est, est_src: "gc", est_ev: est ? p * est - 1 : null, pp: 0 };
+  }
+  function cmp3(dh, da) {
+    let p1 = 0, px = 0, cum = 0;
+    for (let i = 0; i < dh.length; i++) { const ai = i < da.length ? da[i] : 0; p1 += dh[i] * cum; px += dh[i] * ai; cum += ai; }
+    return [p1, px, Math.max(1 - p1 - px, 0)];
+  }
+  function statSels(m) {
+    const sx = m.stx;
+    if (!sx) return [];
+    const out = [];
+    for (const [k, [mh, ma, mT0]] of Object.entries(sx.m || {})) {
+      const name = STATN[k], mT = mT0 ?? mh + ma;
+      const [pt, pT] = (sx.disp || {})[k] || [0.05, 0.03];
+      const tot = nb(mT, pT);
+      lines(mT, 2).forEach(L => { const po = pOver(tot, L); out.push(statSel(`${name}: σύνολο`, `S:${k}:T:${L}`, "Over", `Over ${L}`, po), statSel(`${name}: σύνολο`, `S:${k}:T:${L}`, "Under", `Under ${L}`, 1 - po)); });
+      const dh = nb(mh, pt), da = nb(ma, pt);
+      [["H", mh, dh, m.home], ["A", ma, da, m.away]].forEach(([side, mu, d, team]) => lines(mu, 1).forEach(L => {
+        const po = pOver(d, L), g = `${name}: ${team}`;
+        out.push(statSel(g, `S:${k}:${side}:${L}`, "Over", `${team} Over ${L}`, po), statSel(g, `S:${k}:${side}:${L}`, "Under", `${team} Under ${L}`, 1 - po));
+      }));
+      const [p1, px, p2] = cmp3(dh, da), g = `${name}: ποιος περισσότερα`;
+      out.push(statSel(g, `S:${k}:1X2`, "1", `1 · ${m.home}`, p1), statSel(g, `S:${k}:1X2`, "X", "X · ίσα", px), statSel(g, `S:${k}:1X2`, "2", `2 · ${m.away}`, p2));
+    }
+    if (sx.ht) {
+      const [hh, ha] = sx.ht, tot = nb(hh + ha, 0, 15), g = "Α΄ ημίχρονο";
+      [0.5, 1.5, 2.5].forEach(L => { const po = pOver(tot, L); out.push(statSel(g, `H1:OU${L}`, "Over", `Α΄ ημίχρονο Over ${L}`, po), statSel(g, `H1:OU${L}`, "Under", `Α΄ ημίχρονο Under ${L}`, 1 - po)); });
+      const [p1, px, p2] = cmp3(nb(hh, 0, 12), nb(ha, 0, 12));
+      out.push(statSel(g, "H1:1X2", "1", "Ημίχρονο 1", p1), statSel(g, "H1:1X2", "X", "Ημίχρονο X", px), statSel(g, "H1:1X2", "2", "Ημίχρονο 2", p2));
+    }
+    return out.filter(s => s.fair && s.p >= 0.03 && s.p <= 0.97);
+  }
+  function edgeCard(m, e, withMatch) {
+    return `<div class="card ${withMatch ? "click " : ""}pick opp" data-match="${m.id}">
+      <div><div class="sel">${STAT_ICON[e.stat] || ""} ${esc(e.label)} <span class="pill hot">ΑΠΟΚΛΙΣΗ</span></div>
+      ${withMatch ? `<div class="match">${esc(m.home)} – ${esc(m.away)} · ${esc(COMP[m.comp] || "")} · ${dt(m.date)}</div>` : ""}</div>
+      <div><div class="odds">${pct(e.p)}</div><div class="book">μ.ό. λέει ${pct(e.p_avg)}</div></div>
+      <div class="pbar ${e.p < 0.6 ? "mid" : ""}"><i style="width:${Math.round(e.p * 100)}%"></i></div>
+      <div class="meta"><span>Αναμενόμενα <b>${e.exp}</b> (μ.ό. ${e.avg})</span><span>Δίκαιη <b>${f2(e.fair)}</b></span><span>Αξίζει από <b class="edge">${f2(e.min_odds)}</b></span></div>
+      <div class="evidence">Η γραμμή ${String(e.label).split(" ").pop()} είναι η «συνηθισμένη» του πρωταθλήματος${e.scope === "T" ? "" : " για μία ομάδα"}, αλλά εδώ ${e.scope === "T" ? "οι ομάδες απέχουν" : "η ομάδα απέχει"} πολύ από τον μέσο όρο. ${e.n ? `Στον έλεγχο της έρευνας (2025/26, ${e.n.toLocaleString("el-GR")} τέτοιες περιπτώσεις) το μοντέλο έλεγε κατά μέσο όρο ${pct(e.r_model)}, ο μέσος όρος του πρωταθλήματος ${pct(e.r_avg)}, και τελικά έγινε <b>${pct(e.hit)}</b>.` : ""} Παίξ' το μόνο αν η απόδοση της Stoiximan/Superbet είναι τουλάχιστον ${f2(e.min_odds)}.</div></div>`;
+  }
+
   const LVL = { "πολύ πιθανό": "value", "πιθανό": "solid", "μέτριο": "muted" };
   function predCard(m, t) {
     return `<div class="card click pick" data-match="${m.id}">
@@ -142,6 +203,12 @@
         <div class="meta"><span>Πιθανότητα <b>${pct(o.p)}</b></span><span>Δίκαιη <b>${f2(o.fair)}</b></span><span>Πλεονέκτημα <b class="edge">${evTxt(o.ev)}</b></span></div>
         <div class="evidence">${o.kind === "gap" ? `Η ${esc(o.book || "εταιρεία")} δίνει πάνω από τη δίκαιη τιμή της αγοράς. Στην έρευνα, τέτοιες τιμές κέρδιζαν σταθερά την τελική απόδοση (θετικό CLV). Δες αν η Stoiximan/Superbet δίνει κάτι κοντά.` : esc(o.text)}</div></div>`).join("")}</div>`
       : `<div class="note">Δεν υπάρχει αυτή τη στιγμή απόδοση πάνω από τη δίκαιη τιμή. Αυτό είναι φυσιολογικό: οι αγορές είναι σωστές τις περισσότερες φορές. Οι πιθανότερες προβλέψεις παρακάτω έχουν τις πιο «τίμιες» τιμές (βλ. Μοντέλο → Έρευνα).</div>`;
+    const edges = ms.flatMap(m => (m.stat_edges || []).map(e => ({ m, e }))).sort((a, b) => (b.e.p - b.e.p_avg) - (a.e.p - a.e.p_avg));
+    const SR = R?.stats || {};
+    const okStats = Object.values(SR).filter(s => s.validated).map(s => s.name);
+    h += `<h2>Στατιστικά: εκεί που ο μέσος όρος κάνει λάθος</h2><div class="note">Κόρνερ, σουτ, σουτ στην εστία, φάουλ, κάρτες, αποκρούσεις. Οι στοιχηματικές βάζουν αυτές τις γραμμές κυρίως με τον <b>μέσο όρο του πρωταθλήματος</b> και έχουν μεγαλύτερο γκανιότ. Εδώ είναι οι αγώνες όπου οι συγκεκριμένες ομάδες (και ο διαιτητής) απέχουν πολύ από τον μέσο όρο. ${okStats.length ? `Επιβεβαιωμένο στην έρευνα για: <b>${okStats.join(", ")}</b>.` : ""} Δεν έχουμε δωρεάν αποδόσεις γι' αυτές τις αγορές: έλεγξε ότι η απόδοση είναι <b>πάνω από το «αξίζει από»</b>.</div>`;
+    h += edges.length ? `<div class="grid">${edges.slice(0, 12).map(({ m, e }) => edgeCard(m, e, true)).join("")}</div>`
+      : `<div class="note">Καμία μεγάλη απόκλιση στους αγώνες που φαίνονται τώρα.</div>`;
     const slips = (state.data.slips || []).filter(s => state.day === "ALL" || s.day === state.day);
     if (slips.length && state.comp === "ALL") {
       h += `<h2>Δελτία ημέρας</h2><div class="note">Μόνο αγώνες της ίδιας μέρας. Ο <b>πιθανότερος</b> συνδυασμός με βάση τα στατιστικά που φτάνει <b>Απλό</b>: απόδοση 5+, <b>Ακραίο</b>: απόδοση 20+. Οι αποδόσεις είναι <b>εκτίμηση</b> για Stoiximan/Superbet· έλεγξε την πραγματική πριν παίξεις.</div>`;
@@ -224,8 +291,10 @@
       const t = (Number(a) || 0) + (Number(b) || 0) || 1;
       return `<div class="stat-row"><div class="l">${fmt(a)}</div><div class="c">${lbl}<div class="bar"><i style="width:${(a / t) * 100}%"></i><i style="width:${(b / t) * 100}%"></i></div></div><div class="r">${fmt(b)}</div></div>`;
     };
-    const groups = {};
+    const groups = {}, sgroups = {};
+    const ssels = statSels(m), allSels = m.markets.concat(ssels);
     m.markets.forEach(s => (groups[s.group] = groups[s.group] || []).push(s));
+    ssels.forEach(s => (sgroups[s.group] = sgroups[s.group] || []).push(s));
     const crest = u => (u ? `<img src="${esc(u)}" alt="">` : "");
     const bk = isBasket(m);
     const fx = x => (bk ? Number(x).toFixed(1) : f2(x));
@@ -271,10 +340,25 @@
     if (m.h2h && m.h2h.length) {
       h += `<h2>Τελευταίες αναμετρήσεις</h2><div class="table-wrap"><table><thead><tr><th>Ημ/νία</th><th>Αγώνας</th><th class="num">Σκορ</th>${bk ? "" : `<th class="num">Κόρνερ</th><th class="num">Κάρτες</th>`}</tr></thead><tbody>${m.h2h.map(x => `<tr><td>${x.date}</td><td>${esc(x.home)} – ${esc(x.away)}</td><td class="num"><b>${x.score}</b></td>${bk ? "" : `<td class="num">${x.corners ?? "—"}</td><td class="num">${x.cards ?? "—"}</td>`}</tr>`).join("")}</tbody></table></div>`;
     }
+    if (!bk && m.stx && Object.keys(m.stx.m || {}).length) {
+      const S = m.stx, hsx = m.home_stats || {}, asx = m.away_stats || {};
+      const season = { co: ["cf", "ca"], sh: ["sh", "sh_a"], st: ["sot", "sot_a"], fo: ["fo", "fo_a"], ca: ["cards", "cards_a"], sv: ["sv", null] };
+      const fs = (o, k) => (o[k] == null ? "—" : Number(o[k]).toFixed(1));
+      h += `<h2>Στατιστικά αγώνα</h2><div class="table-wrap"><table><thead><tr><th>Μετρική</th><th class="num">${esc(m.home)}</th><th class="num">${esc(m.away)}</th><th class="num">Σύνολο</th><th class="num">Μ.ό. πρωτ.</th></tr></thead><tbody>
+        ${Object.entries(S.m).map(([k, [a, b, t0]]) => { const t = t0 ?? a + b; const av = (S.avg[k] || [0, 0]); const d = t / (av[0] + av[1] || 1) - 1; const [f, ag] = season[k];
+          return `<tr><td>${STAT_ICON[k]} <b>${STATN[k]}</b><small class="pc">φέτος: ${fs(hsx, f)}${ag ? "/" + fs(hsx, ag) : ""} · ${fs(asx, f)}${ag ? "/" + fs(asx, ag) : ""} (υπέρ/κατά)</small></td><td class="num">${a.toFixed(1)}</td><td class="num">${b.toFixed(1)}</td><td class="num"><b>${t.toFixed(1)}</b></td><td class="num">${(av[0] + av[1]).toFixed(1)} <small class="${d > 0.08 ? "ev-pos" : d < -0.08 ? "ev-neg" : ""}">${d >= 0 ? "+" : ""}${Math.round(d * 100)}%</small></td></tr>`; }).join("")}
+        ${S.ht ? `<tr><td>⏱ <b>Γκολ Α΄ ημιχρόνου</b></td><td class="num">${S.ht[0].toFixed(2)}</td><td class="num">${S.ht[1].toFixed(2)}</td><td class="num"><b>${(S.ht[0] + S.ht[1]).toFixed(2)}</b></td><td class="num">—</td></tr>` : ""}
+        </tbody></table></div><div class="note" style="margin-top:8px">Αναμενόμενα για αυτόν τον αγώνα: ισχύς κάθε ομάδας «υπέρ» και «κατά» σε κάθε μετρική (πρόσφατοι αγώνες μετράνε περισσότερο)${m.ref_stats ? " και ο διαιτητής στις κάρτες/φάουλ" : ""}. Αποκρούσεις = σουτ στην εστία του αντιπάλου μείον τα γκολ.</div>`;
+      if (m.stat_edges?.length) h += `<h3 class="day-sub">Απόκλιση από τον μέσο όρο</h3><div class="grid">${m.stat_edges.map(e => edgeCard(m, e, false)).join("")}</div>`;
+      if (m.stat_top?.length) h += `<h3 class="day-sub">Πιθανότερα στα στατιστικά</h3>` + m.stat_top.map(t => `<div class="card pick" style="margin-bottom:8px">
+        <div><div class="sel">${esc(t.label)} <span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span></div><div class="match">${esc(t.group)}</div></div>
+        <div><div class="odds">${pct(t.p)}</div><div class="book">δίκαιη ${f2(t.fair)} · αξίζει από ${f2(1.03 / t.p)}</div></div>
+        <div class="meta"><span class="why">${esc(t.why || "")}</span></div></div>`).join("");
+    }
     if (m.scores) h += `<h2>Πιθανότερα σκορ</h2><div class="scores">${m.scores.map(s => `<span><b>${s.s}</b> ${pct(s.p)}</span>`).join("")}</div>`;
     if (m.players) h += playersHtml(m);
     h += `<h2>Αγορές</h2><div class="note"><b>Εκτ.</b> = εκτιμώμενη απόδοση Stoiximan/Superbet (διάμεσος εταιρειών ή πραγματικό γκανιότ από ${(state.data.margins?.["1X2"]?.n || 0).toLocaleString("el-GR")} αγώνες). Γράψε την πραγματική απόδοση στο κουτάκι: αν βγει πράσινο, έχει value. Πάτα το όνομα για να την περάσεις στα στοιχήματά σου.</div>`;
-    for (const [g, list] of Object.entries(groups)) {
+    const mkGroups = (G) => { for (const [g, list] of Object.entries(G)) {
       h += `<div class="mk-group"><h3>${esc(g)}</h3><div class="mk head"><span>Επιλογή</span><span class="v">Πιθ.</span><span class="v">Δίκαιη</span><span class="v">Εκτ.</span><span class="v">Δική σου</span></div>`;
       h += list.map((s, i) => `<div class="mk ${s.value ? "is-value" : ""}" data-sel="${esc(s.key)}|${esc(s.side)}">
         <span class="n" data-add>${esc(s.label)} <small class="evout ${evCls(s.est_ev)}">${s.est_ev != null ? evTxt(s.est_ev) : ""}</small></span>
@@ -282,13 +366,18 @@
         <span class="v" title="${esc(srcTxt(s.est_src) + (s.best ? `\nΚαλύτερη: ${s.best} (${s.book})` : ""))}">${s.est ? f2(s.est) : "—"}</span>
         <input inputmode="decimal" placeholder="—" data-odds></div>`).join("");
       h += `</div>`;
+    } };
+    mkGroups(groups);
+    if (Object.keys(sgroups).length) {
+      h += `<h2>Αγορές στατιστικών</h2><div class="note">Κόρνερ, σουτ, σουτ στην εστία, φάουλ, κάρτες, αποκρούσεις, Α΄ ημίχρονο. Δεν υπάρχουν δωρεάν αποδόσεις γι' αυτές: η <b>Εκτ.</b> υποθέτει γκανιότ ~9% (συνηθισμένο σε αυτές τις αγορές). Γράψε την πραγματική απόδοση της Stoiximan/Superbet για να δεις αν έχει value.</div>`;
+      mkGroups(sgroups);
     }
     openSheet(h);
     const sheet = $("#sheet");
     sheet.querySelectorAll("[data-odds]").forEach(inp => inp.addEventListener("input", () => {
       const rowEl = inp.closest(".mk");
       const [k, side] = rowEl.dataset.sel.split("|");
-      const s = m.markets.find(x => x.key === k && x.side === side);
+      const s = allSels.find(x => x.key === k && x.side === side);
       const o = parseFloat(inp.value.replace(",", "."));
       const out = rowEl.querySelector(".evout");
       if (!o || o <= 1) { out.textContent = s.est_ev != null ? evTxt(s.est_ev) : ""; out.className = "evout " + evCls(s.est_ev); rowEl.classList.toggle("is-value", s.value); return; }
@@ -299,7 +388,7 @@
     sheet.querySelectorAll("[data-add]").forEach(n => n.addEventListener("click", () => {
       const rowEl = n.closest(".mk");
       const [k, side] = rowEl.dataset.sel.split("|");
-      const s = m.markets.find(x => x.key === k && x.side === side);
+      const s = allSels.find(x => x.key === k && x.side === side);
       const typed = parseFloat((rowEl.querySelector("[data-odds]").value || "").replace(",", "."));
       openBetForm({ match: `${m.home} – ${m.away}`, comp: m.comp, date: m.date, selection: s.label, group: s.group, odds: typed || s.est || "", p: s.p });
     }));
@@ -418,6 +507,13 @@
         <div class="kpi"><span>Μονάδες (εκτ. απόδ.)</span><b class="${units >= 0 ? "ev-pos" : "ev-neg"}">${units >= 0 ? "+" : ""}${units.toFixed(2)}</b></div></div>
         ${prs.length ? `<div class="table-wrap"><table><thead><tr><th>Πιθανότητα</th><th class="num">Πλήθος</th><th class="num">Πρόβλεψη</th><th class="num">Έγινε</th></tr></thead><tbody>${bucket(0.5, 0.6)}${bucket(0.6, 0.7)}${bucket(0.7, 1.01)}</tbody></table></div>` : `<div class="note">Οι πρώτες προβλέψεις θα ελεγχθούν μόλις τελειώσουν οι αγώνες.</div>`}`;
     }
+    const sp = (state.history?.spreds || []).filter(p => (state.comp === "ALL" || p.comp === state.comp) && p.result !== null && p.result !== undefined);
+    if ((state.history?.spreds || []).length) {
+      const row = (lbl, L) => { const n = L.length, hit = L.filter(p => p.result === 1).length, ap = n ? L.reduce((a, p) => a + p.p, 0) / n : 0, av = L.filter(p => p.p_avg != null);
+        return `<tr><td>${lbl}</td><td class="num">${n}</td><td class="num">${n ? pct(ap) : "—"}</td><td class="num">${av.length ? pct(av.reduce((a, p) => a + p.p_avg, 0) / av.length) : "—"}</td><td class="num"><b>${n ? pct(hit / n) : "—"}</b></td></tr>`; };
+      h += `<h2>Στατιστικά: πόσο πέφτουν μέσα</h2><div class="table-wrap"><table><thead><tr><th>Είδος</th><th class="num">Ελεγμένες</th><th class="num">Μοντέλο</th><th class="num">Μ.ό. πρωτ.</th><th class="num">Έγινε</th></tr></thead><tbody>
+        ${row("Πιθανότερη ανά αγώνα", sp.filter(p => p.kind === "top"))}${row("Αποκλίσεις από μ.ό.", sp.filter(p => p.kind === "edge"))}</tbody></table></div>`;
+    }
     const slips = (state.history?.slips || []).slice().reverse();
     if (slips.length) {
       const done = slips.filter(s => s.result !== null);
@@ -448,6 +544,14 @@
       ${RS.gap.flatMap(g => [["disc", "2023–25"], ["test", "2025/26"]].map(([k, l]) => `<tr><td>EV ≥ ${g.evmin * 100}%</td><td>${l}</td><td class="num">${g[k].n}</td><td class="num ${evCls(g[k].roi)}">${pc(g[k].roi)} <small style="color:var(--muted)">±${(g[k].ci * 100).toFixed(0)}%</small></td><td class="num ${evCls(g[k].clv)}">${pc(g[k].clv)}</td></tr>`)).join("")}</tbody></table></div>
       <div class="note" style="margin-top:8px">Θετικό CLV και στις δύο περιόδους: η μόνη σταθερή «ρωγμή» που βρήκαμε. Αυτές είναι οι «Ευκαιρίες» στην αρχική.</div>
       ${RS.patterns?.length ? `<h3 class="day-sub">5. Μοτίβα ανά πρωτάθλημα</h3>` + RS.patterns.map(pt => `<div class="note">${esc(pt.name)} · ${pt.side === "X" ? "Ισοπαλία" : esc(pt.side)} (απόδοση ${pt.odds[0]}–${pt.odds[1]}): ${pc(pt.disc.roi)} σε ${pt.disc.n} αγώνες (2023–25), ${pc(pt.test.roi)} σε ${pt.test.n} (2025/26). Μεγάλη αβεβαιότητα.</div>`).join("") : ""}`;
+      const ST = Object.entries(RS.stats || {}).filter(([k]) => k !== "ht");
+      if (ST.length) {
+        h += `<h3 class="day-sub">6. Στατιστικά: κόρνερ, σουτ, φάουλ, κάρτες, αποκρούσεις</h3>
+        <div class="note">Πρόβλεψη κάθε μετρικής εβδομάδα-εβδομάδα (μόνο με παλιούς αγώνες), σε ${ST[0][1].n.toLocaleString("el-GR")} αγώνες του 2025/26 που δεν είχε δει το μοντέλο. Σύγκριση με τον <b>μέσο όρο του πρωταθλήματος</b> (έτσι βάζει γραμμές όποιος δεν κοιτάει τις ομάδες).</div>
+        <div class="table-wrap"><table><thead><tr><th>Μετρική</th><th class="num">Μ.ό./αγώνα</th><th class="num">Εξηγούν οι ομάδες</th><th class="num">Κέρδος ακρίβειας σύνολο</th><th class="num">ανά ομάδα</th><th class="num">Διαιτητής</th><th class="num">Αποκλίσεις σύνολο: μοντ./μ.ό./έγινε</th><th class="num">Αποκλίσεις ομάδας: μοντ./μ.ό./έγινε</th><th>Χρήση</th></tr></thead><tbody>
+        ${ST.map(([k, s]) => `<tr><td>${STAT_ICON[k] || ""} <b>${esc(s.name)}</b></td><td class="num">${s.avg} <small style="color:var(--muted)">±${s.sd}</small></td><td class="num">${(s.explained * 100).toFixed(1)}%</td><td class="num ${evCls(s.gain)}">${s.gain > 0 ? "+" : ""}${s.gain}%</td><td class="num ${evCls(s.team_gain)}">${s.team_gain > 0 ? "+" : ""}${s.team_gain}%</td><td class="num">${s.ref_gain == null ? "—" : (s.ref_gain > 0 ? "+" : "") + s.ref_gain + "%"}</td>${[s.edge_total, s.edge_team].map(e => `<td class="num">${e?.n ? `${pct(e.model)} / ${pct(e.avg)} / <b>${pct(e.hit)}</b> ${e.ok ? "✓" : ""}<small style="color:var(--muted)"> (${e.n.toLocaleString("el-GR")})</small>` : "—"}</td>`).join("")}<td>${s.validated ? `<span class="pill value">✓ αποκλίσεις</span>` : `<span class="pill muted">μόνο πιθανότητες</span>`}${s.ref_ok ? ` <span class="pill muted">+ διαιτητής</span>` : ""}</td></tr>`).join("")}</tbody></table></div>
+        <div class="note" style="margin-top:8px"><b>Κέρδος ακρίβειας</b>: πόσο καλύτερα προβλέπει το Over/Under στη συνηθισμένη γραμμή από τον μέσο όρο (log-loss). <b>Αποκλίσεις</b>: αγώνες όπου το μοντέλο διαφωνούσε με τον μέσο όρο κατά 10+ μονάδες· ✓ όταν το αποτέλεσμα ήταν πιο κοντά στο μοντέλο. ${RS.stats.ht ? `Α΄ ημίχρονο: Over 0.5 πρόβλεψη ${pct(RS.stats.ht.lines[0].pred)}, έγινε ${pct(RS.stats.ht.lines[0].actual)} · Over 1.5 ${pct(RS.stats.ht.lines[1].pred)} / ${pct(RS.stats.ht.lines[1].actual)}.` : ""}</div>`;
+      }
     }
     const bt = state.backtest;
     if (bt) {

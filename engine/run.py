@@ -8,7 +8,7 @@
 import json
 from datetime import datetime, timedelta, timezone
 
-from . import basket, config, history, markets, model, names, players, predictions, slip, sources
+from . import basket, config, history, markets, model, names, players, predictions, slip, sources, stats
 from .settle import outcome
 
 
@@ -172,15 +172,24 @@ def analyse(m, cid, ctx, books):
     ref = history.find_referee(ref_name, ctx["refs"], config.COMPETITIONS[cid]["fdcouk"])
     if ref:
         lk *= ref["factor"]
+    # στατιστικά αγώνα (κόρνερ, σουτ, φάουλ, κάρτες, αποκρούσεις), με τον διαιτητή στις κάρτες/φάουλ
+    mx = stats.means(rh, ra, lg, ref, ctx["disp"], ctx["stat_info"]) if th and ta else {}
+    naive = {k: list(v) for k, v in (lg.get("sx") or {}).items()}
+    if "co" in mx:
+        lc = mx["co"][2]
+    if "ca" in mx:
+        lk = mx["ca"][2]
 
     # πώς "βλέπει" ο στοιχηματικός τον αγώνα (για εκτίμηση αποδόσεων σε αγορές χωρίς τιμές)
     book_view = {}
     if market_xg:
-        for s in markets.selections(model.score_matrix(*market_xg), lc, lk):
+        for s in markets.selections(model.score_matrix(*market_xg), None, None):
             book_view[(s["key"], s["side"])] = (s["pw"], s["pp"])
 
     M = model.score_matrix(lh, la)
-    sels = markets.price(markets.selections(M, lc, lk), books, book_view, ctx["margins"])
+    sels = markets.price(markets.selections(M, None, None), books, book_view, ctx["margins"])
+    ht = [lh * lg.get("ht_share", 0.44), la * lg.get("ht_share", 0.44)]
+    ssels = stats.selections(mx, ctx["disp"], ht, m["home"], m["away"])
     scores = sorted(((i, j, M[i][j]) for i in range(6) for j in range(6)), key=lambda x: -x[2])[:6]
     confidence = "υψηλή" if th and ta and not cross else "μέτρια" if th and ta else "χαμηλή"
     return {
@@ -198,6 +207,12 @@ def analyse(m, cid, ctx, books):
         "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
         "solid": markets.solid(sels),
         "top": predictions.top(sels),
+        "stx": {"m": {k: [round(x, 2) for x in v] for k, v in mx.items()},
+                "avg": {k: [round(a, 2), round(b, 2)] for k, (a, b) in naive.items()},
+                "ht": [round(x, 3) for x in ht],
+                "disp": {k: ctx["disp"][k] for k in mx}},
+        "stat_top": predictions.stat_top(ssels),
+        "stat_edges": stats.edges(mx, naive, ctx["disp"], ctx["stat_info"], m["home"], m["away"]),
         "has_odds": bool(books),
     }
 
@@ -224,6 +239,23 @@ def update_history(matches, results, slip_now=None, extra_results=()):
             old.update(row)
         else:
             hist["preds"].append(row)
+    hist.setdefault("spreds", [])
+    by_sid = {(p["match_id"], p["key"], p["side"]) for p in hist["spreds"]}
+    for m in matches:
+        if m["date"].replace("Z", "+00:00") <= now_iso0:
+            continue
+        # πιθανότερη επιλογή στατιστικών + οι "αποκλίσεις από τον μέσο όρο" (για να μετράμε αν πετυχαίνουν)
+        items = [dict(t, kind="top") for t in m.get("stat_top", [])[:1]] + \
+                [dict(e, kind="edge") for e in m.get("stat_edges", [])]
+        for t in items:
+            k = (m["id"], t["key"], t["side"])
+            if k in by_sid:
+                continue
+            by_sid.add(k)
+            hist["spreds"].append({"match_id": m["id"], "comp": m["comp"], "date": m["date"], "home": m["home"],
+                                   "away": m["away"], "key": t["key"], "side": t["side"], "label": t["label"],
+                                   "p": t["p"], "kind": t["kind"], "p_avg": t.get("p_avg"), "fair": t.get("fair"),
+                                   "result": None})
     known = {(p["match_id"], p["key"], p["side"]) for p in hist["picks"]}
     for m in matches:
         for s in m["values"]:
@@ -265,7 +297,7 @@ def update_history(matches, results, slip_now=None, extra_results=()):
             return outcome(item["key"], item["side"], r)
         return None
 
-    for p in hist["picks"] + hist["preds"]:
+    for p in hist["picks"] + hist["preds"] + hist["spreds"]:
         if p["result"] is None and p["date"].replace("Z", "+00:00") < now_iso0:
             p["result"] = settle(p)
     for s in hist["slips"]:
@@ -295,8 +327,9 @@ def main():
     print(f"  {len(refs)} διαιτητές, γκανιότ 1X2 {margins_tbl['1X2']['overround']} ({margins_tbl['1X2']['n']} αγώνες)")
     print("• Επόμενοι αγώνες & αποδόσεις")
     fx_csv = sources.fdcouk_fixtures()
-    ctx = {"ratings": ratings, "leagues": leagues, "fx_csv": fx_csv, "refs": refs,
-           "margins": margins_tbl, "hist": hist_matches, "goal_factor": {}}
+    disp, stat_info = stats.disp_table()
+    ctx = {"ratings": ratings, "leagues": leagues, "fx_csv": fx_csv, "refs": refs, "disp": disp,
+           "stat_info": stat_info, "margins": margins_tbl, "hist": hist_matches, "goal_factor": {}}
     goal_info = {}
     for cid in config.COMPETITIONS:
         ctx["goal_factor"][cid], goal_info[cid] = comp_goal_factor(cid, ctx)

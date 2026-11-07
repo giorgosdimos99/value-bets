@@ -19,7 +19,7 @@
   "SP2",
   "T1"
  ],
- "created": "2026-11-07T13:25:56.684878+00:00",
+ "created": "2026-11-07T16:27:15.332242+00:00",
  "bias": [
   {
    "market": "1X2",
@@ -392,5 +392,405 @@
     "clv": -0.0739
    }
   }
- ]
+ ],
+ "stats": {
+  "co": {
+   "name": "Κόρνερ",
+   "n": 5439,
+   "avg": 9.74,
+   "sd": 3.36,
+   "disp": [
+    0.088,
+    0.0136
+   ],
+   "alpha": 0.755,
+   "alphaT": 0.39,
+   "explained": 0.0078,
+   "logloss": [
+    0.6903,
+    0.6915
+   ],
+   "gain": 0.16,
+   "team_gain": 3.01,
+   "ref_gain": null,
+   "ref_ok": false,
+   "calibration": [
+    {
+     "bucket": "20-40%",
+     "n": 456,
+     "pred": 0.3775,
+     "actual": 0.4539
+    },
+    {
+     "bucket": "40-60%",
+     "n": 4915,
+     "pred": 0.4843,
+     "actual": 0.4871
+    },
+    {
+     "bucket": "60-80%",
+     "n": 68,
+     "pred": 0.6167,
+     "actual": 0.6176
+    }
+   ],
+   "edge_total": {
+    "n": 132,
+    "model": 0.6086,
+    "avg": 0.4935,
+    "hit": 0.5379,
+    "ok": false
+   },
+   "edge_team": {
+    "n": 3802,
+    "model": 0.6583,
+    "avg": 0.5034,
+    "hit": 0.6499,
+    "ok": true
+   },
+   "validated": true
+  },
+  "sh": {
+   "name": "Σουτ",
+   "n": 5439,
+   "avg": 25.26,
+   "sd": 5.65,
+   "disp": [
+    0.048,
+    0.0114
+   ],
+   "alpha": 0.996,
+   "alphaT": 0.723,
+   "explained": 0.0673,
+   "logloss": [
+    0.6708,
+    0.6933
+   ],
+   "gain": 3.26,
+   "team_gain": 8.51,
+   "ref_gain": null,
+   "ref_ok": false,
+   "calibration": [
+    {
+     "bucket": "20-40%",
+     "n": 1172,
+     "pred": 0.3455,
+     "actual": 0.3652
+    },
+    {
+     "bucket": "40-60%",
+     "n": 3612,
+     "pred": 0.4929,
+     "actual": 0.5161
+    },
+    {
+     "bucket": "60-80%",
+     "n": 642,
+     "pred": 0.6482,
+     "actual": 0.6682
+    }
+   ],
+   "edge_total": {
+    "n": 1672,
+    "model": 0.6516,
+    "avg": 0.4997,
+    "hit": 0.6591,
+    "ok": true
+   },
+   "edge_team": {
+    "n": 6460,
+    "model": 0.7088,
+    "avg": 0.503,
+    "hit": 0.6974,
+    "ok": true
+   },
+   "validated": true
+  },
+  "st": {
+   "name": "Σουτ στην εστία",
+   "n": 5439,
+   "avg": 8.59,
+   "sd": 3.07,
+   "disp": [
+    0.0341,
+    0.0126
+   ],
+   "alpha": 0.912,
+   "alphaT": 0.605,
+   "explained": 0.0267,
+   "logloss": [
+    0.6842,
+    0.6915
+   ],
+   "gain": 1.05,
+   "team_gain": 4.63,
+   "ref_gain": null,
+   "ref_ok": false,
+   "calibration": [
+    {
+     "bucket": "20-40%",
+     "n": 1066,
+     "pred": 0.3605,
+     "actual": 0.4006
+    },
+    {
+     "bucket": "40-60%",
+     "n": 4063,
+     "pred": 0.4874,
+     "actual": 0.5023
+    },
+    {
+     "bucket": "60-80%",
+     "n": 309,
+     "pred": 0.6367,
+     "actual": 0.6214
+    }
+   ],
+   "edge_total": {
+    "n": 914,
+    "model": 0.6308,
+    "avg": 0.4966,
+    "hit": 0.605,
+    "ok": true
+   },
+   "edge_team": {
+    "n": 5254,
+    "model": 0.6811,
+    "avg": 0.5017,
+    "hit": 0.6614,
+    "ok": true
+   },
+   "validated": true
+  },
+  "fo": {
+   "name": "Φάουλ",
+   "n": 5439,
+   "avg": 24.59,
+   "sd": 5.21,
+   "disp": [
+    0.0056,
+    0.0049
+   ],
+   "alpha": 0.84,
+   "alphaT": 0.852,
+   "explained": 0.0972,
+   "logloss": [
+    0.6565,
+    0.691
+   ],
+   "gain": 5.0,
+   "team_gain": 6.59,
+   "ref_gain": -0.46,
+   "ref_ok": false,
+   "calibration": [
+    {
+     "bucket": "0-20%",
+     "n": 56,
+     "pred": 0.165,
+     "actual": 0.1607
+    },
+    {
+     "bucket": "20-40%",
+     "n": 1394,
+     "pred": 0.3331,
+     "actual": 0.3063
+    },
+    {
+     "bucket": "40-60%",
+     "n": 2916,
+     "pred": 0.4968,
+     "actual": 0.477
+    },
+    {
+     "bucket": "60-80%",
+     "n": 1051,
+     "pred": 0.6634,
+     "actual": 0.6489
+    }
+   ],
+   "edge_total": {
+    "n": 2436,
+    "model": 0.6691,
+    "avg": 0.4996,
+    "hit": 0.6741,
+    "ok": true
+   },
+   "edge_team": {
+    "n": 5028,
+    "model": 0.6751,
+    "avg": 0.4997,
+    "hit": 0.6935,
+    "ok": true
+   },
+   "validated": true
+  },
+  "ca": {
+   "name": "Κάρτες",
+   "n": 5439,
+   "avg": 4.33,
+   "sd": 2.22,
+   "disp": [
+    0.0,
+    0.0287
+   ],
+   "alpha": 0.506,
+   "alphaT": 0.46,
+   "explained": 0.0072,
+   "logloss": [
+    0.6822,
+    0.6848
+   ],
+   "gain": 0.39,
+   "team_gain": 1.03,
+   "ref_gain": 0.15,
+   "ref_ok": true,
+   "calibration": [
+    {
+     "bucket": "20-40%",
+     "n": 851,
+     "pred": 0.359,
+     "actual": 0.3549
+    },
+    {
+     "bucket": "40-60%",
+     "n": 4347,
+     "pred": 0.4919,
+     "actual": 0.4875
+    },
+    {
+     "bucket": "60-80%",
+     "n": 241,
+     "pred": 0.6268,
+     "actual": 0.668
+    }
+   ],
+   "edge_total": {
+    "n": 254,
+    "model": 0.609,
+    "avg": 0.4864,
+    "hit": 0.5551,
+    "ok": true
+   },
+   "edge_team": {
+    "n": 889,
+    "model": 0.6059,
+    "avg": 0.4814,
+    "hit": 0.6164,
+    "ok": true
+   },
+   "validated": true
+  },
+  "sv": {
+   "name": "Αποκρούσεις",
+   "n": 5439,
+   "avg": 5.87,
+   "sd": 2.59,
+   "disp": [
+    0.0797,
+    0.0278
+   ],
+   "alpha": 0.703,
+   "alphaT": 0.457,
+   "explained": 0.0123,
+   "logloss": [
+    0.6836,
+    0.6886
+   ],
+   "gain": 0.72,
+   "team_gain": 2.17,
+   "ref_gain": null,
+   "ref_ok": false,
+   "calibration": [
+    {
+     "bucket": "20-40%",
+     "n": 933,
+     "pred": 0.3677,
+     "actual": 0.4084
+    },
+    {
+     "bucket": "40-60%",
+     "n": 4348,
+     "pred": 0.4809,
+     "actual": 0.5002
+    },
+    {
+     "bucket": "60-80%",
+     "n": 158,
+     "pred": 0.6282,
+     "actual": 0.6646
+    }
+   ],
+   "edge_total": {
+    "n": 275,
+    "model": 0.6183,
+    "avg": 0.4964,
+    "hit": 0.6073,
+    "ok": true
+   },
+   "edge_team": {
+    "n": 3018,
+    "model": 0.6447,
+    "avg": 0.4995,
+    "hit": 0.6402,
+    "ok": true
+   },
+   "validated": true
+  },
+  "ht": {
+   "n": 5439,
+   "share": null,
+   "lines": [
+    {
+     "line": 0.5,
+     "pred": 0.6925,
+     "actual": 0.7108,
+     "logloss": 0.6015
+    },
+    {
+     "line": 1.5,
+     "pred": 0.3344,
+     "actual": 0.3451,
+     "logloss": 0.6429
+    }
+   ]
+  }
+ },
+ "stats_disp": {
+  "co": [
+   0.088,
+   0.0136,
+   0.755,
+   0.39
+  ],
+  "sh": [
+   0.048,
+   0.0114,
+   0.996,
+   0.723
+  ],
+  "st": [
+   0.0341,
+   0.0126,
+   0.912,
+   0.605
+  ],
+  "fo": [
+   0.0056,
+   0.0049,
+   0.84,
+   0.852
+  ],
+  "ca": [
+   0.0,
+   0.0287,
+   0.506,
+   0.46
+  ],
+  "sv": [
+   0.0797,
+   0.0278,
+   0.703,
+   0.457
+  ]
+ }
 }

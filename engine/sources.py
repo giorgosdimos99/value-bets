@@ -102,7 +102,7 @@ def _odds_row(r):
 
 def fdcouk_league(code, season):
     """Ολοκληρωμένοι αγώνες ενός πρωταθλήματος με γκολ, xG, σουτ, κόρνερ, κάρτες, αποδόσεις."""
-    key = f"fdcouk3_{code}_{season}.json"
+    key = f"fdcouk4_{code}_{season}.json"
     hit = _cached(key, 6 if season == config.SEASON else 24 * 30)
     if hit is not None:
         return hit
@@ -121,6 +121,7 @@ def fdcouk_league(code, season):
             "league": code, "date": dt.isoformat() if dt else None,
             "home": r["HomeTeam"].strip(), "away": r["AwayTeam"].strip(),
             "hg": _num(r["FTHG"]), "ag": _num(r["FTAG"]),
+            "hthg": _num(r.get("HTHG")), "htag": _num(r.get("HTAG")),
             "hxg": _num(r.get("HxG")), "axg": _num(r.get("AxG")),
             "hs": _num(r.get("HS")), "as": _num(r.get("AS")),
             "hst": _num(r.get("HST")), "ast": _num(r.get("AST")),

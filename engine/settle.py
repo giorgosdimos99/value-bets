@@ -6,6 +6,25 @@ def outcome(key, side, r):
     hg, ag = r.get("hg"), r.get("ag")
     if hg is None or ag is None:
         return None
+    if key.startswith("S:"):  # στατιστικά: S:<μετρική>:<T|H|A|1X2>[:γραμμή]
+        from .stats import values
+        parts = key.split(":")
+        v = values(r, parts[1])
+        if v is None:
+            return None
+        if parts[2] == "1X2":
+            res = "1" if v[0] > v[1] else "X" if v[0] == v[1] else "2"
+            return 1 if res == side else 0
+        total = v[0] + v[1] if parts[2] == "T" else v[0] if parts[2] == "H" else v[1]
+        return 1 if (total > float(parts[3])) == (side == "Over") else 0
+    if key.startswith("H1:"):  # Α' ημίχρονο
+        h, a = r.get("hthg"), r.get("htag")
+        if h is None or a is None:
+            return None
+        if key == "H1:1X2":
+            res = "1" if h > a else "X" if h == a else "2"
+            return 1 if res == side else 0
+        return 1 if (h + a > float(key[5:])) == (side == "Over") else 0
     if key == "1X2":
         res = "1" if hg > ag else "X" if hg == ag else "2"
         return 1 if res == side else 0

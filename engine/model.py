@@ -3,7 +3,7 @@ import math
 from collections import defaultdict
 from datetime import datetime, timezone
 
-from . import config
+from . import config, stats as stx
 
 MAX_GOALS = 10
 RHO = -0.06  # διόρθωση Dixon-Coles για χαμηλά σκορ (0-0, 1-1 κ.λπ.)
@@ -22,7 +22,7 @@ def _blend(goals, xg):
     return config.XG_WEIGHT * xg + (1 - config.XG_WEIGHT) * goals
 
 
-def _fit_pair(matches, f_home, f_away, iters=12):
+def _fit_pair(matches, f_home, f_away, iters=12, prior=None):
     """Γενική επαναληπτική εκτίμηση επίθεσης/άμυνας για μια μετρική (γκολ ή κόρνερ)."""
     tw = sum(m["_w"] for m in matches) or 1.0
     h_avg = sum(m["_w"] * f_home(m) for m in matches) / tw
@@ -30,7 +30,7 @@ def _fit_pair(matches, f_home, f_away, iters=12):
     teams = {m["home"] for m in matches} | {m["away"] for m in matches}
     att = {t: 1.0 for t in teams}
     dfn = {t: 1.0 for t in teams}
-    P = config.PRIOR_MATCHES
+    P = config.PRIOR_MATCHES if prior is None else prior
     for _ in range(iters):
         na, da = defaultdict(float), defaultdict(float)
         nd, dd = defaultdict(float), defaultdict(float)
@@ -89,19 +89,33 @@ def fit_league(code, cur, prev, now=None, with_stats=True):
             cn[t] += m["_w"] * cards(m); cd[t] += m["_w"]
     card_f = {t: ((cn[t] + 3 * card_avg) / (cd[t] + 3)) / card_avg for t in cd}
 
+    # όλα τα υπόλοιπα στατιστικά (σουτ, φάουλ, κάρτες ανά ομάδα, αποκρούσεις...): ίδια μέθοδος
+    sfit = {}
+    for k in stx.STATS:
+        sm = [dict(m, _v=v) for m in ms if (v := stx.values(m, k)) is not None]
+        if len(sm) >= 40:
+            tw2 = sum(m["_w"] for m in sm) or 1
+            avg = sum(m["_w"] * (m["_v"][0] + m["_v"][1]) for m in sm) / tw2 / 2
+            sfit[k] = _fit_pair(sm, lambda m: m["_v"][0], lambda m: m["_v"][1], prior=3 * avg)
+    hts = [m for m in ms if m.get("hthg") is not None and m.get("htag") is not None]
+    g_all = sum(m["_w"] * (m["hg"] + m["ag"]) for m in hts)
+    ht_share = (sum(m["_w"] * (m["hthg"] + m["htag"]) for m in hts) + 20) / (g_all + 20 / 0.44) if hts else 0.44
+
     cur_teams = {m["home"] for m in cur} | {m["away"] for m in cur}
     out = {}
     for t in cur_teams:
         out[t] = {
             "league": code, "att": att.get(t, 0.85), "def": dfn.get(t, 1.15),
             "catt": catt.get(t, 1.0), "cdef": cdef.get(t, 1.0), "cards": card_f.get(t, 1.0),
+            "sx": {k: [round(f[0].get(t, 1.0), 3), round(f[1].get(t, 1.0), 3)] for k, f in sfit.items()},
         }
         if with_stats:
             tm = sorted([m for m in cur if t in (m["home"], m["away"])], key=lambda m: m["date"] or "")
             out[t]["stats"] = team_stats(t, tm)
             out[t]["stats_home"] = team_stats(t, [m for m in tm if m["home"] == t])
             out[t]["stats_away"] = team_stats(t, [m for m in tm if m["away"] == t])
-    league = {"h_avg": h_avg, "a_avg": a_avg, "hc_avg": hc_avg, "ac_avg": ac_avg, "card_avg": card_avg}
+    league = {"h_avg": h_avg, "a_avg": a_avg, "hc_avg": hc_avg, "ac_avg": ac_avg, "card_avg": card_avg,
+              "sx": {k: [round(f[2], 3), round(f[3], 3)] for k, f in sfit.items()}, "ht_share": round(ht_share, 3)}
     return out, league
 
 
@@ -121,6 +135,13 @@ def team_stats(team, ms):
         s["cf"] += (m["hc"] if home else m["ac"]) or 0
         s["ca"] += (m["ac"] if home else m["hc"]) or 0
         s["cards"] += ((m["hy"] or 0) + (m["hr"] or 0)) if home else ((m["ay"] or 0) + (m["ar"] or 0))
+        s["cards_a"] += ((m["ay"] or 0) + (m["ar"] or 0)) if home else ((m["hy"] or 0) + (m["hr"] or 0))
+        s["sh"] += (m.get("hs") if home else m.get("as")) or 0
+        s["sh_a"] += (m.get("as") if home else m.get("hs")) or 0
+        s["sot_a"] += (m["ast"] if home else m["hst"]) or 0
+        s["fo"] += (m.get("hf") if home else m.get("af")) or 0
+        s["fo_a"] += (m.get("af") if home else m.get("hf")) or 0
+        s["sv"] += max(((m["ast"] if home else m["hst"]) or 0) - ga, 0)
         s["btts"] += 1 if gf > 0 and ga > 0 else 0
         s["o25"] += 1 if gf + ga > 2.5 else 0
         s["cs"] += 1 if ga == 0 else 0
@@ -129,6 +150,8 @@ def team_stats(team, ms):
     return {
         "p": n, "gf": r(s["gf"] / n), "ga": r(s["ga"] / n), "xgf": r(s["xgf"] / n), "xga": r(s["xga"] / n),
         "sot": r(s["sot"] / n), "cf": r(s["cf"] / n), "ca": r(s["ca"] / n), "cards": r(s["cards"] / n),
+        "cards_a": r(s["cards_a"] / n), "sh": r(s["sh"] / n), "sh_a": r(s["sh_a"] / n), "sot_a": r(s["sot_a"] / n),
+        "fo": r(s["fo"] / n), "fo_a": r(s["fo_a"] / n), "sv": r(s["sv"] / n),
         "btts": r(s["btts"] / n), "o25": r(s["o25"] / n), "cs": r(s["cs"] / n), "form": "".join(form[-5:]),
     }
 

@@ -71,6 +71,8 @@ def selections(M, lc, lk):
         out.append(_sel("Γκολ γηπεδούχου", f"HT_OU{L:g}", "Under", f"Γηπεδούχος Under {L:g}", 1 - h))
         out.append(_sel("Γκολ φιλοξενούμενου", f"AT_OU{L:g}", "Over", f"Φιλοξενούμενος Over {L:g}", a))
         out.append(_sel("Γκολ φιλοξενούμενου", f"AT_OU{L:g}", "Under", f"Φιλοξενούμενος Under {L:g}", 1 - a))
+    if lc is None:  # κόρνερ/κάρτες πλέον στο engine/stats.py (με διασπορά από την έρευνα)
+        return out
     for L in CORNER_LINES:
         po = pois_over(lc, L)
         out.append(_sel("Κόρνερ", f"CO{L:g}", "Over", f"Κόρνερ Over {L:g}", po))

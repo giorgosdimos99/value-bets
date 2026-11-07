@@ -33,6 +33,11 @@ def referees(all_matches):
         if m["hy"] is not None:
             league_avg[m["league"]].append(_cards(m))
     lavg = {k: sum(v) / len(v) for k, v in league_avg.items()}
+    lf = defaultdict(list)
+    for m in all_matches:
+        if m.get("hf") is not None and m.get("af") is not None:
+            lf[m["league"]].append(m["hf"] + m["af"])
+    lfav = {k: sum(v) / len(v) for k, v in lf.items()}
     out = {}
     for (lg, key), ms in by.items():
         n = len(ms)
@@ -54,6 +59,7 @@ def referees(all_matches):
             "league_cards": round(lavg[lg], 2),
             # συντελεστής καρτών με συρρίκνωση (λίγα ματς -> πιο κοντά στο 1)
             "factor": round(((sum(c) + 8 * lavg[lg]) / (n + 8)) / lavg[lg], 3),
+            "ffactor": round(((sum(fouls) + 8 * lfav[lg]) / (len(fouls) + 8)) / lfav[lg], 3) if fouls and lg in lfav else None,
         }
     return out
 
