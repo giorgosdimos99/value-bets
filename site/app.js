@@ -65,6 +65,7 @@
     }
     try { state.history = await (await fetch("data/history.json?ts=" + Date.now())).json(); } catch { state.history = { picks: [] }; }
     try { state.backtest = await (await fetch("data/backtest.json?ts=" + Date.now())).json(); } catch { state.backtest = null; }
+    try { state.research = await (await fetch("data/research.json?ts=" + Date.now())).json(); } catch { state.research = null; }
     const comps = Object.entries(state.data.competitions || {}).filter(([, c]) => c.matches?.length);
     comps.forEach(([cid, c]) => { COMP[cid] = c.name; });
     if (!comps.some(([cid]) => cid === state.comp)) state.comp = "ALL";
@@ -110,6 +111,7 @@
       <div><div class="sel">${esc(t.label)} <span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span></div>
       <div class="match">${isBasket(m) ? "🏀 " : ""}${esc(m.home)} – ${esc(m.away)} · ${esc(t.group)}</div></div>
       <div><div class="odds">${pct(t.p)}</div><div class="book">εκτ. απόδοση ${f2(t.est)}</div></div>
+      <div class="pbar ${t.p < 0.6 ? "mid" : ""}"><i style="width:${Math.round(t.p * 100)}%"></i></div>
       <div class="meta"><span class="why">${esc(t.why || "")}</span></div>
       <div class="meta"><span>Δίκαιη <b>${f2(t.fair)}</b></span><span>${COMP[m.comp] || m.comp} · ${dt(m.date)}</span>${m.confidence !== "υψηλή" ? `<span>αξιοπιστία ${m.confidence}</span>` : ""}</div></div>`;
   }
@@ -117,13 +119,29 @@
   function renderValue() {
     const all = matches();
     const ms = matches(true);
-    const values = ms.flatMap(m => m.values.map(s => ({ m, s, date: m.date })));
     let h = "";
     if (!all.length) {
       view.innerHTML = `<div class="empty"><b>Δεν υπάρχουν αγώνες ακόμα</b>Μόλις βγει το επόμενο πρόγραμμα θα εμφανιστούν εδώ.</div>`;
       return;
     }
     h += dayChips(all);
+    // Ευκαιρίες: (α) εταιρεία δίνει πάνω από τη δίκαιη τιμή της αγοράς, (β) μοτίβα της έρευνας
+    const R = state.research;
+    const gap = R?.gap?.find(g => g.evmin === 0.03) || R?.gap?.[0];
+    const opps = [
+      ...ms.flatMap(m => m.values.map(s => ({ m, kind: "gap", label: s.label, group: s.group, p: s.p, odds: s.best, book: s.book, fair: s.fair, ev: s.ev, date: m.date }))),
+      ...ms.flatMap(m => (m.patterns || []).map(pt => ({ m, kind: "pattern", label: pt.label, group: "Μοτίβο έρευνας", p: pt.p, odds: pt.odds, fair: pt.p ? 1 / pt.p : null, ev: pt.p * pt.odds - 1, text: pt.text, date: m.date }))),
+    ].sort((a, b) => (b.p * b.odds) - (a.p * a.odds));
+    h += `<div class="hero"><h1>Ευκαιρίες</h1><p>Εκεί που η απόδοση είναι <b>μεγαλύτερη απ' όσο δικαιολογεί η πιθανότητα</b>. Η πιθανότητα βγαίνει από την αγορά (power, η πιο ακριβής μέθοδος στην έρευνα), όχι από «αίσθηση».</p>
+      ${gap ? `<div class="stats"><div><b>${(R.matches || 0).toLocaleString("el-GR")}</b><span>αγώνες έρευνας</span></div><div><b class="ev-pos">${evTxt(gap.disc.clv)}</b><span>CLV 2023–25</span></div><div><b class="ev-pos">${evTxt(gap.test.clv)}</b><span>CLV 2025/26 (έλεγχος)</span></div></div>` : ""}</div>`;
+    h += opps.length ? `<div class="grid">${opps.slice(0, 12).map(o => `<div class="card click pick opp" data-match="${o.m.id}">
+        <div><div class="sel">${esc(o.label)} <span class="pill ${o.kind === "gap" ? "hot" : "solid"}">${o.kind === "gap" ? "ΚΕΝΟ ΑΓΟΡΑΣ" : "ΜΟΤΙΒΟ"}</span></div>
+        <div class="match">${isBasket(o.m) ? "🏀 " : ""}${esc(o.m.home)} – ${esc(o.m.away)} · ${esc(COMP[o.m.comp] || "")} · ${dt(o.m.date)}</div></div>
+        <div><div class="odds">${f2(o.odds)}</div><div class="book">${o.book ? esc(o.book) : "εκτ. απόδοση"}</div></div>
+        <div class="pbar ${o.p < 0.6 ? "mid" : ""}"><i style="width:${Math.round(o.p * 100)}%"></i></div>
+        <div class="meta"><span>Πιθανότητα <b>${pct(o.p)}</b></span><span>Δίκαιη <b>${f2(o.fair)}</b></span><span>Πλεονέκτημα <b class="edge">${evTxt(o.ev)}</b></span></div>
+        <div class="evidence">${o.kind === "gap" ? `Η ${esc(o.book || "εταιρεία")} δίνει πάνω από τη δίκαιη τιμή της αγοράς. Στην έρευνα, τέτοιες τιμές κέρδιζαν σταθερά την τελική απόδοση (θετικό CLV). Δες αν η Stoiximan/Superbet δίνει κάτι κοντά.` : esc(o.text)}</div></div>`).join("")}</div>`
+      : `<div class="note">Δεν υπάρχει αυτή τη στιγμή απόδοση πάνω από τη δίκαιη τιμή. Αυτό είναι φυσιολογικό: οι αγορές είναι σωστές τις περισσότερες φορές. Οι πιθανότερες προβλέψεις παρακάτω έχουν τις πιο «τίμιες» τιμές (βλ. Μοντέλο → Έρευνα).</div>`;
     const slips = (state.data.slips || []).filter(s => state.day === "ALL" || s.day === state.day);
     if (slips.length && state.comp === "ALL") {
       h += `<h2>Δελτία ημέρας</h2><div class="note">Μόνο αγώνες της ίδιας μέρας. Ο <b>πιθανότερος</b> συνδυασμός με βάση τα στατιστικά που φτάνει <b>Απλό</b>: απόδοση 5+, <b>Ακραίο</b>: απόδοση 20+. Οι αποδόσεις είναι <b>εκτίμηση</b> για Stoiximan/Superbet· έλεγξε την πραγματική πριν παίξεις.</div>`;
@@ -138,11 +156,6 @@
       const list = pg[k].sort((a, b) => b.t.p - a.t.p);
       return `<h3 class="day-sub">${dayLabel(k)} <span style="color:var(--muted);font-weight:500">· ${list.length} αγώνες</span></h3><div class="grid">${list.map(({ m, t }) => predCard(m, t)).join("")}</div>`;
     }).join("");
-    const vg = groupByDay(values);
-    h += `<h2>Value επιλογές (${values.length})</h2><div class="note">Όπου η απόδοση κάποιας εταιρείας είναι πάνω από τη δίκαιη (+3% και πάνω).</div>`;
-    h += values.length
-      ? Object.keys(vg).sort().map(k => `<h3 class="day-sub">${dayLabel(k)}</h3><div class="grid">${vg[k].sort((a, b) => b.s.ev - a.s.ev).map(({ m, s }) => pickCard(m, s, "value")).join("")}</div>`).join("")
-      : `<div class="note">Δεν βρέθηκε value στις διαθέσιμες αποδόσεις.</div>`;
     view.innerHTML = h;
   }
 
@@ -242,7 +255,7 @@
     if (bk) {
       const md = state.data.competitions[m.comp]?.model || {};
       h += `<div class="note">Αναμενόμενοι πόντοι: μοντέλο <b>${fx(m.model_xg[0])}–${fx(m.model_xg[1])}</b>${m.market_xg ? `, αγορά <b>${fx(m.market_xg[0])}–${fx(m.market_xg[1])}</b>. Τελικά (15% μοντέλο, 85% αγορά)` : ". Τελικά"}: <b>${fx(m.xg[0])}–${fx(m.xg[1])}</b>. Τυπικό σφάλμα (από ${md.games || "—"} αγώνες): διαφορά ±${m.sd[0]}, σύνολο ±${m.sd[1]} πόντοι. Χωρίς δωρεάν ιστορικές αποδόσεις δεν έχει γίνει backtest στο μπάσκετ.</div>`;
-    } else if (m.market_xg) h += `<div class="note">Αναμενόμενα γκολ: μοντέλο <b>${f2(m.model_xg[0])}–${f2(m.model_xg[1])}</b>, αγορά <b>${f2(m.market_xg[0])}–${f2(m.market_xg[1])}</b>. Τελικά (20% μοντέλο, 80% αγορά, από backtest): <b>${f2(m.xg[0])}–${f2(m.xg[1])}</b>.${m.comp === "CL" && state.data.goal_factor?.CL?.matches ? ` Στο Champions League μπαίνουν περισσότερα γκολ από τα εγχώρια πρωταθλήματα (${state.data.goal_factor.CL.actual_goals}/αγώνα σε ${state.data.goal_factor.CL.matches} αγώνες), γι' αυτό το μοντέλο διορθώνεται ×${state.data.goal_factor.CL.factor}.` : ""}</div>`;
+    } else if (m.market_xg) h += `<div class="note">Αναμενόμενα γκολ: μοντέλο <b>${f2(m.model_xg[0])}–${f2(m.model_xg[1])}</b>, αγορά <b>${f2(m.market_xg[0])}–${f2(m.market_xg[1])}</b>. Τελικά χρησιμοποιείται η αγορά: <b>${f2(m.xg[0])}–${f2(m.xg[1])}</b> (στην έρευνα 16.450 αγώνων το μοντέλο δεν βελτίωσε την ακρίβεια όπου υπάρχουν αποδόσεις· μένει ως εξήγηση).${m.comp === "CL" && state.data.goal_factor?.CL?.matches ? ` Στο Champions League μπαίνουν περισσότερα γκολ από τα εγχώρια πρωταθλήματα (${state.data.goal_factor.CL.actual_goals}/αγώνα σε ${state.data.goal_factor.CL.matches} αγώνες), γι' αυτό το μοντέλο διορθώνεται ×${state.data.goal_factor.CL.factor}.` : ""}</div>`;
     if (!bk) {
       const r = m.ref_stats;
       h += `<h2>Διαιτητής</h2>`;
@@ -412,6 +425,29 @@
       h += `<h2>Προτεινόμενα δελτία (${slips.length})</h2><div class="note">Κέρδη ${done.filter(s => s.result === 1).length}/${done.length} · Αποτέλεσμα <b class="${sp >= 0 ? "ev-pos" : "ev-neg"}">${sp >= 0 ? "+" : ""}${sp.toFixed(2)}</b> μονάδες (με τις εκτιμώμενες αποδόσεις)</div>`;
       h += slips.slice(0, 10).map(s => `<div class="card"><div style="display:flex;justify-content:space-between"><b>@${f2(s.odds)} · ${pct(s.p)}</b>${s.result === null ? `<span class="pill muted">εκκρεμεί</span>` : s.result === 1 ? `<span class="pill value">ΚΕΡΔΟΣ</span>` : `<span class="pill" style="background:rgba(240,82,82,.12);color:var(--red)">ΧΑΘΗΚΕ</span>`}</div>
         ${s.legs.map(l => `<div style="font-size:13px;margin-top:6px">${l.result === 1 ? "✓" : l.result === 0 ? "✕" : "·"} ${esc(l.home)} – ${esc(l.away)}: <b>${esc(l.label)}</b> @${f2(l.est)} ${l.score ? `<span style="color:var(--muted)">(${l.score})</span>` : ""}</div>`).join("")}</div>`).join("");
+    }
+    const RS = state.research;
+    if (RS) {
+      const pc = x => (x == null ? "—" : (x > 0 ? "+" : "") + (x * 100).toFixed(1) + "%");
+      const dv = RS.devig?.find(d => d.method.startsWith("Power")) || RS.devig?.[0];
+      h += `<h2>Έρευνα: πού κάνουν λάθος οι στοιχηματικές</h2>
+      <div class="note">${RS.matches.toLocaleString("el-GR")} πραγματικοί αγώνες, ${RS.leagues.length} πρωταθλήματα, 2023/24–2025/26. Αποδόσεις Bet365 πριν τον αγώνα (μαλακή εταιρεία, σαν Stoiximan), δίκαιη τιμή από Pinnacle/μέσο όρο, τελικό αποτέλεσμα. Οι κανόνες βρέθηκαν σε 2023–25 και ελέγχθηκαν στο 2025/26.</div>
+      <h3 class="day-sub">1. Αν έπαιζες ΟΛΑ τα στοιχήματα στη Bet365, ανά απόδοση</h3>
+      <div class="table-wrap"><table><thead><tr><th>Αγορά</th><th>Απόδοση</th><th class="num">Στοιχ.</th><th class="num">Υπονοούμενη</th><th class="num">Βγήκε</th><th class="num">ROI</th></tr></thead><tbody>
+      ${RS.bias.map(b => `<tr><td>${b.market}</td><td>${b.range}</td><td class="num">${b.n.toLocaleString("el-GR")}</td><td class="num">${pct(b.implied)}</td><td class="num">${pct(b.hit)}</td><td class="num ${evCls(b.roi)}">${pc(b.roi)}</td></tr>`).join("")}</tbody></table></div>
+      <div class="note" style="margin-top:8px">Τα φαβορί (χαμηλές αποδόσεις) είναι σχεδόν δίκαια τιμολογημένα. Τα αουτσάιντερ έχουν πολύ μεγαλύτερο γκανιότ. Γι' αυτό οι προβλέψεις προτιμούν μεγάλες πιθανότητες.</div>
+      ${dv ? `<h3 class="day-sub">2. Πιθανότητες: λέει ${"–"} έγινε (μέθοδος power, σφάλμα ${dv.error} μονάδες)</h3>
+      <div class="table-wrap"><table><thead><tr><th>Πιθανότητα</th><th class="num">Περιπτώσεις</th><th class="num">Πρόβλεψη</th><th class="num">Έγινε</th></tr></thead><tbody>
+      ${dv.calibration.map(c => `<tr><td>${c.bucket}</td><td class="num">${c.n.toLocaleString("el-GR")}</td><td class="num">${pct(c.pred)}</td><td class="num"><b>${pct(c.actual)}</b></td></tr>`).join("")}</tbody></table></div>` : ""}
+      <h3 class="day-sub">3. Βοηθάει το δικό μας μοντέλο όταν υπάρχουν αποδόσεις;</h3>
+      <div class="table-wrap"><table><thead><tr><th>Βάρος μοντέλου</th><th class="num">Ακρίβεια (log-loss)</th></tr></thead><tbody>
+      ${RS.weights.map(w => `<tr><td>${w.w === 0 ? "0 (μόνο αγορά) ✓" : w.w}</td><td class="num">${w.logloss}</td></tr>`).join("")}</tbody></table></div>
+      <div class="note" style="margin-top:8px">Όχι: η αγορά μόνη της είναι πιο ακριβής. Το μοντέλο μένει για εξηγήσεις και για αγορές/πρωταθλήματα χωρίς αποδόσεις.</div>
+      <h3 class="day-sub">4. Κενά αγοράς: Bet365 πάνω από τη δίκαιη τιμή</h3>
+      <div class="table-wrap"><table><thead><tr><th>Κανόνας</th><th>Περίοδος</th><th class="num">Στοιχ.</th><th class="num">ROI</th><th class="num">CLV</th></tr></thead><tbody>
+      ${RS.gap.flatMap(g => [["disc", "2023–25"], ["test", "2025/26"]].map(([k, l]) => `<tr><td>EV ≥ ${g.evmin * 100}%</td><td>${l}</td><td class="num">${g[k].n}</td><td class="num ${evCls(g[k].roi)}">${pc(g[k].roi)} <small style="color:var(--muted)">±${(g[k].ci * 100).toFixed(0)}%</small></td><td class="num ${evCls(g[k].clv)}">${pc(g[k].clv)}</td></tr>`)).join("")}</tbody></table></div>
+      <div class="note" style="margin-top:8px">Θετικό CLV και στις δύο περιόδους: η μόνη σταθερή «ρωγμή» που βρήκαμε. Αυτές είναι οι «Ευκαιρίες» στην αρχική.</div>
+      ${RS.patterns?.length ? `<h3 class="day-sub">5. Μοτίβα ανά πρωτάθλημα</h3>` + RS.patterns.map(pt => `<div class="note">${esc(pt.name)} · ${pt.side === "X" ? "Ισοπαλία" : esc(pt.side)} (απόδοση ${pt.odds[0]}–${pt.odds[1]}): ${pc(pt.disc.roi)} σε ${pt.disc.n} αγώνες (2023–25), ${pc(pt.test.roi)} σε ${pt.test.n} (2025/26). Μεγάλη αβεβαιότητα.</div>`).join("") : ""}`;
     }
     const bt = state.backtest;
     if (bt) {

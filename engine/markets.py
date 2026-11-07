@@ -7,6 +7,7 @@ AH_LINES = [-2.5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5]
 CORNER_LINES = [7.5, 8.5, 9.5, 10.5, 11.5, 12.5]
 CARD_LINES = [2.5, 3.5, 4.5, 5.5, 6.5]
 SHARP = ("Pinnacle",)
+VALIDATED = {"1X2", "OU2.5"}
 # Δεν μετράνε ως "καλύτερη απόδοση": exchanges (έχουν προμήθεια) και offshore εταιρείες
 NOT_A_BOOK = ("Μέγιστη", "Μέσος όρος", "Betfair", "Matchbook", "Smarkets", "Betdaq", "BetOnline",
               "GTbets", "BetAnything", "Everygame", "Suprabets", "Bovada", "MyBookie", "LowVig", "1xBet",
@@ -82,9 +83,11 @@ def selections(M, lc, lk):
 
 
 def _devig(prices):
-    inv = {k: 1 / v for k, v in prices.items() if v}
-    s = sum(inv.values())
-    return {k: v / s for k, v in inv.items()} if s else {}
+    """Δίκαιες πιθανότητες (μέθοδος power, βλ. history._devig)."""
+    keys = [k for k, v in prices.items() if v]
+    if not keys:
+        return {}
+    return dict(zip(keys, history._devig([prices[k] for k in keys])))
 
 
 def _est(s, book_view, mains, margins_tbl):
@@ -132,7 +135,9 @@ def price(sels, books, book_view=None, margins_tbl=None):
         s["est"], s["est_src"] = _est(s, book_view, mains, margins_tbl)
         s["est_ev"] = round(pw * s["est"] + pp - 1, 4) if s["est"] else None
         # ακέραια χάντικαπ (+1, -2...) δίνονται από κάποιες εταιρείες ως ευρωπαϊκά (χωρίς επιστροφή): όχι value
-        reliable = pp == 0 or s["key"] == "AH+0"
+        # "κενό αγοράς" μόνο όπου το επιβεβαίωσε η έρευνα (16.450 αγώνες): 1X2 και Over/Under 2.5.
+        # Σε άλλες αγορές η πιθανότητα βγαίνει από υπολογισμό (Poisson), όχι από τιμή της ίδιας αγοράς.
+        reliable = s["key"] in VALIDATED
         s["value"] = bool(best and reliable and s["ev"] >= config.MIN_EDGE and config.MIN_ODDS <= best <= config.MAX_ODDS)
         s["pw"], s["pp"] = round(s["pw"], 4), round(s["pp"], 4)
     return sels

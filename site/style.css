@@ -177,3 +177,94 @@ label.f { font-size: 12px; color: var(--muted); display: flex; flex-direction: c
   .kpis { grid-template-columns: repeat(2, 1fr); }
   .mk { grid-template-columns: 1fr 44px 50px 58px 62px; font-size: 12px; }
 }
+
+/* =================== Εμφάνιση v2 =================== */
+:root {
+  --bg: #07090d;
+  --surface: #10151d;
+  --surface-2: #171e29;
+  --line: #1f2835;
+  --text: #eef2f7;
+  --muted: #8693a5;
+  --accent: #2fd27a;
+  --accent-2: #19b4ff;
+  --accent-soft: rgba(47, 210, 122, .12);
+  --glow: 0 0 0 1px rgba(47, 210, 122, .35), 0 8px 30px -12px rgba(47, 210, 122, .45);
+  --radius: 16px;
+}
+body {
+  background:
+    radial-gradient(900px 500px at 10% -10%, rgba(25, 180, 255, .10), transparent 60%),
+    radial-gradient(800px 500px at 100% 0%, rgba(47, 210, 122, .08), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+}
+.top {
+  position: sticky; top: 0; z-index: 5; max-width: none;
+  background: rgba(7, 9, 13, .72); backdrop-filter: saturate(160%) blur(14px); -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, .04);
+}
+.top > * { max-width: 980px; }
+.brand { font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
+.brand .logo {
+  display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; margin-right: 6px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04130b; font-size: 14px; vertical-align: -5px;
+}
+h2 {
+  display: flex; align-items: center; gap: 8px; text-transform: none; letter-spacing: -.01em;
+  font-size: 18px; font-weight: 750; color: var(--text); margin: 26px 0 10px;
+}
+h2::before { content: ""; width: 4px; height: 18px; border-radius: 4px; background: linear-gradient(var(--accent), var(--accent-2)); }
+.day-head::before { display: none; }
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, 0)), var(--surface);
+  border: 1px solid var(--line); box-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset;
+}
+.card.click { transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
+.card.click:hover { transform: translateY(-2px); border-color: #2b3647; box-shadow: 0 10px 30px -18px rgba(0, 0, 0, .9); }
+.card.click:active { transform: scale(.99); }
+.note { background: rgba(255, 255, 255, .02); border: 1px solid var(--line); border-style: solid; }
+.tabs button.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04130b; border-color: transparent; font-weight: 700; }
+.comp-filter button.active, .day-chips button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.pill.value { background: rgba(47, 210, 122, .14); }
+.pill.hot { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04130b; }
+
+/* γραμμή πιθανότητας */
+.pbar { grid-column: 1 / -1; height: 6px; border-radius: 6px; background: var(--surface-2); overflow: hidden; margin-top: 8px; }
+.pbar i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
+.pbar.mid i { background: linear-gradient(90deg, #f5b942, #f7d774); }
+
+/* ευκαιρίες */
+.opp { box-shadow: var(--glow); border-color: transparent; }
+.opp .odds { background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.edge { font-weight: 700; color: var(--accent); }
+.evidence { grid-column: 1 / -1; font-size: 12px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 8px; }
+.hero {
+  border-radius: 20px; padding: 18px; margin: 6px 0 14px;
+  background: radial-gradient(500px 200px at 0% 0%, rgba(47, 210, 122, .18), transparent 70%),
+              radial-gradient(500px 200px at 100% 100%, rgba(25, 180, 255, .16), transparent 70%), var(--surface);
+  border: 1px solid var(--line);
+}
+.hero h1 { margin: 0 0 4px; font-size: 22px; letter-spacing: -.02em; }
+.hero p { margin: 0; color: var(--muted); font-size: 13px; }
+.hero .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+.hero .stats div { background: rgba(0, 0, 0, .25); border-radius: 12px; padding: 8px 10px; }
+.hero .stats b { display: block; font-size: 18px; }
+.hero .stats span { color: var(--muted); font-size: 11px; }
+
+/* κάτω μενού στο κινητό, σαν εφαρμογή */
+@media (max-width: 760px) {
+  .tabs {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 9; margin: 0; max-width: none; justify-content: space-around;
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); gap: 0;
+    background: rgba(10, 13, 18, .88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, .06);
+  }
+  .tabs button { flex: 1 1 0; border: 0; background: none; border-radius: 12px; padding: 6px 2px; font-size: 10.5px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .tabs button .ic { font-size: 19px; line-height: 1; filter: grayscale(1) opacity(.7); }
+  .tabs button.active { background: none; color: var(--text); }
+  .tabs button.active .ic { filter: none; }
+  main { padding-bottom: calc(90px + env(safe-area-inset-bottom)); }
+  .comp-filter { padding-top: 10px; }
+}
+@media (min-width: 761px) { .tabs button .ic { margin-right: 6px; } }

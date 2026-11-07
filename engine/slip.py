@@ -1,7 +1,7 @@
 """Προτεινόμενα δελτία ανά ημέρα, μόνο με αγώνες της ίδιας ημέρας (ώρα Ελλάδας).
 
-- Απλό: συνολική απόδοση ≥ 5, χωρίς ανώτατο όριο, 2-5 επιλογές.
-- Ακραίο: συνολική απόδοση ≥ 20, χωρίς ανώτατο όριο, 3-7 επιλογές.
+- Απλό: συνολική απόδοση ≥ 5, χωρίς ανώτατο όριο, 2-6 επιλογές.
+- Ακραίο: συνολική απόδοση ≥ 20, χωρίς ανώτατο όριο, 3-8 επιλογές.
 Κριτήριο: ο ΠΙΘΑΝΟΤΕΡΟΣ συνδυασμός (με βάση τα στατιστικά) που φτάνει την ελάχιστη απόδοση.
 Αποκλείονται επιλογές με πολύ κακή τιμή (εκτιμώμενη απόδοση πάνω από 7% κάτω από τη δίκαιη).
 """
@@ -13,8 +13,8 @@ MAX_DISAGREE = 0.08   # το μοντέλο δεν απέχει πάνω από 
 MIN_LEG_EV = -0.07    # όχι επιλογές με πολύ κακή τιμή (γκανιότ ~5-7% είναι το συνηθισμένο)
 
 KINDS = {
-    "simple": {"min_total": 5.0, "legs": (2, 5), "leg_p": 0.50, "leg_odds": (1.25, 2.60), "pool": 20},
-    "extreme": {"min_total": 20.0, "legs": (3, 7), "leg_p": 0.40, "leg_odds": (1.35, 3.50), "pool": 17},
+    "simple": {"min_total": 5.0, "legs": (2, 6), "leg_p": 0.50, "leg_odds": (1.25, 2.60), "pool": 20},
+    "extreme": {"min_total": 20.0, "legs": (3, 8), "leg_p": 0.40, "leg_odds": (1.35, 3.50), "pool": 17},
 }
 
 
@@ -40,9 +40,12 @@ def _legs(matches, rule):
         pick = cand[:1] + [s for s in cand if s["est"] >= 1.6][:1]
         for s in {id(x): x for x in pick}.values():
             legs.append({"match": m, "s": s})
-    # οι πιο "δυνατές" επιλογές: πιθανότητα σε σχέση με την απόδοση που προσφέρει
+    # οι πιο "δυνατές" επιλογές (πιθανότητα × απόδοση), μισές χαμηλές και μισές ≥ 1.6 για να φτάνει την απόδοση
     legs.sort(key=lambda x: -(x["s"]["p"] * x["s"]["est"]))
-    return legs[:rule["pool"]]
+    half = rule["pool"] // 2
+    low = [x for x in legs if x["s"]["est"] < 1.6][:half]
+    high = [x for x in legs if x["s"]["est"] >= 1.6][:rule["pool"] - len(low)]
+    return (low + high)[:rule["pool"]]
 
 
 def _best(legs, rule):
@@ -70,8 +73,8 @@ def _best(legs, rule):
             "home": x["match"]["home"], "away": x["match"]["away"],
             "key": x["s"]["key"], "side": x["s"]["side"],
             "label": x["s"]["label"], "group": x["s"]["group"], "p": x["s"]["p"],
-            "fair": x["s"]["fair"], "est": x["s"]["est"], "est_src": x["s"]["est_src"],
-            "best": x["s"]["best"], "book": x["s"]["book"],
+            "fair": x["s"]["fair"], "est": x["s"]["est"], "est_src": x["s"].get("est_src"),
+            "best": x["s"].get("best"), "book": x["s"].get("book"),
         } for x in sorted(combo, key=lambda x: x["match"]["date"])],
         "odds": round(odds, 2), "p": round(p, 4), "ev": round(p * odds - 1, 4),
     }

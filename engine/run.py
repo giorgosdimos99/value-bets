@@ -62,6 +62,34 @@ def fixtures_for(cid, comp, fx_csv):
     return out
 
 
+PATTERN_KEYS = {"1": ("1X2", "1"), "X": ("1X2", "X"), "2": ("1X2", "2"),
+                "Over": ("OU2.5", "Over"), "Under": ("OU2.5", "Under")}
+
+
+def attach_patterns(matches):
+    """Σημαδεύει επιλογές που ταιριάζουν σε μοτίβο της έρευνας (κέρδισε σε ανακάλυψη ΚΑΙ έλεγχο)."""
+    try:
+        pats = json.loads((config.DATA_OUT / "research.json").read_text(encoding="utf-8")).get("patterns", [])
+    except (OSError, ValueError):
+        return
+    code_of = {cid: c["fdcouk"] for cid, c in config.COMPETITIONS.items()}
+    for m in matches:
+        for pt in pats:
+            if code_of.get(m["comp"]) != pt["league"]:
+                continue
+            key, side = PATTERN_KEYS[pt["side"]]
+            s = next((x for x in m["markets"] if x["key"] == key and x["side"] == side), None)
+            odds = s and (s.get("best") or s.get("est"))
+            if s and odds and pt["odds"][0] <= odds <= pt["odds"][1]:
+                s["pattern"] = True
+                d, t = pt["disc"], pt["test"]
+                m.setdefault("patterns", []).append({
+                    "key": key, "side": side, "label": s["label"], "p": s["p"], "odds": odds, "est": s.get("est"),
+                    "text": f"{pt['name']}: {s['label']} με απόδοση {pt['odds'][0]}–{pt['odds'][1]} κέρδισε "
+                            f"{d['roi'] * 100:+.0f}% σε {d['n']} αγώνες (2023-25) και {t['roi'] * 100:+.0f}% σε {t['n']} (2025/26). "
+                            f"Μεγάλη αβεβαιότητα (±{t['ci'] * 100:.0f}%)."})
+
+
 def standings_from(results):
     """Βαθμολογία από τα αποτελέσματα (για πρωταθλήματα που δεν έχει το football-data.org)."""
     if not results:
@@ -333,6 +361,7 @@ def main():
         print(f"  {cid}: {len(bres['matches'])} αγώνες, {sum(len(m['values']) for m in bres['matches'])} value")
 
     predictions.annotate(all_matches)
+    attach_patterns(all_matches)
     out["slips"] = slip.build_daily(all_matches)
     out["slip"] = (out["slips"][0]["simple"] if out["slips"] else None)
     fd_results = [r for c in out["competitions"].values() for r in c["recent"]]
@@ -360,6 +389,14 @@ def main():
     if stale:  # μία φορά την εβδομάδα
         from . import backtest
         backtest.main()
+    rs = config.DATA_OUT / "research.json"
+    try:
+        stale_r = (datetime.now(timezone.utc) - datetime.fromisoformat(json.loads(rs.read_text(encoding="utf-8"))["created"])).days >= 7
+    except (OSError, ValueError, KeyError):
+        stale_r = True
+    if stale_r:  # η έρευνα ξανατρέχει κάθε εβδομάδα (οι προβλέψεις των παλιών αγώνων μένουν στην cache)
+        from . import research
+        research.main()
     print(f"✓ Έτοιμο: {config.DATA_OUT / 'data.json'}")
 
 
