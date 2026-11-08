@@ -3954,36 +3954,119 @@
   {
    "legs": [
     {
-     "match_id": "MEX-0380db9fc7de24aed0c27138c02467e5",
-     "comp": "MEX",
-     "date": "2026-11-14T23:00:00Z",
-     "home": "Querétaro",
-     "away": "Monterrey",
-     "key": "HT_OU1.5",
-     "side": "Under",
-     "label": "Γηπεδούχος Under 1.5",
-     "group": "Γκολ γηπεδούχου",
-     "p": 0.588,
-     "fair": 1.7,
-     "est": 1.63,
+     "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
+     "comp": "FL1",
+     "date": "2026-11-08T19:45:00Z",
+     "home": "RC Lens",
+     "away": "Marseille",
+     "key": "AH-1.5",
+     "side": "A",
+     "label": "2 (+1.5)",
+     "group": "Ασιατικό χάντικαπ",
+     "p": 0.7683,
+     "fair": 1.3,
+     "est": 1.26,
      "est_src": "g",
      "best": null,
      "book": null,
      "result": null
     },
     {
+     "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
+     "comp": "SA",
+     "date": "2026-11-08T19:45:00Z",
+     "home": "Fiorentina",
+     "away": "Juventus",
+     "key": "OU1.5",
+     "side": "Over",
+     "label": "Over 1.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.7742,
+     "fair": 1.29,
+     "est": 1.25,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
+     "comp": "PD",
+     "date": "2026-11-08T20:00:00Z",
+     "home": "Atlético Madrid",
+     "away": "Barcelona",
+     "key": "AT_OU2.5",
+     "side": "Under",
+     "label": "Φιλοξενούμενος Under 2.5",
+     "group": "Γκολ φιλοξενούμενου",
+     "p": 0.5961,
+     "fair": 1.68,
+     "est": 1.61,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
+     "comp": "PPL",
+     "date": "2026-11-08T20:30:00Z",
+     "home": "Rio Ave FC",
+     "away": "Braga",
+     "key": "DC",
+     "side": "12",
+     "label": "12",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.779,
+     "fair": 1.28,
+     "est": 1.26,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
+     "comp": "PPL",
+     "date": "2026-11-08T20:30:00Z",
+     "home": "CF Estrela",
+     "away": "Benfica",
+     "key": "AH+1.5",
+     "side": "A",
+     "label": "2 (-1.5)",
+     "group": "Ασιατικό χάντικαπ",
+     "p": 0.592,
+     "fair": 1.69,
+     "est": 1.62,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 5.18,
+   "p": 0.1635,
+   "ev": -0.1536,
+   "day": "2026-11-08",
+   "kind": "simple",
+   "created": "2026-11-08T19:26:23.601479+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
      "match_id": "BRA-8fafa425728aa8e7d2c23956ba4c2553",
      "comp": "BRA",
      "date": "2026-11-14T23:30:00Z",
      "home": "Chapecoense",
      "away": "Vasco da Gama",
-     "key": "OU2.5",
-     "side": "Over",
-     "label": "Over 2.5",
-     "group": "Γκολ Over/Under",
-     "p": 0.5991,
-     "fair": 1.67,
-     "est": 1.6,
+     "key": "DC",
+     "side": "12",
+     "label": "12",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.7561,
+     "fair": 1.32,
+     "est": 1.3,
      "est_src": "g",
      "best": null,
      "book": null,
@@ -3999,7 +4082,7 @@
      "side": "1X",
      "label": "1X",
      "group": "Διπλή ευκαιρία",
-     "p": 0.7626,
+     "p": 0.7628,
      "fair": 1.31,
      "est": 1.29,
      "est_src": "g",
@@ -4017,21 +4100,158 @@
      "side": "1",
      "label": "1",
      "group": "Τελικό αποτέλεσμα",
-     "p": 0.5636,
+     "p": 0.5638,
      "fair": 1.77,
      "est": 1.71,
      "est_src": "g",
      "best": null,
      "book": null,
      "result": null
+    },
+    {
+     "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
+     "comp": "SD",
+     "date": "2026-11-15T17:30:00Z",
+     "home": "CD Eldense",
+     "away": "Sabadell FC",
+     "key": "BTTS",
+     "side": "No",
+     "label": "N/G",
+     "group": "Γκολ-Γκολ",
+     "p": 0.5402,
+     "fair": 1.85,
+     "est": 1.77,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
     }
    ],
-   "odds": 5.75,
-   "p": 0.1514,
-   "ev": -0.129,
+   "odds": 5.08,
+   "p": 0.1757,
+   "ev": -0.1084,
    "day": "2026-11-15",
    "kind": "simple",
-   "created": "2026-11-08T17:18:42.024790+00:00",
+   "created": "2026-11-08T19:26:23.601479+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": "MEX-0380db9fc7de24aed0c27138c02467e5",
+     "comp": "MEX",
+     "date": "2026-11-14T23:00:00Z",
+     "home": "Querétaro",
+     "away": "Monterrey",
+     "key": "HT_OU1.5",
+     "side": "Under",
+     "label": "Γηπεδούχος Under 1.5",
+     "group": "Γκολ γηπεδούχου",
+     "p": 0.5879,
+     "fair": 1.7,
+     "est": 1.63,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "BRA-8fafa425728aa8e7d2c23956ba4c2553",
+     "comp": "BRA",
+     "date": "2026-11-14T23:30:00Z",
+     "home": "Chapecoense",
+     "away": "Vasco da Gama",
+     "key": "DC",
+     "side": "X2",
+     "label": "X2",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.7255,
+     "fair": 1.38,
+     "est": 1.35,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
+     "comp": "SD",
+     "date": "2026-11-15T13:00:00Z",
+     "home": "Tenerife",
+     "away": "AD Ceuta FC",
+     "key": "HT_OU1.5",
+     "side": "Under",
+     "label": "Γηπεδούχος Under 1.5",
+     "group": "Γκολ γηπεδούχου",
+     "p": 0.5456,
+     "fair": 1.83,
+     "est": 1.76,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
+     "comp": "SD",
+     "date": "2026-11-15T15:15:00Z",
+     "home": "Granada CF",
+     "away": "Las Palmas",
+     "key": "1X2",
+     "side": "1",
+     "label": "1",
+     "group": "Τελικό αποτέλεσμα",
+     "p": 0.5638,
+     "fair": 1.77,
+     "est": 1.71,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
+     "comp": "SD",
+     "date": "2026-11-15T17:30:00Z",
+     "home": "SD Eibar",
+     "away": "Cádiz CF",
+     "key": "1X2",
+     "side": "1",
+     "label": "1",
+     "group": "Τελικό αποτέλεσμα",
+     "p": 0.5524,
+     "fair": 1.81,
+     "est": 1.74,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
+     "comp": "SD",
+     "date": "2026-11-15T17:30:00Z",
+     "home": "CD Eldense",
+     "away": "Sabadell FC",
+     "key": "BTTS",
+     "side": "No",
+     "label": "N/G",
+     "group": "Γκολ-Γκολ",
+     "p": 0.5402,
+     "fair": 1.85,
+     "est": 1.77,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 20.4,
+   "p": 0.0392,
+   "ev": -0.2015,
+   "day": "2026-11-15",
+   "kind": "extreme",
+   "created": "2026-11-08T19:26:23.601479+00:00",
    "result": null
   }
  ],
@@ -4183,7 +4403,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6929,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "4-4"
   },
   {
    "match_id": "GR-e9d86b71a5b34883469614ff2c2cd68c",
@@ -6187,7 +6408,7 @@
    "side": "Over",
    "label": "Over 154.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6676,
+   "p": 0.6679,
    "est": 1.45,
    "result": null
   },
@@ -6201,7 +6422,7 @@
    "side": "A",
    "label": "2",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6721,
+   "p": 0.671,
    "est": 1.44,
    "result": null
   },
@@ -6215,8 +6436,8 @@
    "side": "A",
    "label": "2 (-4.5)",
    "group": "Χάντικαπ",
-   "p": 0.6538,
-   "est": 1.46,
+   "p": 0.6535,
+   "est": 1.47,
    "result": null
   },
   {
@@ -6229,7 +6450,7 @@
    "side": "A",
    "label": "2 (+10.5)",
    "group": "Χάντικαπ",
-   "p": 0.6587,
+   "p": 0.6589,
    "est": 1.45,
    "result": null
   },
@@ -6243,7 +6464,7 @@
    "side": "A",
    "label": "2 (+18.5)",
    "group": "Χάντικαπ",
-   "p": 0.6553,
+   "p": 0.6559,
    "est": 1.46,
    "result": null
   },
@@ -6257,7 +6478,7 @@
    "side": "A",
    "label": "2 (-4.5)",
    "group": "Χάντικαπ",
-   "p": 0.6601,
+   "p": 0.6606,
    "est": 1.45,
    "result": null
   },
@@ -6285,7 +6506,7 @@
    "side": "Over",
    "label": "Over 164.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6639,
+   "p": 0.664,
    "est": 1.44,
    "result": null
   },
@@ -6299,7 +6520,7 @@
    "side": "H",
    "label": "1 (-1.5)",
    "group": "Χάντικαπ",
-   "p": 0.6755,
+   "p": 0.6753,
    "est": 1.43,
    "result": null
   },
@@ -6313,7 +6534,7 @@
    "side": "Over",
    "label": "Over 175.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6648,
+   "p": 0.6652,
    "est": 1.44,
    "result": null
   },
@@ -6327,7 +6548,7 @@
    "side": "Over",
    "label": "Over 142.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6697,
+   "p": 0.6699,
    "est": 1.44,
    "result": null
   },
@@ -6355,7 +6576,7 @@
    "side": "Over",
    "label": "Over 162.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6618,
+   "p": 0.6625,
    "est": 1.45,
    "result": null
   },
@@ -6369,7 +6590,7 @@
    "side": "Over",
    "label": "Over 169.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6849,
+   "p": 0.6847,
    "est": 1.41,
    "result": null
   },
@@ -6383,7 +6604,7 @@
    "side": "Over",
    "label": "Over 156.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6787,
+   "p": 0.6777,
    "est": 1.43,
    "result": null
   },
@@ -6397,7 +6618,7 @@
    "side": "Over",
    "label": "Over 149.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6777,
+   "p": 0.6776,
    "est": 1.43,
    "result": null
   },
@@ -6411,7 +6632,7 @@
    "side": "Over",
    "label": "Over 157.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6753,
+   "p": 0.6758,
    "est": 1.43,
    "result": null
   },
@@ -6425,8 +6646,8 @@
    "side": "Over",
    "label": "Over 140.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6669,
-   "est": 1.45,
+   "p": 0.6662,
+   "est": 1.44,
    "result": null
   },
   {
@@ -6439,7 +6660,7 @@
    "side": "Over",
    "label": "Over 146.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6731,
+   "p": 0.6728,
    "est": 1.44,
    "result": null
   },
@@ -6453,7 +6674,7 @@
    "side": "Over",
    "label": "Over 166.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6779,
+   "p": 0.6778,
    "est": 1.43,
    "result": null
   },
@@ -6467,7 +6688,7 @@
    "side": "Over",
    "label": "Over 157.5",
    "group": "Σύνολο πόντων",
-   "p": 0.661,
+   "p": 0.6605,
    "est": 1.45,
    "result": null
   },
@@ -6495,8 +6716,8 @@
    "side": "Over",
    "label": "Over 159.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6627,
-   "est": 1.45,
+   "p": 0.6632,
+   "est": 1.44,
    "result": null
   },
   {
@@ -6509,7 +6730,7 @@
    "side": "Over",
    "label": "Over 189.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6831,
+   "p": 0.6829,
    "est": 1.42,
    "result": null
   },
@@ -6523,7 +6744,7 @@
    "side": "Over",
    "label": "Over 153.5",
    "group": "Σύνολο πόντων",
-   "p": 0.677,
+   "p": 0.6758,
    "est": 1.43,
    "result": null
   },
@@ -6537,7 +6758,7 @@
    "side": "Over",
    "label": "Over 170.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6819,
+   "p": 0.6828,
    "est": 1.42,
    "result": null
   },
@@ -6551,7 +6772,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6896,
+   "p": 0.6895,
    "est": 1.4,
    "result": null
   },
@@ -6561,12 +6782,12 @@
    "date": "2026-11-14T13:00:00Z",
    "home": "Real Valladolid CF",
    "away": "CD Castellón",
-   "key": "OU3.5",
-   "side": "Under",
-   "label": "Under 3.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6931,
-   "est": 1.4,
+   "key": "DC",
+   "side": "X2",
+   "label": "X2",
+   "group": "Διπλή ευκαιρία",
+   "p": 0.6872,
+   "est": 1.43,
    "result": null
   },
   {
@@ -6691,7 +6912,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6643,
+   "p": 0.664,
    "est": 1.45,
    "result": null
   },
@@ -6705,8 +6926,8 @@
    "side": "A",
    "label": "2 (+11.5)",
    "group": "Χάντικαπ",
-   "p": 0.6663,
-   "est": 1.44,
+   "p": 0.667,
+   "est": 1.45,
    "result": null
   },
   {
@@ -6817,7 +7038,7 @@
    "side": "Under",
    "label": "Under 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6702,
+   "p": 0.6703,
    "est": 1.44,
    "result": null
   },
@@ -7111,7 +7332,7 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.7032,
+   "p": 0.7033,
    "est": 1.4,
    "result": null
   },
@@ -7937,7 +8158,7 @@
    "side": "Over",
    "label": "Over 148.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6616,
+   "p": 0.6624,
    "est": 1.45,
    "result": null
   },
@@ -7979,7 +8200,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6864,
+   "p": 0.6865,
    "est": 1.41,
    "result": null
   },
@@ -7993,7 +8214,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6828,
+   "p": 0.6832,
    "est": 1.42,
    "result": null
   },
@@ -8007,7 +8228,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.651,
+   "p": 0.6511,
    "est": 1.48,
    "result": null
   },
@@ -8035,8 +8256,8 @@
    "side": "H",
    "label": "1 (-8.5)",
    "group": "Χάντικαπ",
-   "p": 0.6668,
-   "est": 1.45,
+   "p": 0.6664,
+   "est": 1.44,
    "result": null
   },
   {
@@ -8049,7 +8270,7 @@
    "side": "Over",
    "label": "Over 154.5",
    "group": "Σύνολο πόντων",
-   "p": 0.66,
+   "p": 0.6605,
    "est": 1.45,
    "result": null
   },
@@ -8063,7 +8284,7 @@
    "side": "H",
    "label": "1 (-2.5)",
    "group": "Χάντικαπ",
-   "p": 0.6798,
+   "p": 0.6792,
    "est": 1.42,
    "result": null
   },
@@ -8077,7 +8298,7 @@
    "side": "A",
    "label": "2 (-6.5)",
    "group": "Χάντικαπ",
-   "p": 0.6556,
+   "p": 0.6566,
    "est": 1.46,
    "result": null
   },
@@ -8091,7 +8312,7 @@
    "side": "Over",
    "label": "Over 174.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6679,
+   "p": 0.6681,
    "est": 1.45,
    "result": null
   },
@@ -8105,7 +8326,7 @@
    "side": "Over",
    "label": "Over 159.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6523,
+   "p": 0.6521,
    "est": 1.47,
    "result": null
   },
@@ -8119,7 +8340,7 @@
    "side": "A",
    "label": "2 (-3.5)",
    "group": "Χάντικαπ",
-   "p": 0.6631,
+   "p": 0.6639,
    "est": 1.44,
    "result": null
   },
@@ -8133,7 +8354,7 @@
    "side": "Over",
    "label": "Over 175.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6804,
+   "p": 0.68,
    "est": 1.42,
    "result": null
   },
@@ -8147,7 +8368,7 @@
    "side": "Over",
    "label": "Over 164.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6653,
+   "p": 0.6646,
    "est": 1.44,
    "result": null
   },
@@ -8161,7 +8382,7 @@
    "side": "Over",
    "label": "Over 144.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6639,
+   "p": 0.6637,
    "est": 1.44,
    "result": null
   },
@@ -8259,7 +8480,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6296,
+   "p": 0.6295,
    "est": 1.52,
    "result": null
   },
@@ -8273,7 +8494,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6758,
+   "p": 0.6756,
    "est": 1.43,
    "result": null
   },
@@ -8287,7 +8508,7 @@
    "side": "A",
    "label": "2 (-4.5)",
    "group": "Χάντικαπ",
-   "p": 0.6591,
+   "p": 0.6595,
    "est": 1.45,
    "result": null
   },
@@ -8301,8 +8522,8 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6844,
-   "est": 1.41,
+   "p": 0.6836,
+   "est": 1.42,
    "result": null
   },
   {
@@ -8315,8 +8536,148 @@
    "side": "Over",
    "label": "Over 168.5",
    "group": "Σύνολο πόντων",
-   "p": 0.677,
+   "p": 0.6781,
    "est": 1.43,
+   "result": null
+  },
+  {
+   "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "CD Eldense",
+   "away": "Sabadell FC",
+   "key": "DC",
+   "side": "12",
+   "label": "12",
+   "group": "Διπλή ευκαιρία",
+   "p": 0.6953,
+   "est": 1.41,
+   "result": null
+  },
+  {
+   "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "SD Eibar",
+   "away": "Cádiz CF",
+   "key": "AH-1.5",
+   "side": "A",
+   "label": "2 (+1.5)",
+   "group": "Ασιατικό χάντικαπ",
+   "p": 0.6901,
+   "est": 1.4,
+   "result": null
+  },
+  {
+   "match_id": "EC-113",
+   "comp": "EC",
+   "date": "2026-11-18T17:30:00.000Z",
+   "home": "Cedevita Olimpija",
+   "away": "Burgos",
+   "key": "OU145.5",
+   "side": "Over",
+   "label": "Over 145.5",
+   "group": "Σύνολο πόντων",
+   "p": 0.6759,
+   "est": 1.43,
+   "result": null
+  },
+  {
+   "match_id": "EC-123",
+   "comp": "EC",
+   "date": "2026-11-18T18:00:00.000Z",
+   "home": "Chemnitz",
+   "away": "Tofas",
+   "key": "OU155.5",
+   "side": "Over",
+   "label": "Over 155.5",
+   "group": "Σύνολο πόντων",
+   "p": 0.6629,
+   "est": 1.44,
+   "result": null
+  },
+  {
+   "match_id": "EC-121",
+   "comp": "EC",
+   "date": "2026-11-18T18:00:00.000Z",
+   "home": "Buducnost",
+   "away": "Slask",
+   "key": "OU170.5",
+   "side": "Over",
+   "label": "Over 170.5",
+   "group": "Σύνολο πόντων",
+   "p": 0.6713,
+   "est": 1.44,
+   "result": null
+  },
+  {
+   "match_id": "EC-116",
+   "comp": "EC",
+   "date": "2026-11-18T18:00:00.000Z",
+   "home": "Aris",
+   "away": "Le Mans Sarthe",
+   "key": "OU157.5",
+   "side": "Over",
+   "label": "Over 157.5",
+   "group": "Σύνολο πόντων",
+   "p": 0.6815,
+   "est": 1.42,
+   "result": null
+  },
+  {
+   "match_id": "EC-125",
+   "comp": "EC",
+   "date": "2026-11-18T18:30:00.000Z",
+   "home": "BOSNA",
+   "away": "Lietkabelis",
+   "key": "ML",
+   "side": "H",
+   "label": "1",
+   "group": "Νικητής (με παράταση)",
+   "p": 0.6741,
+   "est": 1.43,
+   "result": null
+  },
+  {
+   "match_id": "EC-122",
+   "comp": "EC",
+   "date": "2026-11-18T18:30:00.000Z",
+   "home": "Bourg",
+   "away": "Napoli",
+   "key": "OU160.5",
+   "side": "Over",
+   "label": "Over 160.5",
+   "group": "Σύνολο πόντων",
+   "p": 0.6809,
+   "est": 1.42,
+   "result": null
+  },
+  {
+   "match_id": "EC-119",
+   "comp": "EC",
+   "date": "2026-11-18T18:30:00.000Z",
+   "home": "Skyliners",
+   "away": "Reyer Venice",
+   "key": "OU169.5",
+   "side": "Over",
+   "label": "Over 169.5",
+   "group": "Σύνολο πόντων",
+   "p": 0.6644,
+   "est": 1.44,
+   "result": null
+  },
+  {
+   "match_id": "EC-124",
+   "comp": "EC",
+   "date": "2026-11-18T19:00:00.000Z",
+   "home": "Trento",
+   "away": "Neptunas",
+   "key": "OU165.5",
+   "side": "Over",
+   "label": "Over 165.5",
+   "group": "Σύνολο πόντων",
+   "p": 0.6612,
+   "est": 1.45,
    "result": null
   }
  ],
@@ -8702,7 +9063,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": 560639,
@@ -8717,7 +9079,8 @@
    "kind": "edge",
    "p_avg": 0.4666,
    "fair": 1.28,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": 560639,
@@ -8732,7 +9095,8 @@
    "kind": "edge",
    "p_avg": 0.4668,
    "fair": 1.51,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": 560639,
@@ -8747,7 +9111,8 @@
    "kind": "edge",
    "p_avg": 0.3621,
    "fair": 1.82,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": 560639,
@@ -8762,7 +9127,8 @@
    "kind": "edge",
    "p_avg": 0.5038,
    "fair": 1.5,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": "GR-b2ee2c1ccd19eae8b4e3d0546d7db67b",
@@ -15038,7 +15404,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": "GR-b2ee2c1ccd19eae8b4e3d0546d7db67b",
@@ -18604,7 +18971,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": 560639,
@@ -18619,7 +18987,8 @@
    "kind": "edge",
    "p_avg": 0.3888,
    "fair": 1.44,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": 560639,
@@ -18634,7 +19003,8 @@
    "kind": "edge",
    "p_avg": 0.5722,
    "fair": 1.39,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": "GR-b2ee2c1ccd19eae8b4e3d0546d7db67b",
@@ -22475,7 +22845,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -23121,7 +23492,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": null,
+   "score": "4-4"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -23616,6 +23988,141 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-f52b83a74c511828f6155889d751d191",
+   "comp": "SD",
+   "date": "2026-11-09T19:30:00Z",
+   "home": "Sabadell FC",
+   "away": "Real Sociedad B",
+   "key": "S:ca:A:3.5",
+   "side": "Under",
+   "label": "Real Sociedad B: κάρτες Under 3.5",
+   "p": 0.6389,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "CD Eldense",
+   "away": "Sabadell FC",
+   "key": "S:co:T:10.5",
+   "side": "Under",
+   "label": "Κόρνερ Under 10.5",
+   "p": 0.6375,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "CD Eldense",
+   "away": "Sabadell FC",
+   "key": "S:fo:H:12.5",
+   "side": "Under",
+   "label": "CD Eldense: Φάουλ Under 12.5",
+   "p": 0.7318,
+   "kind": "edge",
+   "p_avg": 0.4218,
+   "fair": 1.37,
+   "result": null
+  },
+  {
+   "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "CD Eldense",
+   "away": "Sabadell FC",
+   "key": "S:sh:H:13.5",
+   "side": "Under",
+   "label": "CD Eldense: Σουτ Under 13.5",
+   "p": 0.702,
+   "kind": "edge",
+   "p_avg": 0.4401,
+   "fair": 1.42,
+   "result": null
+  },
+  {
+   "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "CD Eldense",
+   "away": "Sabadell FC",
+   "key": "S:fo:A:13.5",
+   "side": "Over",
+   "label": "Sabadell FC: Φάουλ Over 13.5",
+   "p": 0.6945,
+   "kind": "edge",
+   "p_avg": 0.4953,
+   "fair": 1.44,
+   "result": null
+  },
+  {
+   "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "SD Eibar",
+   "away": "Cádiz CF",
+   "key": "S:fo:T:21.5",
+   "side": "Over",
+   "label": "Φάουλ Over 21.5",
+   "p": 0.6379,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "SD Eibar",
+   "away": "Cádiz CF",
+   "key": "S:fo:T:26.5",
+   "side": "Under",
+   "label": "Φάουλ Under 26.5",
+   "p": 0.7331,
+   "kind": "edge",
+   "p_avg": 0.4751,
+   "fair": 1.36,
+   "result": null
+  },
+  {
+   "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "SD Eibar",
+   "away": "Cádiz CF",
+   "key": "S:fo:H:13.5",
+   "side": "Under",
+   "label": "SD Eibar: Φάουλ Under 13.5",
+   "p": 0.7277,
+   "kind": "edge",
+   "p_avg": 0.529,
+   "fair": 1.37,
+   "result": null
+  },
+  {
+   "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "SD Eibar",
+   "away": "Cádiz CF",
+   "key": "S:fo:A:13.5",
+   "side": "Under",
+   "label": "Cádiz CF: Φάουλ Under 13.5",
+   "p": 0.6671,
+   "kind": "edge",
+   "p_avg": 0.5047,
+   "fair": 1.5,
    "result": null
   }
  ]
