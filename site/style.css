@@ -321,3 +321,38 @@ table.xt td { white-space: normal; }
 table.xt td small.pc { display: block; }
 .sheet .day-sub { margin-top: 18px; }
 @media (max-width: 760px) { .ri { padding: 10px 12px; } .ri-t { font-size: 14px; } }
+
+/* ===== v4: φαρδιά διάταξη, ώρα έναρξης, καθαρές λίστες ===== */
+:root { --w: 1320px; }
+.top { padding-left: max(16px, calc((100% - var(--w)) / 2 + 16px)); padding-right: max(16px, calc((100% - var(--w)) / 2 + 16px)); }
+.top > * { max-width: none; }
+.tabs, .comp-filter, main { max-width: var(--w); }
+.sheet { max-width: 900px; }
+.home { display: grid; gap: 0 22px; align-items: start; }
+@media (min-width: 1000px) {
+  .home { grid-template-columns: 1fr 1fr; }
+  .home .col > .sec:first-child { margin-top: 6px; }
+}
+.home .slips { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.sec-h h2 { font-size: 18px; }
+.list { box-shadow: 0 10px 30px -22px rgba(0, 0, 0, .9); }
+.ri { gap: 14px; padding: 12px 14px; transition: background .12s; }
+.ri-time { flex: 0 0 52px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 5px 0; line-height: 1.15; }
+.ri-time b { font-size: 14px; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.ri-time span { font-size: 10.5px; color: var(--muted); }
+.ri-r { min-width: 62px; }
+.ri-r b.hi { color: var(--accent); }
+.ri-r b.md { color: var(--amber); }
+.kick { font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 1px 8px; }
+.kick.big { display: inline-block; font-size: 15px; margin-bottom: 4px; }
+.day-chips { margin-bottom: 14px; }
+@media (max-width: 760px) {
+  .ri { gap: 10px; padding: 10px 12px; }
+  .ri-time { flex-basis: 46px; }
+  .ri-time b { font-size: 13px; }
+}
+.home { grid-template-columns: minmax(0, 1fr); }
+.home .col { min-width: 0; }
+@media (min-width: 1000px) { .home { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+@media (max-width: 760px) { .ri-time { flex-basis: 50px; } .ri-time span { font-size: 9.5px; } }

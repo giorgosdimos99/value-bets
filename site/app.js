@@ -164,10 +164,14 @@
   }
   const FIT = { 1: ["value", "✓ βολεύει"], 0: ["muted", "ουδέτερο"], "-1": ["warn", "✗ δεν βολεύει"] };
   const fitPill = t => (t.fit === undefined || t.fit === null ? "" : `<span class="pill ${FIT[t.fit][0]}">${FIT[t.fit][1]}</span>`);
-  const shortDt = iso => new Date(iso).toLocaleString("el-GR", { weekday: "short", hour: "2-digit", minute: "2-digit" });
-  const ri = (m, label, pills, right, rightSub, extraCls = "") => `<div class="ri click ${extraCls}" data-match="${m.id}">
-      <div class="ri-main"><div class="ri-t">${label} ${pills || ""}</div><div class="ri-s">${isBasket(m) ? "🏀 " : ""}${esc(m.home)} – ${esc(m.away)} · ${esc(COMP[m.comp] || "")} · ${shortDt(m.date)}</div></div>
-      <div class="ri-r"><b>${right}</b><span>${rightSub || ""}</span></div></div>`;
+  const hhmm = iso => new Date(iso).toLocaleTimeString("el-GR", { hour: "2-digit", minute: "2-digit", hour12: false });
+  const dayShort = iso => { const k = dayKey(iso), l = chipLabel(k); return l.split(" ")[0].replace(/,$/, ""); };
+  const timeBox = iso => `<div class="ri-time"><b>${hhmm(iso)}</b><span>${dayShort(iso)}</span></div>`;
+  const pCls = p => (p >= 0.7 ? "hi" : p >= 0.6 ? "md" : "");
+  const ri = (m, label, pills, right, rightSub, extraCls = "", p = null) => `<div class="ri click ${extraCls}" data-match="${m.id}">
+      ${timeBox(m.date)}
+      <div class="ri-main"><div class="ri-t">${label} ${pills || ""}</div><div class="ri-s">${isBasket(m) ? "🏀 " : ""}${esc(m.home)} – ${esc(m.away)} · ${esc(COMP[m.comp] || "")}</div></div>
+      <div class="ri-r"><b class="${p == null ? "" : pCls(p)}">${right}</b><span>${rightSub || ""}</span></div></div>`;
   const ladderHtml = e => (e.ladder || []).map(x => `<span class="lad"><b>${e.side} ${x.line}</b> ${pct(x.p)} · από <b>${f2(x.min_odds)}</b></span>`).join("");
   function edgeBox(m, e) {
     return `<div class="card pick">
@@ -209,37 +213,37 @@
       view.innerHTML = `<div class="empty"><b>Δεν υπάρχουν αγώνες ακόμα</b>Μόλις βγει το επόμενο πρόγραμμα θα εμφανιστούν εδώ.</div>`;
       return;
     }
-    let h = dayChips(all);
+    let h = dayChips(all), L = "", R = "";
     // 1. Ευκαιρίες: εταιρεία πάνω από τη δίκαιη τιμή (έρευνα: θετικό CLV) + μοτίβα
     const opps = [
       ...ms.flatMap(m => m.values.map(s => ({ m, key: s.key, side: s.side, label: s.label, p: s.p, odds: s.best, book: s.book, ev: s.ev, kind: "gap" }))),
       ...ms.flatMap(m => (m.patterns || []).map(pt => ({ m, key: pt.key, side: pt.side, label: pt.label, p: pt.p, odds: pt.odds, book: "εκτίμηση", ev: pt.p * pt.odds - 1, kind: "pattern" }))),
     ].sort((a, b) => b.ev - a.ev);
-    h += section("💎 Ευκαιρίες", "Απόδοση μεγαλύτερη απ' όσο δικαιολογεί η πιθανότητα.",
+    L += section("💎 Ευκαιρίες", "Απόδοση μεγαλύτερη απ' όσο δικαιολογεί η πιθανότητα.",
       opps.length ? `<div class="list">${opps.slice(0, 5).map(o => ri(o.m, esc(nice(o.m, o.key, o.side, o.label)), `<span class="pill ${o.kind === "gap" ? "hot" : "solid"}">${evTxt(o.ev)}</span>`, f2(o.odds), `${esc(o.book || "")} · ${pct(o.p)}`)).join("")}</div>`
         : `<div class="empty-s">Καμία αυτή τη στιγμή — οι αγορές είναι σωστές τις περισσότερες φορές.</div>`);
-    // 2. Στατιστικά: ρεαλιστικές γραμμές όπου ο μέσος όρος κάνει λάθος, πρώτα όσα βολεύει ο αντίπαλος
+    // 2. Στατιστικά: μόνο οι πιο πιθανές, μία ανά αγώνα
+    const seen = new Set();
     const edges = ms.flatMap(m => (m.stat_edges || []).map(e => ({ m, e })))
       .filter(x => x.e.fit !== -1)
-      .sort((a, b) => ((b.e.fit ?? 0) - (a.e.fit ?? 0)) || ((b.e.p - b.e.p_avg) - (a.e.p - a.e.p_avg)));
-    const ne = state.more.edges ? edges.length : 6;
-    h += section("📊 Στατιστικά", "Κόρνερ, σουτ, φάουλ, κάρτες. Παίξ' το μόνο αν η απόδοση είναι ≥ «από».",
-      edges.length ? `<div class="list">${edges.slice(0, ne).map(({ m, e }) => ri(m, `${STAT_ICON[e.stat] || ""} ${esc(e.label)}`, fitPill(e), pct(e.p), `από ${f2(e.min_odds)}`)).join("")}</div>`
-        : `<div class="empty-s">Καμία μεγάλη απόκλιση στους αγώνες που φαίνονται.</div>`,
-      edges.length > 6 ? `<button class="more" data-more="edges">${state.more.edges ? "Λιγότερα" : `Όλα (${edges.length})`}</button>` : "");
-    // 3. Δελτία
-    const slips = (state.data.slips || []).filter(s => state.day === "ALL" || s.day === state.day).slice(0, state.day === "ALL" ? 1 : 3);
+      .sort((a, b) => (b.e.p - a.e.p) || ((b.e.fit ?? 0) - (a.e.fit ?? 0)))
+      .filter(x => !seen.has(x.m.id) && seen.add(x.m.id))
+      .slice(0, 6);
+    L += section("📊 Στατιστικά", "Οι 6 πιο πιθανές (μία ανά αγώνα). Παίξ' το αν η απόδοση είναι ≥ «από». Για τα υπόλοιπα άνοιξε τον αγώνα.",
+      edges.length ? `<div class="list">${edges.map(({ m, e }) => ri(m, `${STAT_ICON[e.stat] || ""} ${esc(e.label)}`, fitPill(e), pct(e.p), `από ${f2(e.min_odds)}`, "", e.p)).join("")}</div>`
+        : `<div class="empty-s">Καμία μεγάλη απόκλιση στους αγώνες που φαίνονται.</div>`);
+    // 3. Πιθανότερες προβλέψεις: μόνο οι κορυφαίες
+    const preds = ms.filter(m => m.top && m.top.length).map(m => ({ m, t: m.top[0] })).sort((a, b) => b.t.p - a.t.p).slice(0, 8);
+    R += section("⭐ Πιθανότερες προβλέψεις", "Οι 8 πιο πιθανές (απόδοση ≥ 1.40). Πάτα για ανάλυση του αγώνα.",
+      preds.length ? `<div class="list">${preds.map(({ m, t }) => ri(m, esc(nice(m, t.key, t.side, t.label)), `<span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span>`, pct(t.p), `~${f2(t.est)}`, "", t.p)).join("")}</div>`
+        : `<div class="empty-s">Καμία πρόβλεψη για αυτή την επιλογή.</div>`);
+    // 4. Δελτία
+    const slips = (state.data.slips || []).filter(s => state.day === "ALL" || s.day === state.day).slice(0, 1);
     if (slips.length && state.comp === "ALL") {
-      h += section("🎫 Δελτία ημέρας", "Ο πιθανότερος συνδυασμός της μέρας για απόδοση 5+ και 20+.",
-        slips.map(d => `<h3 class="day-sub">${dayLabel(d.day)}</h3><div class="grid">${["simple", "extreme"].map(k => d[k] ? slipCard(d[k], k, d.day) : "").join("")}</div>`).join(""));
+      R += section("🎫 Δελτίο ημέρας", `${dayLabel(slips[0].day)} · απόδοση 5+ και 20+.`,
+        slips.map(d => `<div class="grid slips">${["simple", "extreme"].map(k => d[k] ? slipCard(d[k], k, d.day) : "").join("")}</div>`).join(""));
     }
-    // 4. Πιθανότερες προβλέψεις
-    const preds = ms.filter(m => m.top && m.top.length).map(m => ({ m, t: m.top[0] })).sort((a, b) => b.t.p - a.t.p);
-    const np = state.more.preds ? preds.length : 10;
-    h += section("⭐ Πιθανότερες προβλέψεις", "Η πιο πιθανή επιλογή κάθε αγώνα (απόδοση ≥ 1.40). Πάτα για ανάλυση.",
-      `<div class="list">${preds.slice(0, np).map(({ m, t }) => ri(m, esc(nice(m, t.key, t.side, t.label)), `<span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span>`, pct(t.p), `~${f2(t.est)}`)).join("")}</div>`,
-      preds.length > 10 ? `<button class="more" data-more="preds">${state.more.preds ? "Λιγότερες" : `Όλες (${preds.length})`}</button>` : "");
-    view.innerHTML = h;
+    view.innerHTML = h + `<div class="home"><div class="col">${L}</div><div class="col">${R}</div></div>`;
   }
 
   function matchCard(m) {
@@ -249,12 +253,12 @@
     const unit = bk ? "πόντοι" : "xG";
     const fmtx = x => (bk ? Number(x).toFixed(1) : f2(x));
     return `<div class="card click" data-match="${m.id}">
-      <div class="match-head"><span>${bk ? "🏀 " : ""}${COMP[m.comp]}${m.stage && m.comp === "CL" ? " · " + (STAGE[m.stage] || "") : bk && m.stage ? " · " + esc(m.stage) : ""}</span><span>${dt(m.date)}</span></div>
+      <div class="match-head"><span>${bk ? "🏀 " : ""}${COMP[m.comp]}${m.stage && m.comp === "CL" ? " · " + (STAGE[m.stage] || "") : bk && m.stage ? " · " + esc(m.stage) : ""}</span><span class="kick">${hhmm(m.date)}</span></div>
       <div class="teams">
         <div class="team">${crest(m.home_crest)}${esc(m.home)}<span class="xg">${unit} ${fmtx(m.xg[0])}</span></div>
         <div class="team">${crest(m.away_crest)}${esc(m.away)}<span class="xg">${unit} ${fmtx(m.xg[1])}</span></div>
       </div>
-      <div class="probs" ${bk ? 'style="grid-template-columns:repeat(3,1fr)"' : ""}>${(bk ? ["1", "2"] : ["1", "X", "2"]).map(k => `<div class="prob"><b>${pct(p[k].p)}</b><span>${k} · ${f2(p[k].fair)}</span></div>`).join("")}
+      <div class="probs" ${bk ? 'style="grid-template-columns:repeat(3,1fr)"' : ""}>${(bk ? ["1", "2"] : ["1", "X", "2"]).map(k => `<div class="prob"><b>${p[k] ? pct(p[k].p) : "—"}</b><span>${k} · ${p[k] ? f2(p[k].fair) : "—"}</span></div>`).join("")}
       ${bk ? `<div class="prob"><b>${(m.xg[0] + m.xg[1]).toFixed(1)}</b><span>σύνολο πόντων</span></div>` : ""}</div>
       <div class="tags">${m.values.length ? `<span class="pill value">${m.values.length} value</span>` : ""}
       ${m.has_odds ? "" : `<span class="pill muted">χωρίς αποδόσεις</span>`}
@@ -319,7 +323,7 @@
 
     let h = `<div class="grab"></div><button class="close" data-close>✕</button>
       <div class="match-head"><span>${bk ? "🏀 " : ""}${esc(COMP[m.comp] || "")}${m.stage && bk ? " · " + esc(m.stage) : ""}</span><span>${dt(m.date)}</span></div>
-      <div class="vs"><div class="t">${crest(m.home_crest)}${esc(m.home)}</div><div class="mid">${bk ? "Πόντοι" : "xG"}<br><b style="font-size:18px;color:var(--text)">${fx(m.xg[0])} – ${fx(m.xg[1])}</b></div><div class="t">${crest(m.away_crest)}${esc(m.away)}</div></div>
+      <div class="vs"><div class="t">${crest(m.home_crest)}${esc(m.home)}</div><div class="mid"><span class="kick big">${hhmm(m.date)}</span><br>${bk ? "Πόντοι" : "xG"}<br><b style="font-size:18px;color:var(--text)">${fx(m.xg[0])} – ${fx(m.xg[1])}</b></div><div class="t">${crest(m.away_crest)}${esc(m.away)}</div></div>
       <div class="seg">${tabs.map(([k, l], i) => `<button data-pane-btn="${k}" class="${i ? "" : "active"}">${l}</button>`).join("")}</div>`;
 
     // --- Σύνοψη ---
