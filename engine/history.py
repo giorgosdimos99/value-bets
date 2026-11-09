@@ -22,6 +22,42 @@ def ref_key(name):
     return f"{parts[0][0]} {parts[-1]}" if len(parts) > 1 else parts[0]
 
 
+def _season(m):
+    d = m.get("date") or ""
+    try:
+        y, mo = int(d[:4]), int(d[5:7])
+    except ValueError:
+        return None
+    return y if mo >= 7 else y - 1
+
+
+def _season_avg(ms, f):
+    acc = defaultdict(lambda: [0.0, 0])
+    for m in ms:
+        if m.get("hy") is None:
+            continue
+        a = acc[(m["league"], _season(m))]
+        a[0] += f(m); a[1] += 1
+    return {k: v[0] / v[1] for k, v in acc.items() if v[1]}
+
+
+def _rel(ms, f, savg, prior):
+    """Σταθμισμένος λόγος διαιτητή / μέσος όρος σεζόν. Βάρος 0.5^(σεζόν πίσω): φέτος 1, πέρσι 0.5, πρόπερσι 0.25..."""
+    seasons = [_season(m) for m in ms]
+    last = max((s for s in seasons if s is not None), default=None)
+    if last is None:
+        return 1.0
+    num = den = 0.0
+    for m, s in zip(ms, seasons):
+        avg = savg.get((m["league"], s))
+        if s is None or not avg or m.get("hy") is None:
+            continue
+        w = 0.5 ** (last - s)
+        num += w * f(m) / avg
+        den += w
+    return round((num + prior) / (den + prior), 3)
+
+
 def referees(all_matches):
     """Στατιστικά ανά διαιτητή (όλες οι σεζόν που έχουμε, ανά πρωτάθλημα)."""
     by = defaultdict(list)
@@ -38,6 +74,9 @@ def referees(all_matches):
         if m.get("hf") is not None and m.get("af") is not None:
             lf[m["league"]].append(m["hf"] + m["af"])
     lfav = {k: sum(v) / len(v) for k, v in lf.items()}
+    # μέσοι όροι ανά πρωτάθλημα ΚΑΙ σεζόν (οι κάρτες/φάουλ αλλάζουν από χρονιά σε χρονιά)
+    savg, sfav = _season_avg(all_matches, _cards), _season_avg(
+        [m for m in all_matches if m.get("hf") is not None and m.get("af") is not None], lambda m: m["hf"] + m["af"])
     out = {}
     for (lg, key), ms in by.items():
         n = len(ms)
@@ -57,9 +96,11 @@ def referees(all_matches):
             "home_win": round(sum(1 for m in ms if m["hg"] > m["ag"]) / n, 3),
             "goals": round(sum(m["hg"] + m["ag"] for m in ms) / n, 2),
             "league_cards": round(lavg[lg], 2),
-            # συντελεστής καρτών με συρρίκνωση (λίγα ματς -> πιο κοντά στο 1)
-            "factor": round(((sum(c) + 8 * lavg[lg]) / (n + 8)) / lavg[lg], 3),
-            "ffactor": round(((sum(fouls) + 8 * lfav[lg]) / (len(fouls) + 8)) / lfav[lg], 3) if fouls and lg in lfav else None,
+            # συντελεστής με συρρίκνωση (λίγα ματς -> πιο κοντά στο 1). Κάθε αγώνας συγκρίνεται με τον μέσο όρο
+            # της ΙΔΙΑΣ σεζόν του πρωταθλήματος, και οι πρόσφατοι αγώνες μετράνε περισσότερο (μισό βάρος ανά σεζόν).
+            "factor": _rel(ms, _cards, savg, 8),
+            "ffactor": _rel([m for m in ms if m.get("hf") is not None and m.get("af") is not None],
+                            lambda m: m["hf"] + m["af"], sfav, 8) if fouls else None,
         }
     return out
 
