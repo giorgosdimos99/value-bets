@@ -276,6 +276,8 @@ h2::before { content: ""; width: 4px; height: 18px; border-radius: 4px; backgrou
 .diff { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .diff-t { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
 .diff-t small { color: var(--muted); font-size: 12px; }
+.diff-t small.sty { color: var(--text); opacity: .85; }
+.wx { font-size: 12px; color: var(--muted); margin-top: 8px; }
 .tri { display: flex; height: 26px; border-radius: 8px; overflow: hidden; margin-top: 12px; font-size: 11px; font-weight: 600; }
 .tri i { font-style: normal; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; color: #fff; min-width: 0; }
 .tri i:nth-child(1) { background: linear-gradient(90deg, #12b886, #20c997); }
@@ -356,3 +358,6 @@ table.xt td small.pc { display: block; }
 .home .col { min-width: 0; }
 @media (min-width: 1000px) { .home { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 @media (max-width: 760px) { .ri-time { flex-basis: 50px; } .ri-time span { font-size: 9.5px; } }
+.mv { font-size: 11px; font-weight: 600; white-space: nowrap; }
+.mv.dn { color: var(--green, #3ddc84); }
+.mv.up { color: var(--red, #ff6b6b); }

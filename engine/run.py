@@ -6,9 +6,11 @@
 4. Γράφει το site/data/data.json και ενημερώνει το ιστορικό επιλογών.
 """
 import json
+import math
+import re
 from datetime import datetime, timedelta, timezone
 
-from . import basket, config, history, intl, markets, model, names, players, predictions, slip, sources, stats
+from . import basket, config, context, history, intl, markets, model, names, players, predictions, slip, sources, stats
 from .settle import outcome
 
 
@@ -176,6 +178,11 @@ def analyse(m, cid, ctx, books):
         la = w * la + (1 - w) * ma
 
     M = model.score_matrix(lh, la)
+    wx = weather_for(m, th, rh, ctx)
+    adj = context_adjust(M, rh, ra, x12, ctx.get("coach", {}), th, ta, wx)
+    if adj:
+        lh, la = adj["xg"]
+        M = model.score_matrix(lh, la)
     n_ = len(M)
     p1 = sum(M[i][j] for i in range(n_) for j in range(n_) if i > j)
     p2 = sum(M[i][j] for i in range(n_) for j in range(n_) if i < j)
@@ -229,7 +236,96 @@ def analyse(m, cid, ctx, books):
         "stat_edges": _with_verdict(stats.edges(mx, naive, ctx["disp"], ctx["stat_info"], m["home"], m["away"]), why, m),
         "difficulty": difficulty(m, th, ta, rh, ra, p1, 1 - p1 - p2, p2, ctx, cross),
         "has_odds": bool(books),
+        "weather": wx, "ctx_adj": adj and adj["notes"],
     }
+
+
+def _logit(p):
+    p = min(max(p, 1e-4), 1 - 1e-4)
+    return math.log(p / (1 - p))
+
+
+def _sig(x):
+    return 1 / (1 + math.exp(-x))
+
+
+def context_adjust(M, rh, ra, x12, coach, th, ta, wx):
+    """Διορθώσεις που η έρευνα (engine/context_research.py, 26.000 αγώνες) έδειξε ότι η αγορά δεν τιμολογεί πλήρως:
+    ρυθμός παιχνιδιού και μεγάλο φαβορί -> περισσότερα γκολ, φαβορί κερδίζει λίγο συχνότερα,
+    νέος προπονητής μέσα στη σεζόν -> λίγο χειρότερα από ό,τι περιμένει η αγορά, βροχή/λάσπη -> περισσότερα γκολ.
+    Οι συντελεστές μειώνονται (×SHRINK) γιατί δοκιμάστηκαν πολλοί παράγοντες. Επιστρέφει νέα xG + εξηγήσεις.
+    """
+    C, S = config.CTX_COEF, config.CTX_SHRINK
+    n = len(M)
+    p1 = sum(M[i][j] for i in range(n) for j in range(n) if i > j)
+    p2 = sum(M[i][j] for i in range(n) for j in range(n) if i < j)
+    po = sum(M[i][j] for i in range(n) for j in range(n) if i + j > 2.5)
+    q1, q2 = (x12["1"], x12["2"]) if x12 else (p1, p2)
+    diff = abs(q1 - q2)
+    s_ov, notes = 0.0, []
+    sh, sa = (rh.get("sx") or {}).get("sh"), (ra.get("sx") or {}).get("sh")
+    if sh and sa:
+        tempo = math.log((sh[0] + sh[1]) / 2) + math.log((sa[0] + sa[1]) / 2)
+        x = C["tempo"] * tempo
+        s_ov += x
+        if abs(x) >= 0.04:
+            notes.append(f"{'ανοιχτό' if x > 0 else 'κλειστό'} παιχνίδι (ρυθμός ομάδων) {'+' if x > 0 else '−'}γκολ")
+    s_ov += C["diff_ov"] * (diff - C["diff_mean"])
+    if wx and wx.get("mud") is not None:
+        x = C["mud"] * (math.log1p(wx["mud"]) - C["mud_mean"])
+        s_ov += x
+        if wx["mud"] >= 2:
+            notes.append(f"βροχή/βρεγμένο γήπεδο ({wx['mud']:g} mm) +γκολ")
+    s1 = s2 = 0.0
+    fav = 1 if p1 >= p2 else 2
+    x = C["diff_fav"] * (diff - C["diff_mean"])
+    s1, s2 = (x, 0.0) if fav == 1 else (0.0, x)
+    for side, t, r in ((1, th, rh), (2, ta, ra)):
+        c = coach.get((r.get("league"), t)) if t else None
+        if c and c["games"] < 6:
+            if side == 1:
+                s1 += C["coach"]
+            else:
+                s2 += C["coach"]
+            notes.append(f"νέος προπονητής {t}: η αγορά συνήθως τον υπερεκτιμά")
+    s_ov, s1, s2 = s_ov * S, s1 * S, s2 * S
+    if max(abs(s_ov), abs(s1), abs(s2)) < 0.02:
+        return None
+    n1, n2, no = _sig(_logit(p1) + s1), _sig(_logit(p2) + s2), _sig(_logit(po) + s_ov)
+    lh, la = model.implied_lambdas(n1, n2, no)
+    return {"xg": (lh, la), "notes": notes, "shift": [round(n1 - p1, 3), round(n2 - p2, 3), round(no - po, 3)]}
+
+
+def venue_coords():
+    """Συντεταγμένες έδρας για τις ομάδες Αγγλίας (εκεί δοκιμάστηκε ο καιρός)."""
+    out = {}
+    for code in config.WEATHER_LEAGUES:
+        cur = sources.fdcouk_league(code, config.SEASON)
+        try:
+            ven = context.venues(code, config.SEASON)
+        except Exception as e:
+            print(f"  ! έδρες {code}: {e}")
+            continue
+        mp = context.team_map(list(ven), sorted({m["home"] for m in cur}))
+        for w, fd in mp.items():
+            ll = context.geocode(ven[w], "GB")
+            if ll:
+                out[(code, fd)] = ll
+    return out
+
+
+def weather_for(m, th, rh, ctx):
+    ll = ctx.get("venues", {}).get((rh.get("league"), th)) if th else None
+    if not ll:
+        return None
+    when = datetime.fromisoformat(m["date"].replace("Z", "+00:00")).astimezone(timezone.utc)
+    if when - datetime.now(timezone.utc) > timedelta(days=15):
+        return None
+    w = context.forecast(ll[0], ll[1], when.replace(minute=0, second=0, microsecond=0))
+    if not w:
+        return None
+    w["mud"] = round(w["rain"] + w["rain_before"], 1)
+    return w
 
 
 def _with_verdict(items, why, m):
@@ -249,19 +345,99 @@ def _rank(team_r, ctx):
     return 1 + sum(1 for x in pool if x > team_r["att"] / team_r["def"] + 1e-9), len(pool)
 
 
+def track_open(all_matches):
+    """Πρώτη απόδοση που είδαμε για κάθε επιλογή ("άνοιγμα") -> δείχνουμε πόσο κινήθηκε μέχρι τώρα.
+
+    Αν η απόδοση πέφτει, η αγορά "συμφωνεί" μαζί μας (το value ήταν νωρίς). Αν ανεβαίνει, η αγορά διαφωνεί.
+    """
+    path = config.DATA_OUT / "open_odds.json"
+    try:
+        seen = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        seen = {}
+    now = datetime.now(timezone.utc)
+    for m in all_matches:
+        by = {}
+        for s in m.get("markets") or []:
+            if not s.get("best"):
+                continue
+            k = f"{m['id']}|{s['key']}|{s['side']}"
+            if k not in seen:
+                seen[k] = [s["best"], now.isoformat(timespec="minutes"), m["date"]]
+            o = seen[k][0]
+            if abs(o - s["best"]) >= 0.01:
+                s["open"] = o
+            by[(s["key"], s["side"])] = s
+        for t in (m.get("top") or []) + (m.get("values") or []):
+            src = by.get((t["key"], t["side"]))
+            if src and src.get("open"):
+                t["open"] = src["open"]
+    old = (now - timedelta(days=3)).isoformat()
+    seen = {k: v for k, v in seen.items() if (v[2] or "") >= old}
+    path.write_text(json.dumps(seen, separators=(",", ":")), encoding="utf-8")
+
+
+def coach_info(results):
+    """Ομάδες με νέο προπονητή φέτος (Wikipedia) και πόσους αγώνες έχει κάνει μαζί του."""
+    out = {}
+    for code, cur in results.items():
+        if code not in context.WIKI_PAGES or not cur:
+            continue
+        teams = sorted({m["home"] for m in cur} | {m["away"] for m in cur})
+        try:
+            ch = context.coach_changes(code, config.SEASON)
+        except Exception as e:
+            print(f"  ! προπονητές {code}: {e}")
+            continue
+        mp = context.team_map({c["team"] for c in ch}, teams)
+        for c in sorted(ch, key=lambda c: c["vacancy"]):
+            t = mp.get(c["team"])
+            if not t:
+                continue
+            n = sum(1 for m in cur if t in (m["home"], m["away"]) and m["date"][:10] >= c["vacancy"])
+            name = re.sub(r"\s*\(.*?\)", "", c["in"]).strip() or None
+            out[(code, t)] = {"name": name, "since": c["appointed"], "games": n,
+                              "caretaker": "caretaker" in c["in"].lower() or "interim" in c["in"].lower()}
+    for k in [k for k, v in out.items() if v["games"] >= 8]:
+        del out[k]
+    return out
+
+
 def difficulty(m, th, ta, rh, ra, p1, px, p2, ctx, cross):
     """Πόσο εύκολος/δύσκολος είναι ο αγώνας για κάθε ομάδα."""
     def lvl(pw, pl):
         return ("πολύ εύκολο" if pw >= 0.65 else "εύκολο" if pw >= 0.5 else "ισορροπημένο" if pw >= pl - 0.08
                 else "δύσκολο" if pw >= 0.2 else "πολύ δύσκολο")
     out = {"p": [round(p1, 3), round(px, 3), round(p2, 3)]}
-    for side, team, r, pw, pl, opp in (("home", m["home"], rh, p1, p2, ra), ("away", m["away"], ra, p2, p1, rh)):
+    for side, team, team_n, r, pw, pl, opp in (("home", m["home"], th, rh, p1, p2, ra), ("away", m["away"], ta, ra, p2, p1, rh)):
         rk, n = _rank(r, ctx) if (th and ta) else (None, None)
         out[side] = {"level": lvl(pw, pl), "rank": rk, "of": n,
                      "league": (config.RATING_LEAGUES.get(r.get("league")) or config.NEW_LEAGUES.get(r.get("league"))
                                 or [None])[0] if cross else None,
-                     "form": (r.get("stats") or {}).get("form")}
+                     "form": (r.get("stats") or {}).get("form"), "style": style(r),
+                     "coach": ctx.get("coach", {}).get((r.get("league"), team_n))}
     return out
+
+
+def style(r):
+    """Τρόπος παιχνιδιού από τα σουτ και τα φάουλ (σε σχέση με τον μέσο όρο του πρωταθλήματος)."""
+    sx = r.get("sx") or {}
+    if "sh" not in sx:
+        return None
+    sf, sa = sx["sh"]
+    tempo, dom = (sf + sa) / 2, sf / (sf + sa)
+    tags = []
+    if dom >= 0.56:
+        tags.append("κυριαρχεί / κατοχή")
+    elif dom <= 0.44:
+        tags.append("κλείνεται πίσω")
+    if tempo >= 1.08:
+        tags.append("ανοιχτό παιχνίδι")
+    elif tempo <= 0.92:
+        tags.append("κλειστό παιχνίδι")
+    if (sx.get("fo") or [1])[0] >= 1.1:
+        tags.append("σκληρή (φάουλ)")
+    return {"tags": tags or ["ισορροπημένη"], "dom": round(dom, 3), "tempo": round(tempo, 3)}
 
 
 def update_history(matches, results, slip_now=None, extra_results=()):
@@ -376,7 +552,9 @@ def main():
     fx_csv = sources.fdcouk_fixtures() + sources.fdcouk_new_fixtures()
     disp, stat_info = stats.disp_table()
     ctx = {"ratings": ratings, "leagues": leagues, "fx_csv": fx_csv, "refs": refs, "disp": disp,
-           "stat_info": stat_info, "margins": margins_tbl, "hist": hist_matches, "goal_factor": {}}
+           "stat_info": stat_info, "margins": margins_tbl, "hist": hist_matches, "goal_factor": {},
+           "coach": coach_info(results), "venues": venue_coords()}
+    print(f"  νέοι προπονητές φέτος (λιγότεροι από 8 αγώνες): {len(ctx['coach'])}")
     goal_info = {}
     for cid in config.COMPETITIONS:
         ctx["goal_factor"][cid], goal_info[cid] = comp_goal_factor(cid, ctx)
@@ -451,6 +629,7 @@ def main():
         all_matches += c["matches"]
         print(f"  {cid}: {len(c['matches'])} αγώνες, {sum(m['has_odds'] for m in c['matches'])} με αποδόσεις")
 
+    track_open(all_matches)
     predictions.annotate(all_matches)
     attach_patterns(all_matches)
     out["slips"] = slip.build_daily(all_matches)

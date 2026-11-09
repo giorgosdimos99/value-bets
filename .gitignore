@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 .claude/
+.cache/ctx_rows.json
+.cache/ctx_wx_*

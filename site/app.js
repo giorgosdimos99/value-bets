@@ -195,10 +195,14 @@
     const D = m.difficulty;
     if (!D) return "";
     const team = (t, name) => `<div class="diff-t"><b>${esc(name)}</b><span class="pill ${/εύκολο/.test(t.level) ? "value" : /δύσκολο/.test(t.level) ? "warn" : "muted"}">${esc(t.level)}</span>
-      <small>${t.rank ? `${t.rank}η δύναμη /${t.of}${t.league ? " · " + esc(t.league) : ""}` : ""}${t.form ? ` ${formHtml(t.form)}` : ""}</small></div>`;
+      <small>${t.rank ? `${t.rank}η δύναμη /${t.of}${t.league ? " · " + esc(t.league) : ""}` : ""}${t.form ? ` ${formHtml(t.form)}` : ""}</small>
+      ${t.style ? `<small class="sty">⚙️ ${t.style.tags.map(esc).join(" · ")}</small>` : ""}
+      ${t.coach ? `<small class="sty">🧑‍💼 Νέος προπονητής: ${esc(t.coach.name || "")} (${t.coach.games} αγ.)</small>` : ""}</div>`;
     const [p1, px, p2] = D.p;
     return `<div class="card"><div class="diff">${team(D.home, m.home)}${team(D.away, m.away)}</div>
-      <div class="tri"><i style="width:${p1 * 100}%">1 · ${pct(p1)}</i><i style="width:${px * 100}%">X · ${pct(px)}</i><i style="width:${p2 * 100}%">2 · ${pct(p2)}</i></div></div>`;
+      <div class="tri"><i style="width:${p1 * 100}%">1 · ${pct(p1)}</i><i style="width:${px * 100}%">X · ${pct(px)}</i><i style="width:${p2 * 100}%">2 · ${pct(p2)}</i></div>
+      ${m.weather ? `<div class="wx">${m.weather.mud >= 2 ? "🌧️" : m.weather.rain > 0 ? "🌦️" : "☁️"} Καιρός στον αγώνα: ${m.weather.temp}°C · αέρας ${Math.round(m.weather.wind)} km/h · βροχή ${m.weather.rain} mm (${m.weather.rain_before} mm τις 6 ώρες πριν)</div>` : ""}
+      ${m.ctx_adj && m.ctx_adj.length ? `<div class="wx">🧭 Λαμβάνεται υπόψη: ${m.ctx_adj.map(esc).join(" · ")}</div>` : ""}</div>`;
   }
 
   // κατανοητά ονόματα επιλογών: "2" -> "Νίκη Real Madrid"
@@ -215,6 +219,9 @@
     return label;
   }
   const byTime = (a, b) => a.m.date.localeCompare(b.m.date);
+  // κίνηση απόδοσης από το άνοιγμα: ▼ = έπεσε (η αγορά πήγε προς την επιλογή), ▲ = ανέβηκε
+  const mv = (open, now) => !open || !now || Math.abs(open - now) < 0.02 ? "" :
+    `<span class="mv ${now < open ? "dn" : "up"}" title="Πρώτη απόδοση που είδαμε: ${f2(open)}">${now < open ? "▼" : "▲"} από ${f2(open)}</span>`;
   const LVL = { "πολύ πιθανό": "value", "πιθανό": "solid", "μέτριο": "muted" };
   const section = (title, sub, body, more) => `<section class="sec"><div class="sec-h"><h2>${title}</h2>${more || ""}</div>${sub ? `<p class="sec-sub">${sub}</p>` : ""}${body}</section>`;
 
@@ -228,11 +235,11 @@
     let h = dayChips(all), L = "", R = "";
     // 1. Ευκαιρίες: εταιρεία πάνω από τη δίκαιη τιμή (έρευνα: θετικό CLV) + μοτίβα
     const opps = [
-      ...ms.flatMap(m => m.values.map(s => ({ m, key: s.key, side: s.side, label: s.label, p: s.p, odds: s.best, book: s.book, ev: s.ev, kind: "gap" }))),
+      ...ms.flatMap(m => m.values.map(s => ({ m, key: s.key, side: s.side, label: s.label, p: s.p, odds: s.best, open: s.open, book: s.book, ev: s.ev, kind: "gap" }))),
       ...ms.flatMap(m => (m.patterns || []).map(pt => ({ m, key: pt.key, side: pt.side, label: pt.label, p: pt.p, odds: pt.odds, book: "εκτίμηση", ev: pt.p * pt.odds - 1, kind: "pattern" }))),
     ].sort((a, b) => b.ev - a.ev).slice(0, 5).sort(byTime);
     L += section("💎 Ευκαιρίες", "Απόδοση μεγαλύτερη απ' όσο δικαιολογεί η πιθανότητα.",
-      opps.length ? `<div class="list">${opps.map(o => ri(o.m, esc(nice(o.m, o.key, o.side, o.label)), `<span class="pill ${o.kind === "gap" ? "hot" : "solid"}">${evTxt(o.ev)}</span>`, f2(o.odds), `${esc(o.book || "")} · ${pct(o.p)}`)).join("")}</div>`
+      opps.length ? `<div class="list">${opps.map(o => ri(o.m, esc(nice(o.m, o.key, o.side, o.label)), `<span class="pill ${o.kind === "gap" ? "hot" : "solid"}">${evTxt(o.ev)}</span>`, f2(o.odds), `${esc(o.book || "")} · ${pct(o.p)} ${mv(o.open, o.odds)}`)).join("")}</div>`
         : `<div class="empty-s">Καμία αυτή τη στιγμή — οι αγορές είναι σωστές τις περισσότερες φορές.</div>`);
     // 2. Στατιστικά: μόνο οι πιο πιθανές, μία ανά αγώνα
     const seen = new Set();
@@ -251,7 +258,7 @@
     // 3. Πιθανότερες προβλέψεις: μόνο οι κορυφαίες
     const preds = ms.filter(m => m.top && m.top.length).map(m => ({ m, t: m.top[0] })).sort((a, b) => b.t.p - a.t.p).slice(0, 8).sort(byTime);
     R += section("⭐ Πιθανότερες προβλέψεις", "Οι 8 πιο πιθανές (απόδοση ≥ 1.40), με σειρά ώρας. Πάτα για ανάλυση του αγώνα.",
-      preds.length ? `<div class="list">${preds.map(({ m, t }) => ri(m, esc(nice(m, t.key, t.side, t.label)), `<span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span>`, pct(t.p), `~${f2(t.est)}`, "", t.p)).join("")}</div>`
+      preds.length ? `<div class="list">${preds.map(({ m, t }) => ri(m, esc(nice(m, t.key, t.side, t.label)), `<span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span>`, pct(t.p), `~${f2(t.est)} ${mv(t.open, t.best)}`, "", t.p)).join("")}</div>`
         : `<div class="empty-s">Καμία πρόβλεψη για αυτή την επιλογή.</div>`);
     // 4. Δελτία
     const slips = (state.data.slips || []).filter(s => state.day === "ALL" || s.day === state.day).slice(0, 1);
@@ -347,9 +354,9 @@
     if (m.top && m.top.length) {
       s1 += `<h3 class="day-sub">Πιθανότερες προβλέψεις</h3><div class="list">` + m.top.map((t, i) => `<div class="ri">
         <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(nice(m, t.key, t.side, t.label))} <span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span></div><div class="ri-s">${esc(t.why || t.group)}</div></div>
-        <div class="ri-r"><b>${pct(t.p)}</b><span>~${f2(t.est)}</span></div></div>`).join("") + `</div>`;
+        <div class="ri-r"><b>${pct(t.p)}</b><span>~${f2(t.est)} ${mv(t.open, t.best)}</span></div></div>`).join("") + `</div>`;
     }
-    if (m.values?.length) s1 += `<h3 class="day-sub">💎 Ευκαιρίες</h3><div class="list">` + m.values.map(s => `<div class="ri"><div class="ri-main"><div class="ri-t">${esc(nice(m, s.key, s.side, s.label))} <span class="pill hot">${evTxt(s.ev)}</span></div><div class="ri-s">Η ${esc(s.book)} δίνει πάνω από τη δίκαιη τιμή (${f2(s.fair)})</div></div><div class="ri-r"><b>${f2(s.best)}</b><span>${pct(s.p)}</span></div></div>`).join("") + `</div>`;
+    if (m.values?.length) s1 += `<h3 class="day-sub">💎 Ευκαιρίες</h3><div class="list">` + m.values.map(s => `<div class="ri"><div class="ri-main"><div class="ri-t">${esc(nice(m, s.key, s.side, s.label))} <span class="pill hot">${evTxt(s.ev)}</span></div><div class="ri-s">Η ${esc(s.book)} δίνει πάνω από τη δίκαιη τιμή (${f2(s.fair)})</div></div><div class="ri-r"><b>${f2(s.best)}</b><span>${pct(s.p)} ${mv(s.open, s.best)}</span></div></div>`).join("") + `</div>`;
     if (m.props?.length) s1 += `<h3 class="day-sub">🏀 Παίκτες με αξία</h3><div class="grid">${m.props.map(x => propBox(m, x)).join("")}</div>`;
     if (m.stat_edges?.length) s1 += `<h3 class="day-sub">📊 Στατιστικά με αξία</h3><div class="grid">${m.stat_edges.map(e => edgeBox(m, e)).join("")}</div>`;
     if (m.stat_top?.length) s1 += `<h3 class="day-sub">Πιθανότερα στα στατιστικά</h3><div class="list">` + m.stat_top.map(t => `<div class="ri">

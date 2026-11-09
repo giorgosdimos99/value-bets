@@ -1,1 +1,5 @@
+<<<<<<< Updated upstream
 {"_at": 1794258999.481408, "data": [{"id": "ec0a3056ce896bd73059bffab79fc261", "date": "2026-11-20T00:30:00Z", "home": "Orlando City SC", "away": "FC Cincinnati"}, {"id": "d8eca71d848497deda0c022c1c27e3bc", "date": "2026-11-20T03:00:00Z", "home": "Seattle Sounders FC", "away": "Real Salt Lake"}]}
+=======
+{"_at": 1794266133.238502, "data": [{"id": "ec0a3056ce896bd73059bffab79fc261", "date": "2026-11-20T00:30:00Z", "home": "Orlando City SC", "away": "FC Cincinnati"}, {"id": "d8eca71d848497deda0c022c1c27e3bc", "date": "2026-11-20T03:00:00Z", "home": "Seattle Sounders FC", "away": "Real Salt Lake"}]}
+>>>>>>> Stashed changes
