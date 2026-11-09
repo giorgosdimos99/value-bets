@@ -608,8 +608,9 @@
    "odds": 2.14,
    "book": "Unibet (NL)",
    "ev": 0.0578,
-   "result": null,
-   "closing": 2.14
+   "result": 0,
+   "closing": 2.14,
+   "score": "1-1"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -625,7 +626,8 @@
    "odds": 2.2,
    "book": "Betsson",
    "ev": 0.0403,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -641,8 +643,9 @@
    "odds": 4.0,
    "book": "Bet365",
    "ev": 0.0737,
-   "result": null,
-   "closing": 4.0
+   "result": 0,
+   "closing": 4.0,
+   "score": "1-1"
   },
   {
    "match_id": "PD-c35673eb1e889309d6985c091a43a3f5",
@@ -658,8 +661,9 @@
    "odds": 3.4,
    "book": "Bet365",
    "ev": 0.0772,
-   "result": null,
-   "closing": 3.4
+   "result": 0,
+   "closing": 3.4,
+   "score": "0-2"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -675,8 +679,9 @@
    "odds": 3.5,
    "book": "Bet365",
    "ev": 0.0859,
-   "result": null,
-   "closing": 3.5
+   "result": 0,
+   "closing": 3.5,
+   "score": "0-1"
   },
   {
    "match_id": "BL-3ef62ef56758041178c5280225fe5db7",
@@ -692,8 +697,9 @@
    "odds": 2.03,
    "book": "Bet365",
    "ev": 0.0306,
-   "result": null,
-   "closing": 2.03
+   "result": 1,
+   "closing": 2.03,
+   "score": "2-1"
   },
   {
    "match_id": "BL-4ca4c7a2a1c15e9121f9a7eaa7f42ddb",
@@ -709,8 +715,9 @@
    "odds": 3.1,
    "book": "Bet365",
    "ev": 0.0347,
-   "result": null,
-   "closing": 3.1
+   "result": 0,
+   "closing": 3.1,
+   "score": "2-2"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -726,8 +733,9 @@
    "odds": 4.5,
    "book": "Bet365",
    "ev": 0.0562,
-   "result": null,
-   "closing": 4.5
+   "result": 0,
+   "closing": 4.5,
+   "score": "1-0"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -743,8 +751,9 @@
    "odds": 4.1,
    "book": "Bwin",
    "ev": 0.1572,
-   "result": null,
-   "closing": 4.1
+   "result": 0,
+   "closing": 4.1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -760,8 +769,9 @@
    "odds": 2.05,
    "book": "Bet365",
    "ev": 0.0467,
-   "result": null,
-   "closing": 2.05
+   "result": 0,
+   "closing": 2.05,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -777,8 +787,9 @@
    "odds": 2.0,
    "book": "Bet365",
    "ev": 0.0671,
-   "result": null,
-   "closing": 2.0
+   "result": 1,
+   "closing": 2.0,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -794,8 +805,9 @@
    "odds": 3.3,
    "book": "Bet365",
    "ev": 0.0435,
-   "result": null,
-   "closing": 3.3
+   "result": 1,
+   "closing": 3.3,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -811,8 +823,9 @@
    "odds": 3.6,
    "book": "Bet365",
    "ev": 0.0414,
-   "result": null,
-   "closing": 3.6
+   "result": 0,
+   "closing": 3.6,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -828,8 +841,9 @@
    "odds": 2.3,
    "book": "Bet365",
    "ev": 0.0372,
-   "result": null,
-   "closing": 2.3
+   "result": 0,
+   "closing": 2.3,
+   "score": "1-2"
   },
   {
    "match_id": "ELC-b990dcb534c9019a2846d11c7d879030",
@@ -845,8 +859,9 @@
    "odds": 3.8,
    "book": "Bet365",
    "ev": 0.0672,
-   "result": null,
-   "closing": 3.8
+   "result": 0,
+   "closing": 3.8,
+   "score": "3-0"
   },
   {
    "match_id": "DED-33c5cad848eb423e163a9bf5631ccefe",
@@ -862,8 +877,9 @@
    "odds": 3.5,
    "book": "Bet365",
    "ev": 0.1115,
-   "result": null,
-   "closing": 3.5
+   "result": 0,
+   "closing": 3.5,
+   "score": "2-2"
   },
   {
    "match_id": "PPL-88fe8a3db780908444b4b21229766ad5",
@@ -896,8 +912,9 @@
    "odds": 4.1,
    "book": "Betway",
    "ev": 0.0636,
-   "result": null,
-   "closing": 4.1
+   "result": 0,
+   "closing": 4.1,
+   "score": "0-5"
   },
   {
    "match_id": "SB-fd02f34a219698f956b133ddb2fc7bdf",
@@ -913,8 +930,9 @@
    "odds": 3.2,
    "book": "Bet365",
    "ev": 0.0696,
-   "result": null,
-   "closing": 3.2
+   "result": 0,
+   "closing": 3.2,
+   "score": "1-1"
   },
   {
    "match_id": 560636,
@@ -966,8 +984,9 @@
    "odds": 3.75,
    "book": "Bet365",
    "ev": 0.094,
-   "result": null,
-   "closing": 3.75
+   "result": 1,
+   "closing": 3.75,
+   "score": "1-0"
   },
   {
    "match_id": "GR-e9d86b71a5b34883469614ff2c2cd68c",
@@ -983,7 +1002,8 @@
    "odds": 2.35,
    "book": "Bet365",
    "ev": 0.0304,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -999,8 +1019,9 @@
    "odds": 1.3,
    "book": "Bwin",
    "ev": 0.03,
-   "result": null,
-   "closing": 1.3
+   "result": 1,
+   "closing": 1.3,
+   "score": "0-3"
   },
   {
    "match_id": "TUR-e300554369b00b495db88afb743c95ab",
@@ -1016,7 +1037,8 @@
    "odds": 1.44,
    "book": "Bwin",
    "ev": 0.0345,
-   "result": null
+   "result": 1,
+   "score": "4-3"
   },
   {
    "match_id": 560638,
@@ -1981,7 +2003,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "1-1"
     },
     {
      "match_id": "EL-99",
@@ -2018,7 +2041,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "0-0"
     }
    ],
    "odds": 5.14,
@@ -2027,7 +2051,7 @@
    "day": "2026-11-06",
    "kind": "simple",
    "created": "2026-11-06T19:04:22.209559+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -2187,7 +2211,8 @@
      "est_src": "m3",
      "best": 1.8,
      "book": "Bet365",
-     "result": null
+     "result": 0,
+     "score": "1-1"
     },
     {
      "match_id": "BL-fe97f5adf397dd6b0a8a9e0a5272f307",
@@ -2205,7 +2230,8 @@
      "est_src": "m3",
      "best": 1.34,
      "book": "Bwin",
-     "result": null
+     "result": 1,
+     "score": "1-2"
     },
     {
      "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -2223,7 +2249,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "3-1"
     },
     {
      "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -2241,7 +2268,8 @@
      "est_src": "m3",
      "best": 1.3,
      "book": "Bwin",
-     "result": null
+     "result": 1,
+     "score": "0-3"
     }
    ],
    "odds": 5.0,
@@ -2250,7 +2278,7 @@
    "day": "2026-11-07",
    "kind": "simple",
    "created": "2026-11-07T13:25:31.818299+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -2270,7 +2298,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "2-2"
     },
     {
      "match_id": "SB-e13541774f88508392470d829be69587",
@@ -2288,7 +2317,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "1-0"
     },
     {
      "match_id": "BL-4ca4c7a2a1c15e9121f9a7eaa7f42ddb",
@@ -2306,7 +2336,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "2-2"
     },
     {
      "match_id": "SCO-4bbccf79bc996a66dba9a40722052b69",
@@ -2324,7 +2355,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "1-1"
     },
     {
      "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -2342,7 +2374,8 @@
      "est_src": "m3",
      "best": 1.65,
      "book": "Bet365",
-     "result": null
+     "result": 1,
+     "score": "1-0"
     },
     {
      "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -2360,7 +2393,8 @@
      "est_src": "m3",
      "best": 1.88,
      "book": "Bwin",
-     "result": null
+     "result": 0,
+     "score": "1-1"
     },
     {
      "match_id": "BEL-afde306e7e186da45ff6778a7e952d51",
@@ -2378,7 +2412,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "0-1"
     }
    ],
    "odds": 20.01,
@@ -2387,7 +2422,7 @@
    "day": "2026-11-07",
    "kind": "extreme",
    "created": "2026-11-07T13:25:31.818299+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -2407,7 +2442,8 @@
      "est_src": "m3",
      "best": 1.65,
      "book": "Bet365",
-     "result": null
+     "result": 1,
+     "score": "1-0"
     },
     {
      "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -2425,7 +2461,8 @@
      "est_src": "m3",
      "best": 1.3,
      "book": "Bwin",
-     "result": null
+     "result": 1,
+     "score": "0-3"
     },
     {
      "match_id": "ARG-4dbcec00debc1a175148bdb6824e14b3",
@@ -2490,7 +2527,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "1-1"
     },
     {
      "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -2508,7 +2546,8 @@
      "est_src": "m3",
      "best": 1.65,
      "book": "Bet365",
-     "result": null
+     "result": 1,
+     "score": "1-0"
     },
     {
      "match_id": "ARG-c8d54d20e3fa9acb251716ff6820a0c6",
@@ -2544,7 +2583,8 @@
      "est_src": "m3",
      "best": 1.88,
      "book": "Bwin",
-     "result": null
+     "result": 0,
+     "score": "1-1"
     },
     {
      "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -2562,7 +2602,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "2-1"
     },
     {
      "match_id": "ARG-4dbcec00debc1a175148bdb6824e14b3",
@@ -2607,7 +2648,7 @@
    "day": "2026-11-07",
    "kind": "extreme",
    "created": "2026-11-07T17:03:01.754879+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -2830,7 +2871,8 @@
      "est_src": "m3",
      "best": 1.88,
      "book": "Bwin",
-     "result": null
+     "result": 0,
+     "score": "1-1"
     },
     {
      "match_id": "SWZ-c323662f3c6524f2ed1c293a7b4e8a46",
@@ -2866,7 +2908,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "2-2"
     },
     {
      "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -2884,7 +2927,8 @@
      "est_src": "m3",
      "best": 1.3,
      "book": "Bwin",
-     "result": null
+     "result": 1,
+     "score": "0-3"
     },
     {
      "match_id": "USA-f5ca1b83c89f16c83a63977c741ed93d",
@@ -2911,7 +2955,7 @@
    "day": "2026-11-07",
    "kind": "simple",
    "created": "2026-11-07T17:36:54.876094+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -2931,7 +2975,8 @@
      "est_src": "m3",
      "best": 1.88,
      "book": "Bwin",
-     "result": null
+     "result": 0,
+     "score": "1-1"
     },
     {
      "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -2949,7 +2994,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "0-2"
     },
     {
      "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -2967,7 +3013,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "2-1"
     },
     {
      "match_id": "ARG-4dbcec00debc1a175148bdb6824e14b3",
@@ -3030,7 +3077,7 @@
    "day": "2026-11-07",
    "kind": "extreme",
    "created": "2026-11-07T17:36:54.876094+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -3068,7 +3115,8 @@
      "est_src": "m3",
      "best": 1.73,
      "book": "Bet365",
-     "result": null
+     "result": 0,
+     "score": "5-3"
     },
     {
      "match_id": "SA-23bf8ea47358ef82f65aa7398a2b3921",
@@ -3086,7 +3134,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "1-1"
     },
     {
      "match_id": "NOR-ba67d60b86eca4f5a81b7043d24bf905",
@@ -3113,7 +3162,7 @@
    "day": "2026-11-08",
    "kind": "simple",
    "created": "2026-11-08T05:10:27.714450+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -3529,7 +3578,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "0-0"
     },
     {
      "match_id": "NOR-ba67d60b86eca4f5a81b7043d24bf905",
@@ -3565,7 +3615,8 @@
      "est_src": "m3",
      "best": 1.61,
      "book": "Bwin",
-     "result": null
+     "result": 1,
+     "score": "2-1"
     },
     {
      "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -3583,7 +3634,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "1-2"
     }
    ],
    "odds": 5.01,
@@ -3592,7 +3644,7 @@
    "day": "2026-11-08",
    "kind": "simple",
    "created": "2026-11-08T17:18:42.024790+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -3612,7 +3664,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "1-2"
     },
     {
      "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -3630,7 +3683,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "0-0"
     },
     {
      "match_id": "SD-0377ed072a93f8b77593c0f001fda9ec",
@@ -3666,7 +3720,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "3-0"
     },
     {
      "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -3684,7 +3739,8 @@
      "est_src": "m3",
      "best": 1.61,
      "book": "Bwin",
-     "result": null
+     "result": 1,
+     "score": "2-1"
     },
     {
      "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -3702,7 +3758,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "1-2"
     }
    ],
    "odds": 20.03,
@@ -3711,7 +3768,7 @@
    "day": "2026-11-08",
    "kind": "extreme",
    "created": "2026-11-08T17:18:42.024790+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -3731,7 +3788,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "1-2"
     },
     {
      "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -3749,7 +3807,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "2-2"
     },
     {
      "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -3767,7 +3826,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "1-2"
     },
     {
      "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -3785,7 +3845,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "0-1"
     },
     {
      "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -3803,7 +3864,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "2-3"
     }
    ],
    "odds": 5.18,
@@ -3812,7 +3874,7 @@
    "day": "2026-11-08",
    "kind": "simple",
    "created": "2026-11-08T19:26:23.601479+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -4001,107 +4063,6 @@
   {
    "legs": [
     {
-     "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
-     "comp": "L1",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Milton Keynes Dons",
-     "away": "Burton Albion",
-     "key": "DC",
-     "side": "1X",
-     "label": "1X",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7731,
-     "fair": 1.29,
-     "est": 1.27,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L1-107bb00cece31c0c9d7738659d31b66c",
-     "comp": "L1",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Peterborough United",
-     "away": "Oxford United",
-     "key": "DC",
-     "side": "12",
-     "label": "12",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7434,
-     "fair": 1.35,
-     "est": 1.32,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
-     "comp": "L2",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Salford City",
-     "away": "Northampton Town",
-     "key": "1X2",
-     "side": "1",
-     "label": "1",
-     "group": "Τελικό αποτέλεσμα",
-     "p": 0.5335,
-     "fair": 1.87,
-     "est": 1.81,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
-     "comp": "SD",
-     "date": "2026-11-14T17:30:00Z",
-     "home": "Mallorca",
-     "away": "Córdoba",
-     "key": "DC",
-     "side": "1X",
-     "label": "1X",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7689,
-     "fair": 1.3,
-     "est": 1.28,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L2-b8c1674ee9357dafd107c231c7d8277e",
-     "comp": "L2",
-     "date": "2026-11-14T17:30:00Z",
-     "home": "Fleetwood Town",
-     "away": "Tranmere Rovers",
-     "key": "DC",
-     "side": "1X",
-     "label": "1X",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7614,
-     "fair": 1.31,
-     "est": 1.29,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 5.01,
-   "p": 0.1795,
-   "ev": -0.1006,
-   "day": "2026-11-14",
-   "kind": "simple",
-   "created": "2026-11-09T00:38:58.415404+00:00",
-   "result": null
-  },
-  {
-   "legs": [
-    {
      "match_id": "L2-7bf0d1f95bb9b2b6003386c82ba96b6a",
      "comp": "L2",
      "date": "2026-11-14T12:30:00Z",
@@ -4257,18 +4218,166 @@
   {
    "legs": [
     {
-     "match_id": "BRA-8fafa425728aa8e7d2c23956ba4c2553",
-     "comp": "BRA",
-     "date": "2026-11-14T23:30:00Z",
-     "home": "Chapecoense",
-     "away": "Vasco da Gama",
+     "match_id": "NOR-a878bfc5e7eae6808debf217c23c93f5",
+     "comp": "NOR",
+     "date": "2026-11-09T18:00:00Z",
+     "home": "Kristiansund BK",
+     "away": "Vålerenga",
+     "key": "OU3.5",
+     "side": "Over",
+     "label": "Over 3.5",
+     "group": "Γκολ Over/Under",
+     "p": 0.5163,
+     "fair": 1.94,
+     "est": 1.86,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "SD-f52b83a74c511828f6155889d751d191",
+     "comp": "SD",
+     "date": "2026-11-09T19:30:00Z",
+     "home": "Sabadell FC",
+     "away": "Real Sociedad B",
+     "key": "1X2",
+     "side": "1",
+     "label": "1",
+     "group": "Τελικό αποτέλεσμα",
+     "p": 0.5714,
+     "fair": 1.75,
+     "est": 1.68,
+     "est_src": "m3",
+     "best": 1.68,
+     "book": "Bet365",
+     "result": null
+    },
+    {
+     "match_id": "SD-7bfc2afc162934f011a8425159e340da",
+     "comp": "SD",
+     "date": "2026-11-09T19:30:00Z",
+     "home": "Las Palmas",
+     "away": "CD Eldense",
+     "key": "BTTS",
+     "side": "Yes",
+     "label": "G/G",
+     "group": "Γκολ-Γκολ",
+     "p": 0.5643,
+     "fair": 1.77,
+     "est": 1.7,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 5.31,
+   "p": 0.1665,
+   "ev": -0.1157,
+   "day": "2026-11-09",
+   "kind": "simple",
+   "created": "2026-11-09T11:06:24.957644+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": "L1-107bb00cece31c0c9d7738659d31b66c",
+     "comp": "L1",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Peterborough United",
+     "away": "Oxford United",
      "key": "DC",
      "side": "12",
      "label": "12",
      "group": "Διπλή ευκαιρία",
-     "p": 0.756,
-     "fair": 1.32,
+     "p": 0.7434,
+     "fair": 1.35,
+     "est": 1.32,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "L1-7147fa15092c5d85c5ff46f815e2d5ee",
+     "comp": "L1",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Wycombe Wanderers",
+     "away": "Huddersfield Town",
+     "key": "DC",
+     "side": "12",
+     "label": "12",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.7541,
+     "fair": 1.33,
      "est": 1.3,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
+     "comp": "L2",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Salford City",
+     "away": "Northampton Town",
+     "key": "1X2",
+     "side": "1",
+     "label": "1",
+     "group": "Τελικό αποτέλεσμα",
+     "p": 0.5335,
+     "fair": 1.87,
+     "est": 1.81,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "L2-f71d831db05c678e7208a069210cd59d",
+     "comp": "L2",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Crewe Alexandra",
+     "away": "Newport County",
+     "key": "DC",
+     "side": "X2",
+     "label": "X2",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.5991,
+     "fair": 1.67,
+     "est": 1.61,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 5.0,
+   "p": 0.1792,
+   "ev": -0.104,
+   "day": "2026-11-14",
+   "kind": "simple",
+   "created": "2026-11-09T11:06:24.957644+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": "MEX-0380db9fc7de24aed0c27138c02467e5",
+     "comp": "MEX",
+     "date": "2026-11-14T23:00:00Z",
+     "home": "Querétaro",
+     "away": "Monterrey",
+     "key": "HT_OU1.5",
+     "side": "Under",
+     "label": "Γηπεδούχος Under 1.5",
+     "group": "Γκολ γηπεδούχου",
+     "p": 0.5879,
+     "fair": 1.7,
+     "est": 1.63,
      "est_src": "g",
      "best": null,
      "book": null,
@@ -4284,9 +4393,9 @@
      "side": "1X",
      "label": "1X",
      "group": "Διπλή ευκαιρία",
-     "p": 0.7628,
-     "fair": 1.31,
-     "est": 1.29,
+     "p": 0.7512,
+     "fair": 1.33,
+     "est": 1.31,
      "est_src": "g",
      "best": null,
      "book": null,
@@ -4302,8 +4411,8 @@
      "side": "1",
      "label": "1",
      "group": "Τελικό αποτέλεσμα",
-     "p": 0.5635,
-     "fair": 1.77,
+     "p": 0.5627,
+     "fair": 1.78,
      "est": 1.71,
      "est_src": "g",
      "best": null,
@@ -4311,30 +4420,30 @@
      "result": null
     },
     {
-     "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
+     "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
      "comp": "SD",
      "date": "2026-11-15T17:30:00Z",
-     "home": "SD Eibar",
-     "away": "Cádiz CF",
-     "key": "1X2",
-     "side": "1",
-     "label": "1",
-     "group": "Τελικό αποτέλεσμα",
-     "p": 0.5521,
-     "fair": 1.81,
-     "est": 1.75,
+     "home": "CD Eldense",
+     "away": "Sabadell FC",
+     "key": "AT_OU1.5",
+     "side": "Under",
+     "label": "Φιλοξενούμενος Under 1.5",
+     "group": "Γκολ φιλοξενούμενου",
+     "p": 0.7083,
+     "fair": 1.41,
+     "est": 1.37,
      "est_src": "g",
      "best": null,
      "book": null,
      "result": null
     }
    ],
-   "odds": 5.02,
-   "p": 0.1794,
-   "ev": -0.0996,
+   "odds": 5.0,
+   "p": 0.176,
+   "ev": -0.1195,
    "day": "2026-11-15",
    "kind": "simple",
-   "created": "2026-11-09T00:38:58.415404+00:00",
+   "created": "2026-11-09T11:06:24.957644+00:00",
    "result": null
   }
  ],
@@ -4501,7 +4610,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.7263,
    "est": 1.33,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "GR-b2ee2c1ccd19eae8b4e3d0546d7db67b",
@@ -4515,7 +4625,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6763,
    "est": 1.43,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -4529,7 +4640,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6555,
    "est": 1.46,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -4543,7 +4655,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6358,
    "est": 1.51,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -4557,7 +4670,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6763,
    "est": 1.43,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-52a7ada0374713bbf2bb3c5541c6cf74",
@@ -4571,7 +4685,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6704,
    "est": 1.44,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "GR-58b71c53bc15c3996694b3c8e9350cdc",
@@ -4585,7 +4700,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6929,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PD-9dd0014685fd62d9b2890d7c33a8c9ab",
@@ -4599,7 +4715,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.722,
    "est": 1.33,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "PD-de935794b7d93f3607ac9ad54d18f4c7",
@@ -4613,7 +4730,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6632,
    "est": 1.44,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "PD-262c2c99c38456b8a70cb9daa32f2f6d",
@@ -4641,7 +4759,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6321,
    "est": 1.52,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -4655,7 +4774,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6716,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "0-3"
   },
   {
    "match_id": "PD-c35673eb1e889309d6985c091a43a3f5",
@@ -4669,7 +4789,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6472,
    "est": 1.48,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "PD-339a6465fa5153fd8f31e487cf557cf0",
@@ -4683,7 +4804,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6881,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -4697,7 +4819,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6358,
    "est": 1.51,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "PD-81ad04996f63fb60b494d243b13ac586",
@@ -4711,7 +4834,8 @@
    "group": "Τελικό αποτέλεσμα",
    "p": 0.6872,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -4725,7 +4849,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6691,
    "est": 1.45,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-fa069801a5c9b49143447a1a1d173fd1",
@@ -4739,7 +4864,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7373,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SA-52b256088d29b4abb82e0c63ea9852fe",
@@ -4753,7 +4879,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7559,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SA-0d53a5dbd9d4f4716e923b97e92dfb0d",
@@ -4767,7 +4894,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.7468,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SA-813cc4970b2dcab8457490a332fb5a6c",
@@ -4781,7 +4909,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7369,
    "est": 1.33,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -4795,7 +4924,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6835,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SA-23bf8ea47358ef82f65aa7398a2b3921",
@@ -4809,7 +4939,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6857,
    "est": 1.43,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SA-7a68b099b47ed7724062b661cd9af464",
@@ -4823,7 +4954,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.5768,
    "est": 1.66,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -4837,7 +4969,8 @@
    "group": "Γκολ-Γκολ",
    "p": 0.6246,
    "est": 1.53,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -4851,7 +4984,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6794,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -4865,7 +4999,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6927,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BL-295076c39e49863cb54db085ac3cd340",
@@ -4879,7 +5014,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7403,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "BL-cdb5f9dd39e79db69659c76cd96d0bbe",
@@ -4893,7 +5029,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.7135,
    "est": 1.36,
-   "result": null
+   "result": 1,
+   "score": "5-2"
   },
   {
    "match_id": "BL-fe97f5adf397dd6b0a8a9e0a5272f307",
@@ -4907,7 +5044,8 @@
    "group": "Τελικό αποτέλεσμα",
    "p": 0.7456,
    "est": 1.33,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-3ef62ef56758041178c5280225fe5db7",
@@ -4921,7 +5059,8 @@
    "group": "Τελικό αποτέλεσμα",
    "p": 0.7549,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL-4ca4c7a2a1c15e9121f9a7eaa7f42ddb",
@@ -4935,7 +5074,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.7253,
    "est": 1.33,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -4949,7 +5089,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6915,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -4963,7 +5104,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6919,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -4977,7 +5119,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6415,
    "est": 1.49,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -4991,7 +5134,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6881,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "FL1-5e7d141f719835de18877ed95bedcb32",
@@ -5005,7 +5149,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7032,
    "est": 1.39,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -5019,7 +5164,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6816,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -5033,7 +5179,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6879,
    "est": 1.41,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -5047,7 +5194,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7003,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -5061,7 +5209,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6767,
    "est": 1.43,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -5075,7 +5224,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6696,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-cc9731ee7796fe0d532f11ca2aa522c9",
@@ -5089,7 +5239,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6645,
    "est": 1.45,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "FL1-3e9954446f26494c04c4967db523d375",
@@ -5103,7 +5254,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6615,
    "est": 1.46,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -5117,7 +5269,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6679,
    "est": 1.47,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "ELC-af665449ac9e2c4e1f183376e85fc936",
@@ -5131,7 +5284,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7394,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "ELC-89fe6860f3058526dd227dc27efd902a",
@@ -5145,7 +5299,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7326,
    "est": 1.31,
-   "result": null
+   "result": 1,
+   "score": "0-5"
   },
   {
    "match_id": "ELC-e8492593cecfc388af8a4852f06599c6",
@@ -5159,7 +5314,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.7356,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "ELC-a88341ac02c8103eedc594a2ceb3a400",
@@ -5173,7 +5329,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.7437,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "ELC-82688a32b0049a0c66b2e56309b6b67b",
@@ -5187,7 +5344,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.745,
    "est": 1.32,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "ELC-228a3fca36f1fc8943ab0b7c54f06860",
@@ -5201,7 +5359,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.7174,
    "est": 1.35,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "ELC-463c2870517b0ad28afcbd8775287064",
@@ -5215,7 +5374,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.7437,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "5-4"
   },
   {
    "match_id": "ELC-e1b2a10bfd51e1716202de92f585f502",
@@ -5229,7 +5389,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7329,
    "est": 1.34,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "ELC-611adbd4bc3a3e1b8b03def9d8a29e54",
@@ -5257,7 +5418,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.699,
    "est": 1.38,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "ELC-b990dcb534c9019a2846d11c7d879030",
@@ -5271,7 +5433,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7408,
    "est": 1.33,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "ELC-4330962b4e3ef6768d90008d6befb10d",
@@ -5285,7 +5448,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.7174,
    "est": 1.35,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "DED-926c11a6b5d1773d9024296a215d0f71",
@@ -5299,7 +5463,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.7262,
    "est": 1.31,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "DED-33c5cad848eb423e163a9bf5631ccefe",
@@ -5313,7 +5478,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7524,
    "est": 1.3,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -5327,7 +5493,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6522,
    "est": 1.48,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -5341,7 +5508,8 @@
    "group": "Γκολ-Γκολ",
    "p": 0.6565,
    "est": 1.46,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "DED-019e9d824f3f2251e5b777623d34a9df",
@@ -5355,7 +5523,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6883,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "5-3"
   },
   {
    "match_id": "DED-b71f32fbba046e08d4cc26e2a8e1d5a6",
@@ -5369,7 +5538,8 @@
    "group": "Γκολ-Γκολ",
    "p": 0.663,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -5383,7 +5553,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6901,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "4-3"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -5397,7 +5568,8 @@
    "group": "Τελικό αποτέλεσμα",
    "p": 0.7184,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -5411,7 +5583,8 @@
    "group": "Γκολ-Γκολ",
    "p": 0.6569,
    "est": 1.46,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-d98d64a216d4db8db11c9b5017f76ca6",
@@ -5425,7 +5598,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7105,
    "est": 1.34,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-406c4abcb4384570eada7fffa729be9d",
@@ -5439,7 +5613,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.7355,
    "est": 1.32,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-d9d924bf6388e1288f06e04041b3fe33",
@@ -5453,7 +5628,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6015,
    "est": 1.59,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -5467,7 +5643,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6709,
    "est": 1.44,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-88fe8a3db780908444b4b21229766ad5",
@@ -5495,7 +5672,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6931,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PPL-c468a7bc1110c030b62f381e3a480145",
@@ -5523,7 +5701,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6679,
    "est": 1.45,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -5537,7 +5716,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6919,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-7ad550e94d58693e8d19f1da1ae1513f",
@@ -5551,7 +5731,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.723,
    "est": 1.3,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "BEL-d3d9ff50bb0abd6e9215bd4b9b507644",
@@ -5565,7 +5746,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7517,
    "est": 1.31,
-   "result": null
+   "result": 1,
+   "score": "1-5"
   },
   {
    "match_id": "BEL-04613aa3de9a46ad5d2e37776c78cbb7",
@@ -5579,7 +5761,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.734,
    "est": 1.34,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BEL-afde306e7e186da45ff6778a7e952d51",
@@ -5593,7 +5776,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6398,
    "est": 1.51,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-55129ba3a50af7761828c774c793385a",
@@ -5607,7 +5791,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6339,
    "est": 1.51,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BEL-8a92794bd5f89b8b91b2d8fefdac7b85",
@@ -5621,7 +5806,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6919,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "BEL-16029fbb3d6ae79243c5650896bef095",
@@ -5635,7 +5821,8 @@
    "group": "Τελικό αποτέλεσμα",
    "p": 0.6757,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-3eb376e5f313e6d8e7ca8bb6556d0b29",
@@ -5663,7 +5850,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6902,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "4-1"
   },
   {
    "match_id": "TUR-51baab3ec98943f452377895491bfd6a",
@@ -5677,7 +5865,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7263,
    "est": 1.31,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-a3dad1ddaa98a6ff741be7f63250f2ee",
@@ -5691,7 +5880,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.717,
    "est": 1.33,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-605767f0e7114a23442d92831c12c767",
@@ -5705,7 +5895,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7235,
    "est": 1.32,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "TUR-e300554369b00b495db88afb743c95ab",
@@ -5719,7 +5910,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.7349,
    "est": 1.32,
-   "result": null
+   "result": 0,
+   "score": "4-3"
   },
   {
    "match_id": "TUR-c7ad58db2278db2259846b11c28ae1c2",
@@ -5761,7 +5953,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6929,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "0-5"
   },
   {
    "match_id": "TUR-a85eafd97e49ac329956fa1022be891d",
@@ -5775,7 +5968,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6652,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -5789,7 +5983,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6874,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SCO-f796c10282bb7bd80ea9889d03d2066d",
@@ -5803,7 +5998,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7385,
    "est": 1.33,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SCO-4bbccf79bc996a66dba9a40722052b69",
@@ -5817,7 +6013,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7562,
    "est": 1.3,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -5831,7 +6028,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6919,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -5845,7 +6043,8 @@
    "group": "Τελικό αποτέλεσμα",
    "p": 0.6881,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -5859,7 +6058,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6527,
    "est": 1.47,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -5873,7 +6073,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6897,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BL2-e30a7a5944c3567964399dbc0f8ba642",
@@ -5887,7 +6088,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7306,
    "est": 1.31,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "BL2-2dadc88ea39453a5f2b10fc9a3a30f4b",
@@ -5901,7 +6103,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7295,
    "est": 1.32,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "BL2-9957e59c3f91aa76310383308e1d87bf",
@@ -5915,7 +6118,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6753,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BL2-3b9a50f1eb2723779a14eae1199c8e5c",
@@ -5929,7 +6133,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.7071,
    "est": 1.33,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "BL2-1a2b66dec637d06c15d3902ac9068c1f",
@@ -5943,7 +6148,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7287,
    "est": 1.31,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -5957,7 +6163,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6892,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL2-7e748a8bdb13a55389b8e51876b9a504",
@@ -5971,7 +6178,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7029,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BL2-63c47ffbc57892224b9af4b2c2436522",
@@ -5985,7 +6193,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6562,
    "est": 1.47,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "BL2-e8c45f8f9ebcfde9f58ed47573691def",
@@ -5999,7 +6208,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6933,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "SB-fd02f34a219698f956b133ddb2fc7bdf",
@@ -6013,7 +6223,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6658,
    "est": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SB-fda8738874fa4ae1ba6f50f77386e4d2",
@@ -6027,7 +6238,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.748,
    "est": 1.31,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SB-e13541774f88508392470d829be69587",
@@ -6041,7 +6253,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.738,
    "est": 1.33,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SB-ab8e6594f013c68bd628ee42ea03c453",
@@ -6055,7 +6268,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.7425,
    "est": 1.3,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "SB-6e5b5162f681a43e9a71f3fb76f8f28f",
@@ -6069,7 +6283,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.7037,
    "est": 1.37,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "SB-ef6e2cc0b7ed5a3852d963aba8b2ad84",
@@ -6083,7 +6298,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.7433,
    "est": 1.3,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -6097,7 +6313,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6209,
    "est": 1.54,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SB-c56ba830ee1ac3cd75ec31423529dd91",
@@ -6111,7 +6328,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6881,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SB-f892f9aa0772c3febcde6fb5477bb6ea",
@@ -6125,7 +6343,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6692,
    "est": 1.47,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "SB-fd4b1507292f89721d6d024b337a6375",
@@ -6139,7 +6358,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6699,
    "est": 1.46,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "SD-b8fa8002fb548ec7d8cbe11b7d4b0ba6",
@@ -6167,7 +6387,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.7031,
    "est": 1.35,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-d6ac2cda054a3905cc7f2e5568787a67",
@@ -6181,7 +6402,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.7163,
    "est": 1.35,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SD-b9e2011f8642a0d0dfea4854957e199f",
@@ -6195,7 +6417,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.685,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -6209,7 +6432,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6704,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "SD-ec36d0af95915a31fefdf2f72bb8adeb",
@@ -6251,7 +6475,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6927,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-0377ed072a93f8b77593c0f001fda9ec",
@@ -6279,7 +6504,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6984,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SD-f52b83a74c511828f6155889d751d191",
@@ -6307,7 +6533,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.7057,
    "est": 1.35,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "FL2-47b7fc7d25003a9083df3789f996281e",
@@ -6321,7 +6548,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6493,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL2-d5a74e1730cf9bd8bfe0488e3d064e35",
@@ -6335,7 +6563,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7343,
    "est": 1.3,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "FL2-12e661a2aa5dc95aa7530fa0d9b1bf5c",
@@ -6349,7 +6578,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6737,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "FL2-1358657f64b8fdae74ac7263bf7b8725",
@@ -6363,7 +6593,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7307,
    "est": 1.31,
-   "result": null
+   "result": 0,
+   "score": "2-3"
   },
   {
    "match_id": "FL2-658bb2b77031ef93a7ae893145b663b3",
@@ -6377,7 +6608,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.727,
    "est": 1.31,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL2-cdeb381ea8fb554a959115fcd69bd19c",
@@ -6391,7 +6623,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.7292,
    "est": 1.31,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -6405,7 +6638,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6825,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL2-cb1988f7950962d316571dd0ed98b540",
@@ -6855,7 +7089,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6897,
+   "p": 0.693,
    "est": 1.4,
    "result": null
   },
@@ -6869,7 +7103,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6932,
+   "p": 0.6892,
    "est": 1.4,
    "result": null
   },
@@ -6995,7 +7229,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6642,
+   "p": 0.6624,
    "est": 1.45,
    "result": null
   },
@@ -7411,12 +7645,12 @@
    "date": "2026-11-09T18:00:00Z",
    "home": "Kristiansund BK",
    "away": "Vålerenga",
-   "key": "OU4.5",
-   "side": "Under",
-   "label": "Under 4.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6775,
-   "est": 1.43,
+   "key": "DC",
+   "side": "X2",
+   "label": "X2",
+   "group": "Διπλή ευκαιρία",
+   "p": 0.7033,
+   "est": 1.4,
    "result": null
   },
   {
@@ -8271,7 +8505,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6927,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SD-570ec7734e1f7d9e813ab0013291f5f5",
@@ -8279,12 +8514,12 @@
    "date": "2026-11-14T17:30:00Z",
    "home": "Almería",
    "away": "Andorra CF",
-   "key": "AT_OU0.5",
-   "side": "Over",
-   "label": "Φιλοξενούμενος Over 0.5",
-   "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6864,
-   "est": 1.41,
+   "key": "AH-1.5",
+   "side": "A",
+   "label": "2 (+1.5)",
+   "group": "Ασιατικό χάντικαπ",
+   "p": 0.6925,
+   "est": 1.4,
    "result": null
   },
   {
@@ -8293,12 +8528,12 @@
    "date": "2026-11-14T17:30:00Z",
    "home": "Mallorca",
    "away": "Córdoba",
-   "key": "AT_OU0.5",
-   "side": "Over",
-   "label": "Φιλοξενούμενος Over 0.5",
+   "key": "AT_OU1.5",
+   "side": "Under",
+   "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6834,
-   "est": 1.42,
+   "p": 0.6889,
+   "est": 1.4,
    "result": null
   },
   {
@@ -8311,8 +8546,8 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6511,
-   "est": 1.48,
+   "p": 0.6531,
+   "est": 1.47,
    "result": null
   },
   {
@@ -8535,7 +8770,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.625,
+   "p": 0.6247,
    "est": 1.53,
    "result": null
   },
@@ -8549,8 +8784,8 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6744,
-   "est": 1.45,
+   "p": 0.6737,
+   "est": 1.46,
    "result": null
   },
   {
@@ -8563,8 +8798,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6297,
-   "est": 1.52,
+   "p": 0.6462,
+   "est": 1.48,
    "result": null
   },
   {
@@ -8577,7 +8812,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6758,
+   "p": 0.6771,
    "est": 1.43,
    "result": null
   },
@@ -8633,7 +8868,7 @@
    "side": "12",
    "label": "12",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6952,
+   "p": 0.6938,
    "est": 1.41,
    "result": null
   },
@@ -8643,12 +8878,12 @@
    "date": "2026-11-15T17:30:00Z",
    "home": "SD Eibar",
    "away": "Cádiz CF",
-   "key": "AH-1.5",
-   "side": "A",
-   "label": "2 (+1.5)",
-   "group": "Ασιατικό χάντικαπ",
-   "p": 0.6903,
-   "est": 1.4,
+   "key": "AT_OU0.5",
+   "side": "Over",
+   "label": "Φιλοξενούμενος Over 0.5",
+   "group": "Γκολ φιλοξενούμενου",
+   "p": 0.6088,
+   "est": 1.57,
    "result": null
   },
   {
@@ -8790,6 +9025,20 @@
    "p": 0.6705,
    "est": 1.44,
    "result": null
+  },
+  {
+   "match_id": "SD-7bfc2afc162934f011a8425159e340da",
+   "comp": "SD",
+   "date": "2026-11-09T19:30:00Z",
+   "home": "Las Palmas",
+   "away": "CD Eldense",
+   "key": "AT_OU1.5",
+   "side": "Under",
+   "label": "Φιλοξενούμενος Under 1.5",
+   "group": "Γκολ φιλοξενούμενου",
+   "p": 0.659,
+   "est": 1.45,
+   "result": null
   }
  ],
  "spreds": [
@@ -8806,7 +9055,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null,
+   "result": 1,
    "score": "3-1"
   },
   {
@@ -8822,7 +9071,7 @@
    "kind": "edge",
    "p_avg": 0.4359,
    "fair": 1.36,
-   "result": null,
+   "result": 1,
    "score": "3-1"
   },
   {
@@ -8838,7 +9087,7 @@
    "kind": "edge",
    "p_avg": 0.5158,
    "fair": 1.5,
-   "result": null,
+   "result": 0,
    "score": "3-1"
   },
   {
@@ -8854,7 +9103,7 @@
    "kind": "edge",
    "p_avg": 0.5332,
    "fair": 1.5,
-   "result": null,
+   "result": 0,
    "score": "3-1"
   },
   {
@@ -8870,7 +9119,7 @@
    "kind": "edge",
    "p_avg": 0.5929,
    "fair": 1.41,
-   "result": null,
+   "result": 1,
    "score": "3-1"
   },
   {
@@ -8886,7 +9135,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null,
+   "result": 1,
    "score": "1-3"
   },
   {
@@ -8902,7 +9151,7 @@
    "kind": "edge",
    "p_avg": 0.4528,
    "fair": 1.3,
-   "result": null,
+   "result": 1,
    "score": "1-3"
   },
   {
@@ -8918,7 +9167,7 @@
    "kind": "edge",
    "p_avg": 0.5334,
    "fair": 1.27,
-   "result": null,
+   "result": 0,
    "score": "1-3"
   },
   {
@@ -8934,7 +9183,7 @@
    "kind": "edge",
    "p_avg": 0.4655,
    "fair": 1.5,
-   "result": null,
+   "result": 1,
    "score": "1-3"
   },
   {
@@ -8950,7 +9199,7 @@
    "kind": "edge",
    "p_avg": 0.5332,
    "fair": 1.38,
-   "result": null,
+   "result": 0,
    "score": "1-3"
   },
   {
@@ -8966,7 +9215,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null,
+   "result": 1,
    "score": "1-0"
   },
   {
@@ -8982,7 +9231,7 @@
    "kind": "edge",
    "p_avg": 0.5334,
    "fair": 1.45,
-   "result": null,
+   "result": 1,
    "score": "1-0"
   },
   {
@@ -8998,7 +9247,7 @@
    "kind": "edge",
    "p_avg": 0.5233,
    "fair": 1.56,
-   "result": null,
+   "result": 1,
    "score": "1-0"
   },
   {
@@ -9014,7 +9263,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null,
+   "result": 1,
    "score": "1-2"
   },
   {
@@ -9030,7 +9279,7 @@
    "kind": "edge",
    "p_avg": 0.5334,
    "fair": 1.24,
-   "result": null,
+   "result": 1,
    "score": "1-2"
   },
   {
@@ -9046,7 +9295,7 @@
    "kind": "edge",
    "p_avg": 0.5862,
    "fair": 1.25,
-   "result": null,
+   "result": 1,
    "score": "1-2"
   },
   {
@@ -9062,7 +9311,7 @@
    "kind": "edge",
    "p_avg": 0.4528,
    "fair": 1.66,
-   "result": null,
+   "result": 1,
    "score": "1-2"
   },
   {
@@ -9078,7 +9327,7 @@
    "kind": "edge",
    "p_avg": 0.5233,
    "fair": 1.48,
-   "result": null,
+   "result": 1,
    "score": "1-2"
   },
   {
@@ -9094,7 +9343,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null,
+   "result": 1,
    "score": "2-0"
   },
   {
@@ -9110,7 +9359,7 @@
    "kind": "edge",
    "p_avg": 0.4666,
    "fair": 1.45,
-   "result": null,
+   "result": 1,
    "score": "2-0"
   },
   {
@@ -9126,7 +9375,7 @@
    "kind": "edge",
    "p_avg": 0.5876,
    "fair": 1.4,
-   "result": null,
+   "result": 0,
    "score": "2-0"
   },
   {
@@ -9142,7 +9391,7 @@
    "kind": "edge",
    "p_avg": 0.4668,
    "fair": 1.72,
-   "result": null,
+   "result": 1,
    "score": "2-0"
   },
   {
@@ -9158,7 +9407,7 @@
    "kind": "edge",
    "p_avg": 0.5472,
    "fair": 1.51,
-   "result": null,
+   "result": 1,
    "score": "2-0"
   },
   {
@@ -9174,7 +9423,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -9190,7 +9439,7 @@
    "kind": "edge",
    "p_avg": 0.4666,
    "fair": 1.28,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -9206,7 +9455,7 @@
    "kind": "edge",
    "p_avg": 0.4668,
    "fair": 1.51,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -9222,7 +9471,7 @@
    "kind": "edge",
    "p_avg": 0.3621,
    "fair": 1.82,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -9238,7 +9487,7 @@
    "kind": "edge",
    "p_avg": 0.5038,
    "fair": 1.5,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -9254,7 +9503,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "GR-b2ee2c1ccd19eae8b4e3d0546d7db67b",
@@ -9269,7 +9519,8 @@
    "kind": "edge",
    "p_avg": 0.4332,
    "fair": 1.26,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "GR-b2ee2c1ccd19eae8b4e3d0546d7db67b",
@@ -9284,7 +9535,8 @@
    "kind": "edge",
    "p_avg": 0.4913,
    "fair": 1.44,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "GR-b2ee2c1ccd19eae8b4e3d0546d7db67b",
@@ -9299,7 +9551,8 @@
    "kind": "edge",
    "p_avg": 0.4469,
    "fair": 1.61,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "GR-b2ee2c1ccd19eae8b4e3d0546d7db67b",
@@ -9314,7 +9567,8 @@
    "kind": "edge",
    "p_avg": 0.5165,
    "fair": 1.45,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -9329,7 +9583,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -9344,7 +9599,8 @@
    "kind": "edge",
    "p_avg": 0.4913,
    "fair": 1.29,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -9359,7 +9615,8 @@
    "kind": "edge",
    "p_avg": 0.5653,
    "fair": 1.26,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -9374,7 +9631,8 @@
    "kind": "edge",
    "p_avg": 0.4455,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -9389,7 +9647,8 @@
    "kind": "edge",
    "p_avg": 0.4332,
    "fair": 1.66,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -9404,7 +9663,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -9419,7 +9679,8 @@
    "kind": "edge",
    "p_avg": 0.5602,
    "fair": 1.34,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -9434,7 +9695,8 @@
    "kind": "edge",
    "p_avg": 0.5336,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -9449,7 +9711,8 @@
    "kind": "edge",
    "p_avg": 0.5211,
    "fair": 1.56,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -9464,7 +9727,8 @@
    "kind": "edge",
    "p_avg": 0.4392,
    "fair": 1.85,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -9479,7 +9743,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -9494,7 +9759,8 @@
    "kind": "edge",
    "p_avg": 0.4789,
    "fair": 1.15,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -9509,7 +9775,8 @@
    "kind": "edge",
    "p_avg": 0.5087,
    "fair": 1.13,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -9524,7 +9791,8 @@
    "kind": "edge",
    "p_avg": 0.5668,
    "fair": 1.12,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -9539,7 +9807,8 @@
    "kind": "edge",
    "p_avg": 0.4835,
    "fair": 1.33,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-52a7ada0374713bbf2bb3c5541c6cf74",
@@ -9554,7 +9823,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "GR-52a7ada0374713bbf2bb3c5541c6cf74",
@@ -9569,7 +9839,8 @@
    "kind": "edge",
    "p_avg": 0.5668,
    "fair": 1.29,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "GR-52a7ada0374713bbf2bb3c5541c6cf74",
@@ -9584,7 +9855,8 @@
    "kind": "edge",
    "p_avg": 0.5531,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "GR-52a7ada0374713bbf2bb3c5541c6cf74",
@@ -9599,7 +9871,8 @@
    "kind": "edge",
    "p_avg": 0.4398,
    "fair": 1.84,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "GR-58b71c53bc15c3996694b3c8e9350cdc",
@@ -9614,7 +9887,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-58b71c53bc15c3996694b3c8e9350cdc",
@@ -9629,7 +9903,8 @@
    "kind": "edge",
    "p_avg": 0.4332,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-58b71c53bc15c3996694b3c8e9350cdc",
@@ -9644,7 +9919,8 @@
    "kind": "edge",
    "p_avg": 0.5211,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-58b71c53bc15c3996694b3c8e9350cdc",
@@ -9659,7 +9935,8 @@
    "kind": "edge",
    "p_avg": 0.3843,
    "fair": 1.79,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-58b71c53bc15c3996694b3c8e9350cdc",
@@ -9674,7 +9951,8 @@
    "kind": "edge",
    "p_avg": 0.5165,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PD-71ca5141a1c532e390c6fa14e080d8bd",
@@ -9689,7 +9967,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PD-71ca5141a1c532e390c6fa14e080d8bd",
@@ -9704,7 +9983,8 @@
    "kind": "edge",
    "p_avg": 0.5098,
    "fair": 1.25,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "PD-71ca5141a1c532e390c6fa14e080d8bd",
@@ -9719,7 +9999,8 @@
    "kind": "edge",
    "p_avg": 0.4291,
    "fair": 1.69,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "PD-71ca5141a1c532e390c6fa14e080d8bd",
@@ -9734,7 +10015,8 @@
    "kind": "edge",
    "p_avg": 0.5789,
    "fair": 1.39,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "PD-71ca5141a1c532e390c6fa14e080d8bd",
@@ -9749,7 +10031,8 @@
    "kind": "edge",
    "p_avg": 0.5832,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -9764,7 +10047,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "0-3"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -9779,7 +10063,8 @@
    "kind": "edge",
    "p_avg": 0.4933,
    "fair": 1.3,
-   "result": null
+   "result": 1,
+   "score": "0-3"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -9794,7 +10079,8 @@
    "kind": "edge",
    "p_avg": 0.5375,
    "fair": 1.24,
-   "result": null
+   "result": 1,
+   "score": "0-3"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -9809,7 +10095,8 @@
    "kind": "edge",
    "p_avg": 0.5832,
    "fair": 1.19,
-   "result": null
+   "result": 1,
+   "score": "0-3"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -9824,7 +10111,8 @@
    "kind": "edge",
    "p_avg": 0.5098,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-3"
   },
   {
    "match_id": "PD-c35673eb1e889309d6985c091a43a3f5",
@@ -9839,7 +10127,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "PD-c35673eb1e889309d6985c091a43a3f5",
@@ -9854,7 +10143,8 @@
    "kind": "edge",
    "p_avg": 0.4933,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "PD-c35673eb1e889309d6985c091a43a3f5",
@@ -9869,7 +10159,8 @@
    "kind": "edge",
    "p_avg": 0.4546,
    "fair": 1.71,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "PD-c35673eb1e889309d6985c091a43a3f5",
@@ -9884,7 +10175,8 @@
    "kind": "edge",
    "p_avg": 0.4168,
    "fair": 1.86,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "PD-c35673eb1e889309d6985c091a43a3f5",
@@ -9899,7 +10191,8 @@
    "kind": "edge",
    "p_avg": 0.433,
    "fair": 1.87,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "PD-339a6465fa5153fd8f31e487cf557cf0",
@@ -9914,7 +10207,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PD-339a6465fa5153fd8f31e487cf557cf0",
@@ -9929,7 +10223,8 @@
    "kind": "edge",
    "p_avg": 0.4211,
    "fair": 1.55,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PD-339a6465fa5153fd8f31e487cf557cf0",
@@ -9944,7 +10239,8 @@
    "kind": "edge",
    "p_avg": 0.4863,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PD-339a6465fa5153fd8f31e487cf557cf0",
@@ -9959,7 +10255,8 @@
    "kind": "edge",
    "p_avg": 0.4933,
    "fair": 1.43,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "PD-339a6465fa5153fd8f31e487cf557cf0",
@@ -9974,7 +10271,8 @@
    "kind": "edge",
    "p_avg": 0.4902,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -9989,7 +10287,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -10004,7 +10303,8 @@
    "kind": "edge",
    "p_avg": 0.5789,
    "fair": 1.26,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -10019,7 +10319,8 @@
    "kind": "edge",
    "p_avg": 0.5098,
    "fair": 1.42,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -10034,7 +10335,8 @@
    "kind": "edge",
    "p_avg": 0.5832,
    "fair": 1.31,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -10049,7 +10351,8 @@
    "kind": "edge",
    "p_avg": 0.5454,
    "fair": 1.48,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "PD-81ad04996f63fb60b494d243b13ac586",
@@ -10064,7 +10367,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "PD-81ad04996f63fb60b494d243b13ac586",
@@ -10079,7 +10383,8 @@
    "kind": "edge",
    "p_avg": 0.5067,
    "fair": 1.21,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "PD-81ad04996f63fb60b494d243b13ac586",
@@ -10094,7 +10399,8 @@
    "kind": "edge",
    "p_avg": 0.4533,
    "fair": 1.31,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "PD-81ad04996f63fb60b494d243b13ac586",
@@ -10109,7 +10415,8 @@
    "kind": "edge",
    "p_avg": 0.442,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "PD-81ad04996f63fb60b494d243b13ac586",
@@ -10124,7 +10431,8 @@
    "kind": "edge",
    "p_avg": 0.5081,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -10139,7 +10447,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -10154,7 +10463,8 @@
    "kind": "edge",
    "p_avg": 0.5056,
    "fair": 1.21,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -10169,7 +10479,8 @@
    "kind": "edge",
    "p_avg": 0.5375,
    "fair": 1.21,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -10184,7 +10495,8 @@
    "kind": "edge",
    "p_avg": 0.5098,
    "fair": 1.34,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -10199,7 +10511,8 @@
    "kind": "edge",
    "p_avg": 0.4933,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-813cc4970b2dcab8457490a332fb5a6c",
@@ -10214,7 +10527,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-813cc4970b2dcab8457490a332fb5a6c",
@@ -10229,7 +10543,8 @@
    "kind": "edge",
    "p_avg": 0.5182,
    "fair": 1.14,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-813cc4970b2dcab8457490a332fb5a6c",
@@ -10244,7 +10559,8 @@
    "kind": "edge",
    "p_avg": 0.4791,
    "fair": 1.25,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-813cc4970b2dcab8457490a332fb5a6c",
@@ -10259,7 +10575,8 @@
    "kind": "edge",
    "p_avg": 0.4752,
    "fair": 1.31,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-813cc4970b2dcab8457490a332fb5a6c",
@@ -10274,7 +10591,8 @@
    "kind": "edge",
    "p_avg": 0.4606,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -10289,7 +10607,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -10304,7 +10623,8 @@
    "kind": "edge",
    "p_avg": 0.5248,
    "fair": 1.25,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -10319,7 +10639,8 @@
    "kind": "edge",
    "p_avg": 0.4818,
    "fair": 1.35,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -10334,7 +10655,8 @@
    "kind": "edge",
    "p_avg": 0.5001,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -10349,7 +10671,8 @@
    "kind": "edge",
    "p_avg": 0.5394,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "SA-23bf8ea47358ef82f65aa7398a2b3921",
@@ -10364,7 +10687,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SA-23bf8ea47358ef82f65aa7398a2b3921",
@@ -10379,7 +10703,8 @@
    "kind": "edge",
    "p_avg": 0.5209,
    "fair": 1.4,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SA-23bf8ea47358ef82f65aa7398a2b3921",
@@ -10394,7 +10719,8 @@
    "kind": "edge",
    "p_avg": 0.5393,
    "fair": 1.45,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SA-23bf8ea47358ef82f65aa7398a2b3921",
@@ -10409,7 +10735,8 @@
    "kind": "edge",
    "p_avg": 0.5394,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SA-23bf8ea47358ef82f65aa7398a2b3921",
@@ -10424,7 +10751,8 @@
    "kind": "edge",
    "p_avg": 0.6459,
    "fair": 1.27,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SA-7a68b099b47ed7724062b661cd9af464",
@@ -10439,7 +10767,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-7a68b099b47ed7724062b661cd9af464",
@@ -10454,7 +10783,8 @@
    "kind": "edge",
    "p_avg": 0.5182,
    "fair": 1.23,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SA-7a68b099b47ed7724062b661cd9af464",
@@ -10469,7 +10799,8 @@
    "kind": "edge",
    "p_avg": 0.4752,
    "fair": 1.42,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SA-7a68b099b47ed7724062b661cd9af464",
@@ -10484,7 +10815,8 @@
    "kind": "edge",
    "p_avg": 0.5148,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-7a68b099b47ed7724062b661cd9af464",
@@ -10499,7 +10831,8 @@
    "kind": "edge",
    "p_avg": 0.5827,
    "fair": 1.4,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -10514,7 +10847,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -10529,7 +10863,8 @@
    "kind": "edge",
    "p_avg": 0.5209,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -10544,7 +10879,8 @@
    "kind": "edge",
    "p_avg": 0.4607,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -10559,7 +10895,8 @@
    "kind": "edge",
    "p_avg": 0.4585,
    "fair": 1.61,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -10574,7 +10911,8 @@
    "kind": "edge",
    "p_avg": 0.5248,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -10589,7 +10927,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -10604,7 +10943,8 @@
    "kind": "edge",
    "p_avg": 0.5394,
    "fair": 1.26,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -10619,7 +10959,8 @@
    "kind": "edge",
    "p_avg": 0.5209,
    "fair": 1.3,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -10634,7 +10975,8 @@
    "kind": "edge",
    "p_avg": 0.4818,
    "fair": 1.47,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -10649,7 +10991,8 @@
    "kind": "edge",
    "p_avg": 0.4852,
    "fair": 1.62,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -10664,7 +11007,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -10679,7 +11023,8 @@
    "kind": "edge",
    "p_avg": 0.4752,
    "fair": 1.35,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -10694,7 +11039,8 @@
    "kind": "edge",
    "p_avg": 0.5182,
    "fair": 1.33,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -10709,7 +11055,8 @@
    "kind": "edge",
    "p_avg": 0.5827,
    "fair": 1.32,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -10724,7 +11071,8 @@
    "kind": "edge",
    "p_avg": 0.4606,
    "fair": 1.61,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -10739,7 +11087,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -10754,7 +11103,8 @@
    "kind": "edge",
    "p_avg": 0.4352,
    "fair": 1.66,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -10769,7 +11119,8 @@
    "kind": "edge",
    "p_avg": 0.4638,
    "fair": 1.59,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -10784,7 +11135,8 @@
    "kind": "edge",
    "p_avg": 0.5283,
    "fair": 1.47,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -10799,7 +11151,8 @@
    "kind": "edge",
    "p_avg": 0.4501,
    "fair": 1.68,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -10814,7 +11167,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -10829,7 +11183,8 @@
    "kind": "edge",
    "p_avg": 0.4663,
    "fair": 1.63,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -10844,7 +11199,8 @@
    "kind": "edge",
    "p_avg": 0.4717,
    "fair": 1.67,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -10859,7 +11215,8 @@
    "kind": "edge",
    "p_avg": 0.5092,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -10874,7 +11231,8 @@
    "kind": "edge",
    "p_avg": 0.4384,
    "fair": 1.8,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -10889,7 +11247,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -10904,7 +11263,8 @@
    "kind": "edge",
    "p_avg": 0.5616,
    "fair": 1.14,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -10919,7 +11279,8 @@
    "kind": "edge",
    "p_avg": 0.564,
    "fair": 1.22,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -10934,7 +11295,8 @@
    "kind": "edge",
    "p_avg": 0.5337,
    "fair": 1.31,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -10949,7 +11311,8 @@
    "kind": "edge",
    "p_avg": 0.5362,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -10964,7 +11327,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -10979,7 +11343,8 @@
    "kind": "edge",
    "p_avg": 0.5616,
    "fair": 1.14,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -10994,7 +11359,8 @@
    "kind": "edge",
    "p_avg": 0.564,
    "fair": 1.17,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -11009,7 +11375,8 @@
    "kind": "edge",
    "p_avg": 0.4923,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -11024,7 +11391,8 @@
    "kind": "edge",
    "p_avg": 0.454,
    "fair": 1.51,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -11039,7 +11407,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -11054,7 +11423,8 @@
    "kind": "edge",
    "p_avg": 0.5199,
    "fair": 1.12,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -11069,7 +11439,8 @@
    "kind": "edge",
    "p_avg": 0.3899,
    "fair": 1.33,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -11084,7 +11455,8 @@
    "kind": "edge",
    "p_avg": 0.5023,
    "fair": 1.2,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -11099,7 +11471,8 @@
    "kind": "edge",
    "p_avg": 0.5444,
    "fair": 1.21,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -11114,7 +11487,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -11129,7 +11503,8 @@
    "kind": "edge",
    "p_avg": 0.5718,
    "fair": 1.2,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -11144,7 +11519,8 @@
    "kind": "edge",
    "p_avg": 0.4193,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -11159,7 +11535,8 @@
    "kind": "edge",
    "p_avg": 0.5122,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -11174,7 +11551,8 @@
    "kind": "edge",
    "p_avg": 0.4556,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -11189,7 +11567,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -11204,7 +11583,8 @@
    "kind": "edge",
    "p_avg": 0.4282,
    "fair": 1.55,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -11219,7 +11599,8 @@
    "kind": "edge",
    "p_avg": 0.3899,
    "fair": 1.85,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -11234,7 +11615,8 @@
    "kind": "edge",
    "p_avg": 0.4556,
    "fair": 1.73,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -11249,7 +11631,8 @@
    "kind": "edge",
    "p_avg": 0.4635,
    "fair": 1.73,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -11264,7 +11647,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -11279,7 +11663,8 @@
    "kind": "edge",
    "p_avg": 0.5444,
    "fair": 1.3,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -11294,7 +11679,8 @@
    "kind": "edge",
    "p_avg": 0.4857,
    "fair": 1.43,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -11309,7 +11695,8 @@
    "kind": "edge",
    "p_avg": 0.5807,
    "fair": 1.33,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -11324,7 +11711,8 @@
    "kind": "edge",
    "p_avg": 0.5023,
    "fair": 1.63,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -11339,7 +11727,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -11354,7 +11743,8 @@
    "kind": "edge",
    "p_avg": 0.5122,
    "fair": 1.24,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -11369,7 +11759,8 @@
    "kind": "edge",
    "p_avg": 0.5718,
    "fair": 1.18,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -11384,7 +11775,8 @@
    "kind": "edge",
    "p_avg": 0.5199,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -11399,7 +11791,8 @@
    "kind": "edge",
    "p_avg": 0.4176,
    "fair": 1.84,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-cc9731ee7796fe0d532f11ca2aa522c9",
@@ -11414,7 +11807,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "FL1-cc9731ee7796fe0d532f11ca2aa522c9",
@@ -11429,7 +11823,8 @@
    "kind": "edge",
    "p_avg": 0.4878,
    "fair": 1.62,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "FL1-cc9731ee7796fe0d532f11ca2aa522c9",
@@ -11444,7 +11839,8 @@
    "kind": "edge",
    "p_avg": 0.4282,
    "fair": 1.82,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "FL1-3e9954446f26494c04c4967db523d375",
@@ -11459,7 +11855,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-3e9954446f26494c04c4967db523d375",
@@ -11474,7 +11871,8 @@
    "kind": "edge",
    "p_avg": 0.4282,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-3e9954446f26494c04c4967db523d375",
@@ -11489,7 +11887,8 @@
    "kind": "edge",
    "p_avg": 0.4977,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-3e9954446f26494c04c4967db523d375",
@@ -11504,7 +11903,8 @@
    "kind": "edge",
    "p_avg": 0.4878,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-3e9954446f26494c04c4967db523d375",
@@ -11519,7 +11919,8 @@
    "kind": "edge",
    "p_avg": 0.6101,
    "fair": 1.33,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -11534,7 +11935,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -11549,7 +11951,8 @@
    "kind": "edge",
    "p_avg": 0.4556,
    "fair": 1.52,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -11564,7 +11967,8 @@
    "kind": "edge",
    "p_avg": 0.4193,
    "fair": 1.66,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -11579,7 +11983,8 @@
    "kind": "edge",
    "p_avg": 0.4572,
    "fair": 1.73,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -11594,7 +11999,8 @@
    "kind": "edge",
    "p_avg": 0.4529,
    "fair": 1.79,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -11609,7 +12015,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -11624,7 +12031,8 @@
    "kind": "edge",
    "p_avg": 0.4926,
    "fair": 1.6,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -11639,7 +12047,8 @@
    "kind": "edge",
    "p_avg": 0.4922,
    "fair": 1.66,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -11654,7 +12063,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -11669,7 +12079,8 @@
    "kind": "edge",
    "p_avg": 0.4656,
    "fair": 1.19,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -11684,7 +12095,8 @@
    "kind": "edge",
    "p_avg": 0.5078,
    "fair": 1.21,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -11699,7 +12111,8 @@
    "kind": "edge",
    "p_avg": 0.5001,
    "fair": 1.5,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "DED-019e9d824f3f2251e5b777623d34a9df",
@@ -11714,7 +12127,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "5-3"
   },
   {
    "match_id": "DED-019e9d824f3f2251e5b777623d34a9df",
@@ -11729,7 +12143,8 @@
    "kind": "edge",
    "p_avg": 0.4351,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "5-3"
   },
   {
    "match_id": "DED-019e9d824f3f2251e5b777623d34a9df",
@@ -11744,7 +12159,8 @@
    "kind": "edge",
    "p_avg": 0.4656,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "5-3"
   },
   {
    "match_id": "DED-019e9d824f3f2251e5b777623d34a9df",
@@ -11759,7 +12175,8 @@
    "kind": "edge",
    "p_avg": 0.5078,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "5-3"
   },
   {
    "match_id": "DED-019e9d824f3f2251e5b777623d34a9df",
@@ -11774,7 +12191,8 @@
    "kind": "edge",
    "p_avg": 0.5467,
    "fair": 1.43,
-   "result": null
+   "result": 0,
+   "score": "5-3"
   },
   {
    "match_id": "DED-b71f32fbba046e08d4cc26e2a8e1d5a6",
@@ -11789,7 +12207,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "DED-b71f32fbba046e08d4cc26e2a8e1d5a6",
@@ -11804,7 +12223,8 @@
    "kind": "edge",
    "p_avg": 0.4656,
    "fair": 1.49,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "DED-b71f32fbba046e08d4cc26e2a8e1d5a6",
@@ -11819,7 +12239,8 @@
    "kind": "edge",
    "p_avg": 0.4533,
    "fair": 1.64,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "DED-b71f32fbba046e08d4cc26e2a8e1d5a6",
@@ -11834,7 +12255,8 @@
    "kind": "edge",
    "p_avg": 0.454,
    "fair": 1.7,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "DED-b71f32fbba046e08d4cc26e2a8e1d5a6",
@@ -11849,7 +12271,8 @@
    "kind": "edge",
    "p_avg": 0.4697,
    "fair": 1.68,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -11864,7 +12287,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "4-3"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -11879,7 +12303,8 @@
    "kind": "edge",
    "p_avg": 0.5649,
    "fair": 1.23,
-   "result": null
+   "result": 1,
+   "score": "4-3"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -11894,7 +12319,8 @@
    "kind": "edge",
    "p_avg": 0.4999,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "4-3"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -11909,7 +12335,8 @@
    "kind": "edge",
    "p_avg": 0.6087,
    "fair": 1.31,
-   "result": null
+   "result": 1,
+   "score": "4-3"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -11924,7 +12351,8 @@
    "kind": "edge",
    "p_avg": 0.454,
    "fair": 1.67,
-   "result": null
+   "result": 0,
+   "score": "4-3"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -11939,7 +12367,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -11954,7 +12383,8 @@
    "kind": "edge",
    "p_avg": 0.5467,
    "fair": 1.18,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -11969,7 +12399,8 @@
    "kind": "edge",
    "p_avg": 0.5001,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -11984,7 +12415,8 @@
    "kind": "edge",
    "p_avg": 0.4473,
    "fair": 1.55,
-   "result": null
+   "result": 0,
+   "score": "2-5"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -11999,7 +12431,8 @@
    "kind": "edge",
    "p_avg": 0.5344,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -12014,7 +12447,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -12029,7 +12463,8 @@
    "kind": "edge",
    "p_avg": 0.4926,
    "fair": 1.2,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -12044,7 +12479,8 @@
    "kind": "edge",
    "p_avg": 0.4922,
    "fair": 1.34,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -12059,7 +12495,8 @@
    "kind": "edge",
    "p_avg": 0.5467,
    "fair": 1.33,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-406c4abcb4384570eada7fffa729be9d",
@@ -12074,7 +12511,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-406c4abcb4384570eada7fffa729be9d",
@@ -12089,7 +12527,8 @@
    "kind": "edge",
    "p_avg": 0.4914,
    "fair": 1.55,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-406c4abcb4384570eada7fffa729be9d",
@@ -12104,7 +12543,8 @@
    "kind": "edge",
    "p_avg": 0.5053,
    "fair": 1.62,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-406c4abcb4384570eada7fffa729be9d",
@@ -12119,7 +12559,8 @@
    "kind": "edge",
    "p_avg": 0.5633,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-406c4abcb4384570eada7fffa729be9d",
@@ -12134,7 +12575,8 @@
    "kind": "edge",
    "p_avg": 0.3587,
    "fair": 2.16,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-d9d924bf6388e1288f06e04041b3fe33",
@@ -12149,7 +12591,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PPL-d9d924bf6388e1288f06e04041b3fe33",
@@ -12164,7 +12607,8 @@
    "kind": "edge",
    "p_avg": 0.4101,
    "fair": 1.75,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PPL-d9d924bf6388e1288f06e04041b3fe33",
@@ -12179,7 +12623,8 @@
    "kind": "edge",
    "p_avg": 0.4946,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "PPL-d9d924bf6388e1288f06e04041b3fe33",
@@ -12194,7 +12639,8 @@
    "kind": "edge",
    "p_avg": 0.5762,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PPL-d9d924bf6388e1288f06e04041b3fe33",
@@ -12209,7 +12655,8 @@
    "kind": "edge",
    "p_avg": 0.438,
    "fair": 1.78,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -12224,7 +12671,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -12239,7 +12687,8 @@
    "kind": "edge",
    "p_avg": 0.4914,
    "fair": 1.22,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -12254,7 +12703,8 @@
    "kind": "edge",
    "p_avg": 0.5762,
    "fair": 1.15,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -12269,7 +12719,8 @@
    "kind": "edge",
    "p_avg": 0.438,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -12284,7 +12735,8 @@
    "kind": "edge",
    "p_avg": 0.4943,
    "fair": 1.31,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-88fe8a3db780908444b4b21229766ad5",
@@ -12374,7 +12826,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PPL-3145127655251c9de0251675640e2101",
@@ -12389,7 +12842,8 @@
    "kind": "edge",
    "p_avg": 0.4946,
    "fair": 1.46,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "PPL-3145127655251c9de0251675640e2101",
@@ -12404,7 +12858,8 @@
    "kind": "edge",
    "p_avg": 0.562,
    "fair": 1.34,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PPL-3145127655251c9de0251675640e2101",
@@ -12419,7 +12874,8 @@
    "kind": "edge",
    "p_avg": 0.4613,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PPL-3145127655251c9de0251675640e2101",
@@ -12434,7 +12890,8 @@
    "kind": "edge",
    "p_avg": 0.5778,
    "fair": 1.34,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PPL-c468a7bc1110c030b62f381e3a480145",
@@ -12464,7 +12921,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -12479,7 +12937,8 @@
    "kind": "edge",
    "p_avg": 0.4238,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -12494,7 +12953,8 @@
    "kind": "edge",
    "p_avg": 0.5054,
    "fair": 1.31,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -12509,7 +12969,8 @@
    "kind": "edge",
    "p_avg": 0.5086,
    "fair": 1.31,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -12524,7 +12985,8 @@
    "kind": "edge",
    "p_avg": 0.5057,
    "fair": 1.33,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -12539,7 +13001,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -12554,7 +13017,8 @@
    "kind": "edge",
    "p_avg": 0.5086,
    "fair": 1.09,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -12569,7 +13033,8 @@
    "kind": "edge",
    "p_avg": 0.4238,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -12584,7 +13049,8 @@
    "kind": "edge",
    "p_avg": 0.562,
    "fair": 1.3,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -12599,7 +13065,8 @@
    "kind": "edge",
    "p_avg": 0.5636,
    "fair": 1.34,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-04613aa3de9a46ad5d2e37776c78cbb7",
@@ -12614,7 +13081,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "BEL-04613aa3de9a46ad5d2e37776c78cbb7",
@@ -12629,7 +13097,8 @@
    "kind": "edge",
    "p_avg": 0.4974,
    "fair": 1.28,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BEL-04613aa3de9a46ad5d2e37776c78cbb7",
@@ -12644,7 +13113,8 @@
    "kind": "edge",
    "p_avg": 0.5349,
    "fair": 1.23,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BEL-04613aa3de9a46ad5d2e37776c78cbb7",
@@ -12659,7 +13129,8 @@
    "kind": "edge",
    "p_avg": 0.5132,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BEL-04613aa3de9a46ad5d2e37776c78cbb7",
@@ -12674,7 +13145,8 @@
    "kind": "edge",
    "p_avg": 0.4949,
    "fair": 1.61,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BEL-afde306e7e186da45ff6778a7e952d51",
@@ -12689,7 +13161,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-afde306e7e186da45ff6778a7e952d51",
@@ -12704,7 +13177,8 @@
    "kind": "edge",
    "p_avg": 0.4945,
    "fair": 1.6,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-afde306e7e186da45ff6778a7e952d51",
@@ -12719,7 +13193,8 @@
    "kind": "edge",
    "p_avg": 0.5349,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-55129ba3a50af7761828c774c793385a",
@@ -12734,7 +13209,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BEL-55129ba3a50af7761828c774c793385a",
@@ -12749,7 +13225,8 @@
    "kind": "edge",
    "p_avg": 0.5005,
    "fair": 1.31,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BEL-55129ba3a50af7761828c774c793385a",
@@ -12764,7 +13241,8 @@
    "kind": "edge",
    "p_avg": 0.5055,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BEL-55129ba3a50af7761828c774c793385a",
@@ -12779,7 +13257,8 @@
    "kind": "edge",
    "p_avg": 0.5349,
    "fair": 1.35,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BEL-55129ba3a50af7761828c774c793385a",
@@ -12794,7 +13273,8 @@
    "kind": "edge",
    "p_avg": 0.5108,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BEL-8a92794bd5f89b8b91b2d8fefdac7b85",
@@ -12809,7 +13289,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "BEL-8a92794bd5f89b8b91b2d8fefdac7b85",
@@ -12824,7 +13305,8 @@
    "kind": "edge",
    "p_avg": 0.4651,
    "fair": 1.47,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "BEL-8a92794bd5f89b8b91b2d8fefdac7b85",
@@ -12839,7 +13321,8 @@
    "kind": "edge",
    "p_avg": 0.3884,
    "fair": 1.78,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "BEL-8a92794bd5f89b8b91b2d8fefdac7b85",
@@ -12854,7 +13337,8 @@
    "kind": "edge",
    "p_avg": 0.3853,
    "fair": 1.98,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "BEL-8a92794bd5f89b8b91b2d8fefdac7b85",
@@ -12869,7 +13353,8 @@
    "kind": "edge",
    "p_avg": 0.5055,
    "fair": 1.65,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "BEL-16029fbb3d6ae79243c5650896bef095",
@@ -12884,7 +13369,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-16029fbb3d6ae79243c5650896bef095",
@@ -12899,7 +13385,8 @@
    "kind": "edge",
    "p_avg": 0.5717,
    "fair": 1.26,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-16029fbb3d6ae79243c5650896bef095",
@@ -12914,7 +13401,8 @@
    "kind": "edge",
    "p_avg": 0.4651,
    "fair": 1.5,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-16029fbb3d6ae79243c5650896bef095",
@@ -12929,7 +13417,8 @@
    "kind": "edge",
    "p_avg": 0.4924,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-16029fbb3d6ae79243c5650896bef095",
@@ -12944,7 +13433,8 @@
    "kind": "edge",
    "p_avg": 0.5051,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-3eb376e5f313e6d8e7ca8bb6556d0b29",
@@ -12974,7 +13464,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "BEL-fceade9430abcb824182a6aa031880db",
@@ -12989,7 +13480,8 @@
    "kind": "edge",
    "p_avg": 0.4575,
    "fair": 1.61,
-   "result": null
+   "result": 0,
+   "score": "4-1"
   },
   {
    "match_id": "BEL-fceade9430abcb824182a6aa031880db",
@@ -13004,7 +13496,8 @@
    "kind": "edge",
    "p_avg": 0.5051,
    "fair": 1.64,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "TUR-cf2febfddf729564889172cf83e8fbab",
@@ -13034,7 +13527,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-5"
   },
   {
    "match_id": "TUR-6692a3ca274d09ffbfabd943320d62f5",
@@ -13049,7 +13543,8 @@
    "kind": "edge",
    "p_avg": 0.5013,
    "fair": 1.45,
-   "result": null
+   "result": 0,
+   "score": "0-5"
   },
   {
    "match_id": "TUR-6692a3ca274d09ffbfabd943320d62f5",
@@ -13064,7 +13559,8 @@
    "kind": "edge",
    "p_avg": 0.4156,
    "fair": 1.67,
-   "result": null
+   "result": 0,
+   "score": "0-5"
   },
   {
    "match_id": "TUR-6692a3ca274d09ffbfabd943320d62f5",
@@ -13079,7 +13575,8 @@
    "kind": "edge",
    "p_avg": 0.3817,
    "fair": 1.77,
-   "result": null
+   "result": 1,
+   "score": "0-5"
   },
   {
    "match_id": "TUR-6692a3ca274d09ffbfabd943320d62f5",
@@ -13094,7 +13591,8 @@
    "kind": "edge",
    "p_avg": 0.4764,
    "fair": 1.63,
-   "result": null
+   "result": 1,
+   "score": "0-5"
   },
   {
    "match_id": "TUR-a85eafd97e49ac329956fa1022be891d",
@@ -13109,7 +13607,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-a85eafd97e49ac329956fa1022be891d",
@@ -13124,7 +13623,8 @@
    "kind": "edge",
    "p_avg": 0.3817,
    "fair": 1.65,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-a85eafd97e49ac329956fa1022be891d",
@@ -13139,7 +13639,8 @@
    "kind": "edge",
    "p_avg": 0.4764,
    "fair": 1.68,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-a85eafd97e49ac329956fa1022be891d",
@@ -13154,7 +13655,8 @@
    "kind": "edge",
    "p_avg": 0.5416,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-a85eafd97e49ac329956fa1022be891d",
@@ -13169,7 +13671,8 @@
    "kind": "edge",
    "p_avg": 0.5013,
    "fair": 1.64,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -13184,7 +13687,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -13199,7 +13703,8 @@
    "kind": "edge",
    "p_avg": 0.4584,
    "fair": 1.27,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -13214,7 +13719,8 @@
    "kind": "edge",
    "p_avg": 0.4329,
    "fair": 1.32,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -13229,7 +13735,8 @@
    "kind": "edge",
    "p_avg": 0.4116,
    "fair": 1.53,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -13244,7 +13751,8 @@
    "kind": "edge",
    "p_avg": 0.4987,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -13259,7 +13767,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -13274,7 +13783,8 @@
    "kind": "edge",
    "p_avg": 0.4651,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -13289,7 +13799,8 @@
    "kind": "edge",
    "p_avg": 0.4998,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -13304,7 +13815,8 @@
    "kind": "edge",
    "p_avg": 0.5377,
    "fair": 1.5,
-   "result": null
+   "result": 1,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -13319,7 +13831,8 @@
    "kind": "edge",
    "p_avg": 0.5446,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -13334,7 +13847,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -13349,7 +13863,8 @@
    "kind": "edge",
    "p_avg": 0.4998,
    "fair": 1.18,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -13364,7 +13879,8 @@
    "kind": "edge",
    "p_avg": 0.4658,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -13379,7 +13895,8 @@
    "kind": "edge",
    "p_avg": 0.4651,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -13394,7 +13911,8 @@
    "kind": "edge",
    "p_avg": 0.4306,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -13409,7 +13927,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -13424,7 +13943,8 @@
    "kind": "edge",
    "p_avg": 0.4628,
    "fair": 1.25,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -13439,7 +13959,8 @@
    "kind": "edge",
    "p_avg": 0.5694,
    "fair": 1.19,
-   "result": null
+   "result": 0,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -13454,7 +13975,8 @@
    "kind": "edge",
    "p_avg": 0.4658,
    "fair": 1.35,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -13469,7 +13991,8 @@
    "kind": "edge",
    "p_avg": 0.5446,
    "fair": 1.29,
-   "result": null
+   "result": 0,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -13484,7 +14007,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -13499,7 +14023,8 @@
    "kind": "edge",
    "p_avg": 0.5002,
    "fair": 1.15,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -13514,7 +14039,8 @@
    "kind": "edge",
    "p_avg": 0.5349,
    "fair": 1.13,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -13529,7 +14055,8 @@
    "kind": "edge",
    "p_avg": 0.502,
    "fair": 1.29,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -13544,7 +14071,8 @@
    "kind": "edge",
    "p_avg": 0.4192,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L1-3af2458dd9984d806bbf46e7bd2d7872",
@@ -14099,7 +14627,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -14114,7 +14643,8 @@
    "kind": "edge",
    "p_avg": 0.4748,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -14129,7 +14659,8 @@
    "kind": "edge",
    "p_avg": 0.48,
    "fair": 1.42,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -14144,7 +14675,8 @@
    "kind": "edge",
    "p_avg": 0.5124,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -14159,7 +14691,8 @@
    "kind": "edge",
    "p_avg": 0.4317,
    "fair": 1.59,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL2-7e748a8bdb13a55389b8e51876b9a504",
@@ -14174,7 +14707,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BL2-7e748a8bdb13a55389b8e51876b9a504",
@@ -14189,7 +14723,8 @@
    "kind": "edge",
    "p_avg": 0.4748,
    "fair": 1.33,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BL2-7e748a8bdb13a55389b8e51876b9a504",
@@ -14204,7 +14739,8 @@
    "kind": "edge",
    "p_avg": 0.4317,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BL2-7e748a8bdb13a55389b8e51876b9a504",
@@ -14219,7 +14755,8 @@
    "kind": "edge",
    "p_avg": 0.48,
    "fair": 1.46,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BL2-7e748a8bdb13a55389b8e51876b9a504",
@@ -14234,7 +14771,8 @@
    "kind": "edge",
    "p_avg": 0.4617,
    "fair": 1.55,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BL2-63c47ffbc57892224b9af4b2c2436522",
@@ -14249,7 +14787,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "BL2-63c47ffbc57892224b9af4b2c2436522",
@@ -14264,7 +14803,8 @@
    "kind": "edge",
    "p_avg": 0.5425,
    "fair": 1.5,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "BL2-63c47ffbc57892224b9af4b2c2436522",
@@ -14279,7 +14819,8 @@
    "kind": "edge",
    "p_avg": 0.5252,
    "fair": 1.54,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "BL2-63c47ffbc57892224b9af4b2c2436522",
@@ -14294,7 +14835,8 @@
    "kind": "edge",
    "p_avg": 0.5425,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "BL2-e8c45f8f9ebcfde9f58ed47573691def",
@@ -14309,7 +14851,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "BL2-e8c45f8f9ebcfde9f58ed47573691def",
@@ -14324,7 +14867,8 @@
    "kind": "edge",
    "p_avg": 0.5011,
    "fair": 1.64,
-   "result": null
+   "result": 0,
+   "score": "3-2"
   },
   {
    "match_id": "BL2-e8c45f8f9ebcfde9f58ed47573691def",
@@ -14339,7 +14883,8 @@
    "kind": "edge",
    "p_avg": 0.4575,
    "fair": 1.78,
-   "result": null
+   "result": 0,
+   "score": "3-2"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -14354,7 +14899,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -14369,7 +14915,8 @@
    "kind": "edge",
    "p_avg": 0.5281,
    "fair": 1.24,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -14384,7 +14931,8 @@
    "kind": "edge",
    "p_avg": 0.4753,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -14399,7 +14947,8 @@
    "kind": "edge",
    "p_avg": 0.4712,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -14414,7 +14963,8 @@
    "kind": "edge",
    "p_avg": 0.4374,
    "fair": 1.72,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SB-c56ba830ee1ac3cd75ec31423529dd91",
@@ -14429,7 +14979,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SB-c56ba830ee1ac3cd75ec31423529dd91",
@@ -14444,7 +14995,8 @@
    "kind": "edge",
    "p_avg": 0.5247,
    "fair": 1.3,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SB-c56ba830ee1ac3cd75ec31423529dd91",
@@ -14459,7 +15011,8 @@
    "kind": "edge",
    "p_avg": 0.5242,
    "fair": 1.44,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SB-c56ba830ee1ac3cd75ec31423529dd91",
@@ -14474,7 +15027,8 @@
    "kind": "edge",
    "p_avg": 0.5102,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SB-c56ba830ee1ac3cd75ec31423529dd91",
@@ -14489,7 +15043,8 @@
    "kind": "edge",
    "p_avg": 0.4752,
    "fair": 1.69,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SB-f892f9aa0772c3febcde6fb5477bb6ea",
@@ -14504,7 +15059,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SB-f892f9aa0772c3febcde6fb5477bb6ea",
@@ -14519,7 +15075,8 @@
    "kind": "edge",
    "p_avg": 0.5102,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SB-f892f9aa0772c3febcde6fb5477bb6ea",
@@ -14534,7 +15091,8 @@
    "kind": "edge",
    "p_avg": 0.5247,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SB-f892f9aa0772c3febcde6fb5477bb6ea",
@@ -14549,7 +15107,8 @@
    "kind": "edge",
    "p_avg": 0.6003,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SB-f892f9aa0772c3febcde6fb5477bb6ea",
@@ -14564,7 +15123,8 @@
    "kind": "edge",
    "p_avg": 0.5229,
    "fair": 1.6,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SB-fd4b1507292f89721d6d024b337a6375",
@@ -14579,7 +15139,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "SB-fd4b1507292f89721d6d024b337a6375",
@@ -14594,7 +15155,8 @@
    "kind": "edge",
    "p_avg": 0.5281,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "SB-fd4b1507292f89721d6d024b337a6375",
@@ -14609,7 +15171,8 @@
    "kind": "edge",
    "p_avg": 0.5102,
    "fair": 1.48,
-   "result": null
+   "result": 0,
+   "score": "1-4"
   },
   {
    "match_id": "SB-fd4b1507292f89721d6d024b337a6375",
@@ -14624,7 +15187,8 @@
    "kind": "edge",
    "p_avg": 0.5428,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "SB-fd4b1507292f89721d6d024b337a6375",
@@ -14639,7 +15203,8 @@
    "kind": "edge",
    "p_avg": 0.5288,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "SD-b9e2011f8642a0d0dfea4854957e199f",
@@ -14654,7 +15219,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SD-b9e2011f8642a0d0dfea4854957e199f",
@@ -14669,7 +15235,8 @@
    "kind": "edge",
    "p_avg": 0.4701,
    "fair": 1.23,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SD-b9e2011f8642a0d0dfea4854957e199f",
@@ -14684,7 +15251,8 @@
    "kind": "edge",
    "p_avg": 0.4523,
    "fair": 1.33,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SD-b9e2011f8642a0d0dfea4854957e199f",
@@ -14699,7 +15267,8 @@
    "kind": "edge",
    "p_avg": 0.3861,
    "fair": 1.66,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SD-b9e2011f8642a0d0dfea4854957e199f",
@@ -14714,7 +15283,8 @@
    "kind": "edge",
    "p_avg": 0.4765,
    "fair": 1.45,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -14729,7 +15299,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "1-3"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -14744,7 +15315,8 @@
    "kind": "edge",
    "p_avg": 0.4762,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -14759,7 +15331,8 @@
    "kind": "edge",
    "p_avg": 0.399,
    "fair": 1.86,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -14774,7 +15347,8 @@
    "kind": "edge",
    "p_avg": 0.462,
    "fair": 1.73,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "SD-ec36d0af95915a31fefdf2f72bb8adeb",
@@ -14909,7 +15483,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-d30d1bf02fe13e8aade539b76289bdc3",
@@ -14924,7 +15499,8 @@
    "kind": "edge",
    "p_avg": 0.4765,
    "fair": 1.6,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-d30d1bf02fe13e8aade539b76289bdc3",
@@ -14939,7 +15515,8 @@
    "kind": "edge",
    "p_avg": 0.5299,
    "fair": 1.52,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "SD-d30d1bf02fe13e8aade539b76289bdc3",
@@ -14954,7 +15531,8 @@
    "kind": "edge",
    "p_avg": 0.4942,
    "fair": 1.61,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-0377ed072a93f8b77593c0f001fda9ec",
@@ -15044,7 +15622,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SD-76611e81a480e9f83b04f21c1cad402d",
@@ -15059,7 +15638,8 @@
    "kind": "edge",
    "p_avg": 0.5843,
    "fair": 1.32,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SD-76611e81a480e9f83b04f21c1cad402d",
@@ -15074,7 +15654,8 @@
    "kind": "edge",
    "p_avg": 0.5299,
    "fair": 1.51,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SD-76611e81a480e9f83b04f21c1cad402d",
@@ -15089,7 +15670,8 @@
    "kind": "edge",
    "p_avg": 0.538,
    "fair": 1.5,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SD-76611e81a480e9f83b04f21c1cad402d",
@@ -15104,7 +15686,8 @@
    "kind": "edge",
    "p_avg": 0.5235,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SD-f52b83a74c511828f6155889d751d191",
@@ -15329,7 +15912,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -15344,7 +15928,8 @@
    "kind": "edge",
    "p_avg": 0.4523,
    "fair": 1.56,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -15359,7 +15944,8 @@
    "kind": "edge",
    "p_avg": 0.5355,
    "fair": 1.44,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -15374,7 +15960,8 @@
    "kind": "edge",
    "p_avg": 0.501,
    "fair": 1.54,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -15389,7 +15976,8 @@
    "kind": "edge",
    "p_avg": 0.6245,
    "fair": 1.31,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL2-cb1988f7950962d316571dd0ed98b540",
@@ -15419,7 +16007,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null,
+   "result": 1,
    "score": "1-3"
   },
   {
@@ -15435,7 +16023,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.4,
-   "result": null,
+   "result": 1,
    "score": "1-0"
   },
   {
@@ -15451,7 +16039,7 @@
    "kind": "edge",
    "p_avg": 0.4669,
    "fair": 1.75,
-   "result": null,
+   "result": 0,
    "score": "1-0"
   },
   {
@@ -15467,7 +16055,7 @@
    "kind": "edge",
    "p_avg": 0.5162,
    "fair": 1.61,
-   "result": null,
+   "result": 1,
    "score": "1-0"
   },
   {
@@ -15483,7 +16071,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null,
+   "result": 0,
    "score": "1-2"
   },
   {
@@ -15499,7 +16087,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null,
+   "result": 1,
    "score": "2-0"
   },
   {
@@ -15515,7 +16103,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -15531,7 +16119,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -15546,7 +16135,8 @@
    "kind": "edge",
    "p_avg": 0.5185,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -15561,7 +16151,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -15576,7 +16167,8 @@
    "kind": "edge",
    "p_avg": 0.5185,
    "fair": 1.62,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -15591,7 +16183,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-58b71c53bc15c3996694b3c8e9350cdc",
@@ -15606,7 +16199,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -15621,7 +16215,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "0-3"
   },
   {
    "match_id": "PD-c35673eb1e889309d6985c091a43a3f5",
@@ -15636,7 +16231,8 @@
    "kind": "edge",
    "p_avg": 0.5475,
    "fair": 1.55,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "PD-339a6465fa5153fd8f31e487cf557cf0",
@@ -15651,7 +16247,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -15666,7 +16263,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -15681,7 +16279,8 @@
    "kind": "edge",
    "p_avg": 0.5058,
    "fair": 1.64,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "PD-81ad04996f63fb60b494d243b13ac586",
@@ -15696,7 +16295,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -15711,7 +16311,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "SA-23bf8ea47358ef82f65aa7398a2b3921",
@@ -15726,7 +16327,8 @@
    "kind": "edge",
    "p_avg": 0.5679,
    "fair": 1.44,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SA-7a68b099b47ed7724062b661cd9af464",
@@ -15741,7 +16343,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -15756,7 +16359,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -15771,7 +16375,8 @@
    "kind": "edge",
    "p_avg": 0.5388,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -15786,7 +16391,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -15801,7 +16407,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -15816,7 +16423,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -15831,7 +16439,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -15846,7 +16455,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -15861,7 +16471,8 @@
    "kind": "edge",
    "p_avg": 0.452,
    "fair": 1.6,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -15876,7 +16487,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -15891,7 +16503,8 @@
    "kind": "edge",
    "p_avg": 0.4283,
    "fair": 1.64,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -15906,7 +16519,8 @@
    "kind": "edge",
    "p_avg": 0.5804,
    "fair": 1.32,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -15921,7 +16535,8 @@
    "kind": "edge",
    "p_avg": 0.5416,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -15936,7 +16551,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -15951,7 +16567,8 @@
    "kind": "edge",
    "p_avg": 0.61,
    "fair": 1.2,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -15966,7 +16583,8 @@
    "kind": "edge",
    "p_avg": 0.4965,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -15981,7 +16599,8 @@
    "kind": "edge",
    "p_avg": 0.4913,
    "fair": 1.48,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -15996,7 +16615,8 @@
    "kind": "edge",
    "p_avg": 0.4283,
    "fair": 1.72,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -16011,7 +16631,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -16026,7 +16647,8 @@
    "kind": "edge",
    "p_avg": 0.5191,
    "fair": 1.59,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -16041,7 +16663,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -16056,7 +16679,8 @@
    "kind": "edge",
    "p_avg": 0.5416,
    "fair": 1.46,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -16071,7 +16695,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-cc9731ee7796fe0d532f11ca2aa522c9",
@@ -16086,7 +16711,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "FL1-3e9954446f26494c04c4967db523d375",
@@ -16101,7 +16727,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -16116,7 +16743,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -16131,7 +16759,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -16146,7 +16775,8 @@
    "kind": "edge",
    "p_avg": 0.3724,
    "fair": 2.08,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -16161,7 +16791,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -16176,7 +16807,8 @@
    "kind": "edge",
    "p_avg": 0.5461,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "DED-019e9d824f3f2251e5b777623d34a9df",
@@ -16191,7 +16823,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "5-3"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -16206,7 +16839,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "4-3"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -16221,7 +16855,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -16236,7 +16871,8 @@
    "kind": "edge",
    "p_avg": 0.4354,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -16251,7 +16887,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-d9d924bf6388e1288f06e04041b3fe33",
@@ -16266,7 +16903,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -16281,7 +16919,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.4,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -16296,7 +16935,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -16311,7 +16951,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -16326,7 +16967,8 @@
    "kind": "edge",
    "p_avg": 0.5893,
    "fair": 1.27,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-04613aa3de9a46ad5d2e37776c78cbb7",
@@ -16341,7 +16983,8 @@
    "kind": "edge",
    "p_avg": 0.5006,
    "fair": 1.6,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "BEL-afde306e7e186da45ff6778a7e952d51",
@@ -16356,7 +16999,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-afde306e7e186da45ff6778a7e952d51",
@@ -16371,7 +17015,8 @@
    "kind": "edge",
    "p_avg": 0.4978,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-16029fbb3d6ae79243c5650896bef095",
@@ -16386,7 +17031,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-fceade9430abcb824182a6aa031880db",
@@ -16401,7 +17047,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "4-1"
   },
   {
    "match_id": "BEL-fceade9430abcb824182a6aa031880db",
@@ -16416,7 +17063,8 @@
    "kind": "edge",
    "p_avg": 0.3884,
    "fair": 2.08,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "TUR-6692a3ca274d09ffbfabd943320d62f5",
@@ -16431,7 +17079,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "0-5"
   },
   {
    "match_id": "TUR-a85eafd97e49ac329956fa1022be891d",
@@ -16446,7 +17095,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-a85eafd97e49ac329956fa1022be891d",
@@ -16461,7 +17111,8 @@
    "kind": "edge",
    "p_avg": 0.5152,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -16476,7 +17127,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -16491,7 +17143,8 @@
    "kind": "edge",
    "p_avg": 0.4712,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -16506,7 +17159,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -16521,7 +17175,8 @@
    "kind": "edge",
    "p_avg": 0.3857,
    "fair": 2.04,
-   "result": null
+   "result": 0,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -16536,7 +17191,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.39,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -16551,7 +17207,8 @@
    "kind": "edge",
    "p_avg": 0.496,
    "fair": 1.32,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -16566,7 +17223,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -16581,7 +17239,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L1-3af2458dd9984d806bbf46e7bd2d7872",
@@ -16731,7 +17390,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -16746,7 +17406,8 @@
    "kind": "edge",
    "p_avg": 0.4541,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL2-7e748a8bdb13a55389b8e51876b9a504",
@@ -16761,7 +17422,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BL2-63c47ffbc57892224b9af4b2c2436522",
@@ -16776,7 +17438,8 @@
    "kind": "edge",
    "p_avg": 0.5198,
    "fair": 1.61,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "BL2-e8c45f8f9ebcfde9f58ed47573691def",
@@ -16791,7 +17454,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -16806,7 +17470,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SB-c56ba830ee1ac3cd75ec31423529dd91",
@@ -16821,7 +17486,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SB-f892f9aa0772c3febcde6fb5477bb6ea",
@@ -16836,7 +17502,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SB-fd4b1507292f89721d6d024b337a6375",
@@ -16851,7 +17518,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "SB-fd4b1507292f89721d6d024b337a6375",
@@ -16866,7 +17534,8 @@
    "kind": "edge",
    "p_avg": 0.5997,
    "fair": 1.39,
-   "result": null
+   "result": 0,
+   "score": "1-4"
   },
   {
    "match_id": "SD-b9e2011f8642a0d0dfea4854957e199f",
@@ -16881,7 +17550,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -16896,7 +17566,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "1-3"
   },
   {
    "match_id": "SD-ec36d0af95915a31fefdf2f72bb8adeb",
@@ -16941,7 +17612,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-d30d1bf02fe13e8aade539b76289bdc3",
@@ -16956,7 +17628,8 @@
    "kind": "edge",
    "p_avg": 0.6004,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-0377ed072a93f8b77593c0f001fda9ec",
@@ -17091,7 +17764,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "L2-7bf0d1f95bb9b2b6003386c82ba96b6a",
@@ -18906,7 +19580,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null,
+   "result": 1,
    "score": "3-1"
   },
   {
@@ -18922,7 +19596,7 @@
    "kind": "edge",
    "p_avg": 0.3273,
    "fair": 1.53,
-   "result": null,
+   "result": 1,
    "score": "3-1"
   },
   {
@@ -18938,7 +19612,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null,
+   "result": 1,
    "score": "1-3"
   },
   {
@@ -18954,7 +19628,7 @@
    "kind": "edge",
    "p_avg": 0.3671,
    "fair": 1.38,
-   "result": null,
+   "result": 1,
    "score": "1-3"
   },
   {
@@ -18970,7 +19644,7 @@
    "kind": "edge",
    "p_avg": 0.4501,
    "fair": 1.35,
-   "result": null,
+   "result": 0,
    "score": "1-3"
   },
   {
@@ -18986,7 +19660,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null,
+   "result": 0,
    "score": "1-0"
   },
   {
@@ -19002,7 +19676,7 @@
    "kind": "edge",
    "p_avg": 0.5699,
    "fair": 1.48,
-   "result": null,
+   "result": 1,
    "score": "1-0"
   },
   {
@@ -19018,7 +19692,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null,
+   "result": 0,
    "score": "1-2"
   },
   {
@@ -19034,7 +19708,7 @@
    "kind": "edge",
    "p_avg": 0.367,
    "fair": 1.51,
-   "result": null,
+   "result": 1,
    "score": "1-2"
   },
   {
@@ -19050,7 +19724,7 @@
    "kind": "edge",
    "p_avg": 0.4381,
    "fair": 1.49,
-   "result": null,
+   "result": 1,
    "score": "1-2"
   },
   {
@@ -19066,7 +19740,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null,
+   "result": 1,
    "score": "2-0"
   },
   {
@@ -19082,7 +19756,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null,
+   "result": 0,
    "score": "4-4"
   },
   {
@@ -19098,7 +19772,7 @@
    "kind": "edge",
    "p_avg": 0.3888,
    "fair": 1.44,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -19114,7 +19788,7 @@
    "kind": "edge",
    "p_avg": 0.5722,
    "fair": 1.39,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -19130,7 +19804,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "GR-b2ee2c1ccd19eae8b4e3d0546d7db67b",
@@ -19145,7 +19820,8 @@
    "kind": "edge",
    "p_avg": 0.2858,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -19160,7 +19836,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -19175,7 +19852,8 @@
    "kind": "edge",
    "p_avg": 0.3893,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -19190,7 +19868,8 @@
    "kind": "edge",
    "p_avg": 0.3556,
    "fair": 1.66,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-677618d6faa4a93da9795e1c0482993c",
@@ -19205,7 +19884,8 @@
    "kind": "edge",
    "p_avg": 0.4598,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -19220,7 +19900,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -19235,7 +19916,8 @@
    "kind": "edge",
    "p_avg": 0.2461,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -19250,7 +19932,8 @@
    "kind": "edge",
    "p_avg": 0.3155,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -19265,7 +19948,8 @@
    "kind": "edge",
    "p_avg": 0.3064,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "GR-52a7ada0374713bbf2bb3c5541c6cf74",
@@ -19280,7 +19964,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.6,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "GR-52a7ada0374713bbf2bb3c5541c6cf74",
@@ -19295,7 +19980,8 @@
    "kind": "edge",
    "p_avg": 0.4837,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "GR-52a7ada0374713bbf2bb3c5541c6cf74",
@@ -19310,7 +19996,8 @@
    "kind": "edge",
    "p_avg": 0.5402,
    "fair": 1.55,
-   "result": null
+   "result": 1,
+   "score": "0-0"
   },
   {
    "match_id": "GR-58b71c53bc15c3996694b3c8e9350cdc",
@@ -19325,7 +20012,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PD-71ca5141a1c532e390c6fa14e080d8bd",
@@ -19340,7 +20028,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "PD-71ca5141a1c532e390c6fa14e080d8bd",
@@ -19355,7 +20044,8 @@
    "kind": "edge",
    "p_avg": 0.4269,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -19370,7 +20060,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-3"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -19385,7 +20076,8 @@
    "kind": "edge",
    "p_avg": 0.3186,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "0-3"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -19400,7 +20092,8 @@
    "kind": "edge",
    "p_avg": 0.4206,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-3"
   },
   {
    "match_id": "PD-5b386dfdf6f76705116fbb4120ee8493",
@@ -19415,7 +20108,8 @@
    "kind": "edge",
    "p_avg": 0.4251,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-3"
   },
   {
    "match_id": "PD-c35673eb1e889309d6985c091a43a3f5",
@@ -19430,7 +20124,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "PD-339a6465fa5153fd8f31e487cf557cf0",
@@ -19445,7 +20140,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PD-339a6465fa5153fd8f31e487cf557cf0",
@@ -19460,7 +20156,8 @@
    "kind": "edge",
    "p_avg": 0.5901,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -19475,7 +20172,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "PD-0d2e199bfba0db42871696c10037bad3",
@@ -19490,7 +20188,8 @@
    "kind": "edge",
    "p_avg": 0.5877,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "PD-81ad04996f63fb60b494d243b13ac586",
@@ -19505,7 +20204,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "PD-81ad04996f63fb60b494d243b13ac586",
@@ -19520,7 +20220,8 @@
    "kind": "edge",
    "p_avg": 0.3155,
    "fair": 1.55,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -19535,7 +20236,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -19550,7 +20252,8 @@
    "kind": "edge",
    "p_avg": 0.3534,
    "fair": 1.42,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -19565,7 +20268,8 @@
    "kind": "edge",
    "p_avg": 0.3161,
    "fair": 1.56,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "PD-dd247b356d8fc53e4b4f9bfcfe09c924",
@@ -19580,7 +20284,8 @@
    "kind": "edge",
    "p_avg": 0.4269,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -19595,7 +20300,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -19610,7 +20316,8 @@
    "kind": "edge",
    "p_avg": 0.3628,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SA-f110107bca066ac1a598c89661c88fa3",
@@ -19625,7 +20332,8 @@
    "kind": "edge",
    "p_avg": 0.4039,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SA-23bf8ea47358ef82f65aa7398a2b3921",
@@ -19640,7 +20348,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SA-7a68b099b47ed7724062b661cd9af464",
@@ -19655,7 +20364,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SA-7a68b099b47ed7724062b661cd9af464",
@@ -19670,7 +20380,8 @@
    "kind": "edge",
    "p_avg": 0.3531,
    "fair": 1.49,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -19685,7 +20396,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -19700,7 +20412,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -19715,7 +20428,8 @@
    "kind": "edge",
    "p_avg": 0.422,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SA-657fd1ac35832f65fcc6feba93970e10",
@@ -19730,7 +20444,8 @@
    "kind": "edge",
    "p_avg": 0.44,
    "fair": 1.44,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -19745,7 +20460,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -19760,7 +20476,8 @@
    "kind": "edge",
    "p_avg": 0.4351,
    "fair": 1.47,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -19775,7 +20492,8 @@
    "kind": "edge",
    "p_avg": 0.3818,
    "fair": 1.77,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -19790,7 +20508,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -19805,7 +20524,8 @@
    "kind": "edge",
    "p_avg": 0.511,
    "fair": 1.48,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BL-716d6e3f3e91c47a6efaa2e93d570533",
@@ -19820,7 +20540,8 @@
    "kind": "edge",
    "p_avg": 0.5281,
    "fair": 1.44,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BL-c70f9f21f48464daa93973147502e183",
@@ -19835,7 +20556,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -19850,7 +20572,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -19865,7 +20588,8 @@
    "kind": "edge",
    "p_avg": 0.3851,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -19880,7 +20604,8 @@
    "kind": "edge",
    "p_avg": 0.3821,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BL-c1b9696d88719cb8832d794b986cdd68",
@@ -19895,7 +20620,8 @@
    "kind": "edge",
    "p_avg": 0.3676,
    "fair": 1.68,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -19910,7 +20636,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -19925,7 +20652,8 @@
    "kind": "edge",
    "p_avg": 0.3851,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -19940,7 +20668,8 @@
    "kind": "edge",
    "p_avg": 0.3821,
    "fair": 1.49,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -19955,7 +20684,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -19970,7 +20700,8 @@
    "kind": "edge",
    "p_avg": 0.3773,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -19985,7 +20716,8 @@
    "kind": "edge",
    "p_avg": 0.4181,
    "fair": 1.65,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -20000,7 +20732,8 @@
    "kind": "edge",
    "p_avg": 0.5406,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -20015,7 +20748,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -20030,7 +20764,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -20045,7 +20780,8 @@
    "kind": "edge",
    "p_avg": 0.5738,
    "fair": 1.46,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4288fbe018e6e6fb223e389bcf3e57dd",
@@ -20060,7 +20796,8 @@
    "kind": "edge",
    "p_avg": 0.5389,
    "fair": 1.55,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -20075,7 +20812,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -20090,7 +20828,8 @@
    "kind": "edge",
    "p_avg": 0.4611,
    "fair": 1.41,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-a529e5762f18d97981194ec3668dc3d3",
@@ -20105,7 +20844,8 @@
    "kind": "edge",
    "p_avg": 0.4181,
    "fair": 1.62,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -20120,7 +20860,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -20135,7 +20876,8 @@
    "kind": "edge",
    "p_avg": 0.3471,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-54fae64b1421d836e07a17cad0536c73",
@@ -20150,7 +20892,8 @@
    "kind": "edge",
    "p_avg": 0.4351,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-cc9731ee7796fe0d532f11ca2aa522c9",
@@ -20165,7 +20908,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "FL1-cc9731ee7796fe0d532f11ca2aa522c9",
@@ -20180,7 +20924,8 @@
    "kind": "edge",
    "p_avg": 0.5649,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "FL1-cc9731ee7796fe0d532f11ca2aa522c9",
@@ -20195,7 +20940,8 @@
    "kind": "edge",
    "p_avg": 0.5406,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "FL1-3e9954446f26494c04c4967db523d375",
@@ -20210,7 +20956,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-3e9954446f26494c04c4967db523d375",
@@ -20225,7 +20972,8 @@
    "kind": "edge",
    "p_avg": 0.5885,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -20240,7 +20988,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -20255,7 +21004,8 @@
    "kind": "edge",
    "p_avg": 0.5389,
    "fair": 1.42,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "FL1-4e917e19b59093a02a0e12bcf9a5ecc4",
@@ -20270,7 +21020,8 @@
    "kind": "edge",
    "p_avg": 0.5819,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -20285,7 +21036,8 @@
    "kind": "edge",
    "p_avg": 0.5749,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -20300,7 +21052,8 @@
    "kind": "edge",
    "p_avg": 0.6145,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "DED-da066424422bbd4438e5000312b822fd",
@@ -20315,7 +21068,8 @@
    "kind": "edge",
    "p_avg": 0.5894,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -20330,7 +21084,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -20345,7 +21100,8 @@
    "kind": "edge",
    "p_avg": 0.2381,
    "fair": 1.56,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "DED-5d4dbfdacb0b931ba7b8d771bfed5e0e",
@@ -20360,7 +21116,8 @@
    "kind": "edge",
    "p_avg": 0.4251,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "DED-019e9d824f3f2251e5b777623d34a9df",
@@ -20375,7 +21132,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "5-3"
   },
   {
    "match_id": "DED-b71f32fbba046e08d4cc26e2a8e1d5a6",
@@ -20390,7 +21148,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "DED-b71f32fbba046e08d4cc26e2a8e1d5a6",
@@ -20405,7 +21164,8 @@
    "kind": "edge",
    "p_avg": 0.5293,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "DED-b71f32fbba046e08d4cc26e2a8e1d5a6",
@@ -20420,7 +21180,8 @@
    "kind": "edge",
    "p_avg": 0.6149,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -20435,7 +21196,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "4-3"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -20450,7 +21212,8 @@
    "kind": "edge",
    "p_avg": 0.4774,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "4-3"
   },
   {
    "match_id": "DED-c22d673775e6a4dc0810cc88b0ed75ec",
@@ -20465,7 +21228,8 @@
    "kind": "edge",
    "p_avg": 0.4457,
    "fair": 1.62,
-   "result": null
+   "result": 0,
+   "score": "4-3"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -20480,7 +21244,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -20495,7 +21260,8 @@
    "kind": "edge",
    "p_avg": 0.3191,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-547e4e8cf5577a50926272e0e1a7e677",
@@ -20510,7 +21276,8 @@
    "kind": "edge",
    "p_avg": 0.3566,
    "fair": 1.61,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -20525,7 +21292,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -20540,7 +21308,8 @@
    "kind": "edge",
    "p_avg": 0.2735,
    "fair": 1.5,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -20555,7 +21324,8 @@
    "kind": "edge",
    "p_avg": 0.4117,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-d9d924bf6388e1288f06e04041b3fe33",
@@ -20570,7 +21340,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "PPL-d9d924bf6388e1288f06e04041b3fe33",
@@ -20585,7 +21356,8 @@
    "kind": "edge",
    "p_avg": 0.5582,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -20600,7 +21372,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -20615,7 +21388,8 @@
    "kind": "edge",
    "p_avg": 0.3331,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-ba0a2d492dfcc89ab465eddd7a9e98c2",
@@ -20630,7 +21404,8 @@
    "kind": "edge",
    "p_avg": 0.3783,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-88fe8a3db780908444b4b21229766ad5",
@@ -20675,7 +21450,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PPL-3145127655251c9de0251675640e2101",
@@ -20690,7 +21466,8 @@
    "kind": "edge",
    "p_avg": 0.5353,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -20705,7 +21482,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -20720,7 +21498,8 @@
    "kind": "edge",
    "p_avg": 0.3343,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -20735,7 +21514,8 @@
    "kind": "edge",
    "p_avg": 0.3384,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-c02a3d0a40d536e48bb60dffe0e3cd1e",
@@ -20750,7 +21530,8 @@
    "kind": "edge",
    "p_avg": 0.3234,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "2-3"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -20765,7 +21546,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -20780,7 +21562,8 @@
    "kind": "edge",
    "p_avg": 0.2558,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "PPL-3642cddab8c2e0da43a419cdd01d1db0",
@@ -20795,7 +21578,8 @@
    "kind": "edge",
    "p_avg": 0.3803,
    "fair": 1.63,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-afde306e7e186da45ff6778a7e952d51",
@@ -20810,7 +21594,8 @@
    "kind": "edge",
    "p_avg": 0.578,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-afde306e7e186da45ff6778a7e952d51",
@@ -20825,7 +21610,8 @@
    "kind": "edge",
    "p_avg": 0.5723,
    "fair": 1.44,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "BEL-55129ba3a50af7761828c774c793385a",
@@ -20840,7 +21626,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BEL-55129ba3a50af7761828c774c793385a",
@@ -20855,7 +21642,8 @@
    "kind": "edge",
    "p_avg": 0.3843,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BEL-55129ba3a50af7761828c774c793385a",
@@ -20870,7 +21658,8 @@
    "kind": "edge",
    "p_avg": 0.4191,
    "fair": 1.55,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "BEL-8a92794bd5f89b8b91b2d8fefdac7b85",
@@ -20885,7 +21674,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "BEL-8a92794bd5f89b8b91b2d8fefdac7b85",
@@ -20900,7 +21690,8 @@
    "kind": "edge",
    "p_avg": 0.5514,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "BEL-16029fbb3d6ae79243c5650896bef095",
@@ -20915,7 +21706,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-16029fbb3d6ae79243c5650896bef095",
@@ -20930,7 +21722,8 @@
    "kind": "edge",
    "p_avg": 0.3893,
    "fair": 1.62,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-3eb376e5f313e6d8e7ca8bb6556d0b29",
@@ -20975,7 +21768,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 0,
+   "score": "0-5"
   },
   {
    "match_id": "TUR-a85eafd97e49ac329956fa1022be891d",
@@ -20990,7 +21784,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -21005,7 +21800,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -21020,7 +21816,8 @@
    "kind": "edge",
    "p_avg": 0.3152,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -21035,7 +21832,8 @@
    "kind": "edge",
    "p_avg": 0.2916,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "TUR-1fa78d1150755a8ec1d24cc1e19eeb0a",
@@ -21050,7 +21848,8 @@
    "kind": "edge",
    "p_avg": 0.3022,
    "fair": 1.67,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -21065,7 +21864,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-c0e37c6792227c40758ba2525aa1c875",
@@ -21080,7 +21880,8 @@
    "kind": "edge",
    "p_avg": 0.5777,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-4"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -21095,7 +21896,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-972070a557d435f7f7a07bb9db18261d",
@@ -21110,7 +21912,8 @@
    "kind": "edge",
    "p_avg": 0.3365,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -21125,7 +21928,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -21140,7 +21944,8 @@
    "kind": "edge",
    "p_avg": 0.3573,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-d118b96272c80f8b437f269d8a4c2f5e",
@@ -21155,7 +21960,8 @@
    "kind": "edge",
    "p_avg": 0.3925,
    "fair": 1.44,
-   "result": null
+   "result": 0,
+   "score": "2-5"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -21170,7 +21976,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -21185,7 +21992,8 @@
    "kind": "edge",
    "p_avg": 0.2236,
    "fair": 1.44,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -21200,7 +22008,8 @@
    "kind": "edge",
    "p_avg": 0.2386,
    "fair": 1.41,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -21215,7 +22024,8 @@
    "kind": "edge",
    "p_avg": 0.3726,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L1-3af2458dd9984d806bbf46e7bd2d7872",
@@ -21485,7 +22295,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "BL2-7e748a8bdb13a55389b8e51876b9a504",
@@ -21500,7 +22311,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BL2-7e748a8bdb13a55389b8e51876b9a504",
@@ -21515,7 +22327,8 @@
    "kind": "edge",
    "p_avg": 0.5443,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "BL2-63c47ffbc57892224b9af4b2c2436522",
@@ -21530,7 +22343,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 0,
+   "score": "4-1"
   },
   {
    "match_id": "BL2-63c47ffbc57892224b9af4b2c2436522",
@@ -21545,7 +22359,8 @@
    "kind": "edge",
    "p_avg": 0.5997,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "BL2-e8c45f8f9ebcfde9f58ed47573691def",
@@ -21560,7 +22375,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "BL2-e8c45f8f9ebcfde9f58ed47573691def",
@@ -21575,7 +22391,8 @@
    "kind": "edge",
    "p_avg": 0.5828,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "BL2-e8c45f8f9ebcfde9f58ed47573691def",
@@ -21590,7 +22407,8 @@
    "kind": "edge",
    "p_avg": 0.5749,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -21605,7 +22423,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -21620,7 +22439,8 @@
    "kind": "edge",
    "p_avg": 0.4203,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SB-ebe8c1e4f71ba1f130a9fafb953425f1",
@@ -21635,7 +22455,8 @@
    "kind": "edge",
    "p_avg": 0.5584,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SB-c56ba830ee1ac3cd75ec31423529dd91",
@@ -21650,7 +22471,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "SB-c56ba830ee1ac3cd75ec31423529dd91",
@@ -21665,7 +22487,8 @@
    "kind": "edge",
    "p_avg": 0.4416,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "SB-f892f9aa0772c3febcde6fb5477bb6ea",
@@ -21680,7 +22503,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SB-f892f9aa0772c3febcde6fb5477bb6ea",
@@ -21695,7 +22519,8 @@
    "kind": "edge",
    "p_avg": 0.6026,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SB-fd4b1507292f89721d6d024b337a6375",
@@ -21710,7 +22535,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "SD-b9e2011f8642a0d0dfea4854957e199f",
@@ -21725,7 +22551,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SD-b9e2011f8642a0d0dfea4854957e199f",
@@ -21740,7 +22567,8 @@
    "kind": "edge",
    "p_avg": 0.3683,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -21755,7 +22583,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -21770,7 +22599,8 @@
    "kind": "edge",
    "p_avg": 0.5735,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -21785,7 +22615,8 @@
    "kind": "edge",
    "p_avg": 0.5308,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "SD-74b73ae67252501f068cac62f02f25bb",
@@ -21800,7 +22631,8 @@
    "kind": "edge",
    "p_avg": 0.5687,
    "fair": 1.5,
-   "result": null
+   "result": 1,
+   "score": "1-3"
   },
   {
    "match_id": "SD-ec36d0af95915a31fefdf2f72bb8adeb",
@@ -21860,7 +22692,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "SD-d30d1bf02fe13e8aade539b76289bdc3",
@@ -21875,7 +22708,8 @@
    "kind": "edge",
    "p_avg": 0.5596,
    "fair": 1.44,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-d30d1bf02fe13e8aade539b76289bdc3",
@@ -21890,7 +22724,8 @@
    "kind": "edge",
    "p_avg": 0.6015,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-0377ed072a93f8b77593c0f001fda9ec",
@@ -21935,7 +22770,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SD-f52b83a74c511828f6155889d751d191",
@@ -22085,7 +22921,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -22100,7 +22937,8 @@
    "kind": "edge",
    "p_avg": 0.5527,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "FL2-cb1988f7950962d316571dd0ed98b540",
@@ -22940,7 +23778,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null,
+   "result": 1,
    "score": "1-0"
   },
   {
@@ -22956,7 +23794,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -22972,7 +23810,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BL-8963081c3457212ee238b498bbc33a03",
@@ -22987,7 +23826,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -23002,7 +23842,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -23017,7 +23858,8 @@
    "kind": "edge",
    "p_avg": 0.2058,
    "fair": 1.56,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -23032,7 +23874,8 @@
    "kind": "edge",
    "p_avg": 0.3271,
    "fair": 1.39,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-8553a80cf1ae5cbe3e7a69b76ce8167f",
@@ -23047,7 +23890,8 @@
    "kind": "edge",
    "p_avg": 0.2396,
    "fair": 1.64,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -23062,7 +23906,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -23077,7 +23922,8 @@
    "kind": "edge",
    "p_avg": 0.3595,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "FL1-f7b240389fa5ec055c58a48ab153dcdd",
@@ -23092,7 +23938,8 @@
    "kind": "edge",
    "p_avg": 0.3471,
    "fair": 1.5,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BL2-e8c45f8f9ebcfde9f58ed47573691def",
@@ -23107,7 +23954,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "SD-0377ed072a93f8b77593c0f001fda9ec",
@@ -23212,7 +24060,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null,
+   "result": 0,
    "score": "1-0"
   },
   {
@@ -23228,7 +24076,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SA-5ea6b7050b00fcc1832f7938794dd755",
@@ -23243,7 +24092,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SA-7f50eb7deaebfbcd45c3f4e7cd3724e4",
@@ -23258,7 +24108,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "PPL-9d545e362d9e690aa8e41b4ccf4d4c78",
@@ -23273,7 +24124,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-9d545e362d9e690aa8e41b4ccf4d4c78",
@@ -23288,7 +24140,8 @@
    "kind": "edge",
    "p_avg": 0.5634,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-9d545e362d9e690aa8e41b4ccf4d4c78",
@@ -23303,7 +24156,8 @@
    "kind": "edge",
    "p_avg": 0.5785,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "BEL-fceade9430abcb824182a6aa031880db",
@@ -23318,7 +24172,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "TUR-6692a3ca274d09ffbfabd943320d62f5",
@@ -23333,7 +24188,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 0,
+   "score": "0-5"
   },
   {
    "match_id": "SCO-320cba0343e467f93a65a97da656413d",
@@ -23348,7 +24204,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L1-7147fa15092c5d85c5ff46f815e2d5ee",
@@ -23603,7 +24460,7 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null,
+   "result": 1,
    "score": "4-4"
   },
   {
@@ -23619,7 +24476,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "GR-2674c9a72345391ad764db72e2532378",
@@ -23634,7 +24492,8 @@
    "kind": "edge",
    "p_avg": 0.5161,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-dc222b364fd01d7dfe92d95975b26c79",
@@ -23649,7 +24508,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "GR-58b71c53bc15c3996694b3c8e9350cdc",
@@ -23664,7 +24524,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "L1-e315dc04bd19f74df3199a20acf38004",
@@ -23979,7 +24840,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-3"
   },
   {
    "match_id": "L1-82da0980dcfc5af1d8436be9c3531d91",
@@ -24294,6 +25156,261 @@
    "kind": "edge",
    "p_avg": 0.448,
    "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "SD-7bfc2afc162934f011a8425159e340da",
+   "comp": "SD",
+   "date": "2026-11-09T19:30:00Z",
+   "home": "Las Palmas",
+   "away": "CD Eldense",
+   "key": "S:fo:1X2",
+   "side": "2",
+   "label": "Περισσότερα φάουλ: CD Eldense",
+   "p": 0.6383,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-7bfc2afc162934f011a8425159e340da",
+   "comp": "SD",
+   "date": "2026-11-09T19:30:00Z",
+   "home": "Las Palmas",
+   "away": "CD Eldense",
+   "key": "S:sh:H:13.5",
+   "side": "Under",
+   "label": "Las Palmas: Σουτ Under 13.5",
+   "p": 0.6852,
+   "kind": "edge",
+   "p_avg": 0.437,
+   "fair": 1.46,
+   "result": null
+  },
+  {
+   "match_id": "SD-7bfc2afc162934f011a8425159e340da",
+   "comp": "SD",
+   "date": "2026-11-09T19:30:00Z",
+   "home": "Las Palmas",
+   "away": "CD Eldense",
+   "key": "S:sh:T:26.5",
+   "side": "Under",
+   "label": "Σουτ Under 26.5",
+   "p": 0.7185,
+   "kind": "edge",
+   "p_avg": 0.5346,
+   "fair": 1.39,
+   "result": null
+  },
+  {
+   "match_id": "SD-7bfc2afc162934f011a8425159e340da",
+   "comp": "SD",
+   "date": "2026-11-09T19:30:00Z",
+   "home": "Las Palmas",
+   "away": "CD Eldense",
+   "key": "S:fo:H:13.5",
+   "side": "Under",
+   "label": "Las Palmas: Φάουλ Under 13.5",
+   "p": 0.6708,
+   "kind": "edge",
+   "p_avg": 0.5217,
+   "fair": 1.49,
+   "result": null
+  },
+  {
+   "match_id": "SD-fed29050dc7e99c7dd6b3b4580f142b7",
+   "comp": "SD",
+   "date": "2026-11-13T19:30:00Z",
+   "home": "Leganés",
+   "away": "Burgos CF",
+   "key": "S:ca:T:6.5",
+   "side": "Under",
+   "label": "Κάρτες Under 6.5",
+   "p": 0.6268,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.6,
+   "result": null
+  },
+  {
+   "match_id": "SD-fed29050dc7e99c7dd6b3b4580f142b7",
+   "comp": "SD",
+   "date": "2026-11-13T19:30:00Z",
+   "home": "Leganés",
+   "away": "Burgos CF",
+   "key": "S:sh:A:10.5",
+   "side": "Over",
+   "label": "Burgos CF: Σουτ Over 10.5",
+   "p": 0.6741,
+   "kind": "edge",
+   "p_avg": 0.574,
+   "fair": 1.48,
+   "result": null
+  },
+  {
+   "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
+   "comp": "SD",
+   "date": "2026-11-14T15:15:00Z",
+   "home": "Real Sociedad B",
+   "away": "Sporting Gijón",
+   "key": "S:st:T:9.5",
+   "side": "Under",
+   "label": "Σουτ στην εστία Under 9.5",
+   "p": 0.6352,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-570ec7734e1f7d9e813ab0013291f5f5",
+   "comp": "SD",
+   "date": "2026-11-14T17:30:00Z",
+   "home": "Almería",
+   "away": "Andorra CF",
+   "key": "S:sh:T:24.5",
+   "side": "Over",
+   "label": "Σουτ Over 24.5",
+   "p": 0.6358,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
+   "comp": "SD",
+   "date": "2026-11-14T17:30:00Z",
+   "home": "Mallorca",
+   "away": "Córdoba",
+   "key": "S:ca:A:3.5",
+   "side": "Under",
+   "label": "Córdoba: κάρτες Under 3.5",
+   "p": 0.6386,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
+   "comp": "SD",
+   "date": "2026-11-14T17:30:00Z",
+   "home": "Mallorca",
+   "away": "Córdoba",
+   "key": "S:co:A:3.5",
+   "side": "Over",
+   "label": "Córdoba: Κόρνερ Over 3.5",
+   "p": 0.6623,
+   "kind": "edge",
+   "p_avg": 0.5647,
+   "fair": 1.51,
+   "result": null
+  },
+  {
+   "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
+   "comp": "SD",
+   "date": "2026-11-14T20:00:00Z",
+   "home": "Oviedo",
+   "away": "Girona FC",
+   "key": "S:fo:T:30.5",
+   "side": "Under",
+   "label": "Φάουλ Under 30.5",
+   "p": 0.6367,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
+   "comp": "SD",
+   "date": "2026-11-14T20:00:00Z",
+   "home": "Oviedo",
+   "away": "Girona FC",
+   "key": "S:ca:T:5.5",
+   "side": "Over",
+   "label": "Κάρτες Over 5.5",
+   "p": 0.6194,
+   "kind": "edge",
+   "p_avg": 0.5043,
+   "fair": 1.61,
+   "result": null
+  },
+  {
+   "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
+   "comp": "SD",
+   "date": "2026-11-15T13:00:00Z",
+   "home": "Tenerife",
+   "away": "AD Ceuta FC",
+   "key": "S:sv:H:1.5",
+   "side": "Over",
+   "label": "Tenerife: αποκρούσεις Over 1.5",
+   "p": 0.6382,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
+   "comp": "SD",
+   "date": "2026-11-15T13:00:00Z",
+   "home": "Tenerife",
+   "away": "AD Ceuta FC",
+   "key": "S:fo:T:26.5",
+   "side": "Over",
+   "label": "Φάουλ Over 26.5",
+   "p": 0.724,
+   "kind": "edge",
+   "p_avg": 0.5258,
+   "fair": 1.38,
+   "result": null
+  },
+  {
+   "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
+   "comp": "SD",
+   "date": "2026-11-15T13:00:00Z",
+   "home": "Tenerife",
+   "away": "AD Ceuta FC",
+   "key": "S:sh:H:14.5",
+   "side": "Under",
+   "label": "Tenerife: Σουτ Under 14.5",
+   "p": 0.7153,
+   "kind": "edge",
+   "p_avg": 0.5191,
+   "fair": 1.4,
+   "result": null
+  },
+  {
+   "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "CD Eldense",
+   "away": "Sabadell FC",
+   "key": "S:ca:T:6.5",
+   "side": "Under",
+   "label": "Κάρτες Under 6.5",
+   "p": 0.636,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
+   "comp": "SD",
+   "date": "2026-11-15T17:30:00Z",
+   "home": "SD Eibar",
+   "away": "Cádiz CF",
+   "key": "S:st:A:2.5",
+   "side": "Over",
+   "label": "Cádiz CF: σουτ στην εστία Over 2.5",
+   "p": 0.6384,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
    "result": null
   }
  ]
