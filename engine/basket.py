@@ -14,7 +14,7 @@ import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 
-from . import config, espn, markets, model, predictions, sources
+from . import config, espn, markets, model, predictions, props, sources
 
 FEED = "https://feeds.incrowdsports.com/provider/euroleague-feeds/v2/competitions/{c}/seasons/{s}/games?limit=400"
 BOX = "https://api-live.euroleague.net/v2/competitions/{c}/seasons/{s}/games/{g}/stats"
@@ -266,7 +266,28 @@ def build(cid, comp, margins_tbl):
     if len(played_cur) + len(played_prev) < 50:
         return res
     R = fit(played_cur, played_prev)
-    box = espn.nba_boxscores(played_cur) if comp.get("src") == "espn" else boxscores(comp["feed"], year, played_cur)
+    if comp.get("src") == "espn":
+        box = espn.nba_boxscores(played_cur + played_prev)
+    else:
+        box = boxscores(comp["feed"], year, played_cur)
+    # επιλογές παικτών: μοντέλο + εβδομαδιαίος έλεγχος (μόνο στατιστικά που κερδίζουν μένουν)
+    PM = props.Model(played_prev + played_cur, box)
+    check = sources._cached(f"props_check_{cid}.json", 24 * 7)
+    if check is None:
+        check = props.research(played_prev + played_cur, box)
+        sources._save_cache(f"props_check_{cid}.json", check)
+    res["props_check"] = check
+
+    def roster(team):
+        last = sorted((x for x in played_cur if team in (x["home"], x["away"])), key=lambda x: x["date"])[-1:]
+        b = box.get(str(last[0]["code"]), {}) if last else {}
+        return [r[0] for r in b.get("home" if last and last[0]["home"] == team else "away", [])]
+
+    def nice_name(n):
+        if ", " in n:
+            last, _, first = n.partition(", ")
+            return f"{first.title()} {last.title()}".strip()
+        return n
 
     events, remaining = sources.odds_api(comp["odds"], "h2h,spreads,totals") if comp.get("odds") else (None, None)
     res["credits"] = remaining
@@ -331,6 +352,12 @@ def build(cid, comp, margins_tbl):
         h2h = [{"date": x["date"][:10], "home": x["home_short"], "away": x["away_short"], "score": f"{x['hp']}-{x['ap']}"}
                for x in sorted(played_cur + played_prev, key=lambda x: x["date"], reverse=True)
                if {x["home"], x["away"]} == {h, a}][:6]
+        pk = props.picks(PM, check, roster(h), h, a, g["date"]) + props.picks(PM, check, roster(a), a, h, g["date"])
+        for x in pk:
+            x["player"] = nice_name(x["player"])
+            x["team"] = g["home_short"] if x["team"] == h else g["away_short"]
+            x["label"] = f"{x['player']}: {x['name']} {x['side']} {x['line']:g}"
+        pk = sorted(pk, key=lambda x: -(x["p"] - x["p_avg"]))[:2]
         res["matches"].append({
             "id": f"{cid}-{g['code']}", "comp": cid, "sport": "basketball", "date": g["date"],
             "stage": f"Αγωνιστική {g['round']}" if g.get("round") else None,
@@ -341,7 +368,7 @@ def build(cid, comp, margins_tbl):
             "sd": [round(R["sd_margin"], 1), round(R["sd_total"], 1)],
             "markets": sels,
             "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
-            "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books),
+            "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books), "props": pk,
             "players": {"source": comp.get("players_src", "EuroLeague (επίσημα στατιστικά, τελευταίοι 10 αγώνες)"),
                         "home": players_for(h, [(0, x) for x in h_box], mh, hs.get("ppg")),
                         "away": players_for(a, [(0, x) for x in a_box], ma, as_.get("ppg"))},

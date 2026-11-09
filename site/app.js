@@ -183,6 +183,14 @@
       ${e.fit_text ? `<div class="fitline">${esc(e.fit_text)}</div>` : ""}
       ${e.n ? `<div class="fitline">Έρευνα: σε ${e.n.toLocaleString("el-GR")} παρόμοιες περιπτώσεις έγινε ${pct(e.hit)} (ο μέσος όρος έλεγε ${pct(e.r_avg)}).</div>` : ""}</div>`;
   }
+  function propBox(m, x) {
+    const lad = (x.ladder || []).map(l => `<span class="lad"><b>${x.side} ${l.line}</b> ${pct(l.p)} · από <b>${f2(l.min_odds)}</b></span>`).join("");
+    return `<div class="card pick">
+      <div><div class="sel">🏀 ${esc(x.label)}</div><div class="match">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'</div></div>
+      <div><div class="odds">${pct(x.p)}</div><div class="book">από ${f2(x.min_odds)}</div></div>
+      <div class="ladder">${lad}</div>
+      <div class="fitline">Έλεγχος: σε ${x.n.toLocaleString("el-GR")} παρόμοιες επιλογές βγήκε ${pct(x.hit)}.</div></div>`;
+  }
   function diffHtml(m) {
     const D = m.difficulty;
     if (!D) return "";
@@ -199,10 +207,11 @@
     if (key === "ML") return `Νίκη ${side === "H" ? m.home : m.away}`;
     if (key === "DC") return { "1X": `${m.home} ή ισοπαλία`, X2: `${m.away} ή ισοπαλία`, "12": "Όχι ισοπαλία" }[side] || label;
     if (key === "BTTS") return side === "Yes" ? "Γκολ-Γκολ" : "Όχι Γκολ-Γκολ";
-    if (/^OU\d/.test(key)) return `${side} ${key.slice(2)} γκολ`;
+    const unit = (m.sport === "basketball" || state.data?.competitions?.[m.comp]?.sport === "basketball") ? "πόντοι" : "γκολ";
+    if (/^OU\d/.test(key)) return `${side} ${key.slice(2)} ${unit}`;
     if (key.startsWith("AH")) { const L = parseFloat(key.slice(2)), t = side === "H" ? m.home : m.away, v = side === "H" ? L : -L; return L === 0 ? `${t} (ισοπαλία επιστροφή)` : `${t} ${v > 0 ? "+" : ""}${v}`; }
-    if (key.startsWith("HT_OU")) return `${m.home} ${side} ${key.slice(5)} γκολ`;
-    if (key.startsWith("AT_OU")) return `${m.away} ${side} ${key.slice(5)} γκολ`;
+    if (key.startsWith("HT_OU")) return `${m.home} ${side} ${key.slice(5)} ${unit}`;
+    if (key.startsWith("AT_OU")) return `${m.away} ${side} ${key.slice(5)} ${unit}`;
     return label;
   }
   const byTime = (a, b) => a.m.date.localeCompare(b.m.date);
@@ -235,6 +244,10 @@
     L += section("📊 Στατιστικά", "Οι 6 πιο πιθανές (μία ανά αγώνα), με σειρά ώρας. Παίξ' το αν η απόδοση είναι ≥ «από». Για τα υπόλοιπα άνοιξε τον αγώνα.",
       edges.length ? `<div class="list">${edges.map(({ m, e }) => ri(m, `${STAT_ICON[e.stat] || ""} ${esc(e.label)}`, fitPill(e), pct(e.p), `από ${f2(e.min_odds)}`, "", e.p)).join("")}</div>`
         : `<div class="empty-s">Καμία μεγάλη απόκλιση στους αγώνες που φαίνονται.</div>`);
+    // 2β. Παίκτες μπάσκετ: μόνο επιλογές που πέρασαν τον έλεγχο
+    const props = ms.flatMap(m => (m.props || []).map(x => ({ m, x }))).sort((a, b) => b.x.p - a.x.p).slice(0, 6).sort(byTime);
+    if (props.length) L += section("🏀 Παίκτες", "Πόντοι, ριμπάουντ, ασίστ κ.ά. μόνο όπου το μοντέλο κέρδισε στον έλεγχο. Παίξ' το αν η απόδοση είναι ≥ «από».",
+      `<div class="list">${props.map(({ m, x }) => ri(m, esc(x.label), "", pct(x.p), `από ${f2(x.min_odds)}`, "", x.p)).join("")}</div>`);
     // 3. Πιθανότερες προβλέψεις: μόνο οι κορυφαίες
     const preds = ms.filter(m => m.top && m.top.length).map(m => ({ m, t: m.top[0] })).sort((a, b) => b.t.p - a.t.p).slice(0, 8).sort(byTime);
     R += section("⭐ Πιθανότερες προβλέψεις", "Οι 8 πιο πιθανές (απόδοση ≥ 1.40), με σειρά ώρας. Πάτα για ανάλυση του αγώνα.",
@@ -337,6 +350,7 @@
         <div class="ri-r"><b>${pct(t.p)}</b><span>~${f2(t.est)}</span></div></div>`).join("") + `</div>`;
     }
     if (m.values?.length) s1 += `<h3 class="day-sub">💎 Ευκαιρίες</h3><div class="list">` + m.values.map(s => `<div class="ri"><div class="ri-main"><div class="ri-t">${esc(nice(m, s.key, s.side, s.label))} <span class="pill hot">${evTxt(s.ev)}</span></div><div class="ri-s">Η ${esc(s.book)} δίνει πάνω από τη δίκαιη τιμή (${f2(s.fair)})</div></div><div class="ri-r"><b>${f2(s.best)}</b><span>${pct(s.p)}</span></div></div>`).join("") + `</div>`;
+    if (m.props?.length) s1 += `<h3 class="day-sub">🏀 Παίκτες με αξία</h3><div class="grid">${m.props.map(x => propBox(m, x)).join("")}</div>`;
     if (m.stat_edges?.length) s1 += `<h3 class="day-sub">📊 Στατιστικά με αξία</h3><div class="grid">${m.stat_edges.map(e => edgeBox(m, e)).join("")}</div>`;
     if (m.stat_top?.length) s1 += `<h3 class="day-sub">Πιθανότερα στα στατιστικά</h3><div class="list">` + m.stat_top.map(t => `<div class="ri">
         <div class="ri-main"><div class="ri-t">${esc(t.label)} ${fitPill(t)}</div><div class="ri-s">${esc(t.fit_text || t.why || "")}</div></div>
@@ -431,8 +445,9 @@
       const rows = P[side] || [];
       if (!rows.length) return "";
       if (isBasket(m)) {
-        return `<h3 class="day-sub">${esc(name)}</h3><div class="table-wrap"><table class="ptable"><thead><tr><th>Παίκτης</th><th class="num">Λεπτά</th><th>Πόντοι</th><th>Ριμπάουντ</th><th>Ασίστ</th><th>P+R+A</th><th>Τρίποντα</th><th>Φάουλ</th></tr></thead><tbody>
-          ${rows.map(r => `<tr><td><b>${esc(r.name)}</b>${r.starter ? ' <span class="pill muted">5άδα</span>' : ""}<small class="pc">${r.games} αγώνες</small></td><td class="num">${r.mins}</td><td>${cell(r.pts)}</td><td>${cell(r.reb)}</td><td>${cell(r.ast)}</td><td>${cell(r.pra)}</td><td>${cell(r.tpm)}</td><td>${cell(r.fouls)}</td></tr>`).join("")}</tbody></table></div>`;
+        const av = st => (st ? st.avg : "—");
+        return `<details class="mk-group"><summary>${esc(name)}: μέσοι όροι</summary><div class="table-wrap"><table class="ptable"><thead><tr><th>Παίκτης</th><th class="num">Λεπτά</th><th class="num">Πόντ.</th><th class="num">Ριμπ.</th><th class="num">Ασίστ</th><th class="num">Τρίπ.</th><th class="num">Φάουλ</th></tr></thead><tbody>
+          ${rows.map(r => `<tr><td><b>${esc(r.name)}</b>${r.starter ? ' <span class="pill muted">5άδα</span>' : ""}</td><td class="num">${r.mins}</td><td class="num">${av(r.pts)}</td><td class="num">${av(r.reb)}</td><td class="num">${av(r.ast)}</td><td class="num">${av(r.tpm)}</td><td class="num">${av(r.fouls)}</td></tr>`).join("")}</tbody></table></div></details>`;
       }
       return `<h3 class="day-sub">${esc(name)}</h3><div class="table-wrap"><table class="ptable"><thead><tr><th>Παίκτης</th><th class="num">Λεπτά</th><th>Σκοράρει</th><th>Ασίστ</th><th>Κάρτα</th><th>Τάκλιν</th><th class="num">CBI</th></tr></thead><tbody>
         ${rows.map(r => `<tr><td><b>${esc(r.name)}</b> <span class="pill muted">${r.pos}</span>${r.pen ? ' <span class="pill muted">πέναλτι</span>' : ""}${r.news ? `<small class="pc" style="color:var(--amber)">${esc(r.news)}</small>` : ""}</td>
@@ -443,6 +458,9 @@
           <td><b>${r.tackles90}</b>/90<small class="pc">1+ ${pct(r.p_tk1)} · 2+ ${pct(r.p_tk2)} · 3+ ${pct(r.p_tk3)}</small></td>
           <td class="num">${r.cbi}</td></tr>`).join("")}</tbody></table></div>`;
     };
+    if (isBasket(m)) return `<h2>Παίκτες</h2>${m.props?.length ? `<div class="grid">${m.props.map(x => propBox(m, x)).join("")}</div>` : `<div class="empty-s">Καμία επιλογή παίκτη με αξία σε αυτόν τον αγώνα.</div>`}
+      <p class="sec-sub" style="margin-top:12px">${esc(P.source)}. Δείχνω μόνο επιλογές σε στατιστικά όπου το μοντέλο κέρδισε στον έλεγχο. Η γραμμή της εταιρείας μπορεί να διαφέρει: διάλεξε από την κλίμακα.</p>
+      ${team("home", m.home)}${team("away", m.away)}`;
     return `<h2>Παίκτες</h2><div class="note">${esc(P.source)}. Οι στοιχηματικές βάζουν συνήθως μεγαλύτερο γκανιότ στις αγορές παικτών, οπότε σύγκρινε την απόδοσή τους με τη <b>δίκαιη</b>: αν δίνουν πιο πάνω, έχει value.${isBasket(m) ? " Μορφή: μέσος όρος · πιθανότητα Over στη γραμμή · δίκαιη Over/Under." : " Φάουλ και σουτ ανά παίκτη δεν υπάρχουν σε δωρεάν πηγή."}</div>
       ${team("home", m.home)}${team("away", m.away)}`;
   }
@@ -523,6 +541,13 @@
       <div class="kpi"><span>ROI</span><b>${settled.length ? ((profit / settled.length) * 100).toFixed(1) : 0}%</b></div>
       <div class="kpi"><span>Επιτυχία</span><b>${settled.length ? Math.round((wins / settled.length) * 100) : 0}%</b></div>
       <div class="kpi"><span>Μ.ό. απόδοσης</span><b>${f2(avgOdds)}</b></div></div>`;
+    for (const [cid, c] of Object.entries(state.data?.competitions || {})) {
+      const PC = c.props_check;
+      if (!PC || !Object.keys(PC).length) continue;
+      h += `<h2>🏀 ${esc(c.name)}: έλεγχος επιλογών παικτών</h2><div class="note">Κάθε εμφάνιση παίκτη προβλέφθηκε μόνο με τους προηγούμενους αγώνες. Γραμμή «εταιρείας» = μέσος όρος των 10 τελευταίων αγώνων. ✓ = κερδίζει καθαρά πάνω από το νεκρό σημείο απόδοσης ~1.87 (μόνο αυτά εμφανίζονται ως επιλογές).</div>
+        <div class="table-wrap"><table><thead><tr><th>Στατιστικό</th><th class="num">Εμφανίσεις</th><th class="num">Λάθος μοντέλου</th><th class="num">Λάθος μ.ό.10</th><th>Επιλογές</th></tr></thead><tbody>
+        ${Object.values(PC).map(x => `<tr><td><b>${esc(x.name)}</b></td><td class="num">${x.n.toLocaleString("el-GR")}</td><td class="num">${x.mae_model}</td><td class="num">${x.mae_avg10}</td><td>${x.ok ? `✓ από ${pct(x.ok.p_from)}: ${pct(x.ok.hit)} σε ${x.ok.n}` : "✗ όχι"}</td></tr>`).join("")}</tbody></table></div>`;
+    }
     const IC = state.data?.intl?.check;
     if (IC) h += `<h2>🌍 Εθνικές ομάδες: έλεγχος μοντέλου</h2><div class="note">Ξαναπρόβλεψη ${IC.matches.toLocaleString("el-GR")} αγώνων εθνικών των τελευταίων 12 μηνών, μόνο με ό,τι ήταν γνωστό πριν από κάθε αγώνα. Σωστό φαβορί: <b>${pct(IC.hit)}</b>. Log-loss <b>${IC.logloss}</b> (χωρίς μοντέλο: ${IC.logloss_base}, μικρότερο = καλύτερο). ${state.data.intl.teams} εθνικές ομάδες.</div>
       <div class="table-wrap"><table><thead><tr><th>Πιθανότητα φαβορί</th><th class="num">Αγώνες</th><th class="num">Πρόβλεψη</th><th class="num">Έγινε</th></tr></thead><tbody>${IC.calibration.map(c => `<tr><td>${c.bucket}</td><td class="num">${c.n}</td><td class="num">${pct(c.pred)}</td><td class="num"><b>${pct(c.actual)}</b></td></tr>`).join("")}</tbody></table></div>`;

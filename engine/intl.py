@@ -3,7 +3,7 @@
 - Ισχύς: όλα τα επίσημα αποτελέσματα εθνικών (github.com/martj42/international_results, δωρεάν),
   μοντέλο Poisson επίθεση/άμυνα με πλεονέκτημα έδρας μόνο όταν δεν είναι ουδέτερο γήπεδο.
   Τα πρόσφατα μετράνε περισσότερο, τα φιλικά λιγότερο.
-- Πρόγραμμα + αποδόσεις DraftKings: ESPN (Nations League, φιλικά, CONCACAF Nations League).
+- Πρόγραμμα + αποδόσεις DraftKings: ESPN (Nations League, προκριματικά Μουντιάλ/Euro). Χωρίς φιλικά.
 - Έλεγχος: το μοντέλο ξαναπροβλέπει τους αγώνες των τελευταίων 12 μηνών μόνο με ό,τι ήξερε πριν.
 """
 import csv
@@ -16,10 +16,8 @@ from datetime import date, datetime, timedelta, timezone
 from . import config, espn, markets, model, predictions, sources
 
 RESULTS = "https://raw.githubusercontent.com/martj42/international_results/master/results.csv"
-LEAGUES = {  # ESPN slug -> όνομα
+LEAGUES = {  # ESPN slug -> όνομα. Μόνο επίσημες ευρωπαϊκές διοργανώσεις (όχι φιλικά)
     "uefa.nations": "Nations League",
-    "concacaf.nations.league": "CONCACAF Nations League",
-    "fifa.friendly": "Φιλικά εθνικών",
     "fifa.worldq.uefa": "Προκριματικά Μουντιάλ (Ευρώπη)",
     "uefa.euroq": "Προκριματικά Euro",
 }
