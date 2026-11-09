@@ -128,7 +128,10 @@ for _code, (_name, _s, _country, _sport) in NEW_LEAGUES.items():
 
 # Μπάσκετ (ξεχωριστό μοντέλο: engine/basket.py)
 BASKET = {"EL": {"name": "EuroLeague", "feed": "E", "odds": "basketball_euroleague"},
-          "EC": {"name": "EuroCup", "feed": "U", "odds": None}}
+          "EC": {"name": "EuroCup", "feed": "U", "odds": None},
+          # NBA: πρόγραμμα, σκορ, παίκτες και αποδόσεις DraftKings από την ESPN (δωρεάν, χωρίς credits)
+          "NBA": {"name": "NBA", "src": "espn", "odds": None, "days": 3,
+                  "players_src": "NBA (ESPN, τελευταίοι 10 αγώνες)"}}
 ODDS_WINDOW_HOURS = 36   # αποδόσεις ζητάμε μόνο αν υπάρχει αγώνας μέσα σε τόσες ώρες (εξοικονόμηση credits)
 
 DAYS_AHEAD = 10          # πόσες μέρες μπροστά κοιτάμε αγώνες

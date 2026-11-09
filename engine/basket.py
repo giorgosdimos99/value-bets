@@ -14,7 +14,7 @@ import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 
-from . import config, markets, model, predictions, sources
+from . import config, espn, markets, model, predictions, sources
 
 FEED = "https://feeds.incrowdsports.com/provider/euroleague-feeds/v2/competitions/{c}/seasons/{s}/games?limit=400"
 BOX = "https://api-live.euroleague.net/v2/competitions/{c}/seasons/{s}/games/{g}/stats"
@@ -237,9 +237,11 @@ def players_for(team, box_games, mu_team, team_avg):
         pra_sd = max(math.sqrt(sum((v - pra_mean) ** 2 for v in pra) / max(len(pra) - 1, 1)), math.sqrt(pra_mean))
         pra_line = _half(pra_mean)
         pra_po = 1 - _phi((pra_line - pra_mean) / pra_sd)
-        last, _, first = name.partition(", ")
+        if ", " in name:
+            last, _, first = name.partition(", ")
+            name = f"{first.title()} {last.title()}".strip()
         out.append({
-            "name": f"{first.title()} {last.title()}".strip(), "games": len(gl), "mins": round(mins, 1),
+            "name": name, "games": len(gl), "mins": round(mins, 1),
             "starter": sum(g[7] for g in recent) >= len(recent) / 2,
             "pts": stat(1, k), "reb": stat(2, counts=True), "ast": stat(3, counts=True),
             "tpm": stat(4, counts=True), "fouls": stat(6, counts=True),
@@ -253,21 +255,24 @@ def players_for(team, box_games, mu_team, team_avg):
 
 def build(cid, comp, margins_tbl):
     year = _season()
-    cur = games(comp["feed"], year)
-    prev = games(comp["feed"], year - 1)
+    if comp.get("src") == "espn":  # NBA
+        cur, prev = espn.nba_games(comp.get("days", 3))
+    else:
+        cur = games(comp["feed"], year)
+        prev = games(comp["feed"], year - 1)
     played_cur = [g for g in cur if g["played"]]
     played_prev = [g for g in prev if g["played"]]
     res = {"name": comp["name"], "sport": "basketball", "matches": [], "standings": None, "teams": [], "recent": []}
     if len(played_cur) + len(played_prev) < 50:
         return res
     R = fit(played_cur, played_prev)
-    box = boxscores(comp["feed"], year, played_cur)
+    box = espn.nba_boxscores(played_cur) if comp.get("src") == "espn" else boxscores(comp["feed"], year, played_cur)
 
-    events, remaining = sources.odds_api(comp["odds"], "h2h,spreads,totals") if comp["odds"] else (None, None)
+    events, remaining = sources.odds_api(comp["odds"], "h2h,spreads,totals") if comp.get("odds") else (None, None)
     res["credits"] = remaining
     now = datetime.now(timezone.utc)
     upcoming = [g for g in cur if not g["played"]
-                and now < datetime.fromisoformat(g["date"].replace("Z", "+00:00")) < now + timedelta(days=config.DAYS_AHEAD)]
+                and now < datetime.fromisoformat(g["date"].replace("Z", "+00:00")) < now + timedelta(days=comp.get("days", config.DAYS_AHEAD))]
     names_all = sorted({g["home"] for g in cur} | {g["away"] for g in cur})
 
     def team_games(t):
@@ -280,8 +285,8 @@ def build(cid, comp, margins_tbl):
         mh = R["h_avg"] * R["att"][h] * R["def"][a]
         ma = R["a_avg"] * R["att"][a] * R["def"][h]
         model_pts = [round(mh, 1), round(ma, 1)]
-        books = {}
-        for e in events or []:
+        books = dict(g.get("books") or {})
+        for e in [] if books else events or []:
             if team_match(e["home"], [h]) and team_match(e["away"], [a]) and \
                     abs((datetime.fromisoformat(e["date"].replace("Z", "+00:00")) -
                          datetime.fromisoformat(g["date"].replace("Z", "+00:00"))).total_seconds()) < 36 * 3600:
@@ -337,7 +342,7 @@ def build(cid, comp, margins_tbl):
             "markets": sels,
             "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
             "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books),
-            "players": {"source": "EuroLeague (επίσημα στατιστικά, τελευταίοι 10 αγώνες)",
+            "players": {"source": comp.get("players_src", "EuroLeague (επίσημα στατιστικά, τελευταίοι 10 αγώνες)"),
                         "home": players_for(h, [(0, x) for x in h_box], mh, hs.get("ppg")),
                         "away": players_for(a, [(0, x) for x in a_box], ma, as_.get("ppg"))},
         })

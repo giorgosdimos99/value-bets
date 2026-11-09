@@ -8,7 +8,7 @@
 import json
 from datetime import datetime, timedelta, timezone
 
-from . import basket, config, history, markets, model, names, players, predictions, slip, sources, stats
+from . import basket, config, history, intl, markets, model, names, players, predictions, slip, sources, stats
 from .settle import outcome
 
 
@@ -439,6 +439,17 @@ def main():
         out["competitions"][cid] = bres
         all_matches += bres["matches"]
         print(f"  {cid}: {len(bres['matches'])} αγώνες, {sum(len(m['values']) for m in bres['matches'])} value")
+
+    print("• Εθνικές ομάδες")
+    try:
+        nat, out["intl"] = intl.build(ctx["margins"])
+    except Exception as e:  # δεν σταματάμε όλη την ενημέρωση για τις εθνικές
+        print(f"  ! εθνικές: {e}")
+        nat = {}
+    for cid, c in nat.items():
+        out["competitions"][cid] = c
+        all_matches += c["matches"]
+        print(f"  {cid}: {len(c['matches'])} αγώνες, {sum(m['has_odds'] for m in c['matches'])} με αποδόσεις")
 
     predictions.annotate(all_matches)
     attach_patterns(all_matches)

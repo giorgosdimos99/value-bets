@@ -60,6 +60,11 @@ def reason(t, m):
                     f"Αναμενόμενο: {m['xg'][0] + m['xg'][1]:.1f}")
         return (f"{H}: {hs.get('ppg', '—')} υπέρ / {hs.get('oppg', '—')} κατά, φόρμα {hs.get('form', '—')}. "
                 f"{A}: {as_.get('ppg', '—')} / {as_.get('oppg', '—')}, φόρμα {as_.get('form', '—')}")
+    if m.get("national"):
+        d = m.get("difficulty") or {}
+        rk = lambda x: f" ({x['rank']}η)" if x.get("rank") else ""
+        return (f"Αναμενόμενα γκολ {m['xg'][0]:.2f}–{m['xg'][1]:.2f} · φόρμα {H}{rk(d.get('home', {}))} "
+                f"{hs.get('form') or '—'}, {A}{rk(d.get('away', {}))} {as_.get('form') or '—'}")
     if not hs or not as_:
         return f"Αναμενόμενα γκολ {m['xg'][0]:.2f}–{m['xg'][1]:.2f}"
     if k.startswith("OU"):
