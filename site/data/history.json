@@ -9452,7 +9452,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6246,
+   "p": 0.6242,
    "est": 1.53,
    "result": null
   },
@@ -9914,7 +9914,7 @@
    "side": "Over",
    "label": "Over 213.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6566,
+   "p": 0.6567,
    "est": 1.46,
    "result": null
   },
@@ -9928,7 +9928,7 @@
    "side": "Over",
    "label": "Over 213.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6559,
+   "p": 0.6562,
    "est": 1.46,
    "result": null
   },
@@ -9984,7 +9984,7 @@
    "side": "Over",
    "label": "Over 224.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6491,
+   "p": 0.6493,
    "est": 1.48,
    "result": null
   },
@@ -10012,7 +10012,7 @@
    "side": "Under",
    "label": "Under 237.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6386,
+   "p": 0.6385,
    "est": 1.5,
    "result": null
   },
@@ -10026,7 +10026,7 @@
    "side": "Over",
    "label": "Over 213.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6409,
+   "p": 0.641,
    "est": 1.49,
    "result": null
   },
@@ -10054,7 +10054,7 @@
    "side": "Over",
    "label": "Over 213.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6566,
+   "p": 0.6567,
    "est": 1.46,
    "result": null
   },
