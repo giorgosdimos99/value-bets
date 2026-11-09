@@ -3879,6 +3879,125 @@
   {
    "legs": [
     {
+     "match_id": "MEX-0380db9fc7de24aed0c27138c02467e5",
+     "comp": "MEX",
+     "date": "2026-11-14T23:00:00Z",
+     "home": "Querétaro",
+     "away": "Monterrey",
+     "key": "HT_OU1.5",
+     "side": "Under",
+     "label": "Γηπεδούχος Under 1.5",
+     "group": "Γκολ γηπεδούχου",
+     "p": 0.5879,
+     "fair": 1.7,
+     "est": 1.63,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "BRA-8fafa425728aa8e7d2c23956ba4c2553",
+     "comp": "BRA",
+     "date": "2026-11-14T23:30:00Z",
+     "home": "Chapecoense",
+     "away": "Vasco da Gama",
+     "key": "DC",
+     "side": "X2",
+     "label": "X2",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.7255,
+     "fair": 1.38,
+     "est": 1.35,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
+     "comp": "SD",
+     "date": "2026-11-15T13:00:00Z",
+     "home": "Tenerife",
+     "away": "AD Ceuta FC",
+     "key": "HT_OU1.5",
+     "side": "Under",
+     "label": "Γηπεδούχος Under 1.5",
+     "group": "Γκολ γηπεδούχου",
+     "p": 0.5456,
+     "fair": 1.83,
+     "est": 1.76,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
+     "comp": "SD",
+     "date": "2026-11-15T15:15:00Z",
+     "home": "Granada CF",
+     "away": "Las Palmas",
+     "key": "1X2",
+     "side": "1",
+     "label": "1",
+     "group": "Τελικό αποτέλεσμα",
+     "p": 0.5638,
+     "fair": 1.77,
+     "est": 1.71,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
+     "comp": "SD",
+     "date": "2026-11-15T17:30:00Z",
+     "home": "SD Eibar",
+     "away": "Cádiz CF",
+     "key": "1X2",
+     "side": "1",
+     "label": "1",
+     "group": "Τελικό αποτέλεσμα",
+     "p": 0.5524,
+     "fair": 1.81,
+     "est": 1.74,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
+     "comp": "SD",
+     "date": "2026-11-15T17:30:00Z",
+     "home": "CD Eldense",
+     "away": "Sabadell FC",
+     "key": "BTTS",
+     "side": "No",
+     "label": "N/G",
+     "group": "Γκολ-Γκολ",
+     "p": 0.5402,
+     "fair": 1.85,
+     "est": 1.77,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 20.4,
+   "p": 0.0392,
+   "ev": -0.2015,
+   "day": "2026-11-15",
+   "kind": "extreme",
+   "created": "2026-11-08T19:26:23.601479+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
      "match_id": "MEX-7cd6004c4921a258af79f297abcfc9e9",
      "comp": "MEX",
      "date": "2026-11-09T02:10:00Z",
@@ -4009,7 +4128,6 @@
   {
    "legs": [
     {
-<<<<<<< Updated upstream
      "match_id": "MEX-0380db9fc7de24aed0c27138c02467e5",
      "comp": "MEX",
      "date": "2026-11-14T23:00:00Z",
@@ -4112,14 +4230,11 @@
      "result": 0
     },
     {
-=======
->>>>>>> Stashed changes
      "match_id": "NBA-401909952",
      "comp": "NBA",
      "date": "2026-11-10T00:00Z",
      "home": "Atlanta Hawks",
      "away": "Los Angeles Lakers",
-<<<<<<< Updated upstream
      "key": "OU233.5",
      "side": "Over",
      "label": "Over 233.5",
@@ -4127,38 +4242,10 @@
      "p": 0.5999,
      "fair": 1.67,
      "est": 1.65,
-=======
-     "key": "OU227.5",
-     "side": "Over",
-     "label": "Over 227.5",
-     "group": "Σύνολο πόντων",
-     "p": 0.6752,
-     "fair": 1.48,
-     "est": 1.48,
->>>>>>> Stashed changes
      "est_src": "g",
      "best": null,
      "book": null,
      "result": null
-    },
-    {
-     "match_id": "NBA-401909954",
-     "comp": "NBA",
-     "date": "2026-11-10T00:00Z",
-     "home": "Detroit Pistons",
-     "away": "Washington Wizards",
-     "key": "ML",
-     "side": "H",
-     "label": "1",
-     "group": "Νικητής (με παράταση)",
-     "p": 0.7738,
-     "fair": 1.29,
-     "est": 1.28,
-     "est_src": "g",
-     "best": 1.243,
-     "book": "DraftKings",
-     "score": "116-121",
-     "result": 0
     },
     {
      "match_id": "NBA-401909955",
@@ -4166,7 +4253,6 @@
      "date": "2026-11-10T00:30Z",
      "home": "Toronto Raptors",
      "away": "Memphis Grizzlies",
-<<<<<<< Updated upstream
      "key": "AH+1.5",
      "side": "H",
      "label": "1 (+1.5)",
@@ -4205,45 +4291,6 @@
    "day": "2026-11-10",
    "kind": "simple",
    "created": "2026-11-09T21:16:50.407227+00:00",
-=======
-     "key": "OU222.5",
-     "side": "Over",
-     "label": "Over 222.5",
-     "group": "Σύνολο πόντων",
-     "p": 0.6172,
-     "fair": 1.62,
-     "est": 1.65,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "NBA-401909958",
-     "comp": "NBA",
-     "date": "2026-11-10T02:00Z",
-     "home": "Phoenix Suns",
-     "away": "San Antonio Spurs",
-     "key": "AT_OU114.5",
-     "side": "Over",
-     "label": "Φιλοξενούμενος Over 114.5",
-     "group": "Πόντοι φιλοξενούμενος",
-     "p": 0.6096,
-     "fair": 1.64,
-     "est": 1.61,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 5.03,
-   "p": 0.1966,
-   "ev": -0.0107,
-   "day": "2026-11-10",
-   "kind": "simple",
-   "created": "2026-11-09T23:15:50.133526+00:00",
->>>>>>> Stashed changes
    "result": 0
   },
   {
@@ -4273,7 +4320,6 @@
      "date": "2026-11-10T00:00Z",
      "home": "Atlanta Hawks",
      "away": "Los Angeles Lakers",
-<<<<<<< Updated upstream
      "key": "OU233.5",
      "side": "Over",
      "label": "Over 233.5",
@@ -4281,22 +4327,12 @@
      "p": 0.5999,
      "fair": 1.67,
      "est": 1.65,
-=======
-     "key": "OU227.5",
-     "side": "Over",
-     "label": "Over 227.5",
-     "group": "Σύνολο πόντων",
-     "p": 0.6752,
-     "fair": 1.48,
-     "est": 1.48,
->>>>>>> Stashed changes
      "est_src": "g",
      "best": null,
      "book": null,
      "result": null
     },
     {
-<<<<<<< Updated upstream
      "match_id": "NBA-401909953",
      "comp": "NBA",
      "date": "2026-11-10T00:00Z",
@@ -4307,29 +4343,12 @@
      "label": "Φιλοξενούμενος Over 109.5",
      "group": "Πόντοι φιλοξενούμενος",
      "p": 0.5952,
-=======
-     "match_id": "NBA-401909954",
-     "comp": "NBA",
-     "date": "2026-11-10T00:00Z",
-     "home": "Detroit Pistons",
-     "away": "Washington Wizards",
-     "key": "HT_OU111.5",
-     "side": "Over",
-     "label": "Γηπεδούχος Over 111.5",
-     "group": "Πόντοι γηπεδούχος",
-     "p": 0.5963,
->>>>>>> Stashed changes
      "fair": 1.68,
      "est": 1.65,
      "est_src": "g",
      "best": null,
      "book": null,
-<<<<<<< Updated upstream
      "result": null
-=======
-     "score": "116-121",
-     "result": 1
->>>>>>> Stashed changes
     },
     {
      "match_id": "NBA-401909955",
@@ -4337,21 +4356,12 @@
      "date": "2026-11-10T00:30Z",
      "home": "Toronto Raptors",
      "away": "Memphis Grizzlies",
-<<<<<<< Updated upstream
      "key": "OU222.5",
      "side": "Over",
      "label": "Over 222.5",
      "group": "Σύνολο πόντων",
      "p": 0.6722,
      "fair": 1.49,
-=======
-     "key": "OU219.5",
-     "side": "Over",
-     "label": "Over 219.5",
-     "group": "Σύνολο πόντων",
-     "p": 0.6819,
-     "fair": 1.47,
->>>>>>> Stashed changes
      "est": 1.48,
      "est_src": "g",
      "best": null,
@@ -4380,27 +4390,6 @@
     {
      "match_id": "NBA-401909958",
      "comp": "NBA",
-<<<<<<< Updated upstream
-=======
-     "date": "2026-11-10T01:30Z",
-     "home": "Houston Rockets",
-     "away": "Denver Nuggets",
-     "key": "AT_OU112.5",
-     "side": "Under",
-     "label": "Φιλοξενούμενος Under 112.5",
-     "group": "Πόντοι φιλοξενούμενος",
-     "p": 0.5922,
-     "fair": 1.69,
-     "est": 1.65,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "NBA-401909958",
-     "comp": "NBA",
->>>>>>> Stashed changes
      "date": "2026-11-10T02:00Z",
      "home": "Phoenix Suns",
      "away": "San Antonio Spurs",
@@ -4422,13 +4411,13 @@
      "date": "2026-11-10T03:00Z",
      "home": "Golden State Warriors",
      "away": "New Orleans Pelicans",
-     "key": "OU223.5",
+     "key": "OU225.5",
      "side": "Over",
-     "label": "Over 223.5",
+     "label": "Over 225.5",
      "group": "Σύνολο πόντων",
-     "p": 0.667,
-     "fair": 1.5,
-     "est": 1.49,
+     "p": 0.6611,
+     "fair": 1.51,
+     "est": 1.48,
      "est_src": "g",
      "best": null,
      "book": null,
@@ -4436,19 +4425,11 @@
     }
    ],
    "odds": 20.12,
-<<<<<<< Updated upstream
    "p": 0.0442,
    "ev": -0.1112,
    "day": "2026-11-10",
    "kind": "extreme",
    "created": "2026-11-09T21:16:50.407227+00:00",
-=======
-   "p": 0.0469,
-   "ev": -0.0573,
-   "day": "2026-11-10",
-   "kind": "extreme",
-   "created": "2026-11-09T23:15:50.133526+00:00",
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -4567,11 +4548,7 @@
    "ev": -0.1576,
    "day": "2026-11-12",
    "kind": "simple",
-<<<<<<< Updated upstream
    "created": "2026-11-09T21:16:50.407227+00:00",
-=======
-   "created": "2026-11-09T23:15:50.133526+00:00",
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -4691,7 +4668,6 @@
      "home": "Montenegro",
      "away": "Latvia",
      "key": "AT_OU0.5",
-<<<<<<< Updated upstream
      "side": "Under",
      "label": "Φιλοξενούμενος Under 0.5",
      "group": "Γκολ φιλοξενούμενου",
@@ -4775,152 +4751,23 @@
    "day": "2026-11-13",
    "kind": "simple",
    "created": "2026-11-09T21:16:50.407227+00:00",
-=======
-     "side": "Under",
-     "label": "Φιλοξενούμενος Under 0.5",
-     "group": "Γκολ φιλοξενούμενου",
-     "p": 0.5655,
-     "fair": 1.77,
-     "est": 1.69,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 20.04,
-   "p": 0.0393,
-   "ev": -0.2123,
-   "day": "2026-11-12",
-   "kind": "extreme",
-   "created": "2026-11-09T23:15:50.133526+00:00",
    "result": null
   },
   {
    "legs": [
     {
-     "match_id": "UNL-401861162",
-     "comp": "UNL",
-     "date": "2026-11-13T17:00Z",
-     "home": "Moldova",
-     "away": "Kazakhstan",
-     "key": "BTTS",
-     "side": "No",
-     "label": "N/G",
-     "group": "Γκολ-Γκολ",
-     "p": 0.5516,
-     "fair": 1.81,
-     "est": 1.74,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "UNL-401861158",
-     "comp": "UNL",
-     "date": "2026-11-13T19:45Z",
-     "home": "Serbia",
-     "away": "Germany",
-     "key": "1X2",
-     "side": "2",
-     "label": "2",
-     "group": "Τελικό αποτέλεσμα",
-     "p": 0.776,
-     "fair": 1.29,
-     "est": 1.26,
-     "est_src": "g",
-     "best": 1.25,
-     "book": "DraftKings",
-     "result": null
-    },
-    {
-     "match_id": "UNL-401861161",
-     "comp": "UNL",
-     "date": "2026-11-13T19:45Z",
-     "home": "Scotland",
-     "away": "North Macedonia",
-     "key": "HT_OU1.5",
-     "side": "Over",
-     "label": "Γηπεδούχος Over 1.5",
-     "group": "Γκολ γηπεδούχου",
-     "p": 0.7188,
-     "fair": 1.39,
-     "est": 1.35,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "UNL-401861153",
-     "comp": "UNL",
-     "date": "2026-11-13T19:45Z",
-     "home": "Liechtenstein",
-     "away": "Azerbaijan",
-     "key": "OU2.5",
-     "side": "Under",
-     "label": "Under 2.5",
-     "group": "Γκολ Over/Under",
-     "p": 0.5671,
-     "fair": 1.76,
-     "est": 1.69,
-     "est_src": "g",
-     "best": 1.667,
-     "book": "DraftKings",
-     "result": null
-    }
-   ],
-   "odds": 5.0,
-   "p": 0.1745,
-   "ev": -0.1272,
-   "day": "2026-11-13",
-   "kind": "simple",
-   "created": "2026-11-09T23:15:50.133526+00:00",
->>>>>>> Stashed changes
-   "result": null
-  },
-  {
-   "legs": [
-    {
-<<<<<<< Updated upstream
      "match_id": "SD-fed29050dc7e99c7dd6b3b4580f142b7",
      "comp": "SD",
      "date": "2026-11-13T19:30:00Z",
      "home": "Leganés",
      "away": "Burgos CF",
-=======
-     "match_id": "UNL-401861160",
-     "comp": "UNL",
-     "date": "2026-11-13T19:45Z",
-     "home": "Slovakia",
-     "away": "Faroe Islands",
-     "key": "1X2",
-     "side": "1",
-     "label": "1",
-     "group": "Τελικό αποτέλεσμα",
-     "p": 0.7186,
-     "fair": 1.39,
-     "est": 1.37,
-     "est_src": "g",
-     "best": 1.339,
-     "book": "DraftKings",
-     "result": null
-    },
-    {
-     "match_id": "UNL-401861154",
-     "comp": "UNL",
-     "date": "2026-11-13T19:45Z",
-     "home": "Luxembourg",
-     "away": "Estonia",
->>>>>>> Stashed changes
      "key": "DC",
      "side": "12",
      "label": "12",
      "group": "Διπλή ευκαιρία",
-     "p": 0.7004,
-     "fair": 1.43,
-     "est": 1.4,
+     "p": 0.7156,
+     "fair": 1.4,
+     "est": 1.37,
      "est_src": "g",
      "best": null,
      "book": null,
@@ -4981,7 +4828,6 @@
      "result": null
     },
     {
-<<<<<<< Updated upstream
      "match_id": "UNL-401861158",
      "comp": "UNL",
      "date": "2026-11-13T19:45Z",
@@ -4994,92 +4840,12 @@
      "p": 0.593,
      "fair": 1.69,
      "est": 1.62,
-=======
-     "match_id": "UNL-401861153",
-     "comp": "UNL",
-     "date": "2026-11-13T19:45Z",
-     "home": "Liechtenstein",
-     "away": "Azerbaijan",
-     "key": "OU2.5",
-     "side": "Under",
-     "label": "Under 2.5",
-     "group": "Γκολ Over/Under",
-     "p": 0.5671,
-     "fair": 1.76,
-     "est": 1.69,
-     "est_src": "g",
-     "best": 1.667,
-     "book": "DraftKings",
-     "result": null
-    },
-    {
-     "match_id": "UNL-401861161",
-     "comp": "UNL",
-     "date": "2026-11-13T19:45Z",
-     "home": "Scotland",
-     "away": "North Macedonia",
-     "key": "OU2.5",
-     "side": "Over",
-     "label": "Over 2.5",
-     "group": "Γκολ Over/Under",
-     "p": 0.57,
-     "fair": 1.75,
-     "est": 1.68,
-     "est_src": "g",
-     "best": 1.667,
-     "book": "DraftKings",
-     "result": null
-    },
-    {
-     "match_id": "UNL-401861157",
-     "comp": "UNL",
-     "date": "2026-11-13T19:45Z",
-     "home": "Bulgaria",
-     "away": "Iceland",
-     "key": "HT_OU0.5",
-     "side": "Over",
-     "label": "Γηπεδούχος Over 0.5",
-     "group": "Γκολ γηπεδούχου",
-     "p": 0.5975,
-     "fair": 1.67,
-     "est": 1.6,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 20.02,
-   "p": 0.04,
-   "ev": -0.1993,
-   "day": "2026-11-13",
-   "kind": "extreme",
-   "created": "2026-11-09T23:15:50.133526+00:00",
-   "result": null
-  },
-  {
-   "legs": [
-    {
-     "match_id": "L2-58dfacfa366fb7b2d5d980ea4ed1d9eb",
-     "comp": "L2",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Rotherham United",
-     "away": "Crawley Town",
-     "key": "DC",
-     "side": "12",
-     "label": "12",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7511,
-     "fair": 1.33,
-     "est": 1.31,
->>>>>>> Stashed changes
      "est_src": "g",
      "best": null,
      "book": null,
      "result": null
     },
     {
-<<<<<<< Updated upstream
      "match_id": "UNL-401861161",
      "comp": "UNL",
      "date": "2026-11-13T19:45Z",
@@ -5128,103 +4894,17 @@
    "legs": [
     {
      "match_id": "L1-107bb00cece31c0c9d7738659d31b66c",
-=======
-     "match_id": "L1-2a7644c3777bcd3ca72e318bb7799217",
->>>>>>> Stashed changes
      "comp": "L1",
      "date": "2026-11-14T15:00:00Z",
-     "home": "Stevenage",
-     "away": "Mansfield Town",
+     "home": "Peterborough United",
+     "away": "Oxford United",
      "key": "DC",
      "side": "12",
      "label": "12",
      "group": "Διπλή ευκαιρία",
-     "p": 0.7026,
-     "fair": 1.42,
-     "est": 1.4,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L1-7147fa15092c5d85c5ff46f815e2d5ee",
-     "comp": "L1",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Wycombe Wanderers",
-     "away": "Huddersfield Town",
-     "key": "DC",
-     "side": "12",
-     "label": "12",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7508,
-     "fair": 1.33,
-     "est": 1.31,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L2-b8c1674ee9357dafd107c231c7d8277e",
-     "comp": "L2",
-     "date": "2026-11-14T17:30:00Z",
-     "home": "Fleetwood Town",
-     "away": "Tranmere Rovers",
-     "key": "DC",
-     "side": "1X",
-     "label": "1X",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7613,
-     "fair": 1.31,
-     "est": 1.29,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "UNL-401861169",
-     "comp": "UNL",
-     "date": "2026-11-14T19:45Z",
-     "home": "Northern Ireland",
-     "away": "Ukraine",
-     "key": "DC",
-     "side": "X2",
-     "label": "X2",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.5961,
-     "fair": 1.68,
-     "est": 1.62,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 5.02,
-   "p": 0.1798,
-   "ev": -0.0972,
-   "day": "2026-11-14",
-   "kind": "simple",
-   "created": "2026-11-09T23:15:50.133526+00:00",
-   "result": null
-  },
-  {
-   "legs": [
-    {
-     "match_id": "SD-908247d5d5cd714de37956edf865668b",
-     "comp": "SD",
-     "date": "2026-11-14T13:00:00Z",
-     "home": "Real Valladolid CF",
-     "away": "CD Castellón",
-     "key": "DC",
-     "side": "1X",
-     "label": "1X",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.5786,
-     "fair": 1.73,
-     "est": 1.67,
+     "p": 0.7434,
+     "fair": 1.35,
+     "est": 1.32,
      "est_src": "g",
      "best": null,
      "book": null,
@@ -5254,7 +4934,6 @@
      "date": "2026-11-14T15:00:00Z",
      "home": "Salford City",
      "away": "Northampton Town",
-<<<<<<< Updated upstream
      "key": "1X2",
      "side": "1",
      "label": "1",
@@ -5262,22 +4941,12 @@
      "p": 0.5334,
      "fair": 1.87,
      "est": 1.81,
-=======
-     "key": "DC",
-     "side": "12",
-     "label": "12",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7029,
-     "fair": 1.42,
-     "est": 1.4,
->>>>>>> Stashed changes
      "est_src": "g",
      "best": null,
      "book": null,
      "result": null
     },
     {
-<<<<<<< Updated upstream
      "match_id": "UNL-401861164",
      "comp": "UNL",
      "date": "2026-11-14T17:00Z",
@@ -5312,54 +4981,11 @@
      "date": "2026-11-14T12:30:00Z",
      "home": "Exeter City",
      "away": "Cheltenham Town",
-=======
-     "match_id": "L1-2a7644c3777bcd3ca72e318bb7799217",
-     "comp": "L1",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Stevenage",
-     "away": "Mansfield Town",
->>>>>>> Stashed changes
      "key": "DC",
      "side": "12",
      "label": "12",
      "group": "Διπλή ευκαιρία",
-     "p": 0.7026,
-     "fair": 1.42,
-     "est": 1.4,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L1-e315dc04bd19f74df3199a20acf38004",
-     "comp": "L1",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Leicester City",
-     "away": "Bradford City",
-     "key": "DC",
-     "side": "1X",
-     "label": "1X",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7019,
-     "fair": 1.42,
-     "est": 1.4,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
-     "comp": "L2",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Port Vale",
-     "away": "Accrington Stanley",
-     "key": "DC",
-     "side": "1X",
-     "label": "1X",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.7172,
+     "p": 0.7186,
      "fair": 1.39,
      "est": 1.37,
      "est_src": "g",
@@ -5368,16 +4994,51 @@
      "result": null
     },
     {
-     "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
+     "match_id": "L1-82da0980dcfc5af1d8436be9c3531d91",
+     "comp": "L1",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Doncaster Rovers",
+     "away": "Leyton Orient",
+     "key": "DC",
+     "side": "12",
+     "label": "12",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.7234,
+     "fair": 1.38,
+     "est": 1.36,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
      "comp": "L2",
      "date": "2026-11-14T15:00:00Z",
-     "home": "Swindon Town",
-     "away": "Grimsby Town",
+     "home": "Shrewsbury Town",
+     "away": "Oldham Athletic",
+     "key": "DC",
+     "side": "12",
+     "label": "12",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.7287,
+     "fair": 1.37,
+     "est": 1.35,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "L1-107bb00cece31c0c9d7738659d31b66c",
+     "comp": "L1",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Peterborough United",
+     "away": "Oxford United",
      "key": "DC",
      "side": "X2",
      "label": "X2",
      "group": "Διπλή ευκαιρία",
-<<<<<<< Updated upstream
      "p": 0.6866,
      "fair": 1.46,
      "est": 1.43,
@@ -5414,8 +5075,6 @@
      "side": "X2",
      "label": "X2",
      "group": "Διπλή ευκαιρία",
-=======
->>>>>>> Stashed changes
      "p": 0.6908,
      "fair": 1.45,
      "est": 1.42,
@@ -5425,7 +5084,6 @@
      "result": null
     },
     {
-<<<<<<< Updated upstream
      "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
      "comp": "L2",
      "date": "2026-11-14T15:00:00Z",
@@ -5444,8 +5102,6 @@
      "result": null
     },
     {
-=======
->>>>>>> Stashed changes
      "match_id": "UNL-401861164",
      "comp": "UNL",
      "date": "2026-11-14T17:00Z",
@@ -5462,243 +5118,14 @@
      "best": null,
      "book": null,
      "result": null
-    },
-    {
-     "match_id": "UNL-401861169",
-     "comp": "UNL",
-     "date": "2026-11-14T19:45Z",
-     "home": "Northern Ireland",
-     "away": "Ukraine",
-     "key": "DC",
-     "side": "X2",
-     "label": "X2",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.5961,
-     "fair": 1.68,
-     "est": 1.62,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
     }
    ],
-<<<<<<< Updated upstream
    "odds": 20.09,
    "p": 0.0418,
    "ev": -0.1602,
    "day": "2026-11-14",
    "kind": "extreme",
    "created": "2026-11-09T21:16:50.407227+00:00",
-=======
-   "odds": 20.07,
-   "p": 0.0418,
-   "ev": -0.1608,
-   "day": "2026-11-14",
-   "kind": "extreme",
-   "created": "2026-11-09T23:15:50.133526+00:00",
-   "result": null
-  },
-  {
-   "legs": [
-    {
-     "match_id": "MEX-0380db9fc7de24aed0c27138c02467e5",
-     "comp": "MEX",
-     "date": "2026-11-14T23:00:00Z",
-     "home": "Querétaro",
-     "away": "Monterrey",
-     "key": "HT_OU1.5",
-     "side": "Under",
-     "label": "Γηπεδούχος Under 1.5",
-     "group": "Γκολ γηπεδούχου",
-     "p": 0.5884,
-     "fair": 1.7,
-     "est": 1.63,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "BRA-8fafa425728aa8e7d2c23956ba4c2553",
-     "comp": "BRA",
-     "date": "2026-11-14T23:30:00Z",
-     "home": "Chapecoense",
-     "away": "Vasco da Gama",
-     "key": "DC",
-     "side": "12",
-     "label": "12",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.756,
-     "fair": 1.32,
-     "est": 1.3,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
-     "comp": "SD",
-     "date": "2026-11-15T13:00:00Z",
-     "home": "Tenerife",
-     "away": "AD Ceuta FC",
-     "key": "HT_OU1.5",
-     "side": "Under",
-     "label": "Γηπεδούχος Under 1.5",
-     "group": "Γκολ γηπεδούχου",
-     "p": 0.5512,
-     "fair": 1.81,
-     "est": 1.74,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
-     "comp": "SD",
-     "date": "2026-11-15T17:30:00Z",
-     "home": "CD Eldense",
-     "away": "Sabadell FC",
-     "key": "AT_OU1.5",
-     "side": "Under",
-     "label": "Φιλοξενούμενος Under 1.5",
-     "group": "Γκολ φιλοξενούμενου",
-     "p": 0.7137,
-     "fair": 1.4,
-     "est": 1.36,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 5.01,
-   "p": 0.175,
-   "ev": -0.1225,
-   "day": "2026-11-15",
-   "kind": "simple",
-   "created": "2026-11-09T23:15:50.133526+00:00",
-   "result": null
-  },
-  {
-   "legs": [
-    {
-     "match_id": "MEX-0380db9fc7de24aed0c27138c02467e5",
-     "comp": "MEX",
-     "date": "2026-11-14T23:00:00Z",
-     "home": "Querétaro",
-     "away": "Monterrey",
-     "key": "DC",
-     "side": "X2",
-     "label": "X2",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.6708,
-     "fair": 1.49,
-     "est": 1.46,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "BRA-8fafa425728aa8e7d2c23956ba4c2553",
-     "comp": "BRA",
-     "date": "2026-11-14T23:30:00Z",
-     "home": "Chapecoense",
-     "away": "Vasco da Gama",
-     "key": "OU2.5",
-     "side": "Over",
-     "label": "Over 2.5",
-     "group": "Γκολ Over/Under",
-     "p": 0.5988,
-     "fair": 1.67,
-     "est": 1.6,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
-     "comp": "SD",
-     "date": "2026-11-15T13:00:00Z",
-     "home": "Tenerife",
-     "away": "AD Ceuta FC",
-     "key": "HT_OU1.5",
-     "side": "Under",
-     "label": "Γηπεδούχος Under 1.5",
-     "group": "Γκολ γηπεδούχου",
-     "p": 0.5512,
-     "fair": 1.81,
-     "est": 1.74,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
-     "comp": "SD",
-     "date": "2026-11-15T15:15:00Z",
-     "home": "Granada CF",
-     "away": "Las Palmas",
-     "key": "1X2",
-     "side": "1",
-     "label": "1",
-     "group": "Τελικό αποτέλεσμα",
-     "p": 0.5699,
-     "fair": 1.75,
-     "est": 1.69,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
-     "comp": "SD",
-     "date": "2026-11-15T17:30:00Z",
-     "home": "SD Eibar",
-     "away": "Cádiz CF",
-     "key": "1X2",
-     "side": "1",
-     "label": "1",
-     "group": "Τελικό αποτέλεσμα",
-     "p": 0.5507,
-     "fair": 1.82,
-     "est": 1.75,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
-     "comp": "SD",
-     "date": "2026-11-15T17:30:00Z",
-     "home": "CD Eldense",
-     "away": "Sabadell FC",
-     "key": "BTTS",
-     "side": "No",
-     "label": "N/G",
-     "group": "Γκολ-Γκολ",
-     "p": 0.5538,
-     "fair": 1.81,
-     "est": 1.73,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 20.8,
-   "p": 0.0385,
-   "ev": -0.1997,
-   "day": "2026-11-15",
-   "kind": "extreme",
-   "created": "2026-11-09T23:15:50.133526+00:00",
->>>>>>> Stashed changes
    "result": null
   }
  ],
@@ -8344,11 +7771,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-<<<<<<< Updated upstream
    "p": 0.6931,
-=======
-   "p": 0.6896,
->>>>>>> Stashed changes
    "est": 1.4,
    "result": null
   },
@@ -8358,12 +7781,12 @@
    "date": "2026-11-14T13:00:00Z",
    "home": "Real Valladolid CF",
    "away": "CD Castellón",
-   "key": "DC",
-   "side": "X2",
-   "label": "X2",
-   "group": "Διπλή ευκαιρία",
-   "p": 0.6875,
-   "est": 1.43,
+   "key": "OU3.5",
+   "side": "Under",
+   "label": "Under 3.5",
+   "group": "Γκολ Over/Under",
+   "p": 0.6892,
+   "est": 1.4,
    "result": null
   },
   {
@@ -8376,8 +7799,8 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6643,
-   "est": 1.45,
+   "p": 0.6675,
+   "est": 1.47,
    "result": null
   },
   {
@@ -8386,21 +7809,12 @@
    "date": "2026-11-14T15:00:00Z",
    "home": "Wimbledon",
    "away": "Blackpool",
-<<<<<<< Updated upstream
    "key": "DC",
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
    "p": 0.6672,
    "est": 1.47,
-=======
-   "key": "HT_OU0.5",
-   "side": "Over",
-   "label": "Γηπεδούχος Over 0.5",
-   "group": "Γκολ γηπεδούχου",
-   "p": 0.6927,
-   "est": 1.4,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -8427,13 +7841,8 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-<<<<<<< Updated upstream
    "p": 0.654,
    "est": 1.47,
-=======
-   "p": 0.6515,
-   "est": 1.48,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -8442,19 +7851,12 @@
    "date": "2026-11-14T15:00:00Z",
    "home": "Wycombe Wanderers",
    "away": "Huddersfield Town",
-   "key": "OU3.5",
+   "key": "HT_OU1.5",
    "side": "Under",
-<<<<<<< Updated upstream
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
    "p": 0.6453,
    "est": 1.48,
-=======
-   "label": "Under 3.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6562,
-   "est": 1.46,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -8463,12 +7865,12 @@
    "date": "2026-11-14T15:00:00Z",
    "home": "Stevenage",
    "away": "Mansfield Town",
-   "key": "DC",
-   "side": "12",
-   "label": "12",
-   "group": "Διπλή ευκαιρία",
-   "p": 0.7026,
-   "est": 1.4,
+   "key": "AT_OU1.5",
+   "side": "Under",
+   "label": "Φιλοξενούμενος Under 1.5",
+   "group": "Γκολ φιλοξενούμενου",
+   "p": 0.6598,
+   "est": 1.45,
    "result": null
   },
   {
@@ -8481,7 +7883,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6562,
+   "p": 0.6667,
    "est": 1.47,
    "result": null
   },
@@ -8495,8 +7897,8 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6897,
-   "est": 1.4,
+   "p": 0.678,
+   "est": 1.43,
    "result": null
   },
   {
@@ -8509,8 +7911,8 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6588,
-   "est": 1.46,
+   "p": 0.6624,
+   "est": 1.45,
    "result": null
   },
   {
@@ -8551,13 +7953,8 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-<<<<<<< Updated upstream
    "p": 0.6713,
    "est": 1.44,
-=======
-   "p": 0.6624,
-   "est": 1.45,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -8570,8 +7967,8 @@
    "side": "12",
    "label": "12",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6961,
-   "est": 1.41,
+   "p": 0.7014,
+   "est": 1.4,
    "result": null
   },
   {
@@ -8584,13 +7981,8 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-<<<<<<< Updated upstream
    "p": 0.6818,
    "est": 1.42,
-=======
-   "p": 0.6919,
-   "est": 1.4,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -8603,11 +7995,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-<<<<<<< Updated upstream
    "p": 0.7007,
-=======
-   "p": 0.6988,
->>>>>>> Stashed changes
    "est": 1.4,
    "result": null
   },
@@ -8618,14 +8006,10 @@
    "home": "Crewe Alexandra",
    "away": "Newport County",
    "key": "DC",
-   "side": "1X",
-   "label": "1X",
+   "side": "12",
+   "label": "12",
    "group": "Διπλή ευκαιρία",
-<<<<<<< Updated upstream
    "p": 0.7008,
-=======
-   "p": 0.6991,
->>>>>>> Stashed changes
    "est": 1.4,
    "result": null
   },
@@ -8649,21 +8033,12 @@
    "date": "2026-11-14T15:00:00Z",
    "home": "Salford City",
    "away": "Northampton Town",
-<<<<<<< Updated upstream
    "key": "OU2.5",
    "side": "Under",
    "label": "Under 2.5",
    "group": "Γκολ Over/Under",
    "p": 0.6702,
    "est": 1.44,
-=======
-   "key": "DC",
-   "side": "12",
-   "label": "12",
-   "group": "Διπλή ευκαιρία",
-   "p": 0.7029,
-   "est": 1.4,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -8676,8 +8051,8 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6917,
-   "est": 1.4,
+   "p": 0.6872,
+   "est": 1.41,
    "result": null
   },
   {
@@ -8686,21 +8061,12 @@
    "date": "2026-11-14T15:00:00Z",
    "home": "Rochdale",
    "away": "York City",
-<<<<<<< Updated upstream
    "key": "HT_OU1.5",
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
    "p": 0.6609,
    "est": 1.45,
-=======
-   "key": "AH+1.5",
-   "side": "H",
-   "label": "1 (+1.5)",
-   "group": "Ασιατικό χάντικαπ",
-   "p": 0.692,
-   "est": 1.4,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -9862,13 +9228,8 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-<<<<<<< Updated upstream
    "p": 0.6532,
    "est": 1.47,
-=======
-   "p": 0.6449,
-   "est": 1.49,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -9881,11 +9242,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-<<<<<<< Updated upstream
    "p": 0.698,
-=======
-   "p": 0.6971,
->>>>>>> Stashed changes
    "est": 1.41,
    "result": null
   },
@@ -10036,8 +9393,8 @@
    "home": "Leicester City",
    "away": "Bradford City",
    "key": "DC",
-   "side": "1X",
-   "label": "1X",
+   "side": "12",
+   "label": "12",
    "group": "Διπλή ευκαιρία",
    "p": 0.7019,
    "est": 1.4,
@@ -10053,13 +9410,8 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-<<<<<<< Updated upstream
    "p": 0.5973,
    "est": 1.6,
-=======
-   "p": 0.5852,
-   "est": 1.64,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -10086,13 +9438,8 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-<<<<<<< Updated upstream
    "p": 0.6866,
    "est": 1.43,
-=======
-   "p": 0.6896,
-   "est": 1.42,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -10105,11 +9452,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-<<<<<<< Updated upstream
    "p": 0.6242,
-=======
-   "p": 0.6249,
->>>>>>> Stashed changes
    "est": 1.53,
    "result": null
   },
@@ -10123,7 +9466,7 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6708,
+   "p": 0.6737,
    "est": 1.46,
    "result": null
   },
@@ -10137,8 +9480,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6358,
-   "est": 1.51,
+   "p": 0.6462,
+   "est": 1.48,
    "result": null
   },
   {
@@ -10151,13 +9494,8 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-<<<<<<< Updated upstream
    "p": 0.6772,
    "est": 1.43,
-=======
-   "p": 0.6718,
-   "est": 1.44,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -10212,13 +9550,8 @@
    "side": "12",
    "label": "12",
    "group": "Διπλή ευκαιρία",
-<<<<<<< Updated upstream
    "p": 0.6939,
    "est": 1.41,
-=======
-   "p": 0.6903,
-   "est": 1.42,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -10227,21 +9560,12 @@
    "date": "2026-11-15T17:30:00Z",
    "home": "SD Eibar",
    "away": "Cádiz CF",
-<<<<<<< Updated upstream
    "key": "AT_OU0.5",
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.609,
    "est": 1.57,
-=======
-   "key": "AH-1.5",
-   "side": "A",
-   "label": "2 (+1.5)",
-   "group": "Ασιατικό χάντικαπ",
-   "p": 0.6902,
-   "est": 1.4,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -10366,11 +9690,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-<<<<<<< Updated upstream
    "p": 0.6618,
-=======
-   "p": 0.6615,
->>>>>>> Stashed changes
    "est": 1.45,
    "result": null
   },
@@ -10408,19 +9728,11 @@
    "date": "2026-11-10T00:00Z",
    "home": "Atlanta Hawks",
    "away": "Los Angeles Lakers",
-<<<<<<< Updated upstream
    "key": "OU230.5",
    "side": "Over",
    "label": "Over 230.5",
    "group": "Σύνολο πόντων",
    "p": 0.6657,
-=======
-   "key": "OU227.5",
-   "side": "Over",
-   "label": "Over 227.5",
-   "group": "Σύνολο πόντων",
-   "p": 0.6752,
->>>>>>> Stashed changes
    "est": 1.48,
    "result": null
   },
@@ -10434,11 +9746,7 @@
    "side": "Over",
    "label": "Over 209.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6496,
-=======
-   "p": 0.6494,
->>>>>>> Stashed changes
    "est": 1.48,
    "result": null
   },
@@ -10452,13 +9760,8 @@
    "side": "Over",
    "label": "Over 213.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6444,
    "est": 1.49,
-=======
-   "p": 0.648,
-   "est": 1.48,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -10467,19 +9770,11 @@
    "date": "2026-11-10T00:30Z",
    "home": "Toronto Raptors",
    "away": "Memphis Grizzlies",
-<<<<<<< Updated upstream
    "key": "OU222.5",
    "side": "Over",
    "label": "Over 222.5",
    "group": "Σύνολο πόντων",
    "p": 0.6722,
-=======
-   "key": "OU219.5",
-   "side": "Over",
-   "label": "Over 219.5",
-   "group": "Σύνολο πόντων",
-   "p": 0.6819,
->>>>>>> Stashed changes
    "est": 1.48,
    "result": null
   },
@@ -10531,12 +9826,12 @@
    "date": "2026-11-10T03:00Z",
    "home": "Golden State Warriors",
    "away": "New Orleans Pelicans",
-   "key": "OU223.5",
+   "key": "OU225.5",
    "side": "Over",
-   "label": "Over 223.5",
+   "label": "Over 225.5",
    "group": "Σύνολο πόντων",
-   "p": 0.667,
-   "est": 1.49,
+   "p": 0.6611,
+   "est": 1.48,
    "result": null
   },
   {
@@ -10545,12 +9840,12 @@
    "date": "2026-11-11T00:30Z",
    "home": "New York Knicks",
    "away": "Milwaukee Bucks",
-   "key": "OU213.5",
+   "key": "OU212.5",
    "side": "Over",
-   "label": "Over 213.5",
+   "label": "Over 212.5",
    "group": "Σύνολο πόντων",
-   "p": 0.64,
-   "est": 1.49,
+   "p": 0.646,
+   "est": 1.48,
    "result": null
   },
   {
@@ -10577,7 +9872,7 @@
    "side": "Over",
    "label": "Over 222.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6546,
+   "p": 0.6545,
    "est": 1.46,
    "result": null
   },
@@ -10591,11 +9886,7 @@
    "side": "Over",
    "label": "Over 227.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6464,
-=======
-   "p": 0.6462,
->>>>>>> Stashed changes
    "est": 1.48,
    "result": null
   },
@@ -10609,13 +9900,8 @@
    "side": "Over",
    "label": "Over 218.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6541,
    "est": 1.46,
-=======
-   "p": 0.6537,
-   "est": 1.47,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -10628,11 +9914,7 @@
    "side": "Over",
    "label": "Over 213.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6567,
-=======
-   "p": 0.6568,
->>>>>>> Stashed changes
    "est": 1.46,
    "result": null
   },
@@ -10660,11 +9942,7 @@
    "side": "Over",
    "label": "Over 215.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6504,
-=======
-   "p": 0.6507,
->>>>>>> Stashed changes
    "est": 1.47,
    "result": null
   },
@@ -10678,7 +9956,7 @@
    "side": "Over",
    "label": "Over 217.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6529,
+   "p": 0.6527,
    "est": 1.47,
    "result": null
   },
@@ -10706,7 +9984,7 @@
    "side": "Over",
    "label": "Over 224.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6492,
+   "p": 0.6493,
    "est": 1.48,
    "result": null
   },
@@ -10720,11 +9998,7 @@
    "side": "Over",
    "label": "Over 230.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6425,
-=======
-   "p": 0.6422,
->>>>>>> Stashed changes
    "est": 1.49,
    "result": null
   },
@@ -10738,11 +10012,7 @@
    "side": "Under",
    "label": "Under 237.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6385,
-=======
-   "p": 0.6381,
->>>>>>> Stashed changes
    "est": 1.5,
    "result": null
   },
@@ -10756,13 +10026,8 @@
    "side": "Over",
    "label": "Over 213.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.641,
    "est": 1.49,
-=======
-   "p": 0.6404,
-   "est": 1.5,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -10775,11 +10040,7 @@
    "side": "Over",
    "label": "Over 217.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6545,
-=======
-   "p": 0.6546,
->>>>>>> Stashed changes
    "est": 1.46,
    "result": null
   },
@@ -10793,11 +10054,7 @@
    "side": "Over",
    "label": "Over 213.5",
    "group": "Σύνολο πόντων",
-<<<<<<< Updated upstream
    "p": 0.6567,
-=======
-   "p": 0.6568,
->>>>>>> Stashed changes
    "est": 1.46,
    "result": null
   },
@@ -10909,7 +10166,7 @@
    "side": "No",
    "label": "N/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6905,
+   "p": 0.6914,
    "est": 1.4,
    "result": null
   },
@@ -10965,13 +10222,8 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 0.5",
    "group": "Γκολ γηπεδούχου",
-<<<<<<< Updated upstream
    "p": 0.6839,
    "est": 1.41,
-=======
-   "p": 0.6907,
-   "est": 1.4,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -11096,13 +10348,8 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-<<<<<<< Updated upstream
    "p": 0.6369,
    "est": 1.5,
-=======
-   "p": 0.6486,
-   "est": 1.48,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -11185,8 +10432,8 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6441,
-   "est": 1.5,
+   "p": 0.6508,
+   "est": 1.48,
    "result": null
   },
   {
@@ -11199,8 +10446,8 @@
    "side": "12",
    "label": "12",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6986,
-   "est": 1.4,
+   "p": 0.6983,
+   "est": 1.41,
    "result": null
   },
   {
@@ -11213,8 +10460,8 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6779,
-   "est": 1.45,
+   "p": 0.6791,
+   "est": 1.44,
    "result": null
   },
   {
@@ -11227,7 +10474,7 @@
    "side": "Over",
    "label": "Over 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6612,
+   "p": 0.6604,
    "est": 1.45,
    "result": null
   },
@@ -11241,7 +10488,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6717,
+   "p": 0.6712,
    "est": 1.44,
    "result": null
   },
@@ -11255,7 +10502,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6614,
+   "p": 0.669,
    "est": 1.45,
    "result": null
   },
@@ -11269,7 +10516,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6544,
+   "p": 0.654,
    "est": 1.46,
    "result": null
   },
@@ -11283,8 +10530,8 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6815,
-   "est": 1.42,
+   "p": 0.6845,
+   "est": 1.41,
    "result": null
   },
   {
@@ -11297,7 +10544,7 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6849,
+   "p": 0.6837,
    "est": 1.41,
    "result": null
   },
@@ -11311,7 +10558,7 @@
    "side": "H",
    "label": "1 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6853,
+   "p": 0.6851,
    "est": 1.41,
    "result": null
   },
@@ -11325,7 +10572,7 @@
    "side": "12",
    "label": "12",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6932,
+   "p": 0.6921,
    "est": 1.42,
    "result": null
   },
@@ -11339,8 +10586,8 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6739,
-   "est": 1.46,
+   "p": 0.6664,
+   "est": 1.45,
    "result": null
   },
   {
@@ -11367,7 +10614,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6959,
+   "p": 0.6973,
    "est": 1.41,
    "result": null
   },
@@ -11395,8 +10642,8 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6747,
-   "est": 1.43,
+   "p": 0.6729,
+   "est": 1.44,
    "result": null
   },
   {
@@ -11409,7 +10656,7 @@
    "side": "12",
    "label": "12",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6761,
+   "p": 0.6767,
    "est": 1.45,
    "result": null
   },
@@ -11423,7 +10670,7 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6483,
+   "p": 0.6486,
    "est": 1.49,
    "result": null
   },
@@ -11437,7 +10684,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6996,
+   "p": 0.7004,
    "est": 1.4,
    "result": null
   },
@@ -11451,7 +10698,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6605,
+   "p": 0.6617,
    "est": 1.46,
    "result": null
   },
@@ -11465,7 +10712,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6918,
+   "p": 0.6923,
    "est": 1.4,
    "result": null
   },
@@ -11479,7 +10726,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6608,
+   "p": 0.6609,
    "est": 1.45,
    "result": null
   },
@@ -11493,7 +10740,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6693,
+   "p": 0.6676,
    "est": 1.45,
    "result": null
   },
@@ -11507,8 +10754,8 @@
    "side": "12",
    "label": "12",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6796,
-   "est": 1.44,
+   "p": 0.678,
+   "est": 1.45,
    "result": null
   },
   {
@@ -11521,7 +10768,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6671,
+   "p": 0.6686,
    "est": 1.45,
    "result": null
   },
@@ -11535,7 +10782,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 2.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6842,
+   "p": 0.6872,
    "est": 1.41,
    "result": null
   },
@@ -12529,13 +11776,8 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-<<<<<<< Updated upstream
    "p": 0.6344,
    "est": 1.51,
-=======
-   "p": 0.6428,
-   "est": 1.49,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -28996,115 +28238,15 @@
    "result": null
   },
   {
-<<<<<<< Updated upstream
-=======
-   "match_id": "L1-b35b9bd8cea60f3228039ca3fc77d4ba",
-   "comp": "L1",
-   "date": "2026-11-14T15:00:00Z",
-   "home": "Wimbledon",
-   "away": "Blackpool",
-   "key": "H1:OU0.5",
-   "side": "Over",
-   "label": "Α' ημίχρονο Over 0.5",
-   "p": 0.6356,
-   "kind": "top",
-   "p_avg": null,
-   "fair": 1.57,
-   "result": null
-  },
-  {
-   "match_id": "L1-e315dc04bd19f74df3199a20acf38004",
-   "comp": "L1",
-   "date": "2026-11-14T15:00:00Z",
-   "home": "Leicester City",
-   "away": "Bradford City",
-   "key": "S:sh:A:12.5",
-   "side": "Under",
-   "label": "Bradford City: Σουτ Under 12.5",
-   "p": 0.6625,
-   "kind": "edge",
-   "p_avg": 0.5302,
-   "fair": 1.51,
-   "result": null
-  },
-  {
->>>>>>> Stashed changes
    "match_id": "L1-d90bee9d1425fb4cebbb391add66d0ed",
    "comp": "L1",
    "date": "2026-11-14T15:00:00Z",
    "home": "Bromley FC",
    "away": "Notts County",
-<<<<<<< Updated upstream
    "key": "S:sv:A:2.5",
    "side": "Under",
    "label": "Notts County: αποκρούσεις Under 2.5",
    "p": 0.6382,
-=======
-   "key": "S:ca:H:1.5",
-   "side": "Over",
-   "label": "Bromley FC: κάρτες Over 1.5",
-   "p": 0.6388,
-   "kind": "top",
-   "p_avg": null,
-   "fair": 1.57,
-   "result": null
-  },
-  {
-   "match_id": "L1-82da0980dcfc5af1d8436be9c3531d91",
-   "comp": "L1",
-   "date": "2026-11-14T15:00:00Z",
-   "home": "Doncaster Rovers",
-   "away": "Leyton Orient",
-   "key": "S:co:H:6.5",
-   "side": "Under",
-   "label": "Doncaster Rovers: κόρνερ Under 6.5",
-   "p": 0.6384,
-   "kind": "top",
-   "p_avg": null,
-   "fair": 1.57,
-   "result": null
-  },
-  {
-   "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
-   "comp": "SD",
-   "date": "2026-11-14T20:00:00Z",
-   "home": "Oviedo",
-   "away": "Girona FC",
-   "key": "S:sh:T:29.5",
-   "side": "Under",
-   "label": "Σουτ Under 29.5",
-   "p": 0.6345,
-   "kind": "top",
-   "p_avg": null,
-   "fair": 1.58,
-   "result": null
-  },
-  {
-   "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
-   "comp": "SD",
-   "date": "2026-11-15T15:15:00Z",
-   "home": "Granada CF",
-   "away": "Las Palmas",
-   "key": "S:co:H:6.5",
-   "side": "Under",
-   "label": "Granada CF: κόρνερ Under 6.5",
-   "p": 0.6378,
-   "kind": "top",
-   "p_avg": null,
-   "fair": 1.57,
-   "result": null
-  },
-  {
-   "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
-   "comp": "SD",
-   "date": "2026-11-15T17:30:00Z",
-   "home": "CD Eldense",
-   "away": "Sabadell FC",
-   "key": "H1:OU0.5",
-   "side": "Over",
-   "label": "Α' ημίχρονο Over 0.5",
-   "p": 0.6362,
->>>>>>> Stashed changes
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
@@ -29116,17 +28258,10 @@
    "date": "2026-11-15T17:30:00Z",
    "home": "SD Eibar",
    "away": "Cádiz CF",
-<<<<<<< Updated upstream
    "key": "S:fo:A:10.5",
    "side": "Over",
    "label": "Cádiz CF: φάουλ Over 10.5",
    "p": 0.6388,
-=======
-   "key": "S:st:H:4.5",
-   "side": "Over",
-   "label": "SD Eibar: σουτ στην εστία Over 4.5",
-   "p": 0.639,
->>>>>>> Stashed changes
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
@@ -29156,11 +28291,7 @@
    "key": "S:fo:A:12.5",
    "side": "Under",
    "label": "Crawley Town: φάουλ Under 12.5",
-<<<<<<< Updated upstream
    "p": 0.6364,
-=======
-   "p": 0.6362,
->>>>>>> Stashed changes
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
@@ -29175,11 +28306,7 @@
    "key": "S:fo:H:11.5",
    "side": "Over",
    "label": "Rotherham United: Φάουλ Over 11.5",
-<<<<<<< Updated upstream
    "p": 0.6733,
-=======
-   "p": 0.6731,
->>>>>>> Stashed changes
    "kind": "edge",
    "p_avg": 0.4757,
    "fair": 1.49,
@@ -29194,17 +28321,10 @@
    "key": "S:ca:H:1.5",
    "side": "Over",
    "label": "Rotherham United: Κάρτες Over 1.5",
-<<<<<<< Updated upstream
    "p": 0.6737,
    "kind": "edge",
    "p_avg": 0.5571,
    "fair": 1.48,
-=======
-   "p": 0.673,
-   "kind": "edge",
-   "p_avg": 0.5571,
-   "fair": 1.49,
->>>>>>> Stashed changes
    "result": null
   },
   {
@@ -29216,35 +28336,13 @@
    "key": "S:ca:T:3.5",
    "side": "Over",
    "label": "Κάρτες Over 3.5",
-<<<<<<< Updated upstream
    "p": 0.6733,
-=======
-   "p": 0.6717,
->>>>>>> Stashed changes
    "kind": "edge",
    "p_avg": 0.562,
    "fair": 1.49,
    "result": null
   },
   {
-<<<<<<< Updated upstream
-=======
-   "match_id": "L2-f71d831db05c678e7208a069210cd59d",
-   "comp": "L2",
-   "date": "2026-11-14T15:00:00Z",
-   "home": "Crewe Alexandra",
-   "away": "Newport County",
-   "key": "S:sv:H:1.5",
-   "side": "Over",
-   "label": "Crewe Alexandra: αποκρούσεις Over 1.5",
-   "p": 0.6315,
-   "kind": "top",
-   "p_avg": null,
-   "fair": 1.58,
-   "result": null
-  },
-  {
->>>>>>> Stashed changes
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
    "comp": "L2",
    "date": "2026-11-14T15:00:00Z",
