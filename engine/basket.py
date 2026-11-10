@@ -74,7 +74,7 @@ def games(c, year):
     return out
 
 
-def boxscores(c, year, played):
+def boxscores(c, year, played, limit=None):
     """Στατιστικά παικτών ανά αγώνα (μόνο όσα λείπουν από την cache)."""
     s = f"{c}{year}"
     key = f"el_box_{s}.json"
@@ -83,15 +83,24 @@ def boxscores(c, year, played):
     for g in played:
         if str(g["code"]) in box:
             continue
-        try:
-            raw, _ = sources._get(BOX.format(c=c, s=s, g=g["code"]))
-            d = json.loads(raw)
-        except Exception as e:
-            print(f"  ! boxscore {g['code']}: {e}")
-            if "429" in str(e):  # όριο κλήσεων: σταματάμε, τα υπόλοιπα στην επόμενη ενημέρωση
+        if limit is not None and new >= limit:
+            break
+        d = None
+        for i in range(3):
+            try:
+                raw, _ = sources._get(BOX.format(c=c, s=s, g=g["code"]))
+                d = json.loads(raw)
                 break
+            except Exception as e:
+                if "429" not in str(e):
+                    print(f"  ! boxscore {g['code']}: {e}")
+                    break
+                time.sleep(30 * (i + 1))  # όριο κλήσεων: περιμένουμε και ξαναδοκιμάζουμε
+        if d is None:
+            if new and new % 25:
+                sources._save_cache(key, box)
             continue
-        time.sleep(0.7)  # το feed έχει όριο κλήσεων
+        time.sleep(1.5)  # το feed έχει όριο κλήσεων
         entry = {}
         for side, team in (("local", g["home"]), ("road", g["away"])):
             rows = []
@@ -105,6 +114,8 @@ def boxscores(c, year, played):
             entry["home" if side == "local" else "away"] = rows
         box[str(g["code"])] = entry
         new += 1
+        if new % 25 == 0:
+            sources._save_cache(key, box)
     if new:
         sources._save_cache(key, box)
     return box
@@ -270,6 +281,10 @@ def build(cid, comp, margins_tbl):
         box = espn.nba_boxscores(played_cur + played_prev)
     else:
         box = boxscores(comp["feed"], year, played_cur)
+        # περσινή σεζόν (για τον έλεγχο των επιλογών παικτών): άλλοι κωδικοί αγώνων -> πρόθεμα "p"
+        pbox = boxscores(comp["feed"], year - 1, played_prev, limit=40)
+        played_prev = [dict(g, code=f"p{g['code']}") for g in played_prev]
+        box = {**{f"p{k}": v for k, v in pbox.items()}, **box}
     # επιλογές παικτών: μοντέλο + εβδομαδιαίος έλεγχος (μόνο στατιστικά που κερδίζουν μένουν)
     PM = props.Model(played_prev + played_cur, box)
     check = sources._cached(f"props_check_{cid}.json", 24 * 7)
@@ -277,6 +292,49 @@ def build(cid, comp, margins_tbl):
         check = props.research(played_prev + played_cur, box)
         sources._save_cache(f"props_check_{cid}.json", check)
     res["props_check"] = check
+
+    injuries = espn.nba_injuries() if comp.get("src") == "espn" else {}
+    OUT = ("Out", "Doubtful")
+
+    def absences(team):
+        """Απόντες βασικοί: NBA από τη λίστα τραυματιών, EuroLeague/EuroCup όσοι έλειψαν στον τελευταίο αγώνα."""
+        reg, tg = PM.regulars(team, datetime.now(timezone.utc).isoformat())
+        out = []
+        if comp.get("src") == "espn":
+            for name, status, note in injuries.get(team, []):
+                if name in reg:
+                    out.append({"name": name, "status": status, "note": note, "mins": round(reg[name], 1),
+                                "out": status in OUT})
+        elif tg:
+            for name, mins in reg.items():
+                if name not in tg[-1]:
+                    miss = 0
+                    for x in reversed(tg):
+                        if name in x:
+                            break
+                        miss += 1
+                    out.append({"name": name, "status": f"έλειψε {miss} αγ." if miss > 1 else "έλειψε στον τελευταίο",
+                                "note": "", "mins": round(mins, 1), "out": True})
+        return sorted(out, key=lambda x: -x["mins"])
+
+    def minutes_view(team, ab, before):
+        """Αναμενόμενα λεπτά των βασικών με τις απουσίες (και αύξηση παραγωγής όπου ο έλεγχος την επιβεβαίωσε)."""
+        mres = check.get("_minutes")
+        if not mres or not ab:
+            return []
+        PM.beta, PM.gamma, PM.usage = mres["beta"], mres["gamma"], mres.get("usage", {})
+        names_ab = [x["name"] for x in ab if x["out"]]
+        plan = PM.minutes_plan(team, before, names_ab)
+        mult = PM.usage_plan(team, before, names_ab)
+        out = []
+        for p, ex in plan.items():
+            base = PM.exp_minutes(p, team, before)
+            if base is None:
+                continue
+            up = {k: round(v - 1, 3) for k, v in mult.items() if k in ("pts", "reb", "ast") and v > 1.01}
+            if ex >= 0.5 or up:
+                out.append({"name": nice_name(p), "base": round(base, 1), "extra": round(ex, 1), "up": up})
+        return sorted(out, key=lambda x: -x["extra"])[:6]
 
     def roster(team):
         last = sorted((x for x in played_cur if team in (x["home"], x["away"])), key=lambda x: x["date"])[-1:]
@@ -352,7 +410,12 @@ def build(cid, comp, margins_tbl):
         h2h = [{"date": x["date"][:10], "home": x["home_short"], "away": x["away_short"], "score": f"{x['hp']}-{x['ap']}"}
                for x in sorted(played_cur + played_prev, key=lambda x: x["date"], reverse=True)
                if {x["home"], x["away"]} == {h, a}][:6]
-        pk = props.picks(PM, check, roster(h), h, a, g["date"]) + props.picks(PM, check, roster(a), a, h, g["date"])
+        ab_h, ab_a = absences(h), absences(a)
+        out_h = [x["name"] for x in ab_h if x["out"]]
+        out_a = [x["name"] for x in ab_a if x["out"]]
+        # NBA: ενεργοί = όσοι έπαιξαν στον τελευταίο αγώνα + βασικοί που γύρισαν, χωρίς όσους είναι εκτός
+        ros = lambda t, outl: [p for p in dict.fromkeys(roster(t) + list(PM.regulars(t, g["date"])[0])) if p not in outl]
+        pk = props.picks(PM, check, ros(h, out_h), h, a, g["date"], absent=out_h) +             props.picks(PM, check, ros(a, out_a), a, h, g["date"], absent=out_a)
         for x in pk:
             x["player"] = nice_name(x["player"])
             x["team"] = g["home_short"] if x["team"] == h else g["away_short"]
@@ -369,6 +432,10 @@ def build(cid, comp, margins_tbl):
             "markets": sels,
             "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
             "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books), "props": pk,
+            "absences": {"home": [dict(x, name=nice_name(x["name"])) for x in ab_h],
+                         "away": [dict(x, name=nice_name(x["name"])) for x in ab_a],
+                         "src": "λίστα τραυματιών NBA (ESPN)" if comp.get("src") == "espn" else "βασικοί που έλειψαν στον τελευταίο αγώνα",
+                         "minutes": {"home": minutes_view(h, ab_h, g["date"]), "away": minutes_view(a, ab_a, g["date"])}},
             "players": {"source": comp.get("players_src", "EuroLeague (επίσημα στατιστικά, τελευταίοι 10 αγώνες)"),
                         "home": players_for(h, [(0, x) for x in h_box], mh, hs.get("ppg")),
                         "away": players_for(a, [(0, x) for x in a_box], ma, as_.get("ppg"))},

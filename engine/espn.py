@@ -175,3 +175,23 @@ def nba_boxscores(played, limit=120):
         sources._save_cache(key, box)
         print(f"  NBA: +{new} boxscores ({len(box)} σύνολο)")
     return box
+
+
+def nba_injuries():
+    """Λίστα τραυματιών NBA: {ομάδα: [(παίκτης, κατάσταση, σχόλιο)]} (κατάσταση: Out / Doubtful / Questionable / Day-To-Day)."""
+    key = "espn_nba_injuries.json"
+    hit = sources._cached(key, 2)
+    if hit is not None:
+        return hit
+    try:
+        raw, _ = sources._get(f"{BASE}/basketball/nba/injuries", headers={"User-Agent": "Mozilla/5.0"})
+        d = json.loads(raw)
+    except Exception as e:
+        print(f"  ! NBA τραυματίες: {e}")
+        return sources._cached(key, 0, stale_ok=True) or {}
+    out = {}
+    for t in d.get("injuries", []):
+        out[t.get("displayName")] = [[i["athlete"]["displayName"], i.get("status"), i.get("shortComment") or ""]
+                                     for i in t.get("injuries", []) if i.get("athlete")]
+    sources._save_cache(key, out)
+    return out
