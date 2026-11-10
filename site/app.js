@@ -99,8 +99,8 @@
 
   function render() {
     buildComp();
-    $("#compFilter").style.display = ["bets"].includes(state.tab) ? "none" : "flex";
-    ({ value: renderValue, matches: renderMatches, teams: renderTeams, bets: renderBets, model: renderModel })[state.tab]();
+    $("#compFilter").style.display = ["bets", "slip"].includes(state.tab) ? "none" : "flex";
+    ({ value: renderValue, matches: renderMatches, teams: renderTeams, slip: renderSlip, bets: renderBets, model: renderModel })[state.tab]();
     if (state.data?.demo && state.tab !== "bets") view.insertAdjacentHTML("afterbegin", `<div class="note" style="border-color:var(--amber);color:var(--amber)">ΔΕΙΓΜΑ: φανταστικοί αγώνες και αποδόσεις για δοκιμή της εμφάνισης.</div>`);
   }
 
@@ -391,6 +391,7 @@
     const tabs = [["sum", "Σύνοψη"], ...(hasStats || hs.p ? [["st", "Στατιστικά"]] : []), ["mk", "Αγορές"], ...(m.players ? [["pl", "Παίκτες"]] : [])];
 
     let h = `<div class="grab"></div><button class="close" data-close>✕</button>
+      <button class="btn sm sx-open" data-openslip="${esc(m.id)}">🧾 Στο δελτίο</button>
       <div class="match-head"><span>${bk ? "🏀 " : ""}${esc(COMP[m.comp] || "")}${m.stage && bk ? " · " + esc(m.stage) : ""}</span><span>${dt(m.date)}</span></div>
       <div class="vs"><div class="t">${crest(m.home_crest)}${esc(m.home)}</div><div class="mid"><span class="kick big">${hhmm(m.date)}</span><br>${bk ? "Πόντοι" : "xG"}<br><b style="font-size:18px;color:var(--text)">${fx(m.xg[0])} – ${fx(m.xg[1])}</b></div><div class="t">${crest(m.away_crest)}${esc(m.away)}</div></div>
       <div class="seg">${tabs.map(([k, l], i) => `<button data-pane-btn="${k}" class="${i ? "" : "active"}">${l}</button>`).join("")}</div>`;
@@ -582,6 +583,174 @@
     view.innerHTML = h;
   }
 
+  // ---------- Δελτίο: γράφεις τις αποδόσεις της εταιρείας, βλέπεις αμέσως πού έχει αξία ----------
+  const PSTAT = { pts: "Πόντοι", reb: "Ριμπάουντ", ast: "Ασίστ", tpm: "Τρίποντα", stl: "Κλεψίματα", blk: "Κοψίματα", tov: "Λάθη", pf: "Φάουλ",
+    pra: "Πόντοι+Ριμπ.+Ασίστ", pr: "Πόντοι+Ριμπάουντ", pa: "Πόντοι+Ασίστ", ra: "Ριμπάουντ+Ασίστ" };
+  const slipLegs = () => store.get("vb_slip", []);
+  const saveSlip = l => store.set("vb_slip", l);
+  const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const num = v => { const x = parseFloat(String(v ?? "").replace(",", ".")); return x > 1 ? x : null; };
+  state.sx = state.sx || { mid: null, q: "", mq: "", pl: "" };
+
+  function allMatches() {
+    const now = Date.now() - 3 * 3600e3;
+    return Object.values(state.data?.competitions || {}).flatMap(c => c.matches || []).filter(m => new Date(m.date).getTime() > now)
+      .sort((a, b) => a.date.localeCompare(b.date));
+  }
+  function selsOf(m) { return (m.markets || []).concat(isBasket(m) ? [] : statSels(m)); }
+  function playerP(m, name, k, L, side) {
+    const P = m.pmodel; if (!P) return null;
+    const r = [...(P.home || []), ...(P.away || [])].find(x => x.name === name);
+    if (!r || r.mu[k] == null) return null;
+    const po = pOver(nb(r.mu[k], P.phi[k] ?? 0.05), L);
+    return { p: side === "Over" ? po : 1 - po, mu: r.mu[k], avg10: r.avg10[k], mins: r.mins, extra: r.extra, ok: (P.ok || []).includes(k) };
+  }
+  // ξαναϋπολογίζει την πιθανότητα με τα τρέχοντα δεδομένα (αν ο αγώνας υπάρχει ακόμα)
+  function legNow(l) {
+    const m = findMatch(l.mid);
+    if (!m) return l;
+    if (l.kind === "player") { const r = playerP(m, l.player, l.stat, l.line, l.side); return r ? { ...l, p: r.p, pp: 0, fair: 1 / r.p, info: r } : l; }
+    const s = selsOf(m).find(x => x.key === l.key && x.side === l.side);
+    return s ? { ...l, p: s.p, pp: s.pp || 0, fair: s.fair, est: s.est } : l;
+  }
+  const verdict = ev => ev == null ? ["muted", "γράψε απόδοση"] : ev >= 0.03 ? ["value", "✅ έχει αξία"] : ev >= -0.03 ? ["solid", "➖ δίκαιη"] : ["warn", "❌ χωρίς αξία"];
+  function addLeg(l) {
+    const legs = slipLegs();
+    if (legs.some(x => x.mid === l.mid && x.key === l.key && x.side === l.side)) return;
+    legs.push({ ...l, odds: l.odds || null, id: Date.now() + Math.random() });
+    saveSlip(legs);
+  }
+
+  function renderSlip() {
+    const S = state.sx, ms = allMatches();
+    const m = S.mid ? findMatch(S.mid) : null;
+    let L = `<div class="card sx-card"><div class="sx-h">🔎 Βρες αγώνα ή παίκτη</div>
+      <input class="sx-q" data-sxq placeholder="π.χ. Arsenal, Olympiacos, Anunoby…" value="${esc(S.q)}" autocomplete="off">`;
+    if (S.q.trim().length >= 2) {
+      const q = norm(S.q.trim());
+      const hitsM = ms.filter(x => norm(`${x.home} ${x.away} ${x.home_full || ""} ${x.away_full || ""}`).includes(q)).slice(0, 8);
+      const hitsP = ms.flatMap(x => [...(x.pmodel?.home || []), ...(x.pmodel?.away || [])].filter(p => norm(p.name).includes(q)).map(p => ({ m: x, p }))).slice(0, 6);
+      L += `<div class="sx-res">${hitsM.map(x => `<button class="sx-r" data-sxm="${esc(x.id)}"><span class="ri-time"><b>${hhmm(x.date)}</b><span>${dayShort(x.date)}</span></span><span class="sx-rt"><b>${esc(x.home)} – ${esc(x.away)}</b><small>${esc(COMP[x.comp] || "")}</small></span></button>`).join("")}
+        ${hitsP.map(({ m: x, p }) => `<button class="sx-r" data-sxm="${esc(x.id)}" data-sxp="${esc(p.name)}"><span class="ri-time"><b>🏀</b><span>${dayShort(x.date)}</span></span><span class="sx-rt"><b>${esc(p.name)}</b><small>${esc(x.home)} – ${esc(x.away)} · ~${p.mins}'</small></span></button>`).join("")}
+        ${!hitsM.length && !hitsP.length ? `<div class="empty-s">Δεν βρέθηκε. Γράψε μέρος του ονόματος (λατινικά).</div>` : ""}</div>`;
+    } else if (!m) {
+      L += `<div class="sx-res">${ms.slice(0, 6).map(x => `<button class="sx-r" data-sxm="${esc(x.id)}"><span class="ri-time"><b>${hhmm(x.date)}</b><span>${dayShort(x.date)}</span></span><span class="sx-rt"><b>${esc(x.home)} – ${esc(x.away)}</b><small>${esc(COMP[x.comp] || "")}</small></span></button>`).join("")}</div>`;
+    }
+    L += `</div>`;
+
+    if (m) {
+      const sels = selsOf(m);
+      const mq = norm(S.mq);
+      const list = sels.filter(s => !mq || norm(nice(m, s.key, s.side, s.label) + " " + s.group).includes(mq));
+      const groups = {};
+      list.forEach(s => (groups[s.group] = groups[s.group] || []).push(s));
+      const inSlip = new Set(slipLegs().map(l => `${l.mid}|${l.key}|${l.side}`));
+      L += `<div class="card sx-card"><div class="sx-mh"><div><div class="sx-h">${esc(m.home)} – ${esc(m.away)}</div><small>${esc(COMP[m.comp] || "")} · ${dt(m.date)}</small></div>
+          <button class="btn sm ghost" data-sxclose>✕</button></div>`;
+      if (m.pmodel) {
+        const players = [...(m.pmodel.home || []).map(p => ({ ...p, t: m.home })), ...(m.pmodel.away || []).map(p => ({ ...p, t: m.away }))];
+        const pl = players.find(p => p.name === S.pl) || null;
+        L += `<div class="sx-pl"><div class="sx-sub">🏀 Γραμμή παίκτη (όπως τη δίνει η εταιρεία)</div>
+          <div class="sx-plg">
+            <select data-sxpl><option value="">Παίκτης…</option>${players.map(p => `<option ${p.name === S.pl ? "selected" : ""}>${esc(p.name)}</option>`).join("")}</select>
+            <select data-sxst>${Object.entries(PSTAT).map(([k, v]) => `<option value="${k}" ${S.st === k ? "selected" : ""}>${v}</option>`).join("")}</select>
+            <input data-sxline inputmode="decimal" placeholder="Γραμμή π.χ. 9.5" value="${esc(S.line || "")}">
+            <input data-sxpodds inputmode="decimal" placeholder="Απόδοση" value="${esc(S.podds || "")}">
+          </div>
+          ${pl ? `<div class="sx-plinfo">${esc(pl.name)} (${esc(pl.t)}) · ~${pl.mins}'${pl.extra >= 1 ? ` (+${pl.extra}' λόγω απουσίας)` : ""} · μ.ό. 10: ${pl.avg10[S.st || "pts"]} · μοντέλο: <b>${pl.mu[S.st || "pts"]}</b></div>` : ""}
+          <div class="sx-plb"><button class="btn sm" data-sxadd="Over">+ Over</button><button class="btn sm ghost" data-sxadd="Under">+ Under</button></div></div>`;
+      }
+      L += `<input class="sx-q sm" data-sxmq placeholder="Φίλτρο αγορών: π.χ. over 2.5, κόρνερ, γκολ-γκολ" value="${esc(S.mq)}">`;
+      L += Object.entries(groups).map(([g, l], i) => `<details class="mk-group" ${i < 3 || mq ? "open" : ""}><summary>${esc(g)}</summary>
+          ${l.map(s => { const k = `${m.id}|${s.key}|${s.side}`; return `<div class="sx-sel ${inSlip.has(k) ? "in" : ""}"><span>${esc(nice(m, s.key, s.side, s.label))}</span><small>${pct(s.p)} · δίκαιη ${f2(s.fair)}</small>
+            <button class="btn sm ${inSlip.has(k) ? "ghost" : ""}" data-sxsel="${esc(s.key)}|${esc(s.side)}">${inSlip.has(k) ? "✓" : "+"}</button></div>`; }).join("")}</details>`).join("") || `<div class="empty-s">Καμία αγορά με αυτό το φίλτρο.</div>`;
+      L += `</div>`;
+    }
+
+    // --- το δελτίο ---
+    const legs = slipLegs().map(legNow);
+    let R = `<div class="card sx-card sx-slip"><div class="sx-mh"><div class="sx-h">🧾 Το δελτίο σου</div>${legs.length ? `<button class="btn sm ghost" data-sxclear>Άδειασμα</button>` : ""}</div>`;
+    if (!legs.length) R += `<div class="empty-s">Πρόσθεσε επιλογές από αριστερά. Μετά γράψε την απόδοση που βλέπεις στη Stoiximan/Superbet.</div>`;
+    let O = 1, P = 1, all = true, Og = 1, Pg = 1, ng = 0;
+    const mids = {};
+    legs.forEach(l => { mids[l.mid] = (mids[l.mid] || 0) + 1; });
+    R += legs.map(l => {
+      const o = num(l.odds), ev = o ? l.p * o + (l.pp || 0) - 1 : null, [cls, txt] = verdict(ev);
+      if (o) { O *= o; P *= l.p; if (ev >= -0.03) { Og *= o; Pg *= l.p; ng++; } } else all = false;
+      return `<div class="sx-leg">
+        <div class="sx-lt"><b>${esc(l.label)}</b><small>${esc(l.match)} · ${hhmm(l.date)}</small>
+          <small>Πιθανότητα <b>${pct(l.p)}</b> · δίκαιη <b>${f2(1 / l.p)}</b>${l.info ? ` · μοντέλο ${l.info.mu} (μ.ό.10 ${l.info.avg10})${l.info.ok ? "" : " · ⚠️ στατιστικό που δεν πέρασε τον έλεγχο"}` : ""}${mids[l.mid] > 1 ? " · ⚠️ ίδιος αγώνας" : ""}</small></div>
+        <div class="sx-lr"><input inputmode="decimal" placeholder="απόδοση" value="${esc(l.odds || "")}" data-sxodds="${l.id}">
+          <span class="pill ${cls}">${ev == null ? txt : `${txt} ${evTxt(ev)}`}</span>
+          <button class="sx-x" data-sxdel="${l.id}" title="Αφαίρεση">✕</button></div></div>`;
+    }).join("");
+    if (legs.length) {
+      const ev = all ? P * O - 1 : null;
+      R += `<div class="sx-sum"><div><span>Απόδοση</span><b>${all ? f2(O) : "—"}</b></div><div><span>Πιθανότητα</span><b>${pct(P)}</b></div>
+        <div><span>Αξία (EV)</span><b class="${evCls(ev)}">${evTxt(ev)}</b></div></div>`;
+      if (all && ng && ng < legs.length) R += `<div class="note sx-tip">💡 Χωρίς τις επιλογές ❌: απόδοση <b>${f2(Og)}</b>, πιθανότητα <b>${pct(Pg)}</b>, αξία <b class="${evCls(Pg * Og - 1)}">${evTxt(Pg * Og - 1)}</b>.</div>`;
+      if (Object.values(mids).some(n => n > 1)) R += `<div class="note sx-tip">⚠️ Επιλογές από τον ίδιο αγώνα επηρεάζουν η μία την άλλη: η πραγματική πιθανότητα μπορεί να διαφέρει.</div>`;
+      R += `<div class="sx-act"><input data-sxstake inputmode="decimal" placeholder="Ποσό €" value="${esc(store.get("vb_last_stake", ""))}">
+        <span class="sx-ret">${all && num(store.get("vb_last_stake", "")) ? `Επιστροφή ${(O * parseFloat(String(store.get("vb_last_stake", "")).replace(",", "."))).toFixed(2)}€` : ""}</span>
+        <button class="btn" data-sxsave ${all ? "" : "disabled"}>Καταγραφή</button></div>`;
+    }
+    R += `</div>`;
+    view.innerHTML = `<div class="sx">${`<div class="sx-col">${L}</div>`}<div class="sx-col sx-side">${R}</div></div>`;
+  }
+
+  view.addEventListener("input", e => {
+    if (state.tab !== "slip") return;
+    const t = e.target;
+    const keep = (sel) => { const el = $(sel); if (el) { el.focus(); const v = el.value; el.value = ""; el.value = v; } };
+    if (t.matches("[data-sxq]")) { state.sx.q = t.value; renderSlip(); keep("[data-sxq]"); }
+    else if (t.matches("[data-sxmq]")) { state.sx.mq = t.value; renderSlip(); keep("[data-sxmq]"); }
+    else if (t.matches("[data-sxline]")) { state.sx.line = t.value; }
+    else if (t.matches("[data-sxpodds]")) { state.sx.podds = t.value; }
+    else if (t.matches("[data-sxodds]")) {
+      const legs = slipLegs(), l = legs.find(x => String(x.id) === t.dataset.sxodds);
+      if (l) { l.odds = t.value; saveSlip(legs); }
+      const pos = t.selectionStart; renderSlip();
+      const el = $(`[data-sxodds="${t.dataset.sxodds}"]`); if (el) { el.focus(); el.setSelectionRange(pos, pos); }
+    } else if (t.matches("[data-sxstake]")) { store.set("vb_last_stake", t.value); const pos = t.selectionStart; renderSlip(); const el = $("[data-sxstake]"); if (el) { el.focus(); el.setSelectionRange(pos, pos); } }
+  });
+  view.addEventListener("change", e => {
+    if (state.tab !== "slip") return;
+    if (e.target.matches("[data-sxpl]")) { state.sx.pl = e.target.value; renderSlip(); }
+    if (e.target.matches("[data-sxst]")) { state.sx.st = e.target.value; renderSlip(); }
+  });
+  view.addEventListener("click", e => {
+    if (state.tab !== "slip") return;
+    const t = e.target;
+    const mb = t.closest("[data-sxm]");
+    if (mb) { state.sx.mid = mb.dataset.sxm; state.sx.q = ""; state.sx.mq = ""; state.sx.pl = mb.dataset.sxp || ""; return renderSlip(); }
+    if (t.closest("[data-sxclose]")) { state.sx.mid = null; return renderSlip(); }
+    const sb = t.closest("[data-sxsel]");
+    if (sb) {
+      const m = findMatch(state.sx.mid), [key, side] = sb.dataset.sxsel.split("|");
+      const s = selsOf(m).find(x => x.key === key && x.side === side);
+      if (s) addLeg({ mid: m.id, key, side, label: nice(m, key, side, s.label), match: `${m.home} – ${m.away}`, date: m.date, comp: m.comp, p: s.p, pp: s.pp || 0 });
+      return renderSlip();
+    }
+    const pa = t.closest("[data-sxadd]");
+    if (pa) {
+      const m = findMatch(state.sx.mid), S = state.sx, k = S.st || "pts", L = num(S.line) || parseFloat(String(S.line || "").replace(",", "."));
+      if (!S.pl || !(L > 0)) { alert("Διάλεξε παίκτη και γράψε τη γραμμή (π.χ. 9.5)."); return; }
+      const side = pa.dataset.sxadd, r = playerP(m, S.pl, k, L, side);
+      if (!r) { alert("Δεν υπάρχει πρόβλεψη για αυτόν τον παίκτη."); return; }
+      addLeg({ kind: "player", mid: m.id, key: `P:${S.pl}:${k}:${L}`, side, player: S.pl, stat: k, line: L, label: `${S.pl}: ${PSTAT[k]} ${side} ${L}`,
+        match: `${m.home} – ${m.away}`, date: m.date, comp: m.comp, p: r.p, pp: 0, odds: S.podds || null });
+      S.podds = ""; return renderSlip();
+    }
+    const d = t.closest("[data-sxdel]");
+    if (d) { saveSlip(slipLegs().filter(x => String(x.id) !== d.dataset.sxdel)); return renderSlip(); }
+    if (t.closest("[data-sxclear]") && confirm("Άδειασμα δελτίου;")) { saveSlip([]); return renderSlip(); }
+    if (t.closest("[data-sxsave]")) {
+      const legs = slipLegs().map(legNow), O = legs.reduce((a, l) => a * (num(l.odds) || 1), 1), P = legs.reduce((a, l) => a * l.p, 1);
+      return openBetForm({ match: legs.length > 1 ? `Δελτίο (${legs.length})` : legs[0].match, selection: legs.map(l => `${l.match}: ${l.label} @${l.odds}`).join(" | "),
+        odds: O.toFixed(2), p: P, group: "Δελτίο", date: legs.map(l => l.date).sort()[0] });
+    }
+  });
+
   // ---------- μοντέλο (ιστορικό value επιλογών) ----------
   function renderModel() {
     const picks = (state.history?.picks || []).filter(p => state.comp === "ALL" || p.comp === state.comp);
@@ -720,7 +889,11 @@
   document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#compPanel")) $("#compPanel").hidden = true; });
   $("#compFilter").addEventListener("change", e => { if (e.target.id !== "compSel") return; state.comp = e.target.value; state.more = {}; store.set("vb_comp", state.comp); render(); });
   $("#backdrop").addEventListener("click", closeSheet);
-  $("#sheet").addEventListener("click", e => { if (e.target.closest("[data-close]")) closeSheet(); });
+  $("#sheet").addEventListener("click", e => {
+    if (e.target.closest("[data-close]")) closeSheet();
+    const os = e.target.closest("[data-openslip]");
+    if (os) { closeSheet(); state.sx = { ...state.sx, mid: os.dataset.openslip, q: "", mq: "", pl: "" }; state.tab = "slip"; store.set("vb_tab", "slip"); syncTabs(); render(); window.scrollTo(0, 0); }
+  });
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
 
   view.addEventListener("click", e => {

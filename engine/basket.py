@@ -421,6 +421,22 @@ def build(cid, comp, margins_tbl):
             x["team"] = g["home_short"] if x["team"] == h else g["away_short"]
             x["label"] = f"{x['player']}: {x['name']} {x['side']} {x['line']:g}"
         pk = sorted(pk, key=lambda x: -(x["p"] - x["p_avg"]))[:2]
+
+        def pmodel(team, opp, outl):
+            """Πρόβλεψη μοντέλου για κάθε βασικό (για έλεγχο οποιασδήποτε γραμμής στην καρτέλα Δελτίο)."""
+            mres = check.get("_minutes") or {}
+            PM.beta, PM.gamma, PM.usage = mres.get("beta", 0), mres.get("gamma", 0), mres.get("usage", {})
+            plan = PM.minutes_plan(team, g["date"], outl) if outl and mres else {}
+            mult = PM.usage_plan(team, g["date"], outl) if outl and mres else None
+            out = []
+            for p in ros(team, outl):
+                pr = PM.predict(p, team, opp, g["date"], plan.get(p, 0.0), mult)
+                if not pr:
+                    continue
+                P, mexp = pr
+                out.append({"name": nice_name(p), "mins": round(mexp, 1), "extra": round(plan.get(p, 0.0), 1),
+                            "mu": {k: round(v[0], 2) for k, v in P.items()}, "avg10": {k: round(v[1], 1) for k, v in P.items()}})
+            return sorted(out, key=lambda x: -x["mins"])
         res["matches"].append({
             "id": f"{cid}-{g['code']}", "comp": cid, "sport": "basketball", "date": g["date"],
             "stage": f"Αγωνιστική {g['round']}" if g.get("round") else None,
@@ -432,6 +448,9 @@ def build(cid, comp, margins_tbl):
             "markets": sels,
             "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
             "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books), "props": pk,
+            "pmodel": {"phi": {k: v["phi"] for k, v in check.items() if not k.startswith("_")},
+                       "ok": [k for k, v in check.items() if not k.startswith("_") and v.get("ok")],
+                       "home": pmodel(h, a, out_h), "away": pmodel(a, h, out_a)},
             "absences": {"home": [dict(x, name=nice_name(x["name"])) for x in ab_h],
                          "away": [dict(x, name=nice_name(x["name"])) for x in ab_a],
                          "src": "λίστα τραυματιών NBA (ESPN)" if comp.get("src") == "espn" else "βασικοί που έλειψαν στον τελευταίο αγώνα",
