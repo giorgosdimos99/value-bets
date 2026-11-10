@@ -130,6 +130,9 @@ for _code, (_name, _s, _country, _sport) in NEW_LEAGUES.items():
 BASKET = {"EL": {"name": "EuroLeague", "feed": "E", "odds": "basketball_euroleague"},
           "EC": {"name": "EuroCup", "feed": "U", "odds": None},
           # NBA: πρόγραμμα, σκορ, παίκτες και αποδόσεις DraftKings από την ESPN (δωρεάν, χωρίς credits)
+          "GBL": {"name": "Basket League", "src": "esake", "odds": None, "days": 7,
+                  "players_src": "Basket League (επίσημα στατιστικά ΕΣΑΚΕ, τελευταίοι 10 αγώνες)"},
+          "BCL": {"name": "Basketball Champions League", "src": "bcl", "odds": None, "days": 7, "min_games": 30},
           "NBA": {"name": "NBA", "src": "espn", "odds": None, "days": 3,
                   "players_src": "NBA (ESPN, τελευταίοι 10 αγώνες)"}}
 ODDS_WINDOW_HOURS = 36   # αποδόσεις ζητάμε μόνο αν υπάρχει αγώνας μέσα σε τόσες ώρες (εξοικονόμηση credits)

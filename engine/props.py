@@ -88,6 +88,8 @@ class Model:
             self.logs_by_tg.setdefault(e[2], []).append(e)
         self.usage = {}
         self.cap = 0.9 * max((e[4] for e in self.logs), default=40) if self.logs else 40
+        # όριο αποβολής: 6 φάουλ στο NBA, 5 στη FIBA (EuroLeague, EuroCup, Basket League)
+        self.foul_out = 6 if max((e[5]["pf"] for e in self.logs), default=5) >= 6 else 5
         # τυποποίηση ρόλων (μέσος/τυπική απόκλιση ανά λεπτό σε όλη τη λίγκα)
         rates = [[e[5][k] / e[4] for k in PROFILE] for e in self.logs if e[4] >= 10]
         n = len(rates) or 1
@@ -409,7 +411,7 @@ def picks(M, check, player_rows, team, opp, before, n=3, absent=()):
             if not c.get("ok"):
                 continue
             L = half(n10)
-            if L < MIN_LINE.get(k, 0.5):
+            if L < MIN_LINE.get(k, 0.5) or (k == "pf" and L >= M.foul_out - 1):
                 continue
             pn = _nb_over(n10, c["phi"], L)
             if not (BAL[0] <= pn <= BAL[1]):

@@ -14,7 +14,7 @@ import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 
-from . import config, espn, markets, model, predictions, props, sources
+from . import bcl, esake, config, espn, markets, model, predictions, props, sources
 
 FEED = "https://feeds.incrowdsports.com/provider/euroleague-feeds/v2/competitions/{c}/seasons/{s}/games?limit=400"
 BOX = "https://api-live.euroleague.net/v2/competitions/{c}/seasons/{s}/games/{g}/stats"
@@ -266,19 +266,28 @@ def players_for(team, box_games, mu_team, team_avg):
 
 def build(cid, comp, margins_tbl):
     year = _season()
-    if comp.get("src") == "espn":  # NBA
+    src = comp.get("src")
+    if src == "espn":  # NBA
         cur, prev = espn.nba_games(comp.get("days", 3))
+    elif src == "esake":  # ελληνική Basket League
+        cur, prev = esake.games(year), esake.games(year - 1)
+    elif src == "bcl":  # Basketball Champions League (μόνο αποτελέσματα)
+        cur, prev = bcl.games(), []
     else:
         cur = games(comp["feed"], year)
         prev = games(comp["feed"], year - 1)
     played_cur = [g for g in cur if g["played"]]
     played_prev = [g for g in prev if g["played"]]
     res = {"name": comp["name"], "sport": "basketball", "matches": [], "standings": None, "teams": [], "recent": []}
-    if len(played_cur) + len(played_prev) < 50:
+    if len(played_cur) + len(played_prev) < comp.get("min_games", 50):
         return res
     R = fit(played_cur, played_prev)
-    if comp.get("src") == "espn":
+    if src == "espn":
         box = espn.nba_boxscores(played_cur + played_prev)
+    elif src == "esake":
+        box = esake.boxscores(played_cur + played_prev)
+    elif src == "bcl":
+        box = {}
     else:
         box = boxscores(comp["feed"], year, played_cur)
         # περσινή σεζόν (για τον έλεγχο των επιλογών παικτών): άλλοι κωδικοί αγώνων -> πρόθεμα "p"
