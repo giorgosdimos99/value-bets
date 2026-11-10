@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#07090d">
+<meta name="theme-color" content="#05070b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Value Bets">
@@ -12,8 +12,153 @@
 <link rel="icon" href="icon.svg">
 <title>Value Bets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Playfair Display / Plus Jakarta Sans δεν έχουν ελληνικά: τα ελληνικά έρχονται από GFS Didot / Manrope (ίδιο ύφος) -->
+<link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+  tailwind.config = {
+    corePlugins: { preflight: false },   // κρατάμε τη βασική διάταξη του style.css
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Playfair Display"', '"GFS Didot"', 'Georgia', 'serif'],
+          sans: ['"Plus Jakarta Sans"', 'Manrope', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          ink: { 950: '#05070b', 900: '#0a0e15', 800: '#111722', 700: '#1a2230' },
+          mint: { 300: '#7cf0b6', 400: '#3fe08e', 500: '#22c873' },
+          gold: { 200: '#f3e2b8', 300: '#e9cd8c', 400: '#d9b264' },
+        },
+        boxShadow: {
+          glass: '0 1px 0 0 rgba(255,255,255,0.06) inset, 0 0 0 1px rgba(255,255,255,0.05), 0 24px 48px -28px rgba(0,0,0,0.95), 0 8px 16px -12px rgba(0,0,0,0.6)',
+          lift: '0 1px 0 0 rgba(255,255,255,0.08) inset, 0 0 0 1px rgba(255,255,255,0.09), 0 30px 60px -30px rgba(0,0,0,1), 0 14px 24px -16px rgba(0,0,0,0.7)',
+          glow: '0 0 0 1px rgba(63,224,142,0.35), 0 18px 40px -18px rgba(63,224,142,0.45)',
+          goldglow: '0 0 0 1px rgba(233,205,140,0.35), 0 18px 40px -20px rgba(233,205,140,0.35)',
+        },
+        transitionTimingFunction: { soft: 'cubic-bezier(.2,.8,.2,1)' },
+      },
+    },
+  };
+</script>
+<style type="text/tailwindcss">
+  /* ============ Premium θέμα (Tailwind, πάνω από το style.css) ============ */
+  @layer base {
+    :root { --bg: #05070b; --surface: rgba(255,255,255,.035); --surface-2: rgba(255,255,255,.055);
+      --line: rgba(255,255,255,.07); --text: #eef1f6; --muted: #8c97a8; --accent: #3fe08e; --amber: #e9cd8c; --radius: 18px; }
+    html, body { @apply bg-ink-950; }
+    body { @apply font-sans text-[15px] leading-[1.6] tracking-[-0.003em] text-slate-100 antialiased; font-feature-settings: "ss01", "cv11";
+      background:
+        radial-gradient(1100px 620px at 12% -8%, rgba(63,224,142,.10), transparent 62%),
+        radial-gradient(900px 560px at 92% 4%, rgba(233,205,140,.08), transparent 60%),
+        radial-gradient(1200px 800px at 50% 120%, rgba(56,92,160,.12), transparent 60%),
+        #05070b; background-attachment: fixed; }
+    /* ελαφρύς κόκκος για "υλικό", όχι επίπεδο χρώμα */
+    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: .05; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    ::selection { background: rgba(63,224,142,.28); }
+  }
+
+  @layer components {
+    /* --- κεφαλίδα: γυαλί --- */
+    body .top { @apply bg-ink-950/60 backdrop-blur-2xl backdrop-saturate-150 border-0 border-b border-solid border-white/[0.06]; }
+    body .brand { @apply font-display text-[23px] font-semibold tracking-[-0.01em]; }
+    body .brand .logo { @apply rounded-[10px] text-ink-950 shadow-glow; background: linear-gradient(140deg, #7cf0b6, #22c873 55%, #d9b264); }
+    body .updated { @apply text-[11.5px] tracking-wide text-slate-400; }
+
+    /* --- τίτλοι: serif με χαρακτήρα --- */
+    body h2, body .sec-h h2 { @apply font-display font-semibold text-[21px] leading-tight tracking-[-0.01em] text-slate-50; }
+    body h2::before { @apply w-[3px] h-[20px] rounded-full; background: linear-gradient(#7cf0b6, #d9b264); }
+    body .day-head { @apply font-display text-[19px]; }
+    body .sec-sub, body .note { @apply leading-[1.6]; }
+    body .hero h1 { @apply font-display font-semibold text-[26px] tracking-[-0.01em]; }
+
+    /* --- κάρτες: πολλαπλά επίπεδα, frosted glass, απαλές σκιές --- */
+    body .card, body .list, body .empty-s, body .table-wrap, body details.mk-group, body .kpi, body .note, body .hero {
+      @apply bg-white/[0.035] backdrop-blur-xl border-0 shadow-glass rounded-[18px]; }
+    body .card.click, body .ri.click { @apply transition-all duration-300 ease-soft; }
+    body .card.click:hover { @apply -translate-y-0.5 scale-[1.015] bg-white/[0.05] shadow-lift; }
+    body .card.click:active { @apply scale-[0.99]; }
+    body .list { @apply overflow-hidden; }
+    body .ri { @apply border-white/[0.05]; }
+    body .ri.click:hover { @apply bg-white/[0.045]; }
+    body .ri.click:hover .ri-time { @apply scale-105 border-mint-400/40; }
+    body .ri-time { @apply bg-white/[0.05] border-white/[0.08] rounded-xl transition-transform duration-300 ease-soft; }
+    body .ri-t { @apply text-[14.5px] font-semibold tracking-[-0.005em]; }
+    body .ri-r b, body .pick .odds, body .kpi b, body .slip-foot b { @apply font-sans font-bold tabular-nums tracking-[-0.02em]; }
+    body .ri-r b.hi { @apply text-mint-400; }
+    body .ri-r b.md { @apply text-gold-300; }
+    body .opp { @apply shadow-glow; }
+    body .slip { @apply shadow-goldglow; }
+    body .prob, body .lad, body .scores span, body .kick { @apply bg-white/[0.05] border-white/[0.08]; }
+
+    /* --- κουμπιά: micro-interactions --- */
+    body .tabs button, body .comp-filter button, body .day-chips button, body .seg button, body .btn, body .more,
+    body .lad, body .mk .add, body .sheet .close, body #compSel {
+      @apply transition-all duration-200 ease-soft will-change-transform; }
+    body .tabs button:hover, body .comp-filter button:hover, body .day-chips button:hover, body .btn:hover,
+    body .mk .add:hover, body .sheet .close:hover, body #compSel:hover, body .lad:hover { @apply scale-105; }
+    body .seg button:hover { @apply scale-105 text-slate-100; }
+    body .tabs button:active, body .comp-filter button:active, body .day-chips button:active, body .seg button:active,
+    body .btn:active, body .mk .add:active { @apply scale-95; }
+
+    body .tabs button, body .comp-filter button, body .day-chips button, body #compSel {
+      @apply bg-white/[0.04] backdrop-blur-md border-white/[0.08] text-slate-300 font-medium tracking-[0.005em]; }
+    body .tabs button:hover, body .day-chips button:hover, body #compSel:hover { @apply bg-white/[0.07] text-slate-100 border-white/[0.14]; }
+    body .tabs button.active { @apply text-ink-950 font-bold border-transparent shadow-glow; background: linear-gradient(135deg, #7cf0b6, #22c873); }
+    body .day-chips button.active, body .comp-filter button.active { @apply bg-slate-100 text-ink-950 border-slate-100 shadow-[0_10px_24px_-12px_rgba(255,255,255,0.45)]; }
+    body .seg { @apply bg-white/[0.04] backdrop-blur-xl border-white/[0.07] rounded-2xl shadow-glass; }
+    body .seg button.active { @apply bg-slate-100 text-ink-950 shadow-[0_6px_18px_-8px_rgba(255,255,255,0.5)]; }
+    body .btn { @apply rounded-xl font-bold text-ink-950 shadow-glow; background: linear-gradient(135deg, #7cf0b6, #22c873); }
+    body .btn.ghost { @apply bg-white/[0.06] text-slate-100 shadow-none border border-solid border-white/[0.1]; }
+    body .more { @apply text-mint-300 hover:text-mint-400; }
+    body .more:hover { @apply translate-x-0.5; }
+
+    /* --- pills --- */
+    body .pill { @apply tracking-[0.01em] font-semibold ring-1 ring-inset; }
+    body .pill.value { @apply bg-mint-400/[0.12] text-mint-300 ring-mint-400/25; }
+    body .pill.solid { @apply bg-gold-300/[0.12] text-gold-200 ring-gold-300/25; }
+    body .pill.muted { @apply bg-white/[0.05] text-slate-400 ring-white/10; }
+    body .pill.warn { @apply ring-red-400/25; }
+    body .pill.hot { @apply text-ink-950 ring-0; background: linear-gradient(135deg, #7cf0b6, #e9cd8c); }
+
+    /* --- μπάρες πιθανότητας --- */
+    body .pbar, body .bar { @apply bg-white/[0.06]; }
+    body .pbar i { background: linear-gradient(90deg, #22c873, #7cf0b6); }
+    body .pbar.mid i { background: linear-gradient(90deg, #d9b264, #f3e2b8); }
+    body .tri { @apply rounded-xl shadow-[0_8px_20px_-14px_rgba(0,0,0,0.9)]; }
+    body .tri i:nth-child(1) { background: linear-gradient(90deg, #179a5a, #22c873); }
+    body .tri i:nth-child(2) { background: #2a3140; }
+    body .tri i:nth-child(3) { background: linear-gradient(90deg, #3c58c9, #5b7bf0); }
+
+    /* --- φύλλο αγώνα: βαθύ γυαλί --- */
+    body .sheet { @apply bg-ink-900/80 backdrop-blur-2xl backdrop-saturate-150 border-0 border-t border-solid border-white/[0.08]
+      shadow-[0_-30px_80px_-30px_rgba(0,0,0,1)] rounded-t-[26px]; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+    body .sheet-backdrop { @apply bg-black/60 backdrop-blur-sm; }
+    body .sheet .grab { @apply bg-white/20; }
+    body .sheet .close { @apply bg-white/[0.06] border-white/10 backdrop-blur-md; }
+    body .vs .t { @apply font-display text-[19px] font-semibold tracking-[-0.01em]; }
+
+    /* --- πίνακες / φόρμες --- */
+    body th { @apply text-[11.5px] uppercase tracking-[0.06em] text-slate-400 border-white/[0.06]; }
+    body td { @apply border-white/[0.05]; }
+    body input, body select { @apply bg-white/[0.05] border-white/[0.1] rounded-xl transition-colors duration-200; }
+    body input:focus, body select:focus { @apply border-mint-400/60 ring-2 ring-mint-400/20; }
+
+    /* --- κινητό: κάτω μενού σαν native εφαρμογή --- */
+    @media (max-width: 760px) {
+      body .tabs { @apply bg-ink-950/70 backdrop-blur-2xl backdrop-saturate-150 border-white/[0.07] shadow-[0_-12px_40px_-20px_rgba(0,0,0,1)]; }
+      body .tabs button, body .tabs button:hover { @apply bg-transparent border-0 shadow-none backdrop-blur-none scale-100; }
+      body .tabs button.active { @apply bg-transparent text-mint-300 shadow-none; background: none; }
+      body .tabs button:active { @apply scale-90; }
+      body .card.click:hover { @apply translate-y-0 scale-100; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body * { transition: none !important; }
+    }
+  }
+</style>
 </head>
 <body>
 <header class="top">
