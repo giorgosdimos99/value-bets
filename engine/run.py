@@ -415,7 +415,8 @@ def difficulty(m, th, ta, rh, ra, p1, px, p2, ctx, cross):
                      "league": (config.RATING_LEAGUES.get(r.get("league")) or config.NEW_LEAGUES.get(r.get("league"))
                                 or [None])[0] if cross else None,
                      "form": (r.get("stats") or {}).get("form"), "style": style(r),
-                     "coach": ctx.get("coach", {}).get((r.get("league"), team_n))}
+                     "coach": ctx.get("coach", {}).get((r.get("league"), team_n)),
+                     "coach_known": r.get("league") in context.WIKI_PAGES}
     return out
 
 

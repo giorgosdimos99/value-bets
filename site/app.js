@@ -69,13 +69,6 @@
     const comps = Object.entries(state.data.competitions || {}).filter(([, c]) => c.matches?.length);
     comps.forEach(([cid, c]) => { COMP[cid] = c.name; });
     if (!comps.some(([cid]) => cid === state.comp)) state.comp = "ALL";
-    const fb = comps.filter(([, c]) => c.sport !== "basketball" && !c.national), bb = comps.filter(([, c]) => c.sport === "basketball"),
-      nt = comps.filter(([, c]) => c.national);
-    const n = l => l.reduce((a, [, c]) => a + c.matches.length, 0);
-    $("#compFilter").innerHTML = `<select id="compSel" aria-label="Διοργάνωση"><option value="ALL">Όλες οι διοργανώσεις (${n(comps)})</option>
-      <optgroup label="⚽ Ποδόσφαιρο">${fb.map(([cid, c]) => `<option value="${cid}">${esc(c.name)} (${c.matches.length})</option>`).join("")}</optgroup>
-      ${nt.length ? `<optgroup label="🌍 Εθνικές ομάδες">${nt.map(([cid, c]) => `<option value="${cid}">${esc(c.name)} (${c.matches.length})</option>`).join("")}</optgroup>` : ""}
-      ${bb.length ? `<optgroup label="🏀 Μπάσκετ">${bb.map(([cid, c]) => `<option value="${cid}">${esc(c.name)} (${c.matches.length})</option>`).join("")}</optgroup>` : ""}</select>`;
     syncTabs();
     $("#updated").innerHTML = state.data.updated
       ? `Ενημέρωση<br>${new Date(state.data.updated).toLocaleString("el-GR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}`
@@ -84,7 +77,28 @@
   }
 
   // ---------- καρτέλες ----------
+  function buildComp() {
+    const comps = Object.entries(state.data?.competitions || {}).filter(([, c]) => c.matches?.length);
+    const fb = comps.filter(([, c]) => c.sport !== "basketball" && !c.national), bb = comps.filter(([, c]) => c.sport === "basketball"),
+      nt = comps.filter(([, c]) => c.national);
+    const n = l => l.reduce((a, [, c]) => a + c.matches.length, 0);
+    const label = state.comp === "ALL" ? `Όλες οι διοργανώσεις` : (COMP[state.comp] || state.comp);
+    const cnt = state.comp === "ALL" ? n(comps) : (comps.find(([cid]) => cid === state.comp)?.[1].matches.length || 0);
+    const grp = (title, list) => list.length ? `<div class="cp-g"><div class="cp-gt">${title}</div>${list.map(([cid, c]) =>
+      `<button class="cp-i ${state.comp === cid ? "on" : ""}" data-cp="${cid}" data-q="${esc(c.name.toLowerCase())}"><span>${esc(c.name)}</span><small>${c.matches.length}</small></button>`).join("")}</div>` : "";
+    $("#compFilter").innerHTML = `<div class="cp">
+      <button class="cp-btn" id="compBtn" aria-haspopup="listbox"><span class="cp-dot"></span><span>${esc(label)}</span><small>${cnt}</small><svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" fill="none" stroke-width="1.6"/></svg></button>
+      <div class="cp-panel" id="compPanel" hidden>
+        <input class="cp-q" id="compQ" placeholder="Αναζήτηση διοργάνωσης…" autocomplete="off">
+        <div class="cp-list">
+          <button class="cp-i all ${state.comp === "ALL" ? "on" : ""}" data-cp="ALL" data-q="όλες"><span>Όλες οι διοργανώσεις</span><small>${n(comps)}</small></button>
+          ${grp("⚽ Ποδόσφαιρο", fb)}${grp("🌍 Εθνικές ομάδες", nt)}${grp("🏀 Μπάσκετ", bb)}
+        </div>
+      </div></div>`;
+  }
+
   function render() {
+    buildComp();
     $("#compFilter").style.display = ["bets"].includes(state.tab) ? "none" : "flex";
     ({ value: renderValue, matches: renderMatches, teams: renderTeams, bets: renderBets, model: renderModel })[state.tab]();
     if (state.data?.demo && state.tab !== "bets") view.insertAdjacentHTML("afterbegin", `<div class="note" style="border-color:var(--amber);color:var(--amber)">ΔΕΙΓΜΑ: φανταστικοί αγώνες και αποδόσεις για δοκιμή της εμφάνισης.</div>`);
@@ -206,15 +220,35 @@
   function diffHtml(m) {
     const D = m.difficulty;
     if (!D) return "";
-    const team = (t, name) => `<div class="diff-t"><b>${esc(name)}</b><span class="pill ${/εύκολο/.test(t.level) ? "value" : /δύσκολο/.test(t.level) ? "warn" : "muted"}">${esc(t.level)}</span>
-      <small>${t.rank ? `${t.rank}η δύναμη /${t.of}${t.league ? " · " + esc(t.league) : ""}` : ""}${t.form ? ` ${formHtml(t.form)}` : ""}</small>
-      ${t.style ? `<small class="sty">⚙️ ${t.style.tags.map(esc).join(" · ")}</small>` : ""}
-      ${t.coach ? `<small class="sty">🧑‍💼 Νέος προπονητής: ${esc(t.coach.name || "")} (${t.coach.games} αγ.)</small>` : ""}</div>`;
+    const lvlCls = l => /εύκολο/.test(l) ? "value" : /δύσκολο/.test(l) ? "warn" : "muted";
+    const team = (t, name, side) => `<div class="mx-team ${side}">
+        <div class="mx-name">${esc(name)}</div>
+        <span class="pill ${lvlCls(t.level)}">${esc(t.level)}</span>
+        <div class="mx-sub">${t.rank ? `${t.rank}η δύναμη από ${t.of}${t.league ? " · " + esc(t.league) : ""}` : ""}</div>
+        ${t.form ? `<div class="mx-form">${formHtml(t.form)}</div>` : ""}
+      </div>`;
     const [p1, px, p2] = D.p;
-    return `<div class="card"><div class="diff">${team(D.home, m.home)}${team(D.away, m.away)}</div>
-      <div class="tri"><i style="width:${p1 * 100}%">1 · ${pct(p1)}</i><i style="width:${px * 100}%">X · ${pct(px)}</i><i style="width:${p2 * 100}%">2 · ${pct(p2)}</i></div>
-      ${m.weather ? `<div class="wx">${m.weather.mud >= 2 ? "🌧️" : m.weather.rain > 0 ? "🌦️" : "☁️"} Καιρός στον αγώνα: ${m.weather.temp}°C · αέρας ${Math.round(m.weather.wind)} km/h · βροχή ${m.weather.rain} mm (${m.weather.rain_before} mm τις 6 ώρες πριν)</div>` : ""}
-      ${m.ctx_adj && m.ctx_adj.length ? `<div class="wx">🧭 Λαμβάνεται υπόψη: ${m.ctx_adj.map(esc).join(" · ")}</div>` : ""}</div>`;
+    const H = D.home, A = D.away;
+    const coachTxt = t => t.coach
+      ? `<b class="hl">Νέος: ${esc(t.coach.name || "—")}</b><small>${t.coach.caretaker ? "υπηρεσιακός · " : ""}${t.coach.games} αγώνες μαζί του</small>`
+      : t.coach_known ? `<span>Καμία αλλαγή φέτος</span>` : `<span class="dim">Δεν υπάρχουν στοιχεία</span>`;
+    const styleTxt = t => t.style ? t.style.tags.map(x => `<span class="chip">${esc(x)}</span>`).join("") : `<span class="dim">—</span>`;
+    const W = m.weather;
+    const wx = W ? `${W.mud >= 2 ? "🌧️" : W.rain > 0 ? "🌦️" : "⛅"} <b>${W.temp}°C</b> · αέρας ${Math.round(W.wind)} km/h · βροχή ${W.rain} mm <small>(${W.rain_before} mm τις 6 ώρες πριν)</small>`
+      : `<span class="dim">Πρόγνωση μόνο για γήπεδα Αγγλίας</span>`;
+    const row = (ic, label, a, b) => `<div class="cx-row"><div class="cx-l">${ic} ${label}</div><div class="cx-v">${a}</div><div class="cx-v">${b}</div></div>`;
+    return `<div class="card mx">
+        <div class="mx-grid">${team(H, m.home, "h")}<div class="mx-vs">VS</div>${team(A, m.away, "a")}</div>
+        <div class="tri"><i style="width:${p1 * 100}%">1 · ${pct(p1)}</i><i style="width:${px * 100}%">X · ${pct(px)}</i><i style="width:${p2 * 100}%">2 · ${pct(p2)}</i></div>
+      </div>
+      <div class="card cx">
+        <div class="cx-h">🧭 Πλαίσιο αγώνα</div>
+        <div class="cx-row cx-head"><div class="cx-l"></div><div class="cx-v">${esc(m.home)}</div><div class="cx-v">${esc(m.away)}</div></div>
+        ${row("⚙️", "Τρόπος παιχνιδιού", styleTxt(H), styleTxt(A))}
+        ${row("🧑‍💼", "Προπονητής", coachTxt(H), coachTxt(A))}
+        <div class="cx-row one"><div class="cx-l">🌦️ Καιρός</div><div class="cx-v">${wx}</div></div>
+        <div class="cx-row one"><div class="cx-l">🎯 Αλλάζει την πρόβλεψη</div><div class="cx-v">${m.ctx_adj && m.ctx_adj.length ? m.ctx_adj.map(x => `<span class="chip on">${esc(x)}</span>`).join("") : `<span class="dim">Τίποτα ιδιαίτερο: μετράνε μόνο η δύναμη και οι αποδόσεις</span>`}</div></div>
+      </div>`;
   }
 
   // κατανοητά ονόματα επιλογών: "2" -> "Νίκη Real Madrid"
@@ -668,6 +702,22 @@
     const sel = $("#compSel"); if (sel) sel.value = state.comp;
   }
   $("#tabs").addEventListener("click", e => { const t = e.target.closest("button"); if (!t) return; state.tab = t.dataset.tab; store.set("vb_tab", state.tab); syncTabs(); render(); });
+  // σκούρο μενού διοργανώσεων (αντί για το λευκό select του browser)
+  document.addEventListener("click", e => {
+    const panel = $("#compPanel");
+    if (!panel) return;
+    if (e.target.closest("#compBtn")) { panel.hidden = !panel.hidden; if (!panel.hidden) setTimeout(() => $("#compQ")?.focus(), 30); return; }
+    const it = e.target.closest("[data-cp]");
+    if (it) { state.comp = it.dataset.cp; state.more = {}; store.set("vb_comp", state.comp); panel.hidden = true; render(); return; }
+    if (!e.target.closest("#compPanel")) panel.hidden = true;
+  });
+  document.addEventListener("input", e => {
+    if (e.target.id !== "compQ") return;
+    const q = e.target.value.trim().toLowerCase();
+    document.querySelectorAll("#compPanel .cp-i").forEach(b => { b.hidden = q && !b.dataset.q.includes(q); });
+    document.querySelectorAll("#compPanel .cp-g").forEach(g => { g.hidden = ![...g.querySelectorAll(".cp-i")].some(b => !b.hidden); });
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#compPanel")) $("#compPanel").hidden = true; });
   $("#compFilter").addEventListener("change", e => { if (e.target.id !== "compSel") return; state.comp = e.target.value; state.more = {}; store.set("vb_comp", state.comp); render(); });
   $("#backdrop").addEventListener("click", closeSheet);
   $("#sheet").addEventListener("click", e => { if (e.target.closest("[data-close]")) closeSheet(); });

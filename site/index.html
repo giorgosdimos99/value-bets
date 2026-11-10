@@ -154,6 +154,82 @@
       body .tabs button:active { @apply scale-90; }
       body .card.click:hover { @apply translate-y-0 scale-100; }
     }
+
+    /* ---------- layout: πλαίσιο πάνω, μενού αριστερά ---------- */
+    body .top { @apply flex items-center justify-between w-full max-w-none px-5 md:px-7 py-3.5;
+      padding-top: calc(14px + env(safe-area-inset-top)); box-shadow: 0 1px 0 rgba(255,255,255,.05), 0 18px 40px -30px rgba(0,0,0,1); }
+    body .top::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(124,240,182,.45), rgba(233,205,140,.35), transparent); }
+    body .top-r { @apply flex items-center gap-2.5 ml-auto text-right; }
+    body .live-dot { @apply w-2 h-2 rounded-full bg-mint-400; box-shadow: 0 0 0 4px rgba(63,224,142,.15); animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 7px rgba(63,224,142,0); } }
+    body .nav-t, body .nav-foot { display: none; }
+    @media (min-width: 1000px) {
+      body .shell { display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 28px; max-width: 1560px; margin: 0 auto; padding: 0 24px; }
+      body .tabs { position: sticky; top: 86px; align-self: start; flex-direction: column; gap: 4px; margin: 20px 0 0; padding: 14px; max-width: none;
+        @apply bg-white/[0.03] backdrop-blur-xl rounded-[20px] shadow-glass overflow-visible; }
+      body .tabs button { @apply flex items-center gap-3 w-full justify-start rounded-xl px-3.5 py-3 text-[14.5px] border-transparent bg-transparent text-slate-300 shadow-none; }
+      body .tabs button .ic { @apply grid place-items-center w-8 h-8 rounded-lg bg-white/[0.05] text-[15px] m-0 transition-all duration-200; }
+      body .tabs button:hover { @apply bg-white/[0.06] text-white scale-[1.03]; }
+      body .tabs button.active { @apply text-white font-semibold shadow-none; background: linear-gradient(90deg, rgba(63,224,142,.16), rgba(63,224,142,.02)); }
+      body .tabs button.active .ic { @apply text-ink-950; background: linear-gradient(135deg, #7cf0b6, #22c873); box-shadow: 0 6px 16px -6px rgba(63,224,142,.7); }
+      body .nav-t { display: block; @apply text-[11px] uppercase tracking-[0.14em] text-slate-500 px-3.5 pb-2 pt-1; }
+      body .nav-foot { display: block; @apply text-[11.5px] leading-relaxed text-slate-500 px-3.5 pt-4 mt-3 border-0 border-t border-solid border-white/[0.06]; }
+      body .content main, body .content .comp-filter { max-width: none; margin: 0; padding-left: 0; padding-right: 0; }
+      body .content .comp-filter { padding-top: 20px; }
+    }
+
+    /* ---------- σκούρο μενού διοργανώσεων ---------- */
+    body .comp-filter { overflow: visible; }
+    body .cp { @apply relative; }
+    body .comp-filter .cp-btn { @apply inline-flex items-center gap-2.5 rounded-full pl-3.5 pr-4 py-2 text-[13.5px] font-semibold text-slate-100 cursor-pointer
+      bg-white/[0.05] backdrop-blur-md border border-solid border-white/[0.1] shadow-glass transition-all duration-200 ease-soft hover:scale-105 hover:bg-white/[0.08]; }
+    body .comp-filter .cp-btn small { @apply text-[11px] font-bold text-ink-950 bg-mint-300 rounded-full px-2 py-px; }
+    body .comp-filter .cp-btn svg { @apply text-slate-400; }
+    body .cp-dot { @apply w-2 h-2 rounded-full; background: linear-gradient(135deg, #7cf0b6, #d9b264); }
+    body .cp-panel { @apply absolute left-0 top-full mt-2 z-30 w-[min(360px,calc(100vw-32px))] p-2.5 rounded-2xl
+      bg-ink-900/95 backdrop-blur-2xl border border-solid border-white/[0.1]; box-shadow: 0 30px 60px -20px rgba(0,0,0,1), 0 0 0 1px rgba(255,255,255,.04) inset;
+      animation: pop .18s cubic-bezier(.2,.8,.2,1); }
+    @keyframes pop { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+    body .cp-panel[hidden] { display: none; }
+    body .cp-q { @apply w-full mb-2 rounded-xl bg-white/[0.05] border border-solid border-white/[0.1] px-3 py-2.5 text-[13.5px] text-slate-100; }
+    body .cp-list { @apply max-h-[60vh] overflow-y-auto pr-1; scrollbar-width: thin; }
+    body .cp-g[hidden], body .cp-i[hidden] { display: none; }
+    body .cp-gt { @apply text-[11px] uppercase tracking-[0.12em] text-slate-500 px-2.5 pt-3 pb-1.5; }
+    body .comp-filter .cp-i { @apply flex w-full items-center justify-between gap-3 rounded-xl px-2.5 py-2 text-left text-[13.5px] text-slate-200 bg-transparent border-0
+      cursor-pointer transition-all duration-150 hover:bg-white/[0.07] hover:translate-x-0.5; }
+    body .comp-filter .cp-i:hover { transform: translateX(2px); }
+    body .comp-filter .cp-i small { @apply text-[11.5px] text-slate-500 tabular-nums; }
+    body .comp-filter .cp-i.on { @apply text-white font-semibold; background: linear-gradient(90deg, rgba(63,224,142,.18), rgba(63,224,142,.03)); }
+    body .comp-filter .cp-i.on small { @apply text-mint-300; }
+    body select, body option, body optgroup { color-scheme: dark; background-color: #0a0e15; color: #eef1f6; }
+
+    /* ---------- κάρτα αγώνα ---------- */
+    body .mx-grid { @apply grid items-start gap-3; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); }
+    body .mx-team { @apply flex flex-col gap-1.5 min-w-0 items-start; }
+    body .mx-team.a { @apply items-end text-right; }
+    body .mx-name { @apply font-display text-[18px] font-semibold leading-tight tracking-[-0.01em] text-white; }
+    body .mx-sub { @apply text-[12px] text-slate-400; }
+    body .mx-vs { @apply self-center text-[11px] font-bold tracking-[0.2em] text-slate-500 px-2 py-1 rounded-full bg-white/[0.04] ring-1 ring-inset ring-white/10; }
+    body .cx-h { @apply font-display text-[17px] font-semibold text-white mb-2; }
+    body .cx-row { @apply grid gap-3 py-2.5 border-0 border-t border-solid border-white/[0.06] items-start; grid-template-columns: 150px minmax(0,1fr) minmax(0,1fr); }
+    body .cx-row.one { grid-template-columns: 150px minmax(0,1fr); }
+    body .cx-row.cx-head { @apply border-0 pt-0 pb-1 text-[12px] font-semibold text-slate-400; }
+    body .cx-l { @apply text-[12.5px] text-slate-400 font-medium; }
+    body .cx-v { @apply text-[13.5px] text-slate-100 flex flex-wrap gap-1.5 items-center leading-snug min-w-0; }
+    body .cx-v small { @apply text-[11.5px] text-slate-400 w-full; }
+    body .cx-v .hl { @apply text-gold-200; }
+    body .chip { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[12px] font-medium bg-white/[0.06] text-slate-200 ring-1 ring-inset ring-white/10; }
+    body .chip.on { @apply bg-mint-400/[0.12] text-mint-300 ring-mint-400/25; }
+    body .dim { @apply text-slate-500; }
+    body .sheet .match-head { @apply text-[12px] uppercase tracking-[0.08em] text-slate-400; }
+    @media (max-width: 640px) {
+      body .cx-row, body .cx-row.one { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+      body .cx-row .cx-l { grid-column: 1 / -1; }
+      body .cx-row.one .cx-v { grid-column: 1 / -1; }
+      body .cx-row.cx-head .cx-l { display: none; }
+      body .mx-name { @apply text-[16px]; }
+    }
     @media (prefers-reduced-motion: reduce) {
       body * { transition: none !important; }
     }
@@ -163,26 +239,24 @@
 <body>
 <header class="top">
   <div class="brand"><span class="logo">◆</span> Value Bets</div>
-  <div class="updated" id="updated">—</div>
+  <div class="top-r"><span class="live-dot"></span><div class="updated" id="updated">—</div></div>
 </header>
 
-<nav class="tabs" id="tabs">
-  <button data-tab="value" class="active"><span class="ic">★</span>Προβλέψεις</button>
-  <button data-tab="matches"><span class="ic">⚽</span>Αγώνες</button>
-  <button data-tab="teams"><span class="ic">📊</span>Ομάδες</button>
-  <button data-tab="bets"><span class="ic">🎫</span>Στοιχήματα</button>
-  <button data-tab="model"><span class="ic">🧪</span>Μοντέλο</button>
-</nav>
-
-<div class="comp-filter" id="compFilter">
-  <button data-comp="ALL" class="active">Όλα</button>
-  <button data-comp="PL">Premier League</button>
-  <button data-comp="CL">Champions League</button>
-  <button data-comp="GR">Super League</button>
-  <button data-comp="EL">🏀 EuroLeague</button>
+<div class="shell">
+  <nav class="tabs" id="tabs">
+    <div class="nav-t">Μενού</div>
+    <button data-tab="value" class="active"><span class="ic">★</span><span class="lb">Προβλέψεις</span></button>
+    <button data-tab="matches"><span class="ic">⚽</span><span class="lb">Αγώνες</span></button>
+    <button data-tab="teams"><span class="ic">📊</span><span class="lb">Ομάδες</span></button>
+    <button data-tab="bets"><span class="ic">🎫</span><span class="lb">Στοιχήματα</span></button>
+    <button data-tab="model"><span class="ic">🧪</span><span class="lb">Μοντέλο</span></button>
+    <div class="nav-foot">Δωρεάν πηγές · ενημέρωση κάθε 3 ώρες. Παίζε υπεύθυνα.</div>
+  </nav>
+  <div class="content">
+    <div class="comp-filter" id="compFilter"></div>
+    <main id="view"></main>
+  </div>
 </div>
-
-<main id="view"></main>
 
 <div class="sheet-backdrop" id="backdrop"></div>
 <section class="sheet" id="sheet" aria-modal="true" role="dialog"></section>

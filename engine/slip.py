@@ -1,7 +1,8 @@
 """Προτεινόμενα δελτία ανά ημέρα, μόνο με αγώνες της ίδιας ημέρας (ώρα Ελλάδας).
 
 - Απλό: συνολική απόδοση ≥ 5, χωρίς ανώτατο όριο, 2-6 επιλογές.
-- Ακραίο: συνολική απόδοση ≥ 20, χωρίς ανώτατο όριο, 3-8 επιλογές.
+- Ακραίο: συνολική απόδοση ≥ 15, με ΙΔΙΕΣ ή ΛΙΓΟΤΕΡΕΣ επιλογές από το απλό: η απόδοση ανεβαίνει
+  με μεγαλύτερες αποδόσεις ανά επιλογή (≥ 1.65), όχι με περισσότερες επιλογές.
 Κριτήριο: ο ΠΙΘΑΝΟΤΕΡΟΣ συνδυασμός (με βάση τα στατιστικά) που φτάνει την ελάχιστη απόδοση.
 Αποκλείονται επιλογές με πολύ κακή τιμή (εκτιμώμενη απόδοση πάνω από 7% κάτω από τη δίκαιη).
 """
@@ -14,7 +15,7 @@ MIN_LEG_EV = -0.07    # όχι επιλογές με πολύ κακή τιμή 
 
 KINDS = {
     "simple": {"min_total": 5.0, "legs": (2, 6), "leg_p": 0.50, "leg_odds": (1.25, 2.60), "pool": 20},
-    "extreme": {"min_total": 20.0, "legs": (3, 8), "leg_p": 0.40, "leg_odds": (1.35, 3.50), "pool": 17},
+    "extreme": {"min_total": 15.0, "legs": (2, 6), "leg_p": 0.25, "leg_odds": (1.65, 6.00), "pool": 18, "per_match": True},
 }
 
 
@@ -38,6 +39,8 @@ def _legs(matches, rule):
         # ανά αγώνα: η πιθανότερη επιλογή και η πιθανότερη με απόδοση ≥ 1.6 (για να "ανεβαίνει" το δελτίο)
         cand.sort(key=lambda s: -s["p"])
         pick = cand[:1] + [s for s in cand if s["est"] >= 1.6][:1]
+        if rule.get("per_match"):  # ακραίο: περισσότερες τιμές ανά αγώνα (1.7, 2.0, 2.5...) για να φτάσει την απόδοση
+            pick = cand[:1] + [s for s in cand if s["est"] >= 1.95][:1] + [s for s in cand if s["est"] >= 2.4][:1]
         for s in {id(x): x for x in pick}.values():
             legs.append({"match": m, "s": s})
     # οι πιο "δυνατές" επιλογές (πιθανότητα × απόδοση), μισές χαμηλές και μισές ≥ 1.6 για να φτάνει την απόδοση
@@ -87,8 +90,11 @@ def build_daily(matches):
     out = []
     for day in sorted(by_day):
         entry = {"day": day, "matches": len(by_day[day])}
-        for kind, rule in KINDS.items():
-            entry[kind] = _best(_legs(by_day[day], rule), rule)
+        entry["simple"] = _best(_legs(by_day[day], KINDS["simple"]), KINDS["simple"])
+        rule = dict(KINDS["extreme"])
+        if entry["simple"]:  # όχι περισσότερες επιλογές από το απλό
+            rule["legs"] = (2, max(2, len(entry["simple"]["legs"])))
+        entry["extreme"] = _best(_legs(by_day[day], rule), rule)
         if entry["simple"] or entry["extreme"]:
             out.append(entry)
     return out
