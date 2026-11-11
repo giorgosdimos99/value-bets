@@ -4572,107 +4572,6 @@
   {
    "legs": [
     {
-     "match_id": "SD-908247d5d5cd714de37956edf865668b",
-     "comp": "SD",
-     "date": "2026-11-14T13:00:00Z",
-     "home": "Real Valladolid CF",
-     "away": "CD Castellón",
-     "key": "DC",
-     "side": "1X",
-     "label": "1X",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.5786,
-     "fair": 1.73,
-     "est": 1.67,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
-     "comp": "L2",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Salford City",
-     "away": "Northampton Town",
-     "key": "1X2",
-     "side": "1",
-     "label": "1",
-     "group": "Τελικό αποτέλεσμα",
-     "p": 0.5332,
-     "fair": 1.88,
-     "est": 1.81,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
-     "comp": "L2",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Swindon Town",
-     "away": "Grimsby Town",
-     "key": "DC",
-     "side": "1X",
-     "label": "1X",
-     "group": "Διπλή ευκαιρία",
-     "p": 0.5608,
-     "fair": 1.78,
-     "est": 1.72,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
-     "comp": "L1",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Milton Keynes Dons",
-     "away": "Burton Albion",
-     "key": "BTTS",
-     "side": "Yes",
-     "label": "G/G",
-     "group": "Γκολ-Γκολ",
-     "p": 0.565,
-     "fair": 1.77,
-     "est": 1.7,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
-     "comp": "L2",
-     "date": "2026-11-14T15:00:00Z",
-     "home": "Shrewsbury Town",
-     "away": "Oldham Athletic",
-     "key": "HT_OU1.5",
-     "side": "Under",
-     "label": "Γηπεδούχος Under 1.5",
-     "group": "Γκολ γηπεδούχου",
-     "p": 0.5645,
-     "fair": 1.77,
-     "est": 1.7,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 15.03,
-   "p": 0.0552,
-   "ev": -0.1709,
-   "day": "2026-11-14",
-   "kind": "extreme",
-   "created": "2026-11-10T12:52:27.150859+00:00",
-   "result": null
-  },
-  {
-   "legs": [
-    {
      "match_id": "NBA-401909962",
      "comp": "NBA",
      "date": "2026-11-11T02:00Z",
@@ -5681,6 +5580,107 @@
    "day": "2026-11-14",
    "kind": "simple",
    "created": "2026-11-11T13:52:39.891582+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": "SD-908247d5d5cd714de37956edf865668b",
+     "comp": "SD",
+     "date": "2026-11-14T13:00:00Z",
+     "home": "Real Valladolid CF",
+     "away": "CD Castellón",
+     "key": "DC",
+     "side": "1X",
+     "label": "1X",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.5786,
+     "fair": 1.73,
+     "est": 1.67,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
+     "comp": "L2",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Swindon Town",
+     "away": "Grimsby Town",
+     "key": "DC",
+     "side": "1X",
+     "label": "1X",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.5613,
+     "fair": 1.78,
+     "est": 1.72,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
+     "comp": "L2",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Salford City",
+     "away": "Northampton Town",
+     "key": "1X2",
+     "side": "1",
+     "label": "1",
+     "group": "Τελικό αποτέλεσμα",
+     "p": 0.5332,
+     "fair": 1.88,
+     "est": 1.81,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
+     "comp": "L1",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Milton Keynes Dons",
+     "away": "Burton Albion",
+     "key": "BTTS",
+     "side": "Yes",
+     "label": "G/G",
+     "group": "Γκολ-Γκολ",
+     "p": 0.565,
+     "fair": 1.77,
+     "est": 1.7,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
+     "comp": "L2",
+     "date": "2026-11-14T15:00:00Z",
+     "home": "Shrewsbury Town",
+     "away": "Oldham Athletic",
+     "key": "HT_OU1.5",
+     "side": "Under",
+     "label": "Γηπεδούχος Under 1.5",
+     "group": "Γκολ γηπεδούχου",
+     "p": 0.5645,
+     "fair": 1.77,
+     "est": 1.7,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 15.03,
+   "p": 0.0552,
+   "ev": -0.1702,
+   "day": "2026-11-14",
+   "kind": "extreme",
+   "created": "2026-11-11T16:42:41.204866+00:00",
    "result": null
   }
  ],
@@ -7964,7 +7964,7 @@
    "side": "Under",
    "label": "Under 173.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6581,
+   "p": 0.6582,
    "est": 1.51,
    "result": null
   },
@@ -7978,7 +7978,7 @@
    "side": "A",
    "label": "2",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6977,
+   "p": 0.6978,
    "est": 1.41,
    "result": null
   },
@@ -7992,7 +7992,7 @@
    "side": "A",
    "label": "2",
    "group": "Νικητής (με παράταση)",
-   "p": 0.7175,
+   "p": 0.7176,
    "est": 1.4,
    "result": null
   },
@@ -8006,7 +8006,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.7062,
+   "p": 0.7061,
    "est": 1.42,
    "result": null
   },
@@ -8266,7 +8266,7 @@
    "side": "Under",
    "label": "Under 173.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6629,
+   "p": 0.664,
    "est": 1.44,
    "result": null
   },
@@ -8280,7 +8280,7 @@
    "side": "Over",
    "label": "Over 158.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6602,
+   "p": 0.6605,
    "est": 1.45,
    "result": null
   },
@@ -8294,7 +8294,7 @@
    "side": "Over",
    "label": "Over 191.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6622,
+   "p": 0.6627,
    "est": 1.45,
    "result": null
   },
@@ -8308,7 +8308,7 @@
    "side": "Over",
    "label": "Over 152.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6718,
+   "p": 0.6719,
    "est": 1.44,
    "result": null
   },
@@ -8322,7 +8322,7 @@
    "side": "Over",
    "label": "Over 169.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6785,
+   "p": 0.6778,
    "est": 1.43,
    "result": null
   },
@@ -8392,7 +8392,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6698,
+   "p": 0.6699,
    "est": 1.44,
    "result": null
   },
@@ -8406,8 +8406,8 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6515,
-   "est": 1.48,
+   "p": 0.6535,
+   "est": 1.47,
    "result": null
   },
   {
@@ -8490,7 +8490,7 @@
    "side": "A",
    "label": "2 (+11.5)",
    "group": "Χάντικαπ",
-   "p": 0.6671,
+   "p": 0.6669,
    "est": 1.45,
    "result": null
   },
@@ -8504,7 +8504,7 @@
    "side": "Over",
    "label": "Over 156.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6809,
+   "p": 0.6808,
    "est": 1.42,
    "result": null
   },
@@ -8588,7 +8588,7 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6905,
+   "p": 0.6903,
    "est": 1.42,
    "result": null
   },
@@ -9778,7 +9778,7 @@
    "side": "A",
    "label": "2 (-6.5)",
    "group": "Χάντικαπ",
-   "p": 0.6669,
+   "p": 0.6673,
    "est": 1.45,
    "result": null
   },
@@ -9792,7 +9792,7 @@
    "side": "Over",
    "label": "Over 145.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6779,
+   "p": 0.6777,
    "est": 1.43,
    "result": null
   },
@@ -9849,7 +9849,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6918,
+   "p": 0.6915,
    "est": 1.4,
    "result": null
   },
@@ -9891,7 +9891,7 @@
    "side": "H",
    "label": "1 (-8.5)",
    "group": "Χάντικαπ",
-   "p": 0.6663,
+   "p": 0.6665,
    "est": 1.44,
    "result": null
   },
@@ -9905,7 +9905,7 @@
    "side": "Over",
    "label": "Over 154.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6605,
+   "p": 0.6603,
    "est": 1.45,
    "result": null
   },
@@ -9919,7 +9919,7 @@
    "side": "H",
    "label": "1 (-2.5)",
    "group": "Χάντικαπ",
-   "p": 0.6792,
+   "p": 0.6796,
    "est": 1.42,
    "result": null
   },
@@ -9933,7 +9933,7 @@
    "side": "A",
    "label": "2 (-6.5)",
    "group": "Χάντικαπ",
-   "p": 0.6564,
+   "p": 0.6557,
    "est": 1.46,
    "result": null
   },
@@ -9975,7 +9975,7 @@
    "side": "A",
    "label": "2 (-3.5)",
    "group": "Χάντικαπ",
-   "p": 0.663,
+   "p": 0.6632,
    "est": 1.44,
    "result": null
   },
@@ -9989,7 +9989,7 @@
    "side": "Over",
    "label": "Over 176.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6767,
+   "p": 0.6775,
    "est": 1.43,
    "result": null
   },
@@ -10003,7 +10003,7 @@
    "side": "Over",
    "label": "Over 164.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6672,
+   "p": 0.6678,
    "est": 1.45,
    "result": null
   },
@@ -10017,7 +10017,7 @@
    "side": "Over",
    "label": "Over 144.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6731,
+   "p": 0.6733,
    "est": 1.44,
    "result": null
   },
@@ -10059,7 +10059,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 2.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6808,
+   "p": 0.6807,
    "est": 1.42,
    "result": null
   },
@@ -10087,7 +10087,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6272,
+   "p": 0.6273,
    "est": 1.53,
    "result": null
   },
@@ -10143,7 +10143,7 @@
    "side": "A",
    "label": "2 (-4.5)",
    "group": "Χάντικαπ",
-   "p": 0.6591,
+   "p": 0.6592,
    "est": 1.45,
    "result": null
   },
@@ -10157,7 +10157,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6637,
+   "p": 0.6643,
    "est": 1.44,
    "result": null
   },
@@ -10171,7 +10171,7 @@
    "side": "Over",
    "label": "Over 167.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6758,
+   "p": 0.6751,
    "est": 1.43,
    "result": null
   },
@@ -10227,7 +10227,7 @@
    "side": "Over",
    "label": "Over 159.5",
    "group": "Σύνολο πόντων",
-   "p": 0.667,
+   "p": 0.6671,
    "est": 1.45,
    "result": null
   },
@@ -10269,7 +10269,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6802,
+   "p": 0.6813,
    "est": 1.42,
    "result": null
   },
@@ -10283,7 +10283,7 @@
    "side": "A",
    "label": "2 (-1.5)",
    "group": "Χάντικαπ",
-   "p": 0.6687,
+   "p": 0.6685,
    "est": 1.45,
    "result": null
   },
@@ -10311,7 +10311,7 @@
    "side": "Over",
    "label": "Over 167.5",
    "group": "Σύνολο πόντων",
-   "p": 0.676,
+   "p": 0.6769,
    "est": 1.43,
    "result": null
   },
@@ -10339,7 +10339,7 @@
    "side": "Over",
    "label": "Over 168.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6724,
+   "p": 0.6721,
    "est": 1.44,
    "result": null
   },
@@ -10574,11 +10574,11 @@
    "date": "2026-11-12T00:00Z",
    "home": "Indiana Pacers",
    "away": "Washington Wizards",
-   "key": "OU233.5",
+   "key": "OU234.5",
    "side": "Under",
-   "label": "Under 233.5",
+   "label": "Under 234.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6426,
+   "p": 0.6458,
    "est": 1.53,
    "result": null
   },
@@ -10588,11 +10588,11 @@
    "date": "2026-11-12T00:00Z",
    "home": "New York Knicks",
    "away": "Cleveland Cavaliers",
-   "key": "OU215.5",
+   "key": "OU216.5",
    "side": "Over",
-   "label": "Over 215.5",
+   "label": "Over 216.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6489,
+   "p": 0.6456,
    "est": 1.48,
    "result": null
   },
@@ -10606,7 +10606,7 @@
    "side": "Over",
    "label": "Over 210.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6721,
+   "p": 0.6725,
    "est": 1.48,
    "result": null
   },
@@ -10630,12 +10630,12 @@
    "date": "2026-11-12T01:00Z",
    "home": "Memphis Grizzlies",
    "away": "Denver Nuggets",
-   "key": "OU235.5",
-   "side": "Under",
-   "label": "Under 235.5",
+   "key": "OU224.5",
+   "side": "Over",
+   "label": "Over 224.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6559,
-   "est": 1.46,
+   "p": 0.6405,
+   "est": 1.48,
    "result": null
   },
   {
@@ -10644,12 +10644,12 @@
    "date": "2026-11-12T01:00Z",
    "home": "Milwaukee Bucks",
    "away": "Los Angeles Lakers",
-   "key": "OU224.5",
+   "key": "OU223.5",
    "side": "Over",
-   "label": "Over 224.5",
+   "label": "Over 223.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6578,
-   "est": 1.48,
+   "p": 0.6607,
+   "est": 1.49,
    "result": null
   },
   {
@@ -10662,7 +10662,7 @@
    "side": "Over",
    "label": "Over 223.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6467,
+   "p": 0.6468,
    "est": 1.48,
    "result": null
   },
@@ -10746,8 +10746,8 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6742,
-   "est": 1.43,
+   "p": 0.6578,
+   "est": 1.46,
    "result": null
   },
   {
@@ -10788,8 +10788,8 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6662,
-   "est": 1.44,
+   "p": 0.659,
+   "est": 1.45,
    "result": null
   },
   {
@@ -10896,12 +10896,12 @@
    "date": "2026-11-13T19:45Z",
    "home": "Netherlands",
    "away": "Greece",
-   "key": "1X2",
-   "side": "1",
-   "label": "1",
-   "group": "Τελικό αποτέλεσμα",
-   "p": 0.6434,
-   "est": 1.5,
+   "key": "HT_OU2.5",
+   "side": "Under",
+   "label": "Γηπεδούχος Under 2.5",
+   "group": "Γκολ γηπεδούχου",
+   "p": 0.6442,
+   "est": 1.49,
    "result": null
   },
   {
@@ -10970,8 +10970,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6321,
-   "est": 1.52,
+   "p": 0.6394,
+   "est": 1.5,
    "result": null
   },
   {
@@ -10994,12 +10994,12 @@
    "date": "2026-11-14T17:00Z",
    "home": "Norway",
    "away": "Wales",
-   "key": "OU4.5",
-   "side": "Under",
-   "label": "Under 4.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6388,
-   "est": 1.5,
+   "key": "AH-1.5",
+   "side": "H",
+   "label": "1 (-1.5)",
+   "group": "Ασιατικό χάντικαπ",
+   "p": 0.631,
+   "est": 1.52,
    "result": null
   },
   {
@@ -12412,7 +12412,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6557,
+   "p": 0.6558,
    "est": 1.46,
    "result": null
   },
@@ -12440,7 +12440,7 @@
    "side": "A",
    "label": "2 (-3.5)",
    "group": "Χάντικαπ",
-   "p": 0.6616,
+   "p": 0.6623,
    "est": 1.45,
    "result": null
   },
@@ -12454,7 +12454,7 @@
    "side": "Over",
    "label": "Over 157.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6724,
+   "p": 0.6723,
    "est": 1.44,
    "result": null
   },
@@ -12468,7 +12468,7 @@
    "side": "H",
    "label": "1 (-2.5)",
    "group": "Χάντικαπ",
-   "p": 0.6794,
+   "p": 0.679,
    "est": 1.42,
    "result": null
   },
@@ -12482,7 +12482,7 @@
    "side": "H",
    "label": "1 (+13.5)",
    "group": "Χάντικαπ",
-   "p": 0.6568,
+   "p": 0.6571,
    "est": 1.46,
    "result": null
   },
@@ -12496,7 +12496,7 @@
    "side": "Over",
    "label": "Over 183.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6631,
+   "p": 0.663,
    "est": 1.44,
    "result": null
   },
@@ -12594,7 +12594,7 @@
    "side": "Over",
    "label": "Over 173.5",
    "group": "Σύνολο πόντων",
-   "p": 0.667,
+   "p": 0.6672,
    "est": 1.45,
    "result": null
   },
@@ -12608,7 +12608,7 @@
    "side": "Over",
    "label": "Over 153.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6683,
+   "p": 0.6684,
    "est": 1.45,
    "result": null
   },
@@ -12622,7 +12622,7 @@
    "side": "H",
    "label": "1 (-2.5)",
    "group": "Χάντικαπ",
-   "p": 0.6715,
+   "p": 0.6712,
    "est": 1.44,
    "result": null
   },
@@ -12636,7 +12636,7 @@
    "side": "H",
    "label": "1 (-2.5)",
    "group": "Χάντικαπ",
-   "p": 0.6803,
+   "p": 0.68,
    "est": 1.42,
    "result": null
   },
@@ -12650,7 +12650,7 @@
    "side": "A",
    "label": "2 (+4.5)",
    "group": "Χάντικαπ",
-   "p": 0.6713,
+   "p": 0.671,
    "est": 1.44,
    "result": null
   },
@@ -12664,7 +12664,7 @@
    "side": "A",
    "label": "2 (-5.5)",
    "group": "Χάντικαπ",
-   "p": 0.6719,
+   "p": 0.6725,
    "est": 1.44,
    "result": null
   },
@@ -12678,7 +12678,7 @@
    "side": "H",
    "label": "1 (-15.5)",
    "group": "Χάντικαπ",
-   "p": 0.6738,
+   "p": 0.6737,
    "est": 1.44,
    "result": null
   },
@@ -12692,7 +12692,7 @@
    "side": "H",
    "label": "1 (-7.5)",
    "group": "Χάντικαπ",
-   "p": 0.6609,
+   "p": 0.66,
    "est": 1.45,
    "result": null
   },
@@ -12702,11 +12702,11 @@
    "date": "2026-11-15T14:00:00Z",
    "home": "Vikos Falcons",
    "away": "Μαρούσι",
-   "key": "AH-7.5",
-   "side": "A",
-   "label": "2 (+7.5)",
-   "group": "Χάντικαπ",
-   "p": 0.6481,
+   "key": "ML",
+   "side": "H",
+   "label": "1",
+   "group": "Νικητής (με παράταση)",
+   "p": 0.6483,
    "est": 1.48,
    "result": null
   },
@@ -12720,7 +12720,7 @@
    "side": "Over",
    "label": "Over 150.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6506,
+   "p": 0.6507,
    "est": 1.47,
    "result": null
   },
@@ -12734,7 +12734,7 @@
    "side": "Over",
    "label": "Over 147.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6813,
+   "p": 0.681,
    "est": 1.42,
    "result": null
   },
@@ -12748,7 +12748,7 @@
    "side": "Over",
    "label": "Over 153.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6732,
+   "p": 0.6726,
    "est": 1.44,
    "result": null
   },
@@ -12776,7 +12776,7 @@
    "side": "Under",
    "label": "Under 163.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6787,
+   "p": 0.6786,
    "est": 1.43,
    "result": null
   },
@@ -12790,7 +12790,7 @@
    "side": "Over",
    "label": "Over 181.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6808,
+   "p": 0.6804,
    "est": 1.42,
    "result": null
   },
@@ -12804,8 +12804,8 @@
    "side": "Over",
    "label": "Over 163.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6899,
-   "est": 1.4,
+   "p": 0.6874,
+   "est": 1.41,
    "result": null
   },
   {
@@ -12818,7 +12818,7 @@
    "side": "Over",
    "label": "Over 163.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6798,
+   "p": 0.6791,
    "est": 1.42,
    "result": null
   },
@@ -12832,7 +12832,7 @@
    "side": "Under",
    "label": "Under 148.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6503,
+   "p": 0.6505,
    "est": 1.47,
    "result": null
   },
@@ -30357,6 +30357,21 @@
    "side": "Under",
    "label": "Crystal Palace: αποκρούσεις Under 3.5",
    "p": 0.6386,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-570ec7734e1f7d9e813ab0013291f5f5",
+   "comp": "SD",
+   "date": "2026-11-14T17:30:00Z",
+   "home": "Almería",
+   "away": "Andorra CF",
+   "key": "S:fo:T:25.5",
+   "side": "Over",
+   "label": "Φάουλ Over 25.5",
+   "p": 0.6383,
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
