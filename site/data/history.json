@@ -1072,7 +1072,8 @@
    "odds": 3.85,
    "book": "Unibet (SE)",
    "ev": 0.053,
-   "result": null
+   "result": null,
+   "closing": 3.85
   },
   {
    "match_id": 560650,
@@ -1088,7 +1089,8 @@
    "odds": 3.0,
    "book": "Unibet (SE)",
    "ev": 0.0942,
-   "result": null
+   "result": null,
+   "closing": 3.0
   }
  ],
  "slips": [
@@ -5422,89 +5424,6 @@
   {
    "legs": [
     {
-     "match_id": "NBA-401909968",
-     "comp": "NBA",
-     "date": "2026-11-12T00:00Z",
-     "home": "Toronto Raptors",
-     "away": "Boston Celtics",
-     "key": "OU219.5",
-     "side": "Over",
-     "label": "Over 219.5",
-     "group": "Σύνολο πόντων",
-     "p": 0.4654,
-     "fair": 2.15,
-     "est": 2.14,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "EL-103",
-     "comp": "EL",
-     "date": "2026-11-12T19:05:00.000Z",
-     "home": "Maccabi",
-     "away": "Hapoel",
-     "key": "OU183.5",
-     "side": "Over",
-     "label": "Over 183.5",
-     "group": "Σύνολο πόντων",
-     "p": 0.455,
-     "fair": 2.2,
-     "est": 2.15,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "EL-104",
-     "comp": "EL",
-     "date": "2026-11-12T19:30:00.000Z",
-     "home": "Milan",
-     "away": "Zalgiris",
-     "key": "ML",
-     "side": "A",
-     "label": "2",
-     "group": "Νικητής (με παράταση)",
-     "p": 0.6302,
-     "fair": 1.59,
-     "est": 1.66,
-     "est_src": "m14",
-     "best": 1.7,
-     "book": "888sport",
-     "result": null
-    },
-    {
-     "match_id": "EL-105",
-     "comp": "EL",
-     "date": "2026-11-12T19:30:00.000Z",
-     "home": "Valencia",
-     "away": "Bayern",
-     "key": "HT_OU96.5",
-     "side": "Over",
-     "label": "Γηπεδούχος Over 96.5",
-     "group": "Πόντοι γηπεδούχος",
-     "p": 0.5082,
-     "fair": 1.97,
-     "est": 1.98,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 15.12,
-   "p": 0.0678,
-   "ev": 0.0256,
-   "day": "2026-11-12",
-   "kind": "extreme",
-   "created": "2026-11-11T05:23:59.902341+00:00",
-   "result": null
-  },
-  {
-   "legs": [
-    {
      "match_id": "MEX-0380db9fc7de24aed0c27138c02467e5",
      "comp": "MEX",
      "date": "2026-11-14T23:00:00Z",
@@ -5695,6 +5614,90 @@
    "day": "2026-11-21",
    "kind": "extreme",
    "created": "2026-11-11T05:23:59.902341+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": "NBA-401909975",
+     "comp": "NBA",
+     "date": "2026-11-12T03:00Z",
+     "home": "Portland Trail Blazers",
+     "away": "Oklahoma City Thunder",
+     "key": "AT_OU113.5",
+     "side": "Under",
+     "label": "Φιλοξενούμενος Under 113.5",
+     "group": "Πόντοι φιλοξενούμενος",
+     "p": 0.4992,
+     "fair": 2.0,
+     "est": 1.98,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "score": "123-103",
+     "result": 1
+    },
+    {
+     "match_id": "EL-103",
+     "comp": "EL",
+     "date": "2026-11-12T19:05:00.000Z",
+     "home": "Maccabi",
+     "away": "Hapoel",
+     "key": "OU180.5",
+     "side": "Over",
+     "label": "Over 180.5",
+     "group": "Σύνολο πόντων",
+     "p": 0.5304,
+     "fair": 1.89,
+     "est": 1.91,
+     "est_src": "m8",
+     "best": 1.95,
+     "book": "Coolbet",
+     "result": null
+    },
+    {
+     "match_id": "EL-104",
+     "comp": "EL",
+     "date": "2026-11-12T19:30:00.000Z",
+     "home": "Milan",
+     "away": "Zalgiris",
+     "key": "ML",
+     "side": "A",
+     "label": "2",
+     "group": "Νικητής (με παράταση)",
+     "p": 0.6302,
+     "fair": 1.59,
+     "est": 1.66,
+     "est_src": "m14",
+     "best": 1.7,
+     "book": "888sport",
+     "result": null
+    },
+    {
+     "match_id": "EL-105",
+     "comp": "EL",
+     "date": "2026-11-12T19:30:00.000Z",
+     "home": "Valencia",
+     "away": "Bayern",
+     "key": "HT_OU99.5",
+     "side": "Over",
+     "label": "Γηπεδούχος Over 99.5",
+     "group": "Πόντοι γηπεδούχος",
+     "p": 0.4108,
+     "fair": 2.43,
+     "est": 2.4,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 15.07,
+   "p": 0.0685,
+   "ev": 0.0328,
+   "day": "2026-11-12",
+   "kind": "extreme",
+   "created": "2026-11-11T08:00:32.430051+00:00",
    "result": null
   }
  ],
@@ -10564,7 +10567,8 @@
    "group": "Νικητής (με παράταση)",
    "p": 0.6676,
    "est": 1.43,
-   "result": null
+   "result": 1,
+   "score": "100-107"
   },
   {
    "match_id": "NBA-401909965",
@@ -10578,7 +10582,8 @@
    "group": "Σύνολο πόντων",
    "p": 0.6465,
    "est": 1.53,
-   "result": null
+   "result": 1,
+   "score": "123-103"
   },
   {
    "match_id": "NBA-401909966",
@@ -10590,7 +10595,7 @@
    "side": "Over",
    "label": "Over 219.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6396,
+   "p": 0.6398,
    "est": 1.48,
    "result": null
   },
@@ -10604,7 +10609,7 @@
    "side": "Over",
    "label": "Over 215.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6488,
+   "p": 0.6489,
    "est": 1.48,
    "result": null
   },
@@ -10614,11 +10619,11 @@
    "date": "2026-11-12T00:00Z",
    "home": "Toronto Raptors",
    "away": "Boston Celtics",
-   "key": "OU210.5",
+   "key": "OU209.5",
    "side": "Over",
-   "label": "Over 210.5",
+   "label": "Over 209.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6711,
+   "p": 0.6753,
    "est": 1.48,
    "result": null
   },
@@ -10632,7 +10637,7 @@
    "side": "Over",
    "label": "Over 234.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6651,
+   "p": 0.6659,
    "est": 1.49,
    "result": null
   },
@@ -10642,12 +10647,12 @@
    "date": "2026-11-12T01:00Z",
    "home": "Memphis Grizzlies",
    "away": "Denver Nuggets",
-   "key": "OU221.5",
-   "side": "Over",
-   "label": "Over 221.5",
+   "key": "OU235.5",
+   "side": "Under",
+   "label": "Under 235.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6501,
-   "est": 1.48,
+   "p": 0.6559,
+   "est": 1.46,
    "result": null
   },
   {
@@ -10656,11 +10661,11 @@
    "date": "2026-11-12T01:00Z",
    "home": "Milwaukee Bucks",
    "away": "Los Angeles Lakers",
-   "key": "OU227.5",
+   "key": "OU226.5",
    "side": "Over",
-   "label": "Over 227.5",
+   "label": "Over 226.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6487,
+   "p": 0.6518,
    "est": 1.48,
    "result": null
   },
@@ -10670,11 +10675,11 @@
    "date": "2026-11-12T01:00Z",
    "home": "New Orleans Pelicans",
    "away": "Brooklyn Nets",
-   "key": "OU222.5",
+   "key": "OU223.5",
    "side": "Over",
-   "label": "Over 222.5",
+   "label": "Over 223.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6494,
+   "p": 0.6467,
    "est": 1.48,
    "result": null
   },
@@ -10684,12 +10689,12 @@
    "date": "2026-11-12T02:00Z",
    "home": "Utah Jazz",
    "away": "Orlando Magic",
-   "key": "OU213.5",
+   "key": "OU211.5",
    "side": "Over",
-   "label": "Over 213.5",
+   "label": "Over 211.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6401,
-   "est": 1.5,
+   "p": 0.648,
+   "est": 1.48,
    "result": null
   },
   {
@@ -10702,8 +10707,8 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.656,
-   "est": 1.47,
+   "p": 0.6765,
+   "est": 1.43,
    "result": null
   },
   {
@@ -10712,12 +10717,12 @@
    "date": "2026-11-12T03:00Z",
    "home": "Portland Trail Blazers",
    "away": "Oklahoma City Thunder",
-   "key": "OU226.5",
+   "key": "OU232.5",
    "side": "Under",
-   "label": "Under 226.5",
+   "label": "Under 232.5",
    "group": "Σύνολο πόντων",
-   "p": 0.638,
-   "est": 1.5,
+   "p": 0.6459,
+   "est": 1.53,
    "result": null
   },
   {
@@ -10744,8 +10749,8 @@
    "side": "H",
    "label": "1 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6847,
-   "est": 1.41,
+   "p": 0.6743,
+   "est": 1.43,
    "result": null
   },
   {
@@ -11010,8 +11015,8 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6486,
-   "est": 1.48,
+   "p": 0.6369,
+   "est": 1.5,
    "result": null
   },
   {
@@ -12536,8 +12541,8 @@
    "side": "Over",
    "label": "Over 219.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6524,
-   "est": 1.47,
+   "p": 0.6567,
+   "est": 1.46,
    "result": null
   },
   {
@@ -12550,7 +12555,7 @@
    "side": "Over",
    "label": "Over 215.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6425,
+   "p": 0.6423,
    "est": 1.49,
    "result": null
   },
@@ -12560,12 +12565,12 @@
    "date": "2026-11-13T01:00Z",
    "home": "Minnesota Timberwolves",
    "away": "Dallas Mavericks",
-   "key": "OU218.5",
-   "side": "Over",
-   "label": "Over 218.5",
+   "key": "OU231.5",
+   "side": "Under",
+   "label": "Under 231.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6575,
-   "est": 1.46,
+   "p": 0.6384,
+   "est": 1.5,
    "result": null
   },
   {
@@ -12578,7 +12583,7 @@
    "side": "Over",
    "label": "Over 209.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6536,
+   "p": 0.6531,
    "est": 1.47,
    "result": null
   },
@@ -12956,7 +12961,7 @@
    "side": "Over",
    "label": "Over 208.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6396,
+   "p": 0.6403,
    "est": 1.5,
    "result": null
   },
@@ -12966,12 +12971,12 @@
    "date": "2026-11-14T00:00Z",
    "home": "Orlando Magic",
    "away": "Milwaukee Bucks",
-   "key": "OU219.5",
-   "side": "Over",
-   "label": "Over 219.5",
+   "key": "OU230.5",
+   "side": "Under",
+   "label": "Under 230.5",
    "group": "Σύνολο πόντων",
-   "p": 0.647,
-   "est": 1.48,
+   "p": 0.6419,
+   "est": 1.49,
    "result": null
   },
   {
@@ -12984,7 +12989,7 @@
    "side": "Over",
    "label": "Over 240.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6422,
+   "p": 0.6445,
    "est": 1.49,
    "result": null
   },
@@ -12998,7 +13003,7 @@
    "side": "Over",
    "label": "Over 250.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6507,
+   "p": 0.651,
    "est": 1.47,
    "result": null
   },
@@ -13008,12 +13013,12 @@
    "date": "2026-11-14T01:00Z",
    "home": "New Orleans Pelicans",
    "away": "Memphis Grizzlies",
-   "key": "OU229.5",
-   "side": "Over",
-   "label": "Over 229.5",
+   "key": "OU242.5",
+   "side": "Under",
+   "label": "Under 242.5",
    "group": "Σύνολο πόντων",
-   "p": 0.654,
-   "est": 1.46,
+   "p": 0.6387,
+   "est": 1.5,
    "result": null
   },
   {
@@ -13022,12 +13027,12 @@
    "date": "2026-11-14T01:30Z",
    "home": "Houston Rockets",
    "away": "Utah Jazz",
-   "key": "OU223.5",
-   "side": "Under",
-   "label": "Under 223.5",
+   "key": "OU210.5",
+   "side": "Over",
+   "label": "Over 210.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6419,
-   "est": 1.49,
+   "p": 0.6517,
+   "est": 1.47,
    "result": null
   },
   {
@@ -13040,8 +13045,8 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6789,
-   "est": 1.42,
+   "p": 0.6769,
+   "est": 1.43,
    "result": null
   },
   {
@@ -13050,11 +13055,11 @@
    "date": "2026-11-14T03:00Z",
    "home": "Sacramento Kings",
    "away": "Portland Trail Blazers",
-   "key": "OU226.5",
+   "key": "OU225.5",
    "side": "Over",
-   "label": "Over 226.5",
+   "label": "Over 225.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6472,
+   "p": 0.6488,
    "est": 1.48,
    "result": null
   },
@@ -13064,12 +13069,12 @@
    "date": "2026-11-14T03:30Z",
    "home": "LA Clippers",
    "away": "Oklahoma City Thunder",
-   "key": "OU222.5",
-   "side": "Under",
-   "label": "Under 222.5",
+   "key": "OU210.5",
+   "side": "Over",
+   "label": "Over 210.5",
    "group": "Σύνολο πόντων",
-   "p": 0.639,
-   "est": 1.5,
+   "p": 0.6459,
+   "est": 1.48,
    "result": null
   }
  ],
