@@ -903,12 +903,14 @@
     if (!F || !F.leagues?.length) { view.innerHTML = `<div class="empty"><b>Δεν υπάρχουν ακόμα μακροχρόνια</b>Θα εμφανιστούν στην επόμενη ενημέρωση.</div>`; return; }
     const L = F.leagues.find(x => x.id === FS.lg) || F.leagues[0];
     const inSlip = new Set(slipLegs().map(l => l.key));
-    const chip = x => `<button class="${x.id === L.id ? "active" : ""}" data-flg="${esc(x.id)}">${x.sport === "basketball" ? "🏀 " : ""}${esc(x.name)}</button>`;
+    const chip = x => `<button class="fz-c ${x.id === L.id ? "active" : ""}" data-flg="${esc(x.id)}">${esc(x.name)}</button>`;
     let h = `<section class="sec"><div class="sec-h"><h2>🏆 Σεζόν</h2></div><p class="sec-sub">Μακροχρόνια στοιχήματα: η υπόλοιπη σεζόν παίζεται ${(F.nsim || 10000).toLocaleString("el-GR")} φορές στον υπολογιστή, αγώνα-αγώνα, με τη δύναμη κάθε ομάδας. Η πιθανότητα = πόσες φορές συνέβη.</p>
-      <div class="day-chips fz-lg">${F.leagues.filter(x => x.sport !== "basketball").map(chip).join("")}${F.leagues.filter(x => x.sport === "basketball").map(chip).join("")}</div></section>`;
+      <div class="fz-lg"><span class="fz-lgt">⚽</span>${F.leagues.filter(x => x.sport !== "basketball").map(chip).join("")}</div>
+      <div class="fz-lg"><span class="fz-lgt">🏀</span>${F.leagues.filter(x => x.sport === "basketball").map(chip).join("")}</div></section>`;
     h += `<div class="card fz-head"><div><div class="fz-t">${L.sport === "basketball" ? "🏀" : "⚽"} ${esc(L.name)}</div>
         <small>Έχει παιχτεί το ${pct(L.progress)} της κανονικής περιόδου · μένουν ${L.rem} αγώνες</small></div>
         <span class="fz-prog"><i style="width:${Math.round(L.progress * 100)}%"></i></span></div>`;
+    if (L.note) h += `<div class="note">${esc(L.note)}</div>`;
     h += `<div class="fz-grid">${L.markets.map(m => {
       const open = FS.open[L.id + m.key], list = open ? m.sel : m.sel.slice(0, 5);
       return `<div class="card fz-m"><div class="fz-mh">${esc(m.label)}</div>${m.note ? `<div class="wx">${esc(m.note)}</div>` : ""}
@@ -947,7 +949,7 @@
   view.addEventListener("click", e => {
     if (state.tab !== "futures") return;
     const t = e.target, FS = state.fs;
-    const lg = t.closest("[data-flg]"); if (lg) { FS.lg = lg.dataset.flg; FS.row = null; store.set("vb_fut", FS.lg); return renderFutures(); }
+    const lg = t.closest("[data-flg]"); if (lg) { const y = scrollY; FS.lg = lg.dataset.flg; FS.row = null; store.set("vb_fut", FS.lg); renderFutures(); scrollTo(0, y); return; }
     const mo = t.closest("[data-fmore]"); if (mo) { FS.open[mo.dataset.fmore] = !FS.open[mo.dataset.fmore]; return renderFutures(); }
     const fa = t.closest("[data-fadd]");
     if (fa) {

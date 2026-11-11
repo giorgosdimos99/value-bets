@@ -142,8 +142,42 @@ def table(played):
     return T
 
 
-def simulate(teams, played, R, sigma=SIGMA, nsim=NSIM, seed=7):
-    """Επιστρέφει (θέσεις: dict ομάδα -> πίνακας πιθανοτήτων θέσης, αναμενόμενοι βαθμοί, τρέχων πίνακας)."""
+def _phase2(rng, pts, gd, gf, A, D, ha, aa, eA, eD, groups, real):
+    """Δεύτερη φάση (π.χ. Ελλάδα): ομάδες θέσεων, όλοι με όλους εντός-εκτός, μεταφορά βαθμών.
+    groups: [(από, έως, συντελεστής βαθμών)]. real: {(γηπ, φιλ): (γκολ, γκολ)} αγώνες 2ης φάσης που έχουν γίνει."""
+    nsim, nT = pts.shape
+    key = pts * 1e6 + (gd + 500) * 1e3 + gf + rng.random((nsim, nT)) * 0.5
+    order = np.argsort(-key, axis=1)
+    r = np.arange(nsim)
+    final = np.empty_like(order)
+    for a0, a1, carry in groups:
+        slots = order[:, a0:a1]
+        gp = np.ceil(pts[r[:, None], slots] * carry) if carry != 1 else pts[r[:, None], slots].copy()
+        ggd = gd[r[:, None], slots].copy(); ggf = gf[r[:, None], slots].copy()
+        k = a1 - a0
+        for i in range(k):
+            for j in range(k):
+                if i == j:
+                    continue
+                ti, tj = slots[:, i], slots[:, j]
+                lh = ha * A[ti] * D[tj] * np.exp(eA[r, ti] + eD[r, tj])
+                la = aa * A[tj] * D[ti] * np.exp(eA[r, tj] + eD[r, ti])
+                hg = rng.poisson(lh); ag = rng.poisson(la)
+                for (h, a), (x, y) in real.items():  # ό,τι έχει ήδη παιχτεί
+                    msk = (ti == h) & (tj == a)
+                    hg[msk] = x; ag[msk] = y
+                gp[:, i] += np.where(hg > ag, 3, np.where(hg == ag, 1, 0)); gp[:, j] += np.where(ag > hg, 3, np.where(hg == ag, 1, 0))
+                ggd[:, i] += hg - ag; ggd[:, j] += ag - hg; ggf[:, i] += hg; ggf[:, j] += ag
+        kk = gp * 1e6 + (ggd + 500) * 1e3 + ggf + rng.random(gp.shape) * 0.5
+        o = np.argsort(-kk, axis=1)
+        final[:, a0:a1] = slots[r[:, None], o]
+        pts[r[:, None], slots] = gp  # για τους «αναμενόμενους βαθμούς»
+    return final
+
+
+def simulate(teams, played, R, sigma=SIGMA, nsim=NSIM, seed=7, deduct=None, split=None, played2=()):
+    """Επιστρέφει (θέσεις: dict ομάδα -> πίνακας πιθανοτήτων θέσης, αναμενόμενοι βαθμοί, τρέχων πίνακας).
+    deduct: {ομάδα: βαθμοί} (αφαίρεση βαθμών). split: ομάδες 2ης φάσης (βλ. _phase2)."""
     rng = np.random.default_rng(seed)
     att, dfn, ha, aa = R
     idx = {t: i for i, t in enumerate(teams)}
@@ -151,14 +185,17 @@ def simulate(teams, played, R, sigma=SIGMA, nsim=NSIM, seed=7):
     done = {(m["home"], m["away"]) for m in played}
     rem = [(h, a) for h in teams for a in teams if h != a and (h, a) not in done]
     T = table(played)
+    for t, d in (deduct or {}).items():
+        if t in T:
+            T[t][0] += d
     base = np.array([[T[t][0], T[t][1], T[t][2]] for t in teams], dtype=float)
     pts = np.repeat(base[None, :, 0], nsim, 0)
     gd = np.repeat(base[None, :, 1], nsim, 0)
     gf = np.repeat(base[None, :, 2], nsim, 0)
+    A = np.array([att.get(t, 0.85) for t in teams]); D = np.array([dfn.get(t, 1.15) for t in teams])
+    eA = rng.normal(0, sigma, (nsim, nT)); eD = rng.normal(0, sigma, (nsim, nT))
     if rem:
         hi = np.array([idx[h] for h, _ in rem]); ai = np.array([idx[a] for _, a in rem])
-        A = np.array([att.get(t, 0.85) for t in teams]); D = np.array([dfn.get(t, 1.15) for t in teams])
-        eA = rng.normal(0, sigma, (nsim, nT)); eD = rng.normal(0, sigma, (nsim, nT))
         lh = ha * A[hi] * D[ai] * np.exp(eA[:, hi] + eD[:, ai])
         la = aa * A[ai] * D[hi] * np.exp(eA[:, ai] + eD[:, hi])
         hg = rng.poisson(lh); ag = rng.poisson(la)
@@ -168,8 +205,12 @@ def simulate(teams, played, R, sigma=SIGMA, nsim=NSIM, seed=7):
         pts += hp @ H + ap @ Aw
         gd += (hg - ag) @ H + (ag - hg) @ Aw
         gf += hg @ H + ag @ Aw
-    key = pts * 1e6 + (gd + 500) * 1e3 + gf + rng.random((nsim, nT)) * 0.5
-    order = np.argsort(-key, axis=1)
+    if split:
+        real = {(idx[m["home"]], idx[m["away"]]): (int(m["hg"]), int(m["ag"])) for m in played2 if m["home"] in idx and m["away"] in idx}
+        order = _phase2(rng, pts, gd, gf, A, D, ha, aa, eA, eD, split, real)
+    else:
+        key = pts * 1e6 + (gd + 500) * 1e3 + gf + rng.random((nsim, nT)) * 0.5
+        order = np.argsort(-key, axis=1)
     pos = np.empty_like(order)
     pos[np.arange(nsim)[:, None], order] = np.arange(nT)[None, :]
     P = np.zeros((nT, nT))

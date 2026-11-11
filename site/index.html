@@ -300,8 +300,11 @@
 
 
     /* Σεζόν (μακροχρόνια) */
-    body .fz-lg { @apply flex-nowrap overflow-x-auto pb-1; scrollbar-width: none; }
-    body .fz-lg button { @apply whitespace-nowrap; }
+    body .fz-lg { @apply flex flex-wrap items-center gap-1.5 mt-2; }
+    body .fz-lgt { @apply text-[14px] mr-1 w-5 text-center; }
+    body .fz-c { @apply whitespace-nowrap rounded-full px-3 py-1.5 text-[12.5px] font-medium cursor-pointer text-slate-300 bg-white/[0.04]
+      border border-solid border-white/[0.08] transition-all duration-150 hover:bg-white/[0.08] hover:text-white; }
+    body .fz-c.active { @apply text-ink-950 font-bold border-transparent; background: linear-gradient(135deg, #7cf0b6, #22c873); }
     body .fz-head { @apply flex items-center justify-between gap-4 p-4 md:p-5 mb-4 flex-wrap; }
     body .fz-t { @apply font-display text-[21px] font-semibold text-white; }
     body .fz-head small { @apply text-[12.5px] text-slate-400; }
