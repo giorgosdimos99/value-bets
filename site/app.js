@@ -92,6 +92,7 @@
     try { state.history = await (await fetch("data/history.json?ts=" + Date.now())).json(); } catch { state.history = { picks: [] }; }
     try { state.backtest = await (await fetch("data/backtest.json?ts=" + Date.now())).json(); } catch { state.backtest = null; }
     try { state.research = await (await fetch("data/research.json?ts=" + Date.now())).json(); } catch { state.research = null; }
+    try { state.fut = await (await fetch("data/futures.json?ts=" + Date.now())).json(); } catch { state.fut = null; }
     const comps = Object.entries(state.data.competitions || {}).filter(([, c]) => c.matches?.length);
     comps.forEach(([cid, c]) => { COMP[cid] = c.name; });
     if (!comps.some(([cid]) => cid === state.comp)) state.comp = "ALL";
@@ -125,8 +126,10 @@
 
   function render() {
     buildComp();
-    $("#compFilter").style.display = ["bets", "slip"].includes(state.tab) ? "none" : "flex";
-    ({ value: renderValue, matches: renderMatches, teams: renderTeams, slip: renderSlip, bets: renderBets, model: renderModel })[state.tab]();
+    $("#compFilter").style.display = ["bets", "slip", "futures"].includes(state.tab) ? "none" : "flex";
+    if (state.tab !== "slip") { state.slipOpen = false; $("#popBack")?.classList.remove("open"); }
+    ({ value: renderValue, matches: renderMatches, teams: renderTeams, slip: renderSlip, bets: renderBets, model: renderModel, futures: renderFutures })[state.tab]();
+    updateFab();
     if (state.data?.demo && state.tab !== "bets") view.insertAdjacentHTML("afterbegin", `<div class="note" style="border-color:var(--amber);color:var(--amber)">ΔΕΙΓΜΑ: φανταστικοί αγώνες και αποδόσεις για δοκιμή της εμφάνισης.</div>`);
   }
 
@@ -667,6 +670,11 @@
   }
   // ξαναϋπολογίζει την πιθανότητα με τα τρέχοντα δεδομένα (αν ο αγώνας υπάρχει ακόμα)
   function legNow(l) {
+    if (l.kind === "future") {
+      const [, lid, mkey, ...tt] = l.key.split(":"), team = tt.join(":");
+      const x = state.fut?.leagues.find(L => L.id === lid)?.markets.find(m => m.key === mkey)?.sel.find(y => y.t === team);
+      return x ? { ...l, p: x.p, fair: 1 / x.p } : l;
+    }
     const m = findMatch(l.mid);
     if (!m) return l;
     if (l.kind === "player") { const r = playerP(m, l.player, l.stat, l.line, l.side); return r ? { ...l, p: r.p, pp: 0, fair: 1 / r.p, info: r } : l; }
@@ -679,6 +687,7 @@
     if (legs.some(x => x.mid === l.mid && x.key === l.key && x.side === l.side)) return;
     legs.push({ ...l, odds: l.odds || null, id: Date.now() + Math.random() });
     saveSlip(legs);
+    state.bump = true;
   }
 
   function renderSlip() {
@@ -729,16 +738,17 @@
 
     // --- το δελτίο ---
     const legs = slipLegs().map(legNow);
-    let R = `<div class="card sx-card sx-slip"><div class="sx-mh"><div class="sx-h">🧾 Το δελτίο σου</div>${legs.length ? `<button class="btn sm ghost" data-sxclear>Άδειασμα</button>` : ""}</div>`;
+    let R = `<div class="card sx-card sx-slip"><div class="pop-grab"></div><div class="sx-mh"><div class="sx-h">🧾 Το δελτίο σου</div><div class="sx-mhr">${legs.length ? `<button class="btn sm ghost" data-sxclear>Άδειασμα</button>` : ""}<button class="btn sm ghost sx-min" data-sxmin aria-label="Κλείσιμο">▾</button></div></div>`;
     if (!legs.length) R += `<div class="empty-s">Πρόσθεσε επιλογές από αριστερά. Μετά γράψε την απόδοση που βλέπεις στη Stoiximan/Superbet.</div>`;
     let O = 1, P = 1, all = true, Og = 1, Pg = 1, ng = 0;
     const mids = {};
     legs.forEach(l => { mids[l.mid] = (mids[l.mid] || 0) + 1; });
     R += legs.map(l => {
       const o = num(l.odds), ev = o ? l.p * o + (l.pp || 0) - 1 : null, [cls, txt] = verdict(ev);
-      if (o) { O *= o; P *= l.p; if (ev >= -0.03) { Og *= o; Pg *= l.p; ng++; } } else all = false;
+      P *= l.p;
+      if (o) { O *= o; if (ev >= -0.03) { Og *= o; Pg *= l.p; ng++; } } else all = false;
       return `<div class="sx-leg">
-        <div class="sx-lt"><b>${esc(l.label)}</b><small>${esc(l.match)} · ${hhmm(l.date)}</small>
+        <div class="sx-lt"><b>${esc(l.label)}</b><small>${esc(l.match)}${l.kind === "future" ? "" : ` · ${hhmm(l.date)}`}</small>
           <small>Πιθανότητα <b>${pct(l.p)}</b> · δίκαιη <b>${f2(1 / l.p)}</b>${l.info ? ` · μοντέλο ${l.info.mu} (μ.ό.10 ${l.info.avg10})${l.info.ok ? "" : " · ⚠️ στατιστικό που δεν πέρασε τον έλεγχο"}` : ""}${mids[l.mid] > 1 ? " · ⚠️ ίδιος αγώνας" : ""}</small></div>
         <div class="sx-lr"><input inputmode="decimal" placeholder="απόδοση" value="${esc(l.odds || "")}" data-sxodds="${l.id}">
           <span class="pill ${cls}">${ev == null ? txt : `${txt} ${evTxt(ev)}`}</span>
@@ -755,12 +765,66 @@
         <button class="btn" data-sxsave ${all ? "" : "disabled"}>Καταγραφή</button></div>`;
     }
     R += `</div>`;
-    view.innerHTML = `<div class="sx">${`<div class="sx-col">${L}</div>`}<div class="sx-col sx-side">${R}</div></div>`;
+    view.innerHTML = `<div class="sx ${state.slipOpen ? "pop-open" : ""}">${`<div class="sx-col">${L}</div>`}<div class="sx-col sx-side" id="sxSide">${R}</div></div>`;
+    const side = $("#sxSide"); if (side && state.sxScroll) side.scrollTop = state.sxScroll;
+    updateFab();
   }
+
+  // ---------- πλωτό κουμπί δελτίου (κινητό): ανοίγει/κλείνει μικρό παράθυρο ----------
+  function updateFab() {
+    const fab = $("#slipFab"); if (!fab) return;
+    const legs = slipLegs().map(legNow);
+    const show = state.tab === "slip" || legs.length > 0;
+    fab.hidden = !show;
+    if (!show) return;
+    const O = legs.reduce((a, l) => a * (num(l.odds) || 1), 1), all = legs.length && legs.every(l => num(l.odds));
+    const P = legs.reduce((a, l) => a * l.p, 1), open = !!state.slipOpen && state.tab === "slip";
+    fab.classList.toggle("on", open);
+    fab.innerHTML = `<span class="fab-n">${legs.length}</span><span class="fab-t"><b>Δελτίο</b><small>${legs.length ? (all ? `απόδοση ${f2(O)} · ${pct(P)}` : `πιθανότητα ${pct(P)}`) : "άδειο"}</small></span><span class="fab-c">${open ? "▾" : "▴"}</span>`;
+    if (state.bump) { fab.classList.remove("bump"); void fab.offsetWidth; fab.classList.add("bump"); state.bump = false; }
+  }
+  function setSlipOpen(v) {
+    state.slipOpen = v;
+    const sx = $(".sx"); if (sx) sx.classList.toggle("pop-open", v);
+    $("#popBack")?.classList.toggle("open", v && state.tab === "slip" && innerWidth < 1000);
+    updateFab();
+  }
+  $("#slipFab")?.addEventListener("click", () => {
+    if (state.tab !== "slip") { state.tab = "slip"; store.set("vb_tab", "slip"); syncTabs(); render(); setSlipOpen(true); return; }
+    setSlipOpen(!state.slipOpen);
+  });
+  $("#popBack")?.addEventListener("click", () => setSlipOpen(false));
+
+  // ---------- κλείσιμο με σύρσιμο προς τα κάτω (καρτέλα αγώνα / δελτίο) ----------
+  function swipeClose(getEl, onClose) {
+    let y0 = null, dy = 0, el = null, t0 = 0;
+    document.addEventListener("touchstart", e => {
+      el = getEl(); if (!el || !el.contains(e.target)) { el = null; return; }
+      if (el.scrollTop > 2 || e.target.closest("input,select,textarea")) { el = null; return; }
+      y0 = e.touches[0].clientY; dy = 0; t0 = Date.now();
+    }, { passive: true });
+    document.addEventListener("touchmove", e => {
+      if (!el || y0 === null) return;
+      dy = e.touches[0].clientY - y0;
+      if (dy <= 0) { el.style.transform = ""; el.style.transition = ""; y0 = null; return; }
+      e.preventDefault();
+      el.style.transition = "none"; el.style.transform = `translateY(${dy}px)`;
+    }, { passive: false });
+    document.addEventListener("touchend", () => {
+      if (!el || y0 === null) { el = null; return; }
+      const fast = dy > 50 && dy / Math.max(Date.now() - t0, 1) > 0.6;
+      el.style.transition = ""; el.style.transform = "";
+      if (dy > 110 || fast) onClose();
+      el = null; y0 = null; dy = 0;
+    });
+  }
+  swipeClose(() => $("#sheet").classList.contains("open") ? $("#sheet") : null, () => closeSheet());
+  swipeClose(() => state.tab === "slip" && state.slipOpen && innerWidth < 1000 ? $("#sxSide") : null, () => setSlipOpen(false));
 
   view.addEventListener("input", e => {
     if (state.tab !== "slip") return;
     const t = e.target;
+    state.sxScroll = $("#sxSide")?.scrollTop || 0;
     const keep = (sel) => { const el = $(sel); if (el) { el.focus(); const v = el.value; el.value = ""; el.value = v; } };
     if (t.matches("[data-sxq]")) { state.sx.q = t.value; renderSlip(); keep("[data-sxq]"); }
     else if (t.matches("[data-sxmq]")) { state.sx.mq = t.value; renderSlip(); keep("[data-sxmq]"); }
@@ -784,6 +848,8 @@
     const mb = t.closest("[data-sxm]");
     if (mb) { state.sx.mid = mb.dataset.sxm; state.sx.q = ""; state.sx.mq = ""; state.sx.pl = mb.dataset.sxp || ""; return renderSlip(); }
     if (t.closest("[data-sxclose]")) { state.sx.mid = null; return renderSlip(); }
+    if (t.closest("[data-sxmin]")) return setSlipOpen(false);
+    state.sxScroll = $("#sxSide")?.scrollTop || 0;
     const sb = t.closest("[data-sxsel]");
     if (sb) {
       const m = findMatch(state.sx.mid), [key, side] = sb.dataset.sxsel.split("|");
@@ -809,6 +875,90 @@
       return openBetForm({ match: legs.length > 1 ? `Δελτίο (${legs.length})` : legs[0].match, selection: legs.map(l => `${l.match}: ${l.label} @${l.odds}`).join(" | "),
         odds: O.toFixed(2), p: P, group: "Δελτίο", date: legs.map(l => l.date).sort()[0] });
     }
+  });
+
+
+  // ---------- Σεζόν: μακροχρόνια (προσομοίωση της υπόλοιπης σεζόν) ----------
+  state.fs = state.fs || { lg: store.get("vb_fut", "E0"), open: {}, row: null };
+  const FUT_FB_COLS = L => {
+    const mk = Object.fromEntries(L.markets.map(m => [m.key, m]));
+    const cols = [["win", "Πρωτ.", 1, "top"], [L.markets.find(m => m.key === "t4") ? "t4" : "t2", L.markets.find(m => m.key === "t4") ? "Top 4" : "Top 2", L.markets.find(m => m.key === "t4") ? 4 : 2, "top"]];
+    const rel = L.markets.find(m => /^b\d/.test(m.key));
+    if (rel) cols.push([rel.key, "Υποβ.", +rel.key.slice(1), "bot"]);
+    return cols;
+  };
+  const sumTop = (d, k) => d.slice(0, k).reduce((a, b) => a + b, 0);
+  const sumBot = (d, k) => d.slice(d.length - k).reduce((a, b) => a + b, 0);
+  const futLegKey = (L, m, t) => `F:${L.id}:${m}:${t}`;
+  function futSel(L, m, x, inSlip) {
+    const k = futLegKey(L, m.key, x.t), w = Math.max(2, Math.round(x.p * 100));
+    const mkt = x.mkt != null ? `<small class="fz-mkt">αγορά ${pct(x.mkt)}${x.p > x.mkt * 1.15 ? " · μοντέλο πιο αισιόδοξο" : x.p < x.mkt * 0.87 ? " · μοντέλο πιο επιφυλακτικό" : ""}</small>` : "";
+    return `<div class="fz-s"><div class="fz-st"><b>${esc(x.t)}</b><small>δίκαιη ${f2(x.fair)} · συμφέρει από <b>${f2(x.min_odds)}</b></small>${mkt}
+        <span class="fz-bar"><i style="width:${w}%"></i></span></div>
+      <div class="fz-sr"><b class="${pCls(x.p)}">${x.p >= 0.995 ? ">99%" : x.p < 0.01 ? "<1%" : pct(x.p)}</b>
+        <button class="btn sm ${inSlip.has(k) ? "ghost" : ""}" data-fadd="${esc(L.id)}|${esc(m.key)}|${esc(x.t)}">${inSlip.has(k) ? "✓" : "+"}</button></div></div>`;
+  }
+  function renderFutures() {
+    const F = state.fut, FS = state.fs;
+    if (!F || !F.leagues?.length) { view.innerHTML = `<div class="empty"><b>Δεν υπάρχουν ακόμα μακροχρόνια</b>Θα εμφανιστούν στην επόμενη ενημέρωση.</div>`; return; }
+    const L = F.leagues.find(x => x.id === FS.lg) || F.leagues[0];
+    const inSlip = new Set(slipLegs().map(l => l.key));
+    const chip = x => `<button class="${x.id === L.id ? "active" : ""}" data-flg="${esc(x.id)}">${x.sport === "basketball" ? "🏀 " : ""}${esc(x.name)}</button>`;
+    let h = `<section class="sec"><div class="sec-h"><h2>🏆 Σεζόν</h2></div><p class="sec-sub">Μακροχρόνια στοιχήματα: η υπόλοιπη σεζόν παίζεται ${(F.nsim || 10000).toLocaleString("el-GR")} φορές στον υπολογιστή, αγώνα-αγώνα, με τη δύναμη κάθε ομάδας. Η πιθανότητα = πόσες φορές συνέβη.</p>
+      <div class="day-chips fz-lg">${F.leagues.filter(x => x.sport !== "basketball").map(chip).join("")}${F.leagues.filter(x => x.sport === "basketball").map(chip).join("")}</div></section>`;
+    h += `<div class="card fz-head"><div><div class="fz-t">${L.sport === "basketball" ? "🏀" : "⚽"} ${esc(L.name)}</div>
+        <small>Έχει παιχτεί το ${pct(L.progress)} της κανονικής περιόδου · μένουν ${L.rem} αγώνες</small></div>
+        <span class="fz-prog"><i style="width:${Math.round(L.progress * 100)}%"></i></span></div>`;
+    h += `<div class="fz-grid">${L.markets.map(m => {
+      const open = FS.open[L.id + m.key], list = open ? m.sel : m.sel.slice(0, 5);
+      return `<div class="card fz-m"><div class="fz-mh">${esc(m.label)}</div>${m.note ? `<div class="wx">${esc(m.note)}</div>` : ""}
+        ${list.map(x => futSel(L, m, x, inSlip)).join("")}
+        ${m.sel.length > 5 ? `<button class="more" data-fmore="${esc(L.id + m.key)}">${open ? "Λιγότερα" : `Όλες (${m.sel.length})`}</button>` : ""}</div>`;
+    }).join("")}</div>`;
+    if (L.h2h?.length) {
+      const open = FS.open[L.id + "h2h"], list = open ? L.h2h : L.h2h.slice(0, 6);
+      h += `<div class="card fz-m fz-wide"><div class="fz-mh">⚔️ Ποιος τερματίζει ψηλότερα</div>
+        ${list.map(x => { const fa = x.p >= 0.5, t = fa ? x.a : x.b, p = fa ? x.p : 1 - x.p, o = fa ? x.b : x.a; return `<div class="fz-s"><div class="fz-st"><b>${esc(t)}</b> <small>πάνω από ${esc(o)} · δίκαιη ${f2(1 / p)} · συμφέρει από <b>${f2(1.08 / p)}</b></small>
+          <span class="fz-bar"><i style="width:${Math.round(p * 100)}%"></i></span></div><div class="fz-sr"><b class="${pCls(p)}">${pct(p)}</b></div></div>`; }).join("")}
+        <button class="more" data-fmore="${esc(L.id)}h2h">${open ? "Λιγότερα" : `Όλα (${L.h2h.length})`}</button></div>`;
+    }
+    // βαθμολογία + προσομοίωση
+    const fb = L.sport !== "basketball", cols = fb ? FUT_FB_COLS(L) : L.cols;
+    let cur = null;
+    h += `<h2 style="margin-top:22px">Βαθμολογία & τελική εκτίμηση</h2><div class="table-wrap"><table class="fz-tbl"><thead><tr><th>#</th><th>Ομάδα</th>${fb ? `<th class="num">Αγ.</th><th class="num">Β</th><th class="num">Τελ. Β</th>` : `<th class="num">Ν-Η</th><th class="num">Τελ. Ν</th>`}${cols.map(c => `<th class="num">${c[1]}</th>`).join("")}</tr></thead><tbody>`;
+    L.table.forEach((r, i) => {
+      if (r.conf && r.conf !== cur) { cur = r.conf; h += `<tr class="fz-conf"><td colspan="9">${r.conf === "East" ? "Ανατολή" : "Δύση"}</td></tr>`; }
+      const vals = fb ? cols.map(c => c[3] === "top" ? sumTop(r.dist, c[2]) : sumBot(r.dist, c[2])) : cols.map(c => r[c[0]]);
+      const rk = r.conf ? L.table.filter(x => x.conf === r.conf).indexOf(r) + 1 : i + 1;
+      h += `<tr class="click" data-frow="${esc(r.t)}"><td>${rk}</td><td><b>${esc(r.t)}</b></td>${fb ? `<td class="num">${r.g}</td><td class="num"><b>${r.pts}</b></td><td class="num">${r.xpts}</td>` : `<td class="num">${r.w}-${r.l}</td><td class="num">${r.xw}</td>`}
+        ${vals.map(v => `<td class="num ${v >= 0.5 ? "fz-hi" : v >= 0.15 ? "fz-md" : "fz-lo"}">${v >= 0.995 ? ">99%" : v < 0.005 ? "—" : pct(v)}</td>`).join("")}</tr>`;
+      if (FS.row === r.t) {
+        const dist = r.dist ? `<div class="fz-dist">${r.dist.map((d, k) => `<span title="${k + 1}η: ${pct(d)}"><i style="height:${Math.max(2, Math.round(d * 100))}%"></i><small>${k + 1}</small></span>`).join("")}</div>` : "";
+        h += `<tr class="fz-x"><td colspan="9">${dist ? `<div class="fz-xl">Πιθανότητα για κάθε θέση</div>${dist}` : ""}
+          <div class="fz-xl">${esc(L.lines_label)}: Over/Under</div><div class="fz-lines">${r.lines.map(([ln, po]) => `<span class="lad"><b>Over ${ln}</b> ${pct(po)} · από <b>${f2(1.08 / Math.max(po, 0.01))}</b></span><span class="lad"><b>Under ${ln}</b> ${pct(1 - po)} · από <b>${f2(1.08 / Math.max(1 - po, 0.01))}</b></span>`).join("")}</div></td></tr>`;
+      }
+    });
+    h += `</tbody></table></div><div class="note" style="margin-top:8px">Πάτα μια ομάδα για την πιθανότητα κάθε θέσης και Over/Under ${fb ? "βαθμών" : "νικών"}. «Συμφέρει από» = δίκαιη απόδοση +8%: στα μακροχρόνια τα χρήματα μένουν δεσμευμένα μήνες και η αβεβαιότητα είναι μεγαλύτερη, οπότε θέλουμε μεγαλύτερο περιθώριο.
+      ${fb ? "Δύναμη ομάδων: μείγμα αποδόσεων κλεισίματος (Pinnacle) και στατιστικών (γκολ/xG). Ελέγχθηκε σε 15 πρωταθλήματα × 4 σεζόν (240 σημεία): όταν έλεγε ~75% συνέβαινε 76%, όταν έλεγε ~85% συνέβαινε 88%." : "Έλεγχος στη EuroLeague 2023–26: βρήκε σωστά τη δυναμική των πρωταθλητριών. Play-in, playoffs και Final Four προσομοιώνονται όπως γίνονται στην πραγματικότητα."}
+      Μεταγραφές, τραυματισμοί και αλλαγές προπονητή μετράνε μόνο αφού φανούν στα αποτελέσματα/αποδόσεις.</div>`;
+    view.innerHTML = h;
+    updateFab();
+  }
+  view.addEventListener("click", e => {
+    if (state.tab !== "futures") return;
+    const t = e.target, FS = state.fs;
+    const lg = t.closest("[data-flg]"); if (lg) { FS.lg = lg.dataset.flg; FS.row = null; store.set("vb_fut", FS.lg); return renderFutures(); }
+    const mo = t.closest("[data-fmore]"); if (mo) { FS.open[mo.dataset.fmore] = !FS.open[mo.dataset.fmore]; return renderFutures(); }
+    const fa = t.closest("[data-fadd]");
+    if (fa) {
+      const [lid, mkey, team] = fa.dataset.fadd.split("|");
+      const L = state.fut.leagues.find(x => x.id === lid), m = L.markets.find(x => x.key === mkey), x = m.sel.find(y => y.t === team);
+      const key = futLegKey(L, mkey, team), legs = slipLegs();
+      if (legs.some(l => l.key === key)) saveSlip(legs.filter(l => l.key !== key));
+      else addLeg({ kind: "future", mid: "F:" + lid, key, side: "", label: `${team}: ${m.label}`, match: `${L.name} (μακροχρόνιο)`, date: new Date(Date.now() + 200 * 864e5).toISOString(), comp: lid, p: x.p, pp: 0 });
+      return renderFutures();
+    }
+    const row = t.closest("[data-frow]"); if (row) { FS.row = FS.row === row.dataset.frow ? null : row.dataset.frow; return renderFutures(); }
   });
 
   // ---------- μοντέλο (ιστορικό value επιλογών) ----------

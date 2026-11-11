@@ -410,3 +410,33 @@ def odds_api(sport, markets=None):
     _save_cache(key, {"events": events, "remaining": remaining})
     _save_cache("odds_meta.json", {"remaining": remaining, "at": datetime.now(timezone.utc).isoformat()})
     return events, remaining
+
+
+def odds_outright(sport):
+    """Αποδόσεις μακροχρόνιου (π.χ. πρωταθλήτρια NBA): διάμεσος ανά ομάδα. 1 credit, το πολύ μία φορά τη μέρα."""
+    key = f"outright_{sport}.json"
+    hit = _cached(key, 24)
+    if hit is not None:
+        return hit
+    old = _cached(key, 0, stale_ok=True)
+    meta = _cached("odds_meta.json", 24 * 30) or {}
+    if not config.ODDS_API_KEY or (meta.get("remaining") is not None and meta["remaining"] < config.ODDS_MIN_REMAINING + 20):
+        return old
+    q = urllib.parse.urlencode({"apiKey": config.ODDS_API_KEY, "regions": config.ODDS_REGIONS, "markets": "outrights", "oddsFormat": "decimal"})
+    try:
+        raw, hdr = _get(f"https://api.the-odds-api.com/v4/sports/{sport}/odds?{q}")
+    except Exception as e:
+        print(f"  ! Odds API {sport}: {str(e).split('apiKey')[0]}")
+        return old
+    prices = {}
+    for ev in json.loads(raw):
+        for b in ev.get("bookmakers", []):
+            for m in b.get("markets", []):
+                for x in m.get("outcomes", []):
+                    prices.setdefault(x["name"], []).append(x["price"])
+    out = {t: sorted(v)[len(v) // 2] for t, v in prices.items() if v}
+    remaining = _num(hdr.get("x-requests-remaining") or hdr.get("X-Requests-Remaining"))
+    _save_cache(key, out)
+    if remaining is not None:
+        _save_cache("odds_meta.json", {"remaining": remaining, "at": datetime.now(timezone.utc).isoformat()})
+    return out

@@ -652,6 +652,14 @@ def main():
             for s in m["values"] + m["solid"]:
                 s.pop("odds", None)
     (config.DATA_OUT / "data.json").write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print("• Μακροχρόνια (προσομοίωση σεζόν)")
+    try:
+        from . import futures_out
+        fut = futures_out.build()
+        (config.DATA_OUT / "futures.json").write_text(json.dumps(fut, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        print(f"  {len(fut['leagues'])} διοργανώσεις")
+    except Exception as e:  # δεν σταματάμε την υπόλοιπη ενημέρωση
+        print(f"  ! μακροχρόνια: {e}")
     bt = config.DATA_OUT / "backtest.json"
     try:
         stale = (datetime.now(timezone.utc) - datetime.fromisoformat(json.loads(bt.read_text(encoding="utf-8"))["created"])).days >= 7

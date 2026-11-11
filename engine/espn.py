@@ -5,6 +5,7 @@
 - Αποδόσεις DraftKings όπου υπάρχουν (νικητής, χάντικαπ, σύνολο) -> χωρίς κόστος credits.
 """
 import json
+import time
 from datetime import date, datetime, timedelta, timezone
 
 from . import sources
@@ -193,5 +194,54 @@ def nba_injuries():
     for t in d.get("injuries", []):
         out[t.get("displayName")] = [[i["athlete"]["displayName"], i.get("status"), i.get("shortComment") or ""]
                                      for i in t.get("injuries", []) if i.get("athlete")]
+    sources._save_cache(key, out)
+    return out
+
+
+def nba_standings():
+    """{ομάδα: {"conf": "East"/"West", "w", "l", "id"}} από τη βαθμολογία της ESPN."""
+    key = "espn_nba_standings.json"
+    hit = sources._cached(key, 3)
+    if hit is not None:
+        return hit
+    try:
+        raw, _ = sources._get("https://site.api.espn.com/apis/v2/sports/basketball/nba/standings", headers={"User-Agent": "Mozilla/5.0"})
+        d = json.loads(raw)
+    except Exception as e:
+        print(f"  ! ESPN standings: {e}")
+        return sources._cached(key, 0, stale_ok=True) or {}
+    out = {}
+    for c in d.get("children", []):
+        conf = "East" if "East" in c["name"] else "West"
+        for e in c["standings"]["entries"]:
+            st = {x["name"]: x.get("value") for x in e["stats"]}
+            out[e["team"]["displayName"]] = {"conf": conf, "id": e["team"]["id"], "w": int(st.get("wins") or 0),
+                                             "l": int(st.get("losses") or 0), "pd": float(st.get("differential") or 0)}
+    sources._save_cache(key, out)
+    return out
+
+
+def nba_remaining():
+    """Αγώνες κανονικής περιόδου που μένουν: [(γηπεδούχος, φιλοξενούμενος)] από το πρόγραμμα κάθε ομάδας."""
+    key = "espn_nba_remaining.json"
+    hit = sources._cached(key, 12)
+    if hit is not None:
+        return hit
+    seen, out = set(), []
+    for team, x in nba_standings().items():
+        try:
+            raw, _ = sources._get(f"{BASE}/basketball/nba/teams/{x['id']}/schedule", headers={"User-Agent": "Mozilla/5.0"})
+            evs = json.loads(raw).get("events", [])
+        except Exception as e:
+            print(f"  ! ESPN schedule {team}: {e}")
+            return sources._cached(key, 0, stale_ok=True) or []
+        for e in evs:
+            c = e["competitions"][0]
+            if e["id"] in seen or (e.get("seasonType") or {}).get("type") != 2 or c["status"]["type"].get("completed"):
+                continue
+            t = {y["homeAway"]: y["team"]["displayName"] for y in c["competitors"]}
+            if "home" in t and "away" in t:
+                seen.add(e["id"]); out.append([t["home"], t["away"]])
+        time.sleep(0.3)
     sources._save_cache(key, out)
     return out
