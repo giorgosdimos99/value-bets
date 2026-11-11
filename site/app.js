@@ -17,10 +17,35 @@
   const STAGE = { LEAGUE_STAGE: "Φάση πρωταθλήματος", PLAYOFFS: "Playoffs", LAST_16: "16 ομάδες", QUARTER_FINALS: "Προημιτελικά", SEMI_FINALS: "Ημιτελικά", FINAL: "Τελικός" };
   const formHtml = f => `<span class="form">${(f || "").split("").map(c => `<span class="${c}">${{ W: "Ν", D: "Ι", L: "Η" }[c]}</span>`).join("")}</span>`;
 
+  // Αποθήκευση: localStorage + δεύτερο αντίγραφο σε IndexedDB για τα σημαντικά (στοιχήματα, δελτίο).
+  // Αν ο browser καθαρίσει το ένα, γίνεται αυτόματη επαναφορά από το άλλο.
+  const KEEP = ["vb_bets", "vb_slip"];
+  const idb = (() => {
+    let dbp = null;
+    const open = () => dbp || (dbp = new Promise((res, rej) => {
+      try { const r = indexedDB.open("valuebets", 1); r.onupgradeneeded = () => r.result.createObjectStore("kv"); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }
+      catch (e) { rej(e); }
+    }));
+    const tx = (mode, fn) => open().then(db => new Promise((res, rej) => { const t = db.transaction("kv", mode); const out = fn(t.objectStore("kv")); t.oncomplete = () => res(out && out.result); t.onerror = () => rej(t.error); }));
+    return { put: (k, v) => tx("readwrite", st => st.put(v, k)).catch(() => {}), get: k => tx("readonly", st => st.get(k)).catch(() => undefined) };
+  })();
   const store = {
     get(k, def) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch { return def; } },
-    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ιδιωτική περιήγηση */ } },
+    set(k, v) {
+      try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ιδιωτική περιήγηση */ }
+      if (KEEP.includes(k)) { idb.put(k, { v, at: Date.now() }); try { localStorage.setItem(k + "_at", String(Date.now())); } catch { } }
+    },
   };
+  async function restoreStorage() {
+    try { if (navigator.storage && navigator.storage.persist) state.persisted = await navigator.storage.persist(); } catch { }
+    for (const k of KEEP) {
+      const box = await idb.get(k);
+      const local = store.get(k, null), lat = Number(localStorage.getItem(k + "_at") || 0);
+      // το IndexedDB έχει πιο πρόσφατα (ή το localStorage άδειασε) -> επαναφορά
+      if (box && box.v && (local === null || box.at > lat + 1000)) { try { localStorage.setItem(k, JSON.stringify(box.v)); localStorage.setItem(k + "_at", String(box.at)); } catch { } state.restored = true; }
+      else if (local && (!box || lat > (box.at || 0))) idb.put(k, { v: local, at: lat || Date.now() });
+    }
+  }
 
   // ---------- ημέρες ----------
   const dayKey = iso => { const d = new Date(iso); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
@@ -57,6 +82,7 @@
 
   // ---------- φόρτωση ----------
   async function load() {
+    await restoreStorage();
     try {
       const r = await fetch("data/data.json?ts=" + Date.now());
       state.data = await r.json();
@@ -126,7 +152,7 @@
 
   // ---- Στατιστικά αγώνα: ίδιοι υπολογισμοί με το engine/stats.py (Negative Binomial) ----
   const LGN = { E0: "Premier League", SP1: "La Liga", D1: "Bundesliga", I1: "Serie A", F1: "Ligue 1", P1: "Primeira Liga", N1: "Eredivisie", B1: "Βέλγιο", T1: "Τουρκία", G1: "Ελλάδα", SC0: "Σκωτία", E1: "Championship", E2: "League One", E3: "League Two", EC: "National League", D2: "2. Bundesliga", I2: "Serie B", SP2: "Segunda", F2: "Ligue 2", SC1: "Σκωτία 2", SC2: "Σκωτία 3", SC3: "Σκωτία 4" };
-  const STATN = { co: "Κόρνερ", sh: "Σουτ", st: "Σουτ στην εστία", fo: "Φάουλ", ca: "Κάρτες", sv: "Αποκρούσεις" };
+  const STATN = { co: "Κόρνερ", sh: "Σουτ", st: "Σουτ στην εστία", fo: "Φάουλ (που κάνει η ομάδα)", ca: "Κάρτες", sv: "Αποκρούσεις" };
   const STAT_ICON = { co: "🚩", sh: "🎯", st: "🥅", fo: "🦵", ca: "🟨", sv: "🧤" };
   const PROP_RATIO = 1.045;
   function nb(mu, phi, kmax) {
@@ -249,6 +275,31 @@
         <div class="cx-row one"><div class="cx-l">🌦️ Καιρός</div><div class="cx-v">${wx}</div></div>
         <div class="cx-row one"><div class="cx-l">🎯 Αλλάζει την πρόβλεψη</div><div class="cx-v">${m.ctx_adj && m.ctx_adj.length ? m.ctx_adj.map(x => `<span class="chip on">${esc(x)}</span>`).join("") : `<span class="dim">Τίποτα ιδιαίτερο: μετράνε μόνο η δύναμη και οι αποδόσεις</span>`}</div></div>
       </div>`;
+  }
+
+  function bkDefHtml(m) {
+    const C = m.coef;
+    if (!C) return "";
+    const sg = x => `${x >= 0 ? "+" : "−"}${Math.abs(Math.round(x * 100))}%`;
+    const cls = (x, good) => Math.abs(x) < 0.02 ? "dim" : (good ? "ev-pos" : "ev-neg");
+    const team = (c, name) => `<div class="mx-team"><div class="mx-name">${esc(name)}</div>
+        <div class="dv-k"><span>⚔️ Επίθεση</span><b class="${cls(c.att - 1, c.att > 1)}">${sg(c.att - 1)}</b><small>${c.ratt}η από ${c.of}</small></div>
+        <div class="dv-k"><span>🛡️ Άμυνα (πόντοι που δέχεται)</span><b class="${cls(c.def - 1, c.def < 1)}">${sg(c.def - 1)}</b><small>${c.rdef}η από ${c.of}</small></div></div>`;
+    let h = `<div class="card cx"><div class="cx-h">🛡️ Επίθεση & άμυνα</div>
+      <div class="mx-grid">${team(C.home, m.home)}<div class="mx-vs">VS</div>${team(C.away, m.away)}</div>
+      <div class="wx">Σε σχέση με τον μέσο όρο της λίγκας (πρόσφατοι αγώνες μετράνε περισσότερο). Επίθεση + = βάζει περισσότερους πόντους, άμυνα − = δέχεται λιγότερους (καλό).</div>`;
+    const D = m.dvp;
+    if (D) {
+      const RN = { G: "Γκαρντ", F: "Φόργουορντ", C: "Ψηλοί" }, ST = [["pts", "Πόντοι"], ["reb", "Ριμπ."], ["ast", "Ασίστ"], ["tpm", "Τρίπ."]];
+      // τι δέχεται η ΑΜΥΝΑ κάθε ομάδας: αυτό ενδιαφέρει τους παίκτες του ΑΝΤΙΠΑΛΟΥ
+      const tbl = (d, def, att) => `<div class="dv-t"><div class="dv-tt">Τι δέχεται η άμυνα της <b>${esc(def)}</b> <small>(ευνοεί τους παίκτες της ${esc(att)} όπου είναι +)</small></div>
+        <table><thead><tr><th></th>${ST.map(([, l]) => `<th class="num">${l}</th>`).join("")}</tr></thead><tbody>
+        ${["G", "F", "C"].map(r => `<tr><td>${RN[r]}</td>${ST.map(([k]) => { const v = d[r][k]; return `<td class="num ${Math.abs(v) < 0.03 ? "dim" : v > 0 ? "ev-pos" : "ev-neg"}">${sg(v)}</td>`; }).join("")}</tr>`).join("")}
+        </tbody></table></div>`;
+      h += `<div class="dv-g">${tbl(D.home, m.home, m.away)}${tbl(D.away, m.away, m.home)}</div>
+        <div class="wx">Ρόλος από το τι κάνει ο παίκτης ανά λεπτό (ασίστ/τρίποντα = γκαρντ, ριμπάουντ/κοψίματα = ψηλός). Είναι πληροφορία: ο έλεγχος σε 4 λίγκες έδειξε ότι δεν βελτιώνει τις προβλέψεις παικτών πέρα από τη συνολική άμυνα, γι' αυτό το μοντέλο χρησιμοποιεί τη συνολική.</div>`;
+    }
+    return h + `</div>`;
   }
 
   // κατανοητά ονόματα επιλογών: "2" -> "Νίκη Real Madrid"
@@ -397,7 +448,7 @@
       <div class="seg">${tabs.map(([k, l], i) => `<button data-pane-btn="${k}" class="${i ? "" : "active"}">${l}</button>`).join("")}</div>`;
 
     // --- Σύνοψη ---
-    let s1 = bk ? "" : diffHtml(m);
+    let s1 = bk ? bkDefHtml(m) : diffHtml(m);
     if (m.top && m.top.length) {
       s1 += `<h3 class="day-sub">Πιθανότερες προβλέψεις</h3><div class="list">` + m.top.map((t, i) => `<div class="ri">
         <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(nice(m, t.key, t.side, t.label))} <span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span></div><div class="ri-s">${esc(t.why || t.group)}</div></div>
@@ -500,7 +551,7 @@
       if (!rows.length) return "";
       if (isBasket(m)) {
         const av = st => (st ? st.avg : "—");
-        return `<details class="mk-group"><summary>${esc(name)}: μέσοι όροι</summary><div class="table-wrap"><table class="ptable"><thead><tr><th>Παίκτης</th><th class="num">Λεπτά</th><th class="num">Πόντ.</th><th class="num">Ριμπ.</th><th class="num">Ασίστ</th><th class="num">Τρίπ.</th><th class="num">Φάουλ</th></tr></thead><tbody>
+        return `<details class="mk-group"><summary>${esc(name)}: μέσοι όροι</summary><div class="table-wrap"><table class="ptable"><thead><tr><th>Παίκτης</th><th class="num">Λεπτά</th><th class="num">Πόντ.</th><th class="num">Ριμπ.</th><th class="num">Ασίστ</th><th class="num">Τρίπ.</th><th class="num" title="Προσωπικά φάουλ που κάνει ο παίκτης">Προσ. φάουλ</th></tr></thead><tbody>
           ${rows.map(r => `<tr><td><b>${esc(r.name)}</b>${r.starter ? ' <span class="pill muted">5άδα</span>' : ""}</td><td class="num">${r.mins}</td><td class="num">${av(r.pts)}</td><td class="num">${av(r.reb)}</td><td class="num">${av(r.ast)}</td><td class="num">${av(r.tpm)}</td><td class="num">${av(r.fouls)}</td></tr>`).join("")}</tbody></table></div></details>`;
       }
       return `<h3 class="day-sub">${esc(name)}</h3><div class="table-wrap"><table class="ptable"><thead><tr><th>Παίκτης</th><th class="num">Λεπτά</th><th>Σκοράρει</th><th>Ασίστ</th><th>Κάρτα</th><th>Τάκλιν</th><th class="num">CBI</th></tr></thead><tbody>
@@ -579,12 +630,12 @@
         : `<span class="pill ${x.result === 1 ? "value" : "muted"}">${x.result === 1 ? "Κέρδος +" + (x.stake * (x.odds - 1)).toFixed(2) + "€" : x.result === 0 ? "Χάθηκε −" + x.stake + "€" : "Επιστροφή"}</span><button class="btn sm ghost" data-res="null" data-id="${x.id}">Αναίρεση</button>`}
         <button class="btn sm ghost" data-del="${x.id}" style="margin-left:auto">Διαγραφή</button></div></div>`).join("")
       : `<div class="empty"><b>Κανένα στοίχημα ακόμα</b>Πρόσθεσε από τον αγώνα (πάτα μια επιλογή) ή με το κουμπί.</div>`;
-    h += `<div class="note" style="margin-top:14px">Τα στοιχήματα αποθηκεύονται σε αυτή τη συσκευή. Με «Εξαγωγή» κρατάς αντίγραφο ασφαλείας.</div>`;
+    h += `<div class="note" style="margin-top:14px">💾 Τα στοιχήματα αποθηκεύονται σε αυτή τη συσκευή, σε δύο σημεία (με αυτόματη επαναφορά)${state.persisted ? " και ο browser τα έχει κλειδώσει ως μόνιμα" : ""}${state.restored ? ". ✅ Έγινε επαναφορά από το αντίγραφο" : ""}. Άνοιγε την εφαρμογή πάντα από το ίδιο σημείο (εικονίδιο στην αρχική οθόνη ή Safari): κάθε browser/εφαρμογή έχει δική του αποθήκευση. Με «Εξαγωγή» κρατάς και αντίγραφο σε αρχείο.</div>`;
     view.innerHTML = h;
   }
 
   // ---------- Δελτίο: γράφεις τις αποδόσεις της εταιρείας, βλέπεις αμέσως πού έχει αξία ----------
-  const PSTAT = { pts: "Πόντοι", reb: "Ριμπάουντ", ast: "Ασίστ", tpm: "Τρίποντα", stl: "Κλεψίματα", blk: "Κοψίματα", tov: "Λάθη", pf: "Φάουλ",
+  const PSTAT = { pts: "Πόντοι", reb: "Ριμπάουντ", ast: "Ασίστ", tpm: "Τρίποντα", stl: "Κλεψίματα", blk: "Κοψίματα", tov: "Λάθη", pf: "Προσωπικά φάουλ (που κάνει)",
     pra: "Πόντοι+Ριμπ.+Ασίστ", pr: "Πόντοι+Ριμπάουντ", pa: "Πόντοι+Ασίστ", ra: "Ριμπάουντ+Ασίστ" };
   const slipLegs = () => store.get("vb_slip", []);
   const saveSlip = l => store.set("vb_slip", l);

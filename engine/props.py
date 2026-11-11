@@ -13,11 +13,12 @@ from datetime import datetime
 
 STATS = {  # κλειδί: (όνομα, στήλες στη γραμμή boxscore)
     "pts": ("Πόντοι", (2,)), "reb": ("Ριμπάουντ", (3,)), "ast": ("Ασίστ", (4,)), "tpm": ("Τρίποντα", (5,)),
-    "stl": ("Κλεψίματα", (6,)), "blk": ("Κοψίματα", (9,)), "tov": ("Λάθη", (7,)), "pf": ("Φάουλ", (8,)),
+    "stl": ("Κλεψίματα", (6,)), "blk": ("Κοψίματα", (9,)), "tov": ("Λάθη", (7,)), "pf": ("Προσωπικά φάουλ", (8,)),
     "pra": ("Πόντοι+Ριμπ.+Ασίστ", (2, 3, 4)), "pr": ("Πόντοι+Ριμπάουντ", (2, 3)),
     "pa": ("Πόντοι+Ασίστ", (2, 4)), "ra": ("Ριμπάουντ+Ασίστ", (3, 4)),
 }
 K_OPP = 10.0      # συρρίκνωση του αντιπάλου (αγώνες)
+ROLE_W = 0.35     # πόσο από τη διαφορά "άμυνα ανά ρόλο" κρατάμε (mode "both")
 MIN_GAMES = 8
 MIN_MINS = 18.0
 VIG = 1.035       # γκανιότ ~7% στις αγορές παικτών, μοιρασμένο στις δύο πλευρές
@@ -96,6 +97,92 @@ class Model:
         self._mu = [sum(r[i] for r in rates) / n for i in range(len(PROFILE))]
         self._sd = [max((sum((r[i] - self._mu[i]) ** 2 for r in rates) / n) ** 0.5, 1e-6) for i in range(len(PROFILE))]
         self._plan = {}
+        self.opp_mode = "team"  # έλεγχος 11/2026: "role"/"both" όχι καλύτερα από "team" σε NBA, EL, EC, GBL. "team": ό,τι δέχεται η ομάδα συνολικά, "role": ό,τι δέχεται από κάθε ρόλο (G/F/C)
+        self._roles()
+
+    ROLE_NAMES = {"G": "Γκαρντ", "F": "Φόργουορντ", "C": "Ψηλοί"}
+
+    def _roles(self):
+        """Ρόλος κάθε παίκτη από το τι κάνει ανά λεπτό: δημιουργία (ασίστ, τρίποντα) vs ψηλός (ριμπάουντ, κοψίματα).
+        Τα πιο "γκαρντ" 35% των λεπτών = G, τα πιο "ψηλά" 25% = C, τα υπόλοιπα = F."""
+        agg = {}
+        for e in self.logs:
+            a = agg.setdefault((e[1], e[2]), [0.0, 0.0, 0.0, 0.0, 0.0])
+            a[0] += e[4]; a[1] += e[5]["ast"]; a[2] += e[5]["tpm"]; a[3] += e[5]["reb"]; a[4] += e[5]["blk"]
+        tot = [sum(a[i] for a in agg.values()) for i in range(5)]
+        if not tot[0]:
+            self.role = {}
+            self.role_allowed = {}
+            return
+        lg = [tot[i] / tot[0] for i in range(1, 5)]
+        score = {}
+        for key, a in agg.items():
+            if a[0] < 30:
+                continue
+            r = [a[i] / a[0] / (lg[i - 1] or 1) for i in range(1, 5)]
+            score[key] = (r[0] + 0.5 * r[1]) / 1.5 - (r[2] + 0.5 * r[3]) / 1.5
+        order = sorted(score, key=lambda k: -score[k])
+        mins = sum(agg[k][0] for k in order) or 1
+        cum, self.role = 0.0, {}
+        for k in order:
+            cum += agg[k][0]
+            self.role[k] = "G" if cum <= 0.35 * mins else "C" if cum > 0.75 * mins else "F"
+        # ό,τι δέχεται κάθε ομάδα ανά ρόλο, ανά αγώνα
+        per = {}
+        for e in self.logs:
+            rl = self.role.get((e[1], e[2]))
+            if not rl:
+                continue
+            g = per.setdefault((e[3], e[0], rl), {k: 0.0 for k in STATS})
+            for k in STATS:
+                g[k] += e[5][k]
+        self.role_allowed = {}
+        for (opp, date, rl), t in per.items():
+            self.role_allowed.setdefault((opp, rl), []).append((date, t))
+        self._rcache, self._rlg = {}, {}
+
+    def _role_factor(self, opp, k, role, before):
+        key = (opp, role, before[:10])
+        if key not in self._rcache:
+            d0 = before[:10]
+            lk = (role, d0)
+            if lk not in self._rlg:
+                rows = [t for (o, rl), lst in self.role_allowed.items() if rl == role for d, t in lst if d[:10] < d0]
+                self._rlg[lk] = (len(rows), {s: sum(t[s] for t in rows) / (len(rows) or 1) for s in STATS})
+            n_lg, lg = self._rlg[lk]
+            rows = [t for d, t in self.role_allowed.get((opp, role), []) if d[:10] < d0]
+            f = {}
+            for s in STATS:
+                if len(rows) < 3 or not n_lg or not lg[s]:
+                    f[s] = 1.0
+                    continue
+                raw = (sum(t[s] for t in rows) / len(rows)) / lg[s]
+                f[s] = 1 + (raw - 1) * len(rows) / (len(rows) + K_OPP)
+            self._rcache[key] = f
+        return self._rcache[key][k]
+
+    def defense_view(self, team, before):
+        """Πόσο δέχεται η ομάδα από κάθε ρόλο σε σχέση με τον μέσο όρο (πόντοι, ριμπάουντ, ασίστ, τρίποντα)."""
+        out = {}
+        for rl in ("G", "F", "C"):
+            out[rl] = {k: round(self._role_factor(team, k, rl, before) - 1, 3) for k in ("pts", "reb", "ast", "tpm")}
+            out[rl]["n"] = len([1 for d, t in self.role_allowed.get((team, rl), []) if d[:10] < before[:10]])
+        return out
+
+    def opp_factor(self, player, team, opp, k, before):
+        if self.opp_mode == "both":
+            # συνολική άμυνα × (διαφορά του ρόλου από τη συνολική, πιο συγκρατημένη)
+            rl = self.role.get((player, team))
+            tf = self._opp_factor(opp, k, before)
+            if not rl:
+                return tf
+            rf = self._role_factor(opp, k, rl, before)
+            return tf * (1 + ROLE_W * (rf - tf))
+        if self.opp_mode == "role":
+            rl = self.role.get((player, team))
+            if rl:
+                return self._role_factor(opp, k, rl, before)
+        return self._opp_factor(opp, k, before)
 
     def profile(self, player, team, before):
         h = [e for e in self.by_player.get((player, team), []) if e[0][:10] < before[:10]][-15:]
@@ -218,7 +305,7 @@ class Model:
         out = {}
         for k in STATS:
             rate = sum(e[5][k] for e in l15) / mins15
-            mu = rate * m_exp * self._opp_factor(opp, k, before) * ((mult or {}).get(k, 1.0))
+            mu = rate * m_exp * self.opp_factor(player, team, opp, k, before) * ((mult or {}).get(k, 1.0))
             out[k] = (mu, sum(e[5][k] for e in l10) / len(l10))
         return out, m_exp
 
@@ -302,11 +389,13 @@ def minutes_research(M):
     return best
 
 
-def research(games, box, usage_scale=None):
+def research(games, box, usage_scale=None, opp_mode=None):
     """Κυλιόμενος έλεγχος: για κάθε στατιστικό, πόσο συχνά βγαίνει η πλευρά που προτιμά το μοντέλο στη γραμμή
     "εταιρείας" (μέσος όρος 10 αγώνων), ανά βαθμό βεβαιότητας. Επιστρέφει και τη διασπορά (phi) ανά στατιστικό.
     Με τις απουσίες του κάθε αγώνα (βασικοί που δεν έπαιξαν) -> επιπλέον λεπτά στους συμπαίκτες."""
     M = Model(games, box)
+    if opp_mode:
+        M.opp_mode = opp_mode
     mres = minutes_research(M)
     if mres and usage_scale is not None:
         mres["usage"] = {k: round(v * usage_scale, 3) for k, v in mres["usage"].items()}

@@ -366,6 +366,7 @@ def build(cid, comp, margins_tbl):
     def team_games(t):
         return [g for g in played_cur if t in (g["home"], g["away"])]
 
+    cur_t = [t for t in {x["home"] for x in played_cur} | {x["away"] for x in played_cur} if t in R["att"]]
     for g in sorted(upcoming, key=lambda g: g["date"]):
         h, a = g["home"], g["away"]
         if h not in R["att"] or a not in R["att"]:
@@ -457,6 +458,13 @@ def build(cid, comp, margins_tbl):
             "markets": sels,
             "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
             "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books), "props": pk,
+            "coef": {side: {"att": round(R["att"][t], 3), "def": round(R["def"][t], 3),
+                            "ratt": 1 + sum(1 for x in cur_t if R["att"][x] > R["att"][t] + 1e-9),
+                            "rdef": 1 + sum(1 for x in cur_t if R["def"][x] < R["def"][t] - 1e-9),
+                            "of": len(cur_t), "pf": round(R["h_avg" if side == "home" else "a_avg"] * R["att"][t], 1)}
+                     for side, t in (("home", h), ("away", a))},
+            "dvp": ({"home": PM.defense_view(h, g["date"]), "away": PM.defense_view(a, g["date"])}
+                    if PM.role_allowed else None),
             "pmodel": {"phi": {k: v["phi"] for k, v in check.items() if not k.startswith("_")},
                        "ok": [k for k, v in check.items() if not k.startswith("_") and v.get("ok")],
                        "home": pmodel(h, a, out_h), "away": pmodel(a, h, out_a)},

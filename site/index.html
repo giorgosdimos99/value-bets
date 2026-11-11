@@ -280,6 +280,20 @@
     body .sx-ret { @apply text-[13px] text-mint-300 font-semibold flex-1; }
     body .btn[disabled] { @apply opacity-40 cursor-not-allowed; }
     body .sheet .sx-open { @apply absolute right-[56px] top-[10px] z-[2]; }
+
+    /* ---------- μπάσκετ: επίθεση/άμυνα ---------- */
+    body .dv-k { @apply flex items-baseline gap-2 flex-wrap text-[13px] text-slate-300; }
+    body .mx-team.a .dv-k, body .mx-grid > .mx-team:last-child .dv-k { @apply justify-end; }
+    body .mx-grid > .mx-team:last-child { @apply items-end text-right; }
+    body .dv-k b { @apply text-[16px] tabular-nums; }
+    body .dv-k small { @apply text-[11.5px] text-slate-500; }
+    body .dv-g { @apply grid gap-3 mt-4; grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+    @media (max-width: 640px) { body .dv-g { grid-template-columns: minmax(0,1fr); } }
+    body .dv-t { @apply rounded-2xl p-3 bg-white/[0.03] ring-1 ring-inset ring-white/[0.06] min-w-0; }
+    body .dv-tt { @apply text-[12.5px] text-slate-300 mb-2 leading-snug; }
+    body .dv-tt small { @apply text-slate-500; }
+    body .dv-t table { @apply text-[12.5px]; }
+    body .dv-t td, body .dv-t th { @apply py-1.5 px-1; }
     @media (prefers-reduced-motion: reduce) {
       body * { transition: none !important; }
     }
