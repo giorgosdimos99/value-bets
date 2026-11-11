@@ -277,6 +277,14 @@
       </div>`;
   }
 
+  function ptopHtml(m) {
+    if (!m.ptop || !m.ptop.length) return "";
+    return `<h3 class="day-sub">🏀 3 πιθανότερες επιλογές παικτών</h3><div class="list">${m.ptop.map((x, i) => `<div class="ri">
+        <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(x.label)}${x.extra >= 1 ? ` <span class="pill value">+${x.extra}' λόγω απουσίας</span>` : ""}</div>
+        <div class="ri-s">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'</div></div>
+        <div class="ri-r"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><span>συμφέρει από ${f2(x.min_odds)}</span></div></div>`).join("")}</div>
+      <div class="wx">Πιθανότητα από τον έλεγχο (ό,τι βγήκε σε παρόμοιες επιλογές), όχι η ωμή του μοντέλου. Γραμμή = εκεί που τη βάζουν συνήθως οι εταιρείες (μέσος όρος 10 αγώνων). Αν η εταιρεία έχει άλλη γραμμή, έλεγξέ την στο 🧾 Δελτίο.</div>`;
+  }
   function bkDefHtml(m) {
     const C = m.coef;
     if (!C) return "";
@@ -380,6 +388,7 @@
       </div>
       <div class="probs" ${bk ? 'style="grid-template-columns:repeat(3,1fr)"' : ""}>${(bk ? ["1", "2"] : ["1", "X", "2"]).map(k => `<div class="prob"><b>${p[k] ? pct(p[k].p) : "—"}</b><span>${k} · ${p[k] ? f2(p[k].fair) : "—"}</span></div>`).join("")}
       ${bk ? `<div class="prob"><b>${(m.xg[0] + m.xg[1]).toFixed(1)}</b><span>σύνολο πόντων</span></div>` : ""}</div>
+      ${bk && m.ptop && m.ptop.length ? `<div class="pt1">🏀 ${esc(m.ptop[0].label)} <b>${pct(m.ptop[0].p)}</b></div>` : ""}
       <div class="tags">${m.values.length ? `<span class="pill value">${m.values.length} value</span>` : ""}
       ${m.has_odds ? "" : `<span class="pill muted">χωρίς αποδόσεις</span>`}
       ${m.confidence !== "υψηλή" ? `<span class="pill muted">αξιοπιστία: ${m.confidence}</span>` : ""}</div></div>`;
@@ -448,7 +457,7 @@
       <div class="seg">${tabs.map(([k, l], i) => `<button data-pane-btn="${k}" class="${i ? "" : "active"}">${l}</button>`).join("")}</div>`;
 
     // --- Σύνοψη ---
-    let s1 = bk ? bkDefHtml(m) : diffHtml(m);
+    let s1 = bk ? ptopHtml(m) + bkDefHtml(m) : diffHtml(m);
     if (m.top && m.top.length) {
       s1 += `<h3 class="day-sub">Πιθανότερες προβλέψεις</h3><div class="list">` + m.top.map((t, i) => `<div class="ri">
         <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(nice(m, t.key, t.side, t.label))} <span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span></div><div class="ri-s">${esc(t.why || t.group)}</div></div>

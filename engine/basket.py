@@ -431,6 +431,13 @@ def build(cid, comp, margins_tbl):
             x["team"] = g["home_short"] if x["team"] == h else g["away_short"]
             x["label"] = f"{x['player']}: {x['name']} {x['side']} {x['line']:g}"
         pk = sorted(pk, key=lambda x: -(x["p"] - x["p_avg"]))[:2]
+        # οι 3 πιθανότερες επιλογές παικτών του αγώνα (μικρότερη απαίτηση διαφωνίας, ταξινόμηση κατά πιθανότητα)
+        pt = props.picks(PM, check, ros(h, out_h), h, a, g["date"], n=6, absent=out_h, edge_min=0.04, by="p") +             props.picks(PM, check, ros(a, out_a), a, h, g["date"], n=6, absent=out_a, edge_min=0.04, by="p")
+        for x in pt:
+            x["player"] = nice_name(x["player"])
+            x["team"] = g["home_short"] if x["team"] == h else g["away_short"]
+            x["label"] = f"{x['player']}: {x['name']} {x['side']} {x['line']:g}"
+        pt = sorted(pt, key=lambda x: -x["p"])[:3]
 
         def pmodel(team, opp, outl):
             """Πρόβλεψη μοντέλου για κάθε βασικό (για έλεγχο οποιασδήποτε γραμμής στην καρτέλα Δελτίο)."""
@@ -457,7 +464,7 @@ def build(cid, comp, margins_tbl):
             "sd": [round(R["sd_margin"], 1), round(R["sd_total"], 1)],
             "markets": sels,
             "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
-            "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books), "props": pk,
+            "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books), "props": pk, "ptop": pt,
             "coef": {side: {"att": round(R["att"][t], 3), "def": round(R["def"][t], 3),
                             "ratt": 1 + sum(1 for x in cur_t if R["att"][x] > R["att"][t] + 1e-9),
                             "rdef": 1 + sum(1 for x in cur_t if R["def"][x] < R["def"][t] - 1e-9),

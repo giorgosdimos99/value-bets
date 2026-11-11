@@ -476,8 +476,9 @@ def research(games, box, usage_scale=None, opp_mode=None):
     return out
 
 
-def picks(M, check, player_rows, team, opp, before, n=3, absent=()):
+def picks(M, check, player_rows, team, opp, before, n=3, absent=(), edge_min=None, by="edge"):
     """Επιλογές για τους παίκτες μιας ομάδας, μόνο σε στατιστικά που πέρασαν τον έλεγχο.
+    by="edge": οι μεγαλύτερες διαφωνίες με τη γραμμή (value). by="p": οι πιθανότερες (edge_min μικρότερο).
     absent: απόντες βασικοί -> επιπλέον λεπτά στους συμπαίκτες (αν ο έλεγχος λεπτών υπάρχει)."""
     out = []
     mres = check.get("_minutes")
@@ -508,7 +509,7 @@ def picks(M, check, player_rows, team, opp, before, n=3, absent=()):
             pm = _nb_over(mu, c["phi"], L)
             side = "Over" if pm >= pn else "Under"
             edge = abs(pm - pn)
-            if edge < c["ok"]["edge_from"] - 1e-9:
+            if edge < (c["ok"]["edge_from"] if edge_min is None else edge_min) - 1e-9:
                 continue
             p_avg = pn if side == "Over" else 1 - pn
             # πιθανότητα = ό,τι έγινε στον έλεγχο σε αυτό το επίπεδο απόκλισης (όχι η ωμή του μοντέλου)
@@ -529,7 +530,7 @@ def picks(M, check, player_rows, team, opp, before, n=3, absent=()):
                         "exp": round(mu, 1), "avg10": round(n10, 1), "mins": round(m_exp, 1),
                         "min_odds": round(1.03 / p_real, 2), "ladder": ladder, "extra": round(extra, 1),
                         "hit": c["ok"]["hit"], "n": c["ok"]["n"]})
-    out.sort(key=lambda x: -(x["p"] - x["p_avg"]))
+    out.sort(key=(lambda x: -x["p"]) if by == "p" else (lambda x: -(x["p"] - x["p_avg"])))
     seen, res = set(), []
     for x in out:  # το πολύ μία επιλογή ανά παίκτη
         if x["player"] in seen:
