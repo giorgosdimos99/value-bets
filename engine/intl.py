@@ -183,12 +183,15 @@ def build(margins_tbl):
     rank = {t: i + 1 for i, t in enumerate(t for t in ranked if R["n"].get(t, 0) >= 8)}
     now = datetime.now(timezone.utc)
     today = now.date()
-    out = {}
+    out, all_results = {}, {}
     for slug, cname in LEAGUES.items():
         gl = espn.days(f"soccer/{slug}", today, today + timedelta(days=config.DAYS_AHEAD), draw=True)
-        past = espn.days(f"soccer/{slug}", today - timedelta(days=10), today - timedelta(days=1), draw=True)
+        past = espn.days(f"soccer/{slug}", today - timedelta(days=10), today, draw=True)
         cid = "N-" + slug.split(".")[-1].upper() if slug != "uefa.nations" else "UNL"
         cid = {"fifa.friendly": "FRI", "concacaf.nations.league": "CNL"}.get(slug, cid)
+        # αποτελέσματα για την εκκαθάριση, ακόμα κι αν η διοργάνωση δεν έχει άλλους αγώνες τις επόμενες μέρες
+        all_results[cid] = [{"id": f"{cid}-{g['id']}", "date": g["date"], "home": g["home"], "away": g["away"],
+                             "hg": g["hp"], "ag": g["ap"]} for g in past if g["played"] and g["hp"] is not None]
         matches = []
         for g in sorted(gl, key=lambda g: g["date"]):
             if g["played"] or g["state"] != "STATUS_SCHEDULED":
@@ -205,12 +208,12 @@ def build(margins_tbl):
                 matches.append(m)
         if not matches:
             continue
-        recent = [{"date": g["date"], "home": g["home"], "away": g["away"], "hg": g["hp"], "ag": g["ap"]}
+        recent = [{"id": f"{cid}-{g['id']}", "date": g["date"], "home": g["home"], "away": g["away"], "hg": g["hp"], "ag": g["ap"]}
                   for g in sorted(past, key=lambda g: g["date"]) if g["played"] and g["hp"] is not None]
         out[cid] = {"name": cname, "sport": "football", "national": True, "matches": matches, "standings": None,
                     "teams": [], "recent": recent[-40:]}
     info = {"teams": len(rank), "matches_used": len(rows), "home_adv": round(R["H"], 3), "goals": round(R["mu"], 3),
-            "check": check}
+            "check": check, "_results": all_results}
     return out, info
 
 
@@ -229,12 +232,24 @@ def analyse(g, cid, R, h, a, known, books, margins_tbl, rows, rank):
             lh, la = w * lh + (1 - w) * mh, w * la + (1 - w) * ma
         else:
             lh, la = mh, ma
+    elif not known:
+        return None
     M, p1, px, p2 = _probs(lh, la)
     book_view = {}
     if market_xg:
         for s in markets.selections(model.score_matrix(*market_xg), None, None):
             book_view[(s["key"], s["side"])] = (s["pw"], s["pp"])
-    sels = markets.price(markets.selections(M, None, None), books, book_view, margins_tbl)
+    raw = markets.selections(M, None, None)
+    if x12 and (config.MODEL_WEIGHT == 0 or not known):  # 1/Χ/2 και O/U 2.5 = η αγορά χωρίς γκανιότ (όχι προσέγγιση Poisson)
+        anchor = {("1X2", "1"): x12["1"], ("1X2", "X"): x12["X"], ("1X2", "2"): x12["2"],
+                  ("DC", "1X"): x12["1"] + x12["X"], ("DC", "X2"): x12["X"] + x12["2"], ("DC", "12"): x12["1"] + x12["2"]}
+        if ou:
+            anchor.update({("OU2.5", "Over"): ou["Over"], ("OU2.5", "Under"): ou["Under"]})
+        for s_ in raw:
+            if (s_["key"], s_["side"]) in anchor:
+                s_["pw"] = anchor[(s_["key"], s_["side"])]
+        p1, px, p2 = x12["1"], x12["X"], x12["2"]
+    sels = markets.price(raw, books, book_view, margins_tbl)
     scores = sorted(((i, j, M[i][j]) for i in range(6) for j in range(6)), key=lambda x: -x[2])[:6]
 
     def lvl(pw, pl):

@@ -9,7 +9,14 @@
 from datetime import datetime, timedelta, timezone
 from itertools import combinations
 
-ATHENS = timezone(timedelta(hours=2))  # χειμερινή ώρα (αρκεί για ομαδοποίηση ανά ημέρα)
+def _athens(d):
+    """Ώρα Ελλάδας: UTC+3 από την τελευταία Κυριακή Μαρτίου έως την τελευταία Κυριακή Οκτωβρίου (01:00 UTC), αλλιώς UTC+2."""
+    def last_sunday(y, mo):
+        x = datetime(y, mo, 31, 1, tzinfo=timezone.utc)
+        return x - timedelta(days=(x.weekday() + 1) % 7)
+    u = d.astimezone(timezone.utc)
+    summer = last_sunday(u.year, 3) <= u < last_sunday(u.year, 10)
+    return u.astimezone(timezone(timedelta(hours=3 if summer else 2)))
 MAX_DISAGREE = 0.08   # το μοντέλο δεν απέχει πάνω από 8 μονάδες από την αγορά (αλλιώς μάλλον λάθος του)
 MIN_LEG_EV = -0.07    # όχι επιλογές με πολύ κακή τιμή (γκανιότ ~5-7% είναι το συνηθισμένο)
 
@@ -20,7 +27,7 @@ KINDS = {
 
 
 def _day(iso):
-    return datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(ATHENS).strftime("%Y-%m-%d")
+    return _athens(datetime.fromisoformat(iso.replace("Z", "+00:00"))).strftime("%Y-%m-%d")
 
 
 def _legs(matches, rule):
@@ -28,7 +35,9 @@ def _legs(matches, rule):
     legs = []
     for m in matches:
         start = datetime.fromisoformat(m["date"].replace("Z", "+00:00"))
-        if start <= now or m["confidence"] == "χαμηλή" or (not m.get("has_odds") and m["confidence"] != "υψηλή"):
+        # μόνο αγώνες με πραγματικές αποδόσεις: εκεί η πιθανότητα στηρίζεται στην αγορά. Χωρίς αποδόσεις μένει μόνο
+        # το μοντέλο, που στην έρευνα ήταν χειρότερο από την αγορά (και οι επιλογές δελτίων έβγαιναν 48% αντί 63%).
+        if start <= now or m["confidence"] == "χαμηλή" or not m.get("has_odds"):
             continue
         lo, hi = rule["leg_odds"]
         cand = [s for s in m["markets"]
@@ -43,8 +52,10 @@ def _legs(matches, rule):
             pick = cand[:1] + [s for s in cand if s["est"] >= 1.95][:1] + [s for s in cand if s["est"] >= 2.4][:1]
         for s in {id(x): x for x in pick}.values():
             legs.append({"match": m, "s": s})
-    # οι πιο "δυνατές" επιλογές (πιθανότητα × απόδοση), μισές χαμηλές και μισές ≥ 1.6 για να φτάνει την απόδοση
-    legs.sort(key=lambda x: -(x["s"]["p"] * x["s"]["est"]))
+    # οι πιθανότερες επιλογές, μισές χαμηλές και μισές ≥ 1.6 για να φτάνει την απόδοση.
+    # (Παλιά: ταξινόμηση με πιθανότητα × εκτιμώμενη απόδοση = διάλεγε συστηματικά εκεί όπου η πιθανότητά μας ήταν
+    # πιο "φουσκωμένη" σε σχέση με την αγορά, δηλαδή τα δικά μας λάθη.)
+    legs.sort(key=lambda x: -x["s"]["p"])
     half = rule["pool"] // 2
     low = [x for x in legs if x["s"]["est"] < 1.6][:half]
     high = [x for x in legs if x["s"]["est"] >= 1.6][:rule["pool"] - len(low)]

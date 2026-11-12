@@ -416,6 +416,7 @@ def research(games, box, usage_scale=None, opp_mode=None):
             if extra >= 2 or (mult or {}).get(k, 1) >= 1.05:
                 boost_rows[k].append((P[k][0], P[k][1], v[k]))
     out = {}
+    cal_num = cal_den = 0.0  # βαθμονόμηση: πόσο από τη διαφωνία μοντέλου-γραμμής επιβεβαιώνεται στην πράξη
     for k, rows in res.items():
         if len(rows) < 300:
             continue
@@ -441,6 +442,7 @@ def research(games, box, usage_scale=None, opp_mode=None):
             b = min(int(edge / 0.03), 4)  # 0-3, 3-6, 6-9, 9-12, 12+ μονάδες
             c = buckets.setdefault(b, [0, 0.0, 0, 0.0])
             c[0] += 1; c[1] += p_avg; c[2] += won; c[3] += p_avg + edge
+            cal_num += (won - p_avg) * edge; cal_den += edge * edge
         bk = []
         for b, (n, spa, w, spm) in sorted(buckets.items()):
             bk.append({"edge": round(b * 0.03, 2), "n": n, "p_avg": round(spa / n, 3), "pred": round(spm / n, 3),
@@ -473,6 +475,9 @@ def research(games, box, usage_scale=None, opp_mode=None):
                              and out[k]["boost"]["hit"] - out[k]["boost"]["p_avg"] >= 0.05 else 0.0)
                          for k, v in mres["usage"].items()}
         out["_minutes"] = mres
+    # κλίση 1 = η πιθανότητα του μοντέλου βγαίνει όπως τη λέει. <1 = το μοντέλο είναι πιο σίγουρο απ' ό,τι πρέπει:
+    # η εφαρμογή φέρνει την πρόβλεψη τόσο πιο κοντά στον μέσο όρο των 10 αγώνων (καρτέλα Δελτίο, οποιαδήποτε γραμμή).
+    out["_cal"] = round(min(max(cal_num / cal_den, 0.0), 1.0), 3) if cal_den > 0 else 1.0
     return out
 
 

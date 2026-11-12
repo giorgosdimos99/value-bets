@@ -173,7 +173,7 @@ def nba(outright=None):
     if len(st) < 30:
         return None
     cur, prev = espn.nba_games(1)
-    R = basket.fit([g for g in cur if g["played"]], [g for g in prev if g["played"]])
+    R = basket.fit([g for g in cur if g["played"]], [g for g in prev if g["played"]], **config.BASKET["NBA"].get("fit", {}))
     teams = sorted(st)
     rem = [tuple(x) for x in espn.nba_remaining()]
     rec = {t: (st[t]["w"], st[t]["l"], st[t]["pd"] * (st[t]["w"] + st[t]["l"])) for t in teams}

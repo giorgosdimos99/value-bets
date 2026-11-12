@@ -276,7 +276,8 @@
         ${row("⚙️", "Τρόπος παιχνιδιού", styleTxt(H), styleTxt(A))}
         ${row("🧑‍💼", "Προπονητής", coachTxt(H), coachTxt(A))}
         <div class="cx-row one"><div class="cx-l">🌦️ Καιρός</div><div class="cx-v">${wx}</div></div>
-        <div class="cx-row one"><div class="cx-l">🎯 Αλλάζει την πρόβλεψη</div><div class="cx-v">${m.ctx_adj && m.ctx_adj.length ? m.ctx_adj.map(x => `<span class="chip on">${esc(x)}</span>`).join("") : `<span class="dim">Τίποτα ιδιαίτερο: μετράνε μόνο η δύναμη και οι αποδόσεις</span>`}</div></div>
+        <div class="cx-row one"><div class="cx-l">🎯 Αλλάζει την πρόβλεψη</div><div class="cx-v">${m.ctx_adj && m.ctx_adj.length ? m.ctx_adj.map(x => `<span class="chip on">${esc(x)}</span>`).join("") : `<span class="dim">Τίποτα: η πιθανότητα βγαίνει από τις αποδόσεις της αγοράς</span>`}</div></div>
+        <div class="wx">Στυλ και προπονητής είναι πληροφορία για σένα. Στον επανέλεγχο (26.472 αγώνες) δεν βελτίωσαν την πρόβλεψη πέρα από τις αποδόσεις, οπότε δεν αλλάζουν την πιθανότητα. Μόνο η βροχή πέρασε τον έλεγχο (περισσότερα γκολ).</div>
       </div>`;
   }
 
@@ -286,7 +287,7 @@
         <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(x.label)}${x.extra >= 1 ? ` <span class="pill value">+${x.extra}' λόγω απουσίας</span>` : ""}</div>
         <div class="ri-s">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'</div></div>
         <div class="ri-r"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><span>συμφέρει από ${f2(x.min_odds)}</span></div></div>`).join("")}</div>
-      <div class="wx">Πιθανότητα από τον έλεγχο (ό,τι βγήκε σε παρόμοιες επιλογές), όχι η ωμή του μοντέλου. Γραμμή = εκεί που τη βάζουν συνήθως οι εταιρείες (μέσος όρος 10 αγώνων). Αν η εταιρεία έχει άλλη γραμμή, έλεγξέ την στο 🧾 Δελτίο.</div>`;
+      <div class="wx">Πιθανότητα από τον έλεγχο (ό,τι βγήκε σε παρόμοιες επιλογές), όχι η ωμή του μοντέλου. Γραμμή = εκεί που τη βάζουν συνήθως οι εταιρείες (μέσος όρος 10 αγώνων). Αν η εταιρεία έχει άλλη γραμμή, έλεγξέ την στο 🧾 Δελτίο. Ο έλεγχος δεν έγινε με πραγματικές γραμμές εταιρειών (δεν υπάρχουν δωρεάν): δες το ως «πιθανότερη πλευρά», όχι ως σίγουρη αξία.</div>`;
   }
   function bkDefHtml(m) {
     const C = m.coef;
@@ -665,8 +666,10 @@
     const P = m.pmodel; if (!P) return null;
     const r = [...(P.home || []), ...(P.away || [])].find(x => x.name === name);
     if (!r || r.mu[k] == null) return null;
-    const po = pOver(nb(r.mu[k], P.phi[k] ?? 0.05), L);
-    return { p: side === "Over" ? po : 1 - po, mu: r.mu[k], avg10: r.avg10[k], mins: r.mins, extra: r.extra, ok: (P.ok || []).includes(k) };
+    // βαθμονόμηση από τον έλεγχο: όσο πιο "υπερβολικά σίγουρο" βγήκε το μοντέλο στη λίγκα, τόσο πιο κοντά στον μ.ό. 10 αγώνων
+    const cal = P.cal ?? 1, mu = r.avg10[k] + cal * (r.mu[k] - r.avg10[k]);
+    const po = pOver(nb(mu, P.phi[k] ?? 0.05), L);
+    return { p: side === "Over" ? po : 1 - po, mu: Math.round(mu * 10) / 10, avg10: r.avg10[k], mins: r.mins, extra: r.extra, ok: (P.ok || []).includes(k) };
   }
   // ξαναϋπολογίζει την πιθανότητα με τα τρέχοντα δεδομένα (αν ο αγώνας υπάρχει ακόμα)
   function legNow(l) {
@@ -971,6 +974,12 @@
     const wins = settled.filter(p => p.result === 1).length;
     const avgOdds = settled.length ? settled.reduce((a, p) => a + p.odds, 0) / settled.length : 0;
     let h = `<div class="note">Κάθε value επιλογή που βγάζει η εφαρμογή καταγράφεται αυτόματα και ελέγχεται μετά το ματς (1 μονάδα ανά επιλογή). Έτσι βλέπουμε τίμια αν το μοντέλο κερδίζει μακροπρόθεσμα. Χρειάζονται 100+ επιλογές για ασφαλές συμπέρασμα.</div>
+      <div class="note"><b>🔍 Έλεγχος αξιοπιστίας (12/11/2026)</b><br>
+      • <b>Value:</b> σε 26.070 παλιούς αγώνες, όταν η Bet365 έδινε απόδοση 3%+ πάνω από τη δίκαιη τιμή της αγοράς, το αποτέλεσμα ήταν +10,6% σε 182 στοιχήματα στα 1 / 2 / Over / Under και −11% σε 211 στην ισοπαλία (γι' αυτό η ισοπαλία δεν σημαδεύεται πια ως value). Τα δείγματα είναι μικρά: <b>το value δεν είναι αποδεδειγμένο κέρδος</b>, είναι ένδειξη καλής τιμής.<br>
+      • <b>Πιθανότητες:</b> στο 1/Χ/2 και Over/Under 2.5 είναι η ίδια η αγορά χωρίς γκανιότ. Στις υπόλοιπες αγορές (G/G, διπλή ευκαιρία, γκολ ομάδας) ο έλεγχος έδειξε σφάλμα έως ~1 μονάδα.<br>
+      • <b>Μπάσκετ:</b> η δύναμη ομάδων ξαναρυθμίστηκε με έλεγχο σε 2.618 αγώνες (τα λάθη στην αρχή της σεζόν μειώθηκαν πολύ).<br>
+      • <b>Παίκτες:</b> ο έλεγχος γίνεται απέναντι σε γραμμή «μέσος όρος 10 αγώνων», όχι στις πραγματικές γραμμές των εταιρειών (δεν υπάρχουν δωρεάν). Δείχνουν την πιθανότερη πλευρά, όχι εγγυημένη αξία.<br>
+      • Το ιστορικό παρακάτω ξαναϋπολογίστηκε: παλιά, κάποιοι αγώνες μπάσκετ είχαν πάρει λάθος σκορ.</div>
       <div class="kpis"><div class="kpi"><span>Κέρδος (μονάδες)</span><b class="${profit >= 0 ? "ev-pos" : "ev-neg"}">${profit >= 0 ? "+" : ""}${profit.toFixed(2)}</b></div>
       <div class="kpi"><span>ROI</span><b>${settled.length ? ((profit / settled.length) * 100).toFixed(1) : 0}%</b></div>
       <div class="kpi"><span>Επιτυχία</span><b>${settled.length ? Math.round((wins / settled.length) * 100) : 0}%</b></div>

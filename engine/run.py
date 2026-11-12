@@ -39,15 +39,28 @@ def build_ratings():
     return ratings, leagues, results, hist
 
 
-def _same_match(a, b, hours=36):
+def _same_match(a, b, hours=36, loose_hours=6):
+    """Ίδιος αγώνας; ΠΡΟΣΟΧΗ: να καλείται μόνο ανάμεσα σε αγώνες της ΙΔΙΑΣ διοργάνωσης.
+    Παλιά αρκούσε ο γηπεδούχος μέσα σε 30-36 ώρες, χωρίς έλεγχο διοργάνωσης: αγώνες μπάσκετ έπαιρναν σκορ
+    ποδοσφαίρου της ίδιας ομάδας (Fenerbahce, Olympiacos...) και το NBA το σκορ της προηγούμενης βραδιάς.
+    Τώρα: και οι δύο ομάδες, ή μία ομάδα (στον ίδιο ρόλο) με σχεδόν ίδια ώρα έναρξης (τα ονόματα διαφέρουν
+    ανά πηγή, π.χ. "Queens Park Rangers" / "QPR")."""
     if not a.get("date") or not b.get("date"):
         return False
-    da = datetime.fromisoformat(a["date"].replace("Z", "+00:00"))
-    db = datetime.fromisoformat(b["date"].replace("Z", "+00:00"))
-    if abs((da - db).total_seconds()) > hours * 3600:
+    dt = abs((_dt(a["date"]) - _dt(b["date"])).total_seconds())
+    if dt > hours * 3600:
         return False
-    return names.norm(a["home"]) == names.norm(b["home"]) or (
-        names.match(a["home"], [b["home"]]) and names.match(a["away"], [b["away"]]))
+    h, w = _team_eq(a["home"], b["home"]), _team_eq(a["away"], b["away"])
+    return (h and w) or ((h or w) and dt <= loose_hours * 3600)
+
+
+def _dt(iso):
+    d = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
+
+
+def _team_eq(x, y):
+    return bool(x and y) and (names.norm(x) == names.norm(y) or bool(names.match(x, [y])))
 
 
 def fixtures_for(cid, comp, fx_csv):
@@ -179,16 +192,29 @@ def analyse(m, cid, ctx, books):
 
     M = model.score_matrix(lh, la)
     wx = weather_for(m, th, rh, ctx)
-    adj = context_adjust(M, rh, ra, x12, ctx.get("coach", {}), th, ta, wx)
+    adj = context_adjust(M, x12, ou, wx)
     if adj:
         lh, la = adj["xg"]
         M = model.score_matrix(lh, la)
+    # 1/Χ/2 και Over/Under 2.5: η πιθανότητα είναι Η ΙΔΙΑ η αγορά χωρίς γκανιότ (όχι η προσέγγιση Poisson).
+    # Έλεγχος σε 26.070 αγώνες (engine/audit_football.py): η προσέγγιση απέχει έως ~1,8 μονάδες στην ισοπαλία και
+    # τα "value" που έβγαιναν μόνο εξαιτίας της έχασαν -14,5%. Ο πίνακας σκορ μένει για τις υπόλοιπες αγορές.
+    anchor = {}
+    if config.MODEL_WEIGHT == 0:
+        if x12:
+            anchor.update({("1X2", "1"): x12["1"], ("1X2", "X"): x12["X"], ("1X2", "2"): x12["2"],
+                           ("DC", "1X"): x12["1"] + x12["X"], ("DC", "X2"): x12["X"] + x12["2"], ("DC", "12"): x12["1"] + x12["2"]})
+        if ou:
+            o_ = adj["over"] if adj else ou["Over"]
+            anchor.update({("OU2.5", "Over"): o_, ("OU2.5", "Under"): 1 - o_})
     n_ = len(M)
     p1 = sum(M[i][j] for i in range(n_) for j in range(n_) if i > j)
     p2 = sum(M[i][j] for i in range(n_) for j in range(n_) if i < j)
 
     # διαιτητής: football-data.org ή fixtures.csv -> ιστορικό καρτών του
-    ref_name = m.get("referee") or next((f.get("ref") for f in fx_csv if f.get("ref") and _same_match(f, m)), None)
+    code_ = config.COMPETITIONS[cid]["fdcouk"]
+    ref_name = m.get("referee") or next((f.get("ref") for f in fx_csv if f.get("ref") and code_ and f.get("league") == code_
+                                         and _same_match(f, m)), None)
     ref = history.find_referee(ref_name, ctx["refs"], config.COMPETITIONS[cid]["fdcouk"])
     if ref:
         lk *= ref["factor"]
@@ -206,8 +232,16 @@ def analyse(m, cid, ctx, books):
     if market_xg:
         for s in markets.selections(model.score_matrix(*market_xg), None, None):
             book_view[(s["key"], s["side"])] = (s["pw"], s["pp"])
+        for k_, v_ in anchor.items():  # στις αγορές με πραγματικές τιμές, "η άποψη της αγοράς" είναι η ίδια η αγορά
+            book_view[k_] = (v_ if k_[0] != "OU2.5" else (ou["Over"] if k_[1] == "Over" else ou["Under"]), 0.0)
 
-    sels = markets.price(markets.selections(M, None, None), books, book_view, ctx["margins"])
+    raw = markets.selections(M, None, None)
+    for s_ in raw:
+        if (s_["key"], s_["side"]) in anchor:
+            s_["pw"] = anchor[(s_["key"], s_["side"])]
+    if x12 and anchor:
+        p1, p2 = x12["1"], x12["2"]
+    sels = markets.price(raw, books, book_view, ctx["margins"])
     ht = [lh * lg.get("ht_share", 0.44), la * lg.get("ht_share", 0.44)]
     ssels = stats.selections(mx, ctx["disp"], ht, m["home"], m["away"])
     scores = sorted(((i, j, M[i][j]) for i in range(6) for j in range(6)), key=lambda x: -x[2])[:6]
@@ -249,51 +283,29 @@ def _sig(x):
     return 1 / (1 + math.exp(-x))
 
 
-def context_adjust(M, rh, ra, x12, coach, th, ta, wx):
-    """Διορθώσεις που η έρευνα (engine/context_research.py, 26.000 αγώνες) έδειξε ότι η αγορά δεν τιμολογεί πλήρως:
-    ρυθμός παιχνιδιού και μεγάλο φαβορί -> περισσότερα γκολ, φαβορί κερδίζει λίγο συχνότερα,
-    νέος προπονητής μέσα στη σεζόν -> λίγο χειρότερα από ό,τι περιμένει η αγορά, βροχή/λάσπη -> περισσότερα γκολ.
-    Οι συντελεστές μειώνονται (×SHRINK) γιατί δοκιμάστηκαν πολλοί παράγοντες. Επιστρέφει νέα xG + εξηγήσεις.
+def context_adjust(M, x12, ou, wx):
+    """Διόρθωση που η αγορά δεν τιμολογεί πλήρως (engine/context_research.py, 26.472 αγώνες, έλεγχος στο 2025/26).
+
+    Επανέλεγχος 12/11/2026 με την ΙΔΙΑ μέθοδο αφαίρεσης γκανιότ που χρησιμοποιεί η εφαρμογή (power): έμεινε μόνο η
+    βροχή/βρεγμένο γήπεδο -> περισσότερα γκολ (Αγγλία). Ρυθμός, μεγάλο φαβορί και νέος προπονητής ΔΕΝ βελτίωναν
+    την πρόβλεψη στη σεζόν ελέγχου (το «φαβορί κερδίζει συχνότερα» ήταν η γνωστή μεροληψία που η power ήδη διορθώνει).
+    Επιστρέφει νέα xG, τη νέα πιθανότητα Over 2.5 και εξήγηση, ή None.
     """
     C, S = config.CTX_COEF, config.CTX_SHRINK
+    if not wx or wx.get("mud") is None:
+        return None
+    s_ov = C["mud"] * (math.log1p(wx["mud"]) - C["mud_mean"]) * S
+    if abs(s_ov) < 0.02:
+        return None
     n = len(M)
     p1 = sum(M[i][j] for i in range(n) for j in range(n) if i > j)
     p2 = sum(M[i][j] for i in range(n) for j in range(n) if i < j)
-    po = sum(M[i][j] for i in range(n) for j in range(n) if i + j > 2.5)
+    po = ou["Over"] if ou else sum(M[i][j] for i in range(n) for j in range(n) if i + j > 2.5)
     q1, q2 = (x12["1"], x12["2"]) if x12 else (p1, p2)
-    diff = abs(q1 - q2)
-    s_ov, notes = 0.0, []
-    sh, sa = (rh.get("sx") or {}).get("sh"), (ra.get("sx") or {}).get("sh")
-    if sh and sa:
-        tempo = math.log((sh[0] + sh[1]) / 2) + math.log((sa[0] + sa[1]) / 2)
-        x = C["tempo"] * tempo
-        s_ov += x
-        if abs(x) >= 0.04:
-            notes.append(f"{'ανοιχτό' if x > 0 else 'κλειστό'} παιχνίδι (ρυθμός ομάδων) {'+' if x > 0 else '−'}γκολ")
-    s_ov += C["diff_ov"] * (diff - C["diff_mean"])
-    if wx and wx.get("mud") is not None:
-        x = C["mud"] * (math.log1p(wx["mud"]) - C["mud_mean"])
-        s_ov += x
-        if wx["mud"] >= 2:
-            notes.append(f"βροχή/βρεγμένο γήπεδο ({wx['mud']:g} mm) +γκολ")
-    s1 = s2 = 0.0
-    fav = 1 if p1 >= p2 else 2
-    x = C["diff_fav"] * (diff - C["diff_mean"])
-    s1, s2 = (x, 0.0) if fav == 1 else (0.0, x)
-    for side, t, r in ((1, th, rh), (2, ta, ra)):
-        c = coach.get((r.get("league"), t)) if t else None
-        if c and c["games"] < 6:
-            if side == 1:
-                s1 += C["coach"]
-            else:
-                s2 += C["coach"]
-            notes.append(f"νέος προπονητής {t}: η αγορά συνήθως τον υπερεκτιμά")
-    s_ov, s1, s2 = s_ov * S, s1 * S, s2 * S
-    if max(abs(s_ov), abs(s1), abs(s2)) < 0.02:
-        return None
-    n1, n2, no = _sig(_logit(p1) + s1), _sig(_logit(p2) + s2), _sig(_logit(po) + s_ov)
-    lh, la = model.implied_lambdas(n1, n2, no)
-    return {"xg": (lh, la), "notes": notes, "shift": [round(n1 - p1, 3), round(n2 - p2, 3), round(no - po, 3)]}
+    no = _sig(_logit(po) + s_ov)
+    lh, la = model.implied_lambdas(q1, q2, no)
+    notes = [f"βροχή/βρεγμένο γήπεδο ({wx['mud']:g} mm) +γκολ"] if s_ov > 0 and wx["mud"] >= 2 else []
+    return {"xg": (lh, la), "over": no, "notes": notes, "shift": [0.0, 0.0, round(no - po, 3)]}
 
 
 def venue_coords():
@@ -441,11 +453,24 @@ def style(r):
     return {"tags": tags or ["ισορροπημένη"], "dom": round(dom, 3), "tempo": round(tempo, 3)}
 
 
-def update_history(matches, results, slip_now=None, extra_results=()):
+SETTLE_V = 2  # αλλαγή κανόνων εκκαθάρισης -> όλα τα παλιά αποτελέσματα ξαναϋπολογίζονται μία φορά
+
+
+def update_history(matches, results, slip_now=None, by_comp=None):
+    """by_comp: {διοργάνωση: [αποτελέσματα]} (κάθε αποτέλεσμα: date, home, away, hg, ag και, αν υπάρχει, id)."""
+    by_comp = by_comp or {}
     path = config.DATA_OUT / "history.json"
     hist = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"picks": []}
     hist.setdefault("slips", [])
     hist.setdefault("preds", [])
+    hist.setdefault("spreds", [])
+    if hist.get("settle_v") != SETTLE_V:
+        for it in hist["picks"] + hist["preds"] + hist["spreds"] + [l for s in hist["slips"] for l in s["legs"]]:
+            it["result"] = None
+            it.pop("score", None)
+        for s in hist["slips"]:
+            s["result"] = None
+        hist["settle_v"] = SETTLE_V
     # κύρια πρόβλεψη κάθε αγώνα: ενημερώνεται μέχρι να ξεκινήσει ο αγώνας, μετά "κλειδώνει"
     now_iso0 = datetime.now(timezone.utc).isoformat()
     by_id = {p["match_id"]: p for p in hist["preds"]}
@@ -511,14 +536,33 @@ def update_history(matches, results, slip_now=None, extra_results=()):
             if min(l["date"] for l in s_new["legs"]) > now_iso:
                 hist["slips"].append({**s_new, "day": day["day"], "kind": kind, "created": now_iso, "result": None})
 
-    # εκκαθάριση με αποτελέσματα από όλα τα πρωταθλήματα (+ Champions League από football-data.org)
-    allres = [r for rs in results.values() for r in rs] + [r for r in extra_results if r.get("hg") is not None]
+    # εκκαθάριση ΜΟΝΟ με αποτελέσματα της ίδιας διοργάνωσης (πρωτάθλημα από football-data.co.uk + πρόσφατα της πηγής)
+    pools, by_id = {}, {}
+    for cid, rs in by_comp.items():
+        code = (config.COMPETITIONS.get(cid) or {}).get("fdcouk")
+        pool = [r for r in (results.get(code, []) if code else []) + list(rs) if r.get("hg") is not None and r.get("date")]
+        pools[cid] = pool
+        for r in pool:
+            if r.get("id") is not None:
+                by_id[str(r["id"])] = r
 
     def settle(item):
-        r = next((r for r in allres if _same_match(r, item, hours=30)), None)
-        if r:
-            item["score"] = f"{int(r['hg'])}-{int(r['ag'])}"
-            return outcome(item["key"], item["side"], r)
+        pool = pools.get(item.get("comp"), [])
+        cands = []
+        r = by_id.get(str(item.get("match_id", "")))
+        if r is not None:
+            cands.append(r)
+        if not (pool and all(x.get("id") is not None for x in pool)):
+            # χωρίς κωδικούς αγώνα (ή για στατιστικά που η πηγή με κωδικό δεν έχει, π.χ. κόρνερ): ταίριασμα ομάδων
+            # μέσα στην ίδια διοργάνωση, πρώτα ο πιο κοντινός χρονικά αγώνας
+            t0 = _dt(item["date"])
+            cands += sorted((x for x in pool if x is not r and _same_match(x, item, hours=30)),
+                            key=lambda x: abs((_dt(x["date"]) - t0).total_seconds()))
+        for r in cands:
+            res = outcome(item["key"], item["side"], r)
+            if res is not None:
+                item["score"] = f"{int(r['hg'])}-{int(r['ag'])}"
+                return res
         return None
 
     for p in hist["picks"] + hist["preds"] + hist["spreds"]:
@@ -582,8 +626,8 @@ def main():
         matches = []
         for m in sorted(fixtures, key=lambda x: x["date"])[:30]:
             books = {}
-            for f in fx_csv:
-                if _same_match(f, m):
+            for f in fx_csv:  # μόνο από το ίδιο πρωτάθλημα (το fixtures.csv έχει όλα τα πρωταθλήματα μαζί)
+                if comp["fdcouk"] and f.get("league") == comp["fdcouk"] and _same_match(f, m):
                     books.update(f["books"])
             for e in events or []:
                 if _same_match(e, m):
@@ -622,9 +666,10 @@ def main():
     print("• Εθνικές ομάδες")
     try:
         nat, out["intl"] = intl.build(ctx["margins"])
+        nat_results = (out["intl"] or {}).pop("_results", {})
     except Exception as e:  # δεν σταματάμε όλη την ενημέρωση για τις εθνικές
         print(f"  ! εθνικές: {e}")
-        nat = {}
+        nat, nat_results = {}, {}
     for cid, c in nat.items():
         out["competitions"][cid] = c
         all_matches += c["matches"]
@@ -635,8 +680,21 @@ def main():
     attach_patterns(all_matches)
     out["slips"] = slip.build_daily(all_matches)
     out["slip"] = (out["slips"][0]["simple"] if out["slips"] else None)
-    fd_results = [r for c in out["competitions"].values() for r in c["recent"]]
-    hist = update_history(all_matches, results, out["slips"], fd_results)
+    by_comp = {cid: list(c.pop("_results", None) or c["recent"]) for cid, c in out["competitions"].items()}
+    for cid, rs in nat_results.items():
+        by_comp[cid] = by_comp.get(cid, []) + rs
+    try:  # Europa League: αποτελέσματα από την ESPN (δεν υπάρχει αλλού δωρεάν)
+        from . import espn
+        td = datetime.now(timezone.utc).date()
+        by_comp["UEL"] = by_comp.get("UEL", []) + [
+            {"date": g["date"], "home": g["home"], "away": g["away"], "hg": g["hp"], "ag": g["ap"]}
+            for g in espn.days("soccer/uefa.europa", td - timedelta(days=10), td, draw=True) if g["played"] and g["hp"] is not None]
+    except Exception as e:
+        print(f"  ! αποτελέσματα Europa League: {e}")
+    if config.FOOTBALL_DATA_ORG_KEY:  # Champions League: όλη η σεζόν (τα "πρόσφατα" κρατούν μόνο 10 μέρες)
+        now_ = datetime.now(timezone.utc)
+        by_comp["CL"] = by_comp.get("CL", []) + sources.fdorg_season("CL", now_.year if now_.month >= 7 else now_.year - 1)
+    hist = update_history(all_matches, results, out["slips"], by_comp)
     settled = [p for p in hist["picks"] if p["result"] is not None]
     out["track"] = {
         "picks": len(settled),

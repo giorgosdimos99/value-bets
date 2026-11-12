@@ -4,3 +4,7 @@ __pycache__/
 .claude/
 .cache/ctx_rows.json
 .cache/ctx_wx_*
+.cache/ctx_rows_power.json
+.cache/ctx_power_result.json
+.cache/audit_football.json
+.cache/audit_basket.json

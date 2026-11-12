@@ -22,13 +22,14 @@ SEASONS = [("2223", "2122"), ("2324", "2223"), ("2425", "2324"), ("2526", "2425"
 DISCOVER, TEST = {"2223", "2324", "2425"}, {"2526"}
 UK = ["E0", "E1", "E2", "E3", "EC", "SC0", "SC1", "SC2", "SC3"]
 HL = 90
-ROWS = "ctx_rows.json"
+ROWS = "ctx_rows_power.json"
 
 
 def _devig(o):
-    inv = [1 / x for x in o]
-    s = sum(inv)
-    return [x / s for x in inv]
+    """Ίδια μέθοδος με τη ζωντανή εφαρμογή (power). Με την αναλογική, το «το φαβορί κερδίζει συχνότερα»
+    μετρούσε ξανά τη γνωστή μεροληψία φαβορί-αουτσάιντερ που η power ήδη διορθώνει (έλεγχος 12/11/2026)."""
+    from .history import _devig as power
+    return power(o)
 
 
 def _feats(past, prev, now):

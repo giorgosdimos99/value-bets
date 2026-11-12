@@ -139,7 +139,9 @@ def price(sels, books, book_view=None, margins_tbl=None):
         # ακέραια χάντικαπ (+1, -2...) δίνονται από κάποιες εταιρείες ως ευρωπαϊκά (χωρίς επιστροφή): όχι value
         # "κενό αγοράς" μόνο όπου το επιβεβαίωσε η έρευνα (16.450 αγώνες): 1X2 και Over/Under 2.5.
         # Σε άλλες αγορές η πιθανότητα βγαίνει από υπολογισμό (Poisson), όχι από τιμή της ίδιας αγοράς.
-        reliable = s["key"] in VALIDATED
+        # Η ισοπαλία εξαιρείται: σε 26.070 αγώνες (engine/audit_football.py) τα "value" στο Χ έχασαν -11% (211 στοιχήματα),
+        # ενώ στα 1 / 2 / Over / Under πήγαν +10,6% (182). Μικρά δείγματα και τα δύο, αλλά δεν σημαδεύουμε ό,τι έχανε.
+        reliable = s["key"] in VALIDATED and not (s["key"] == "1X2" and s["side"] == "X")
         s["value"] = bool(best and reliable and s["ev"] >= config.MIN_EDGE and config.MIN_ODDS <= best <= config.MAX_ODDS)
         s["pw"], s["pp"] = round(s["pw"], 4), round(s["pp"], 4)
     return sels

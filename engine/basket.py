@@ -123,18 +123,38 @@ def boxscores(c, year, played, limit=None):
 
 # ---------------- μοντέλο ----------------
 
-def fit(played_cur, played_prev):
-    now = datetime.now(timezone.utc)
+# Ρυθμίσεις δύναμης ομάδων από τον έλεγχο engine/audit_basket.py (2.618 αγώνες, 7 σεζόν/διοργανώσεις, κάθε
+# εβδομάδα προβλέπεται μόνο με τα προηγούμενα). Παλιά (χωρίς συγκράτηση, ημιζωή 90): log-loss 0,616 συνολικά και
+# 0,660 στις πρώτες 8 εβδομάδες (σχεδόν όσο το κορόνα-γράμματα), τυπική απόκλιση 14% μικρότερη από τα πραγματικά λάθη.
+# Νέα: 0,599 / 0,611. Ανά διοργάνωση διαφέρει (config.BASKET[...]["fit"]): NBA ημιζωή 90, Basket League λιγότερη συγκράτηση.
+PRIOR_GAMES = 4      # συγκράτηση προς τον μέσο όρο: σαν 4 αγώνες "μέσης ομάδας" σε κάθε ομάδα
+FIT_HL = 180         # ημιζωή (μέρες)
+PREV_W = 0.8         # βάρος προηγούμενης σεζόν (πριν τη χρονική έκπτωση)
+SD_FACTOR_M = 1.09   # πραγματικά λάθη εκτός δείγματος / λάθη μέσα στο δείγμα (διαφορά πόντων)
+SD_FACTOR_T = 1.07   # το ίδιο για το σύνολο πόντων
+
+
+def fit(played_cur, played_prev, now=None, prior_games="default", hl=None, prev_w=None, sd_factor=None):
+    now = now or datetime.now(timezone.utc)
+    hl = hl or FIT_HL or config.HALF_LIFE_DAYS
+    prev_w = PREV_W if prev_w is None else prev_w
+    prior_games = PRIOR_GAMES if prior_games == "default" else prior_games
     ms = []
-    for g, f in [(g, 1.0) for g in played_cur] + [(g, 0.5) for g in played_prev]:
+    for g, f in [(g, 1.0) for g in played_cur] + [(g, prev_w) for g in played_prev]:
         age = (now - datetime.fromisoformat(g["date"].replace("Z", "+00:00"))).days
         # παράταση: αφαιρούμε τους πόντους της παράτασης περίπου, για να μετράμε την κανονική διάρκεια
         hp, ap = g["hp"], g["ap"]
         if g.get("ot"):
             hp, ap = hp - OT_POINTS / 2, ap - OT_POINTS / 2
         ms.append({"home": g["home"], "away": g["away"], "hp": hp, "ap": ap,
-                   "_w": f * 0.5 ** (max(age, 0) / config.HALF_LIFE_DAYS)})
-    att, dfn, h_avg, a_avg = model._fit_pair(ms, lambda m: m["hp"], lambda m: m["ap"])
+                   "_w": f * 0.5 ** (max(age, 0) / hl)})
+    # συγκράτηση: σαν να έχει παίξει κάθε ομάδα `prior_games` αγώνες στον μέσο όρο της λίγκας.
+    # (το προεπιλεγμένο prior του _fit_pair είναι 4 ΜΟΝΑΔΕΣ: σωστό για γκολ, αμελητέο για πόντους)
+    prior = None
+    if prior_games is not None and ms:
+        tw = sum(m["_w"] for m in ms) or 1.0
+        prior = prior_games * sum(m["_w"] * (m["hp"] + m["ap"]) / 2 for m in ms) / tw
+    att, dfn, h_avg, a_avg = model._fit_pair(ms, lambda m: m["hp"], lambda m: m["ap"], prior=prior)
     # τυπική απόκλιση από τα λάθη του μοντέλου (σταθμισμένα)
     se_m = se_t = ws = 0.0
     for m in ms:
@@ -143,9 +163,9 @@ def fit(played_cur, played_prev):
         se_m += m["_w"] * ((m["hp"] - m["ap"]) - (ph - pa)) ** 2
         se_t += m["_w"] * ((m["hp"] + m["ap"]) - (ph + pa)) ** 2
         ws += m["_w"]
-    # +5%: τα λάθη μέσα στο δείγμα είναι λίγο μικρότερα από τα πραγματικά
+    km, kt = (SD_FACTOR_M, SD_FACTOR_T) if sd_factor is None else (sd_factor, sd_factor)
     return {"att": att, "def": dfn, "h_avg": h_avg, "a_avg": a_avg,
-            "sd_margin": math.sqrt(se_m / ws) * 1.05, "sd_total": math.sqrt(se_t / ws) * 1.05, "n": len(ms)}
+            "sd_margin": math.sqrt(se_m / ws) * km, "sd_total": math.sqrt(se_t / ws) * kt, "n": len(ms)}
 
 
 def _phi(x):
@@ -182,7 +202,7 @@ def selections(mu_h, mu_a, sd_m, sd_t, lines):
         po = total_over(mu_h + mu_a, sd_t, L)
         out.append(markets._sel("Σύνολο πόντων", f"OU{L:g}", "Over", f"Over {L:g}", po))
         out.append(markets._sel("Σύνολο πόντων", f"OU{L:g}", "Under", f"Under {L:g}", 1 - po))
-    sd_team = sd_t / math.sqrt(2) * 1.1
+    sd_team = math.sqrt((sd_t ** 2 + sd_m ** 2) / 4)  # παλιά: sd_t/√2×1.1 (περίπου 25% πιο φαρδιά από το σωστό)
     for side, mu, lab, key in (("h", mu_h, "Γηπεδούχος", "HT_OU"), ("a", mu_a, "Φιλοξενούμενος", "AT_OU")):
         for L in lines[side]:
             # σε παράταση η κάθε ομάδα βάζει ~10 πόντους επιπλέον
@@ -281,7 +301,7 @@ def build(cid, comp, margins_tbl):
     res = {"name": comp["name"], "sport": "basketball", "matches": [], "standings": None, "teams": [], "recent": []}
     if len(played_cur) + len(played_prev) < comp.get("min_games", 50):
         return res
-    R = fit(played_cur, played_prev)
+    R = fit(played_cur, played_prev, **comp.get("fit", {}))
     if src == "espn":
         box = espn.nba_boxscores(played_cur + played_prev)
     elif src == "esake":
@@ -296,10 +316,10 @@ def build(cid, comp, margins_tbl):
         box = {**{f"p{k}": v for k, v in pbox.items()}, **box}
     # επιλογές παικτών: μοντέλο + εβδομαδιαίος έλεγχος (μόνο στατιστικά που κερδίζουν μένουν)
     PM = props.Model(played_prev + played_cur, box)
-    check = sources._cached(f"props_check_{cid}.json", 24 * 7)
+    check = sources._cached(f"props_check2_{cid}.json", 24 * 7)
     if check is None:
         check = props.research(played_prev + played_cur, box)
-        sources._save_cache(f"props_check_{cid}.json", check)
+        sources._save_cache(f"props_check2_{cid}.json", check)
     res["props_check"] = check
 
     injuries = espn.nba_injuries() if comp.get("src") == "espn" else {}
@@ -472,7 +492,7 @@ def build(cid, comp, margins_tbl):
                      for side, t in (("home", h), ("away", a))},
             "dvp": ({"home": PM.defense_view(h, g["date"]), "away": PM.defense_view(a, g["date"])}
                     if PM.role_allowed else None),
-            "pmodel": {"phi": {k: v["phi"] for k, v in check.items() if not k.startswith("_")},
+            "pmodel": {"cal": check.get("_cal", 1.0), "phi": {k: v["phi"] for k, v in check.items() if not k.startswith("_")},
                        "ok": [k for k, v in check.items() if not k.startswith("_") and v.get("ok")],
                        "home": pmodel(h, a, out_h), "away": pmodel(a, h, out_a)},
             "absences": {"home": [dict(x, name=nice_name(x["name"])) for x in ab_h],
@@ -502,6 +522,8 @@ def build(cid, comp, margins_tbl):
                            for t in names_all if t in R["att"]), key=lambda x: -(x["att"] / x["def"]))
     res["model"] = {"sd_margin": round(R["sd_margin"], 1), "sd_total": round(R["sd_total"], 1), "games": R["n"],
                     "home_pts": round(R["h_avg"], 1), "away_pts": round(R["a_avg"], 1)}
-    res["recent"] = [{"date": g["date"], "home": g["home"], "away": g["away"], "hg": g["hp"], "ag": g["ap"]}
-                     for g in sorted(played_cur, key=lambda g: g["date"])[-40:]]
+    allp = [{"id": f"{cid}-{g['code']}", "date": g["date"], "home": g["home"], "away": g["away"], "hg": g["hp"], "ag": g["ap"]}
+            for g in sorted(played_cur, key=lambda g: g["date"])]
+    res["recent"] = allp[-40:]
+    res["_results"] = allp  # για την εκκαθάριση (με κωδικό αγώνα). Δεν γράφεται στο data.json
     return res

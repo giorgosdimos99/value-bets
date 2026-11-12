@@ -114,7 +114,7 @@ def basket_main():
                 w = g["hp"] > g["ap"]
                 cur[g["home"]][0 if w else 1] += 1; cur[g["away"]][1 if w else 0] += 1
                 cur[g["home"]][2] += g["hp"] - g["ap"]; cur[g["away"]][2] += g["ap"] - g["hp"]
-            for sig in (0.0, 1.5, 2.5, 3.5, 5.0):
+            for sig in (0.0, 1.0, 2.0, 3.0, 4.0, 5.0):
                 S = F.BSim(teams, R, sig, 3000, np.random.default_rng(k))
                 W, order = S.season({t: tuple(cur[t]) for t in teams}, rem)
                 post = F.el_post(S, order)
@@ -141,18 +141,7 @@ def basket_main():
 
 def _bfit(B, played_cur, played_prev, now):
     """basket.fit με δικό μας «τώρα» (για τον έλεγχο)."""
-    import engine.basket as bm
-    real = bm.datetime
-
-    class _D(real):
-        @classmethod
-        def now(cls, tz=None):
-            return now
-    bm.datetime = _D
-    try:
-        return B.fit(played_cur, played_prev)
-    finally:
-        bm.datetime = real
+    return B.fit(played_cur, played_prev, now=now)
 
 
 if __name__ == "__main__":
