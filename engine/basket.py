@@ -14,7 +14,7 @@ import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 
-from . import bcl, esake, config, espn, markets, model, predictions, props, sources
+from . import bcl, esake, config, espn, injuries, markets, model, predictions, props, sources
 
 FEED = "https://feeds.incrowdsports.com/provider/euroleague-feeds/v2/competitions/{c}/seasons/{s}/games?limit=400"
 BOX = "https://api-live.euroleague.net/v2/competitions/{c}/seasons/{s}/games/{g}/stats"
@@ -348,20 +348,38 @@ def build(cid, comp, margins_tbl):
         sources._save_cache(f"props_check4_{cid}.json", check)
     res["props_check"] = check
 
-    injuries = espn.nba_injuries() if comp.get("src") == "espn" else {}
+    nba_inj = espn.nba_injuries() if comp.get("src") == "espn" else {}
     OUT = ("Out", "Doubtful")
+    # EuroLeague / EuroCup: επίσημη αναφορά τραυματισμών της διοργάνωσης (ό,τι δηλώνουν οι ομάδες πριν την αγωνιστική)
+    official, official_at = {}, None
+    if comp.get("feed") in ("E", "U"):
+        try:
+            names_box = {r[0] for b in box.values() for sd in ("home", "away") for r in b.get(sd, [])}
+            official, official_at = injuries.report("EL" if comp["feed"] == "E" else "EC", names_box)
+        except Exception as e:
+            print(f"  ! αναφορά τραυματισμών: {e}")
+    res["injury_report"] = official_at
 
-    def absences(team):
-        """Απόντες βασικοί: NBA από τη λίστα τραυματιών, EuroLeague/EuroCup όσοι έλειψαν στον τελευταίο αγώνα."""
+    def absences(team, when=None):
+        """Απόντες βασικοί. NBA: λίστα τραυματιών ESPN. EuroLeague/EuroCup: επίσημη αναφορά της διοργάνωσης και,
+        για όσους δεν αναφέρει, όσοι έλειψαν στον τελευταίο αγώνα."""
         reg, tg = PM.regulars(team, datetime.now(timezone.utc).isoformat())
+        use = official if official and when and injuries.applies(official_at, when) else {}
         out = []
         if comp.get("src") == "espn":
-            for name, status, note in injuries.get(team, []):
+            for name, status, note in nba_inj.get(team, []):
                 if name in reg:
                     out.append({"name": name, "status": status, "note": note, "mins": round(reg[name], 1),
                                 "out": status in OUT})
         elif tg:
             for name, mins in reg.items():
+                o = use.get(name)
+                if o and o["status"] == "ok":
+                    continue  # η ομάδα τον δηλώνει διαθέσιμο, ακόμα κι αν έλειψε στον προηγούμενο αγώνα
+                if o:
+                    out.append({"name": name, "status": "εκτός (επίσημη αναφορά)" if o["status"] == "out" else "αμφίβολος (επίσημη αναφορά)",
+                                "note": o["note"], "mins": round(mins, 1), "out": o["status"] == "out", "official": True})
+                    continue
                 if name not in tg[-1]:
                     miss = 0
                     for x in reversed(tg):
@@ -468,7 +486,7 @@ def build(cid, comp, margins_tbl):
         h2h = [{"date": x["date"][:10], "home": x["home_short"], "away": x["away_short"], "score": f"{x['hp']}-{x['ap']}"}
                for x in sorted(played_cur + played_prev, key=lambda x: x["date"], reverse=True)
                if {x["home"], x["away"]} == {h, a}][:6]
-        ab_h, ab_a = absences(h), absences(a)
+        ab_h, ab_a = absences(h, g["date"]), absences(a, g["date"])
         out_h = [x["name"] for x in ab_h if x["out"]]
         out_a = [x["name"] for x in ab_a if x["out"]]
         # NBA: ενεργοί = όσοι έπαιξαν στον τελευταίο αγώνα + βασικοί που γύρισαν, χωρίς όσους είναι εκτός
@@ -497,7 +515,9 @@ def build(cid, comp, margins_tbl):
             mult = PM.usage_plan(team, g["date"], outl) if outl and mres else None
             out = []
             # ΟΛΟΙ όσοι έπαιξαν στους 3 τελευταίους αγώνες (όχι μόνο οι βασικοί): για να βρίσκεις όποιον θέλεις στο Δελτίο
-            everyone = [p for p in dict.fromkeys(ros(team, outl) + roster(team, 3)) if p not in outl]
+            off = official if official and injuries.applies(official_at, g["date"]) else {}
+            everyone = [p for p in dict.fromkeys(ros(team, outl) + roster(team, 3))
+                        if p not in outl and (off.get(p) or {}).get("status") != "out"]
             for p in everyone:
                 pr = PM.predict(p, team, opp, g["date"], plan.get(p, 0.0), mult, min_games=props.SHOW_GAMES, min_mins=4)
                 if not pr:
@@ -536,7 +556,9 @@ def build(cid, comp, margins_tbl):
                        "home": pmodel(h, a, out_h), "away": pmodel(a, h, out_a)},
             "absences": {"home": [dict(x, name=nice_name(x["name"])) for x in ab_h],
                          "away": [dict(x, name=nice_name(x["name"])) for x in ab_a],
-                         "src": "λίστα τραυματιών NBA (ESPN)" if comp.get("src") == "espn" else "βασικοί που έλειψαν στον τελευταίο αγώνα",
+                         "src": ("λίστα τραυματιών NBA (ESPN)" if comp.get("src") == "espn" else
+                                 f"επίσημη αναφορά τραυματισμών της διοργάνωσης ({official_at[:10]}) + όσοι έλειψαν στον τελευταίο αγώνα"
+                                 if official and injuries.applies(official_at, g["date"]) else "βασικοί που έλειψαν στον τελευταίο αγώνα"),
                          "minutes": {"home": minutes_view(h, ab_h, g["date"]), "away": minutes_view(a, ab_a, g["date"])}},
             "players": {"source": comp.get("players_src", "EuroLeague (επίσημα στατιστικά, τελευταίοι 10 αγώνες)"),
                         "home": players_for(h, [(0, x) for x in h_box], mh, hs.get("ppg")),
