@@ -241,7 +241,7 @@
   function propBox(m, x) {
     const lad = (x.ladder || []).map(l => `<span class="lad"><b>${x.side} ${l.line}</b> ${pct(l.p)} · από <b>${f2(l.min_odds)}</b></span>`).join("");
     return `<div class="card pick">
-      <div><div class="sel">🏀 ${esc(x.label)}</div><div class="match">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'${x.extra >= 1 ? ` <b class="mv dn">(+${x.extra}' λόγω απουσίας)</b>` : ""}</div></div>
+      <div><div class="sel">🏀 ${esc(x.label)}</div><div class="match">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'${x.extra >= 1 ? ` <b class="mv dn">(+${x.extra}' λόγω απουσίας)</b>` : ""}${x.freq ? `<br>Βγήκε ${x.freq[0]} στους ${x.freq[1]} τελευταίους αγώνες του` : ""}${splitTxt(x.split && { ...x.split, at_home: x.at_home })}</div></div>
       <div><div class="odds">${pct(x.p)}</div><div class="book">από ${f2(x.min_odds)}</div></div>
       <div class="ladder">${lad}</div>
       <div class="fitline">Έλεγχος: σε ${x.n.toLocaleString("el-GR")} παρόμοιες επιλογές βγήκε ${pct(x.hit)}.</div></div>`;
@@ -290,13 +290,22 @@
     return ` · ${b(s.at_home === true, `εντός ${f(s.home)}`)} · ${b(s.at_home === false, `εκτός ${f(s.away)}`)} · τελευταίοι 5: ${f(s.last5)}${form}`;
   }
 
+  // Μία λίστα ανά αγώνα: οι πιθανότερες επιλογές παικτών, και με σήμανση όσες διαφέρουν πολύ από τη γραμμή
+  // (παλιά ήταν δύο ξεχωριστά κουτιά: "3 πιθανότερες" και "παίκτες με αξία", με τους ίδιους συχνά παίκτες).
+  function playerPicks(m) {
+    const key = x => `${x.player}|${x.stat}|${x.side}|${x.line}`, big = new Set((m.props || []).map(key));
+    const out = (m.ptop || []).map(x => ({ ...x, big: big.has(key(x)) })), seen = new Set(out.map(x => x.player));
+    (m.props || []).forEach(x => { if (!seen.has(x.player)) { seen.add(x.player); out.push({ ...x, big: true }); } });
+    return out.sort((a, b) => b.p - a.p);
+  }
   function ptopHtml(m) {
-    if (!m.ptop || !m.ptop.length) return "";
-    return `<h3 class="day-sub">🏀 3 πιθανότερες επιλογές παικτών</h3><div class="list">${m.ptop.map((x, i) => `<div class="ri">
-        <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(x.label)}${x.extra >= 1 ? ` <span class="pill value">+${x.extra}' λόγω απουσίας</span>` : ""}</div>
-        <div class="ri-s">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'${x.freq ? ` · βγήκε ${x.freq[0]} στους ${x.freq[1]} τελευταίους` : ""}${splitTxt(x.split && { ...x.split, at_home: x.at_home })}</div></div>
+    const list = playerPicks(m);
+    if (!list.length) return "";
+    return `<h3 class="day-sub">🏀 Επιλογές παικτών</h3><div class="list">${list.map((x, i) => `<div class="ri">
+        <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(x.label)}${x.big ? ` <span class="pill value">μεγάλη διαφορά από τη γραμμή</span>` : ""}${x.extra >= 1 ? ` <span class="pill value">+${x.extra}' λόγω απουσίας</span>` : ""}</div>
+        <div class="ri-s">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'${x.freq ? ` · βγήκε ${x.freq[0]} στους ${x.freq[1]} τελευταίους αγώνες του` : ""}${splitTxt(x.split && { ...x.split, at_home: x.at_home })}</div></div>
         <div class="ri-r"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><span>συμφέρει από ${f2(x.min_odds)}</span></div></div>`).join("")}</div>
-      <div class="wx">Πιθανότητα από τον έλεγχο (ό,τι βγήκε σε παρόμοιες επιλογές), όχι η ωμή του μοντέλου. Γραμμή = εκεί που τη βάζουν συνήθως οι εταιρείες (μέσος όρος 10 αγώνων). Αν η εταιρεία έχει άλλη γραμμή, έλεγξέ την στο 🧾 Δελτίο. Ο έλεγχος δεν έγινε με πραγματικές γραμμές εταιρειών (δεν υπάρχουν δωρεάν): δες το ως «πιθανότερη πλευρά», όχι ως σίγουρη αξία. «Βγήκε Χ στους 20» = οι 20 τελευταίοι αγώνες του παίκτη με αυτή την ομάδα <b>στην ίδια διοργάνωση</b> (αν φέτος είναι λίγοι, συμπληρώνονται από την περσινή σεζόν της ίδιας διοργάνωσης). Αγώνες σε άλλη διοργάνωση δεν μετράνε. Με έντονα η έδρα του σημερινού αγώνα. 🔥/🧊 = στους 5 τελευταίους το βγάζει πολύ πιο συχνά/σπάνια από ό,τι συνήθως. Η έδρα και η φόρμα είναι πληροφορία: στον έλεγχο δεν βελτίωσαν σταθερά την πρόβλεψη, οπότε δεν αλλάζουν την πιθανότητα.</div>`;
+      <div class="wx">Πιθανότητα από τον έλεγχο (ό,τι βγήκε σε παρόμοιες επιλογές), όχι η ωμή του μοντέλου. Γραμμή = εκεί που τη βάζουν συνήθως οι εταιρείες (μέσος όρος 10 αγώνων). Αν η εταιρεία έχει άλλη γραμμή, έλεγξέ την στο 🧾 Δελτίο. Ο έλεγχος δεν έγινε με πραγματικές γραμμές εταιρειών (δεν υπάρχουν δωρεάν): δες το ως «πιθανότερη πλευρά», όχι ως σίγουρη αξία. Σειρά: από την πιο πιθανή. «Μεγάλη διαφορά από τη γραμμή» = το μοντέλο διαφωνεί πολύ με τον μέσο όρο 10 αγώνων. «Βγήκε Χ στους 20» = οι 20 πιο πρόσφατοι αγώνες του παίκτη με αυτή την ομάδα <b>στην ίδια διοργάνωση</b> (αν φέτος είναι λίγοι, συμπληρώνονται από την περσινή σεζόν της ίδιας διοργάνωσης). Αγώνες σε άλλη διοργάνωση δεν μετράνε. Με έντονα η έδρα του σημερινού αγώνα. 🔥/🧊 = στους 5 τελευταίους το βγάζει πολύ πιο συχνά/σπάνια από ό,τι συνήθως. Η έδρα και η φόρμα είναι πληροφορία: στον έλεγχο δεν βελτίωσαν σταθερά την πρόβλεψη, οπότε δεν αλλάζουν την πιθανότητα.</div>`;
   }
   function bkDefHtml(m) {
     const C = m.coef;
@@ -370,7 +379,7 @@
       edges.length ? `<div class="list">${edges.map(({ m, e }) => ri(m, `${STAT_ICON[e.stat] || ""} ${esc(e.label)}`, fitPill(e), pct(e.p), `από ${f2(e.min_odds)}`, "", e.p)).join("")}</div>`
         : `<div class="empty-s">Καμία μεγάλη απόκλιση στους αγώνες που φαίνονται.</div>`);
     // 2β. Παίκτες μπάσκετ: μόνο επιλογές που πέρασαν τον έλεγχο
-    const props = ms.flatMap(m => (m.props || []).map(x => ({ m, x }))).sort((a, b) => b.x.p - a.x.p).slice(0, 6).sort(byTime);
+    const props = ms.flatMap(m => playerPicks(m).slice(0, 2).map(x => ({ m, x }))).sort((a, b) => b.x.p - a.x.p).slice(0, 6).sort(byTime);
     if (props.length) L += section("🏀 Παίκτες", "Πόντοι, ριμπάουντ, ασίστ κ.ά. μόνο όπου το μοντέλο κέρδισε στον έλεγχο. Παίξ' το αν η απόδοση είναι ≥ «από».",
       `<div class="list">${props.map(({ m, x }) => ri(m, esc(x.label), "", pct(x.p), `από ${f2(x.min_odds)}`, "", x.p)).join("")}</div>`);
     // 3. Πιθανότερες προβλέψεις: μόνο οι κορυφαίες
@@ -478,7 +487,6 @@
         <div class="ri-r"><b>${pct(t.p)}</b><span>~${f2(t.est)} ${mv(t.open, t.best)}</span></div></div>`).join("") + `</div>`;
     }
     if (m.values?.length) s1 += `<h3 class="day-sub">💎 Ευκαιρίες</h3><div class="list">` + m.values.map(s => `<div class="ri"><div class="ri-main"><div class="ri-t">${esc(nice(m, s.key, s.side, s.label))} <span class="pill hot">${evTxt(s.ev)}</span></div><div class="ri-s">Η ${esc(s.book)} δίνει πάνω από τη δίκαιη τιμή (${f2(s.fair)})</div></div><div class="ri-r"><b>${f2(s.best)}</b><span>${pct(s.p)} ${mv(s.open, s.best)}</span></div></div>`).join("") + `</div>`;
-    if (m.props?.length) s1 += `<h3 class="day-sub">🏀 Παίκτες με αξία</h3><div class="grid">${m.props.map(x => propBox(m, x)).join("")}</div>`;
     if (m.stat_edges?.length) s1 += `<h3 class="day-sub">📊 Στατιστικά με αξία</h3><div class="grid">${m.stat_edges.map(e => edgeBox(m, e)).join("")}</div>`;
     if (m.stat_top?.length) s1 += `<h3 class="day-sub">Πιθανότερα στα στατιστικά</h3><div class="list">` + m.stat_top.map(t => `<div class="ri">
         <div class="ri-main"><div class="ri-t">${esc(t.label)} ${fitPill(t)}</div><div class="ri-s">${esc(t.fit_text || t.why || "")}</div></div>
@@ -586,7 +594,7 @@
           <td><b>${r.tackles90}</b>/90<small class="pc">1+ ${pct(r.p_tk1)} · 2+ ${pct(r.p_tk2)} · 3+ ${pct(r.p_tk3)}</small></td>
           <td class="num">${r.cbi}</td></tr>`).join("")}</tbody></table></div>`;
     };
-    if (isBasket(m)) return `<h2>Παίκτες</h2>${absHtml(m)}${m.props?.length ? `<div class="grid">${m.props.map(x => propBox(m, x)).join("")}</div>` : `<div class="empty-s">Καμία επιλογή παίκτη με αξία σε αυτόν τον αγώνα.</div>`}
+    if (isBasket(m)) return `<h2>Παίκτες</h2>${absHtml(m)}${ptopHtml(m) || `<div class="empty-s">Καμία επιλογή παίκτη σε αυτόν τον αγώνα.</div>`}
       <p class="sec-sub" style="margin-top:12px">${esc(P.source)}. Δείχνω μόνο επιλογές σε στατιστικά όπου το μοντέλο κέρδισε στον έλεγχο. Η γραμμή της εταιρείας μπορεί να διαφέρει: διάλεξε από την κλίμακα.</p>
       ${team("home", m.home)}${team("away", m.away)}`;
     return `<h2>Παίκτες</h2><div class="note">${esc(P.source)}. Οι στοιχηματικές βάζουν συνήθως μεγαλύτερο γκανιότ στις αγορές παικτών, οπότε σύγκρινε την απόδοσή τους με τη <b>δίκαιη</b>: αν δίνουν πιο πάνω, έχει value.${isBasket(m) ? " Μορφή: μέσος όρος · πιθανότητα Over στη γραμμή · δίκαιη Over/Under." : " Φάουλ και σουτ ανά παίκτη δεν υπάρχουν σε δωρεάν πηγή."}</div>

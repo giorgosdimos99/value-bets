@@ -8,6 +8,7 @@ CORNER_LINES = [7.5, 8.5, 9.5, 10.5, 11.5, 12.5]
 CARD_LINES = [2.5, 3.5, 4.5, 5.5, 6.5]
 SHARP = ("Pinnacle",)
 VALIDATED = {"1X2", "OU2.5"}
+DERIVED_RATIO = 1.045  # ελάχιστο γκανιότ ανά πλευρά στις παράγωγες αγορές όταν δεν υπάρχουν πραγματικές τιμές
 # Δεν μετράνε ως "καλύτερη απόδοση": exchanges (έχουν προμήθεια) και offshore εταιρείες
 NOT_A_BOOK = ("Μέγιστη", "Μέσος όρος", "Betfair", "Matchbook", "Smarkets", "Betdaq", "BetOnline",
               "GTbets", "BetAnything", "Everygame", "Suprabets", "Bovada", "MyBookie", "LowVig", "1xBet",
@@ -108,6 +109,11 @@ def _est(s, book_view, mains, margins_tbl):
     p_eff = pb / (1 - pp) if pp < 1 else pb  # ακέραια χάντικαπ: δίκαιη απόδοση = (1 - επιστροφή) / νίκη
     mk = "1X2" if s["key"] in ("1X2", "DC") else "OU"
     o = history.estimate_odds(p_eff, mk, margins_tbl)
+    # Παράγωγες αγορές (γκολ ομάδας, G/G, χάντικαπ, άλλες γραμμές γκολ): οι εταιρείες κρατούν μεγαλύτερο γκανιότ από
+    # ό,τι στο 1Χ2 των φαβορί. Ο πίνακας (Bet365 vs Pinnacle στο 1Χ2/O-U 2.5) έβγαζε μόλις ~2-3% στις χαμηλές αποδόσεις
+    # και η εκτίμηση ήταν πιο ψηλή από αυτό που δίνουν στην πράξη. Τουλάχιστον ~4,5% ανά πλευρά.
+    if o and p_eff and s["key"] not in ("1X2", "OU2.5"):
+        o = max(min(o, round(1 / p_eff / DERIVED_RATIO, 2)), 1.01)
     # g = από γκανιότ, gc = από γκανιότ χωρίς καθόλου δεδομένα αγοράς (κόρνερ/κάρτες)
     return o, "gc" if s["key"][:2] in ("CO", "KO") else "g"
 
@@ -144,6 +150,18 @@ def price(sels, books, book_view=None, margins_tbl=None):
         reliable = s["key"] in VALIDATED and not (s["key"] == "1X2" and s["side"] == "X")
         s["value"] = bool(best and reliable and s["ev"] >= config.MIN_EDGE and config.MIN_ODDS <= best <= config.MAX_ODDS)
         s["pw"], s["pp"] = round(s["pw"], 4), round(s["pp"], 4)
+    # Διπλή ευκαιρία χωρίς πραγματικές τιμές: οι εταιρείες τη βγάζουν από τις δύο αποδόσεις του 1Χ2 (με όλο το γκανιότ
+    # και των δύο). Παλιά εκτιμούσαμε με ~2% γκανιότ και το "Όχι ισοπαλία" φαινόταν 1,40 ενώ στην πράξη δίνουν ~1,30.
+    x = {s["side"]: s for s in sels if s["key"] == "1X2"}
+    for s in sels:
+        if s["key"] != "DC" or (s.get("est_src") or "")[:1] == "m":
+            continue
+        a, b = (x.get(c) for c in {"1X": "1X", "X2": "X2", "12": "12"}[s["side"]])
+        ea = (a or {}).get("est")
+        eb = (b or {}).get("est")
+        if ea and eb:
+            s["est"] = max(round(1 / (1 / ea + 1 / eb), 2), 1.01)
+            s["est_ev"] = round(s["pw"] * s["est"] + s["pp"] - 1, 4)
     return sels
 
 
