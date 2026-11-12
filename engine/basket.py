@@ -172,6 +172,31 @@ def _phi(x):
     return 0.5 * (1 + math.erf(x / math.sqrt(2)))
 
 
+def _same_clubs(prev, cur, box):
+    """Ομάδα που άλλαξε όνομα (χορηγό) από πέρσι: αν μοιράζεται >= 4 παίκτες με μια φετινή ομάδα, είναι η ίδια.
+    Χωρίς αυτό το ιστορικό της χανόταν (π.χ. "Aris Thessaloniki Betsson" -> "Aris Thessaloniki")."""
+    def rosters(games):
+        r = {}
+        for g in games:
+            b = box.get(str(g["code"]))
+            if not b:
+                continue
+            for side in ("home", "away"):
+                r.setdefault(g[side], set()).update(x[0] for x in b.get(side, []))
+        return r
+    rc, rp = rosters(cur), rosters(prev)
+    ren = {}
+    for t, players in rp.items():
+        if t in rc:
+            continue
+        best = max(rc, key=lambda c: len(rc[c] & players), default=None)
+        if best and len(rc[best] & players) >= 4:
+            ren[t] = best
+    if not ren:
+        return prev
+    return [dict(g, home=ren.get(g["home"], g["home"]), away=ren.get(g["away"], g["away"])) for g in prev]
+
+
 def _pmf_int(mu, sd, lo, hi):
     return {k: _phi((k + 0.5 - mu) / sd) - _phi((k - 0.5 - mu) / sd) for k in range(lo, hi + 1)}
 
@@ -314,12 +339,13 @@ def build(cid, comp, margins_tbl):
         pbox = boxscores(comp["feed"], year - 1, played_prev, limit=40)
         played_prev = [dict(g, code=f"p{g['code']}") for g in played_prev]
         box = {**{f"p{k}": v for k, v in pbox.items()}, **box}
+        played_prev = _same_clubs(played_prev, played_cur, box)
     # επιλογές παικτών: μοντέλο + εβδομαδιαίος έλεγχος (μόνο στατιστικά που κερδίζουν μένουν)
     PM = props.Model(played_prev + played_cur, box)
-    check = sources._cached(f"props_check3_{cid}.json", 24 * 7)
+    check = sources._cached(f"props_check4_{cid}.json", 24 * 7)
     if check is None:
         check = props.research(played_prev + played_cur, box)
-        sources._save_cache(f"props_check3_{cid}.json", check)
+        sources._save_cache(f"props_check4_{cid}.json", check)
     res["props_check"] = check
 
     injuries = espn.nba_injuries() if comp.get("src") == "espn" else {}
@@ -365,10 +391,12 @@ def build(cid, comp, margins_tbl):
                 out.append({"name": nice_name(p), "base": round(base, 1), "extra": round(ex, 1), "up": up})
         return sorted(out, key=lambda x: -x["extra"])[:6]
 
-    def roster(team):
-        last = sorted((x for x in played_cur if team in (x["home"], x["away"])), key=lambda x: x["date"])[-1:]
-        b = box.get(str(last[0]["code"]), {}) if last else {}
-        return [r[0] for r in b.get("home" if last and last[0]["home"] == team else "away", [])]
+    def roster(team, n=1):
+        out = []
+        for x in sorted((x for x in played_cur if team in (x["home"], x["away"])), key=lambda x: x["date"])[-n:][::-1]:
+            b = box.get(str(x["code"]), {})
+            out += [r[0] for r in b.get("home" if x["home"] == team else "away", [])]
+        return list(dict.fromkeys(out))
 
     def nice_name(n):
         if ", " in n:
@@ -458,6 +486,8 @@ def build(cid, comp, margins_tbl):
             x["team"] = g["home_short"] if x["team"] == h else g["away_short"]
             x["label"] = f"{x['player']}: {x['name']} {x['side']} {x['line']:g}"
         pt = sorted(pt, key=lambda x: -x["p"])[:3]
+        for x in pk + pt:
+            x["at_home"] = x["team"] == g["home_short"]
 
         def pmodel(team, opp, outl):
             """Πρόβλεψη μοντέλου για κάθε βασικό (για έλεγχο οποιασδήποτε γραμμής στην καρτέλα Δελτίο)."""
@@ -466,16 +496,22 @@ def build(cid, comp, margins_tbl):
             plan = PM.minutes_plan(team, g["date"], outl) if outl and mres else {}
             mult = PM.usage_plan(team, g["date"], outl) if outl and mres else None
             out = []
-            for p in ros(team, outl):
-                pr = PM.predict(p, team, opp, g["date"], plan.get(p, 0.0), mult)
+            # ΟΛΟΙ όσοι έπαιξαν στους 3 τελευταίους αγώνες (όχι μόνο οι βασικοί): για να βρίσκεις όποιον θέλεις στο Δελτίο
+            everyone = [p for p in dict.fromkeys(ros(team, outl) + roster(team, 3)) if p not in outl]
+            for p in everyone:
+                pr = PM.predict(p, team, opp, g["date"], plan.get(p, 0.0), mult, min_games=props.SHOW_GAMES, min_mins=4)
                 if not pr:
                     continue
                 P, mexp = pr
-                out.append({"name": nice_name(p), "mins": round(mexp, 1), "extra": round(plan.get(p, 0.0), 1),
+                ng = PM.games_of(p, team, g["date"])
+                out.append({"name": nice_name(p), "mins": round(mexp, 1), "extra": round(plan.get(p, 0.0), 1), "g": ng,
+                            "few": ng < props.MIN_GAMES or mexp < props.MIN_MINS,
                             "mu": {k: round(v[0], 2) for k, v in P.items()}, "avg10": {k: round(v[1], 1) for k, v in P.items()},
                             # τελευταίοι 20 αγώνες (πόντοι.ριμπ.ασίστ.τρίποντα.κλεψ.κοψ.λάθη.φάουλ ανά αγώνα) για τη συχνότητα πάνω από μια γραμμή
-                            "h": "|".join(".".join(str(int(P[k][2][i])) for k in ("pts", "reb", "ast", "tpm", "stl", "blk", "tov", "pf"))
-                                          for i in range(len(P["pts"][2])))})
+                            # 9ο στοιχείο: 1 = εντός έδρας, 0 = εκτός
+                            "h": "|".join(".".join([str(int(P[k][2][i])) for k in ("pts", "reb", "ast", "tpm", "stl", "blk", "tov", "pf")]
+                                                   + [str(fl[i])])
+                                          for fl in [PM.recent_home(p, team, g["date"])] for i in range(len(P["pts"][2])))})
             return sorted(out, key=lambda x: -x["mins"])
         res["matches"].append({
             "id": f"{cid}-{g['code']}", "comp": cid, "sport": "basketball", "date": g["date"],

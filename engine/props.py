@@ -19,7 +19,8 @@ STATS = {  # κλειδί: (όνομα, στήλες στη γραμμή boxscor
 }
 K_OPP = 10.0      # συρρίκνωση του αντιπάλου (αγώνες)
 ROLE_W = 0.35     # πόσο από τη διαφορά "άμυνα ανά ρόλο" κρατάμε (mode "both")
-MIN_GAMES = 8
+MIN_GAMES = 6     # για επιλογές (παλιά 8: στο EuroCup οι νέες ομάδες είχαν 7 αγώνες και δεν έβγαινε καμία επιλογή)
+SHOW_GAMES = 3    # για να φαίνεται ο παίκτης στο Δελτίο (με προειδοποίηση "λίγα δεδομένα")
 MIN_MINS = 18.0
 VIG = 1.035       # γκανιότ ~7% στις αγορές παικτών, μοιρασμένο στις δύο πλευρές
 EDGE_MIN = 0.09    # ελάχιστη διαφωνία μοντέλου με τη γραμμή (9 μονάδες πιθανότητας)
@@ -95,6 +96,7 @@ MIN_BETA, MIN_GAMMA = 0.8, 1.5  # αντικαθίστανται από τον �
 class Model:
     def __init__(self, games, box, beta=MIN_BETA, gamma=MIN_GAMMA):
         self.logs, self.allowed = logs(games, box)
+        self.home_games = {(g["home"], g["date"]) for g in games}  # (ομάδα, ημερομηνία) όπου έπαιζε εντός
         self.by_player = {}
         self._cache, self._lg = {}, {}
         self.beta, self.gamma = beta, gamma
@@ -311,14 +313,22 @@ class Model:
             self._cache[key] = f
         return self._cache[key][k]
 
-    def predict(self, player, team, opp, before, extra=0.0, mult=None):
-        """{στατ: (μ μοντέλου, μ τελευταίων 10)} ή None αν λίγα δεδομένα. extra: επιπλέον λεπτά (απουσίες)."""
+    def recent_home(self, player, team, before):
+        """Για τους τελευταίους αγώνες του παίκτη (ίδια σειρά με τις τιμές του predict): 1 = εντός, 0 = εκτός."""
+        h = [e for e in self.by_player.get((player, team), []) if e[0][:10] < before[:10]][-FREQ_N:]
+        return [1 if (team, e[0]) in self.home_games else 0 for e in h]
+
+    def games_of(self, player, team, before):
+        return sum(1 for e in self.by_player.get((player, team), []) if e[0][:10] < before[:10])
+
+    def predict(self, player, team, opp, before, extra=0.0, mult=None, min_games=None, min_mins=None):
+        """{στατ: (μ μοντέλου, μ τελευταίων 10, τελευταίες τιμές)} ή None αν λίγα δεδομένα. extra: επιπλέον λεπτά (απουσίες)."""
         h = [e for e in self.by_player.get((player, team), []) if e[0][:10] < before[:10]]
-        if len(h) < MIN_GAMES:
+        if len(h) < (MIN_GAMES if min_games is None else min_games):
             return None
         l5, l15, l10 = h[-5:], h[-15:], h[-10:]
         m_exp = 0.6 * sum(e[4] for e in l5) / len(l5) + 0.4 * sum(e[4] for e in l15) / len(l15) + extra
-        if m_exp < MIN_MINS:
+        if m_exp < (MIN_MINS if min_mins is None else min_mins):
             return None
         mins15 = sum(e[4] for e in l15) or 1
         l20 = h[-FREQ_N:]
@@ -507,11 +517,21 @@ def research(games, box, usage_scale=None, opp_mode=None):
     return out
 
 
+def _split(raw, flags, L, side):
+    """Πόσες φορές βγήκε η πλευρά: εντός, εκτός, και στους 5 τελευταίους (πληροφορία: στην έρευνα 13/11/2026 η έδρα
+    και η φόρμα του παίκτη δεν βελτίωσαν σταθερά την πρόβλεψη, οπότε δεν αλλάζουν την πιθανότητα)."""
+    ok = [(x > L) == (side == "Over") for x in raw]
+    hm = [o for o, f in zip(ok, flags) if f]
+    aw = [o for o, f in zip(ok, flags) if not f]
+    return {"home": [sum(hm), len(hm)], "away": [sum(aw), len(aw)], "last5": [sum(ok[-5:]), len(ok[-5:])]}
+
+
 def picks(M, check, player_rows, team, opp, before, n=3, absent=(), edge_min=None, by="edge"):
     """Επιλογές για τους παίκτες μιας ομάδας, μόνο σε στατιστικά που πέρασαν τον έλεγχο.
     by="edge": οι μεγαλύτερες διαφωνίες με τη γραμμή (value). by="p": οι πιθανότερες (edge_min μικρότερο).
     absent: απόντες βασικοί -> επιπλέον λεπτά στους συμπαίκτες (αν ο έλεγχος λεπτών υπάρχει)."""
     out = []
+    is_home = (team, before) in M.home_games or None  # None: ο αγώνας δεν έχει παιχτεί (το ορίζει ο καλών)
     mres = check.get("_minutes")
     if mres:
         M.beta, M.gamma, M.usage = mres["beta"], mres["gamma"], mres.get("usage", {})
@@ -562,6 +582,7 @@ def picks(M, check, player_rows, team, opp, before, n=3, absent=(), edge_min=Non
                         "min_odds": round(1.03 / p_real, 2), "ladder": ladder, "extra": round(extra, 1),
                         # πόσες φορές βγήκε αυτή η πλευρά στους τελευταίους αγώνες
                         "freq": [sum(1 for x in raw if (x > L) == (side == "Over")), len(raw)],
+                        "split": _split(raw, M.recent_home(player, team, before), L, side),
                         "hit": c["ok"]["hit"], "n": c["ok"]["n"]})
     out.sort(key=(lambda x: -x["p"]) if by == "p" else (lambda x: -(x["p"] - x["p_avg"])))
     seen, res = set(), []

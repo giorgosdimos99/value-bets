@@ -281,13 +281,22 @@
       </div>`;
   }
 
+  // εντός/εκτός και φόρμα: πόσες φορές βγήκε η επιλογή (με έντονα η έδρα του σημερινού αγώνα)
+  function splitTxt(s) {
+    if (!s) return "";
+    const f = ([c, n]) => `${c}/${n}`, b = (on, t) => on ? `<b>${t}</b>` : t;
+    const form = s.last5[1] >= 4 && (s.home[1] + s.away[1]) >= 10
+      ? (() => { const all = (s.home[0] + s.away[0]) / (s.home[1] + s.away[1]), r = s.last5[0] / s.last5[1]; return r - all >= 0.2 ? " 🔥" : all - r >= 0.2 ? " 🧊" : ""; })() : "";
+    return ` · ${b(s.at_home === true, `εντός ${f(s.home)}`)} · ${b(s.at_home === false, `εκτός ${f(s.away)}`)} · τελευταίοι 5: ${f(s.last5)}${form}`;
+  }
+
   function ptopHtml(m) {
     if (!m.ptop || !m.ptop.length) return "";
     return `<h3 class="day-sub">🏀 3 πιθανότερες επιλογές παικτών</h3><div class="list">${m.ptop.map((x, i) => `<div class="ri">
         <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(x.label)}${x.extra >= 1 ? ` <span class="pill value">+${x.extra}' λόγω απουσίας</span>` : ""}</div>
-        <div class="ri-s">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'${x.freq ? ` · βγήκε ${x.freq[0]}/${x.freq[1]} φορές` : ""}</div></div>
+        <div class="ri-s">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'${x.freq ? ` · βγήκε ${x.freq[0]} στους ${x.freq[1]} τελευταίους` : ""}${splitTxt(x.split && { ...x.split, at_home: x.at_home })}</div></div>
         <div class="ri-r"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><span>συμφέρει από ${f2(x.min_odds)}</span></div></div>`).join("")}</div>
-      <div class="wx">Πιθανότητα από τον έλεγχο (ό,τι βγήκε σε παρόμοιες επιλογές), όχι η ωμή του μοντέλου. Γραμμή = εκεί που τη βάζουν συνήθως οι εταιρείες (μέσος όρος 10 αγώνων). Αν η εταιρεία έχει άλλη γραμμή, έλεγξέ την στο 🧾 Δελτίο. Ο έλεγχος δεν έγινε με πραγματικές γραμμές εταιρειών (δεν υπάρχουν δωρεάν): δες το ως «πιθανότερη πλευρά», όχι ως σίγουρη αξία.</div>`;
+      <div class="wx">Πιθανότητα από τον έλεγχο (ό,τι βγήκε σε παρόμοιες επιλογές), όχι η ωμή του μοντέλου. Γραμμή = εκεί που τη βάζουν συνήθως οι εταιρείες (μέσος όρος 10 αγώνων). Αν η εταιρεία έχει άλλη γραμμή, έλεγξέ την στο 🧾 Δελτίο. Ο έλεγχος δεν έγινε με πραγματικές γραμμές εταιρειών (δεν υπάρχουν δωρεάν): δες το ως «πιθανότερη πλευρά», όχι ως σίγουρη αξία. «Βγήκε Χ στους 20» = οι 20 τελευταίοι αγώνες του παίκτη με αυτή την ομάδα <b>στην ίδια διοργάνωση</b> (αν φέτος είναι λίγοι, συμπληρώνονται από την περσινή σεζόν της ίδιας διοργάνωσης). Αγώνες σε άλλη διοργάνωση δεν μετράνε. Με έντονα η έδρα του σημερινού αγώνα. 🔥/🧊 = στους 5 τελευταίους το βγάζει πολύ πιο συχνά/σπάνια από ό,τι συνήθως. Η έδρα και η φόρμα είναι πληροφορία: στον έλεγχο δεν βελτίωσαν σταθερά την πρόβλεψη, οπότε δεν αλλάζουν την πιθανότητα.</div>`;
   }
   function bkDefHtml(m) {
     const C = m.coef;
@@ -671,10 +680,16 @@
     let po = pOver(nb(mu, P.phi[k] ?? 0.05), L);
     // + πόσες φορές πέρασε πραγματικά τη γραμμή στους τελευταίους 20 αγώνες (βάρος 25%, από την έρευνα)
     const BASE = ["pts", "reb", "ast", "tpm", "stl", "blk", "tov", "pf"], PARTS = { pra: ["pts", "reb", "ast"], pr: ["pts", "reb"], pa: ["pts", "ast"], ra: ["reb", "ast"] };
-    const hist = (r.h || "").split("|").filter(Boolean).map(g => { const v = g.split(".").map(Number); return (PARTS[k] || [k]).reduce((a, s) => a + (v[BASE.indexOf(s)] || 0), 0); });
-    let freq = null;
+    const rowsH = (r.h || "").split("|").filter(Boolean).map(g => g.split(".").map(Number));
+    const hist = rowsH.map(v => (PARTS[k] || [k]).reduce((a, s) => a + (v[BASE.indexOf(s)] || 0), 0));
+    let freq = null, split = null;
     if (hist.length >= 8) { const c = hist.filter(x => x > L).length; freq = [c, hist.length]; po = 0.75 * po + 0.25 * (c + 1) / (hist.length + 2); }
-    return { p: side === "Over" ? po : 1 - po, mu: Math.round(mu * 10) / 10, avg10: r.avg10[k], mins: r.mins, extra: r.extra, ok: (P.ok || []).includes(k),
+    if (hist.length >= 3) {  // εντός / εκτός / τελευταίοι 5 (πληροφορία, δεν αλλάζει την πιθανότητα)
+      const ok = hist.map(x => (x > L) === (side === "Over")), cnt = a => [a.filter(Boolean).length, a.length];
+      split = { home: cnt(ok.filter((_, i) => rowsH[i][8] === 1)), away: cnt(ok.filter((_, i) => rowsH[i][8] === 0)), last5: cnt(ok.slice(-5)),
+        at_home: (P.home || []).includes(r) };
+    }
+    return { p: side === "Over" ? po : 1 - po, mu: Math.round(mu * 10) / 10, avg10: r.avg10[k], mins: r.mins, extra: r.extra, ok: (P.ok || []).includes(k), few: !!r.few, split,
       freq: freq ? (side === "Over" ? freq : [freq[1] - freq[0], freq[1]]) : null };
   }
   // ξαναϋπολογίζει την πιθανότητα με τα τρέχοντα δεδομένα (αν ο αγώνας υπάρχει ακόμα)
@@ -732,10 +747,10 @@
           <div class="sx-plg">
             <select data-sxpl><option value="">Παίκτης…</option>${players.map(p => `<option ${p.name === S.pl ? "selected" : ""}>${esc(p.name)}</option>`).join("")}</select>
             <select data-sxst>${Object.entries(PSTAT).map(([k, v]) => `<option value="${k}" ${S.st === k ? "selected" : ""}>${v}</option>`).join("")}</select>
-            <input data-sxline inputmode="decimal" placeholder="Γραμμή π.χ. 9.5" value="${esc(S.line || "")}">
+            <span class="sx-half"><input data-sxline inputmode="numeric" pattern="[0-9]*" placeholder="Γραμμή π.χ. 9" value="${esc(S.line || "")}"><b>,5</b></span>
             <input data-sxpodds inputmode="decimal" placeholder="Απόδοση" value="${esc(S.podds || "")}">
           </div>
-          ${pl ? `<div class="sx-plinfo">${esc(pl.name)} (${esc(pl.t)}) · ~${pl.mins}'${pl.extra >= 1 ? ` (+${pl.extra}' λόγω απουσίας)` : ""} · μ.ό. 10: ${pl.avg10[S.st || "pts"]} · μοντέλο: <b>${pl.mu[S.st || "pts"]}</b></div>` : ""}
+          ${pl ? `<div class="sx-plinfo">${esc(pl.name)} (${esc(pl.t)}) · ~${pl.mins}'${pl.extra >= 1 ? ` (+${pl.extra}' λόγω απουσίας)` : ""} · μ.ό. 10: ${pl.avg10[S.st || "pts"]} · μοντέλο: <b>${pl.mu[S.st || "pts"]}</b>${pl.few ? ` · <span class="pill warn">${pl.g < 6 ? `λίγα δεδομένα: ${pl.g} αγώνες` : `παίζει λίγο (~${pl.mins}'): πιο αβέβαιο`}</span>` : ""}</div>` : ""}
           <div class="sx-plb"><button class="btn sm" data-sxadd="Over">+ Over</button><button class="btn sm ghost" data-sxadd="Under">+ Under</button></div></div>`;
       }
       L += `<input class="sx-q sm" data-sxmq placeholder="Φίλτρο αγορών: π.χ. over 2.5, κόρνερ, γκολ-γκολ" value="${esc(S.mq)}">`;
@@ -758,7 +773,7 @@
       if (o) { O *= o; if (ev >= -0.03) { Og *= o; Pg *= l.p; ng++; } } else all = false;
       return `<div class="sx-leg">
         <div class="sx-lt"><b>${esc(l.label)}</b><small>${esc(l.match)}${l.kind === "future" ? "" : ` · ${hhmm(l.date)}`}</small>
-          <small>Πιθανότητα <b>${pct(l.p)}</b> · δίκαιη <b>${f2(1 / l.p)}</b>${l.info ? ` · μοντέλο ${l.info.mu} (μ.ό.10 ${l.info.avg10})${l.info.freq ? ` · βγήκε ${l.info.freq[0]}/${l.info.freq[1]} φορές` : ""}${l.info.ok ? "" : " · ⚠️ στατιστικό που δεν πέρασε τον έλεγχο"}` : ""}${mids[l.mid] > 1 ? " · ⚠️ ίδιος αγώνας" : ""}</small></div>
+          <small>Πιθανότητα <b>${pct(l.p)}</b> · δίκαιη <b>${f2(1 / l.p)}</b>${l.info ? ` · μοντέλο ${l.info.mu} (μ.ό.10 ${l.info.avg10})${l.info.freq ? ` · βγήκε ${l.info.freq[0]} στους ${l.info.freq[1]} τελευταίους αγώνες του σε αυτή τη διοργάνωση` : ""}${splitTxt(l.info.split)}${l.info.few ? " · ⚠️ πιο αβέβαιο (λίγοι αγώνες ή λίγα λεπτά συμμετοχής)" : ""}${l.info.ok ? "" : " · ⚠️ στατιστικό που δεν πέρασε τον έλεγχο"}` : ""}${mids[l.mid] > 1 ? " · ⚠️ ίδιος αγώνας" : ""}</small></div>
         <div class="sx-lr"><input inputmode="decimal" placeholder="απόδοση" value="${esc(l.odds || "")}" data-sxodds="${l.id}">
           <span class="pill ${cls}">${ev == null ? txt : `${txt} ${evTxt(ev)}`}</span>
           <button class="sx-x" data-sxdel="${l.id}" title="Αφαίρεση">✕</button></div></div>`;
@@ -868,8 +883,8 @@
     }
     const pa = t.closest("[data-sxadd]");
     if (pa) {
-      const m = findMatch(state.sx.mid), S = state.sx, k = S.st || "pts", L = num(S.line) || parseFloat(String(S.line || "").replace(",", "."));
-      if (!S.pl || !(L > 0)) { alert("Διάλεξε παίκτη και γράψε τη γραμμή (π.χ. 9.5)."); return; }
+      const m = findMatch(state.sx.mid), S = state.sx, k = S.st || "pts", L = Math.floor(parseFloat(String(S.line || "").replace(",", "."))) + 0.5;  // το ,5 είναι σταθερό: γράφεις μόνο τον ακέραιο
+      if (!S.pl || !(L > 0)) { alert("Διάλεξε παίκτη και γράψε τη γραμμή (π.χ. 9 για 9,5)."); return; }
       const side = pa.dataset.sxadd, r = playerP(m, S.pl, k, L, side);
       if (!r) { alert("Δεν υπάρχει πρόβλεψη για αυτόν τον παίκτη."); return; }
       addLeg({ kind: "player", mid: m.id, key: `P:${S.pl}:${k}:${L}`, side, player: S.pl, stat: k, line: L, label: `${S.pl}: ${PSTAT[k]} ${side} ${L}`,

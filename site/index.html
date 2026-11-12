@@ -253,6 +253,9 @@
     body .sx-plg { @apply grid gap-2; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
     @media (max-width: 640px) { body .sx-plg { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
     body .sx-plg select, body .sx-plg input { @apply py-2 text-[13px]; }
+    body .sx-half { @apply flex items-center gap-1.5 min-w-0; }
+    body .sx-half input { @apply flex-1 min-w-0 text-right; }
+    body .sx-half b { @apply text-[15px] text-gold-200 pr-1; }
     body .sx-plinfo { @apply text-[12.5px] text-slate-300 mt-2; }
     body .sx-plinfo b { @apply text-mint-300; }
     body .sx-plb { @apply flex gap-2 mt-2.5; }
