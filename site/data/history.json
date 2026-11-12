@@ -6255,6 +6255,89 @@
    "kind": "extreme",
    "created": "2026-11-12T16:39:48.409720+00:00",
    "result": null
+  },
+  {
+   "legs": [
+    {
+     "match_id": "EL-107",
+     "comp": "EL",
+     "date": "2026-11-12T19:15:00.000Z",
+     "home": "Olympiacos",
+     "away": "Dubai",
+     "key": "ML",
+     "side": "H",
+     "label": "1",
+     "group": "Νικητής (με παράταση)",
+     "p": 0.6956,
+     "fair": 1.44,
+     "est": 1.44,
+     "est_src": "m14",
+     "best": 1.5,
+     "book": "Marathon Bet",
+     "result": null
+    },
+    {
+     "match_id": "EL-104",
+     "comp": "EL",
+     "date": "2026-11-12T19:30:00.000Z",
+     "home": "Milan",
+     "away": "Zalgiris",
+     "key": "ML",
+     "side": "A",
+     "label": "2",
+     "group": "Νικητής (με παράταση)",
+     "p": 0.6008,
+     "fair": 1.66,
+     "est": 1.7,
+     "est_src": "m14",
+     "best": 1.72,
+     "book": "Winamax (DE)",
+     "result": null
+    },
+    {
+     "match_id": "UNL-401861147",
+     "comp": "UNL",
+     "date": "2026-11-12T19:45Z",
+     "home": "Albania",
+     "away": "Finland",
+     "key": "DC",
+     "side": "1X",
+     "label": "1X",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.7664,
+     "fair": 1.3,
+     "est": 1.28,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "UNL-401861151",
+     "comp": "UNL",
+     "date": "2026-11-12T19:45Z",
+     "home": "Italy",
+     "away": "France",
+     "key": "BTTS",
+     "side": "Yes",
+     "label": "G/G",
+     "group": "Γκολ-Γκολ",
+     "p": 0.5995,
+     "fair": 1.67,
+     "est": 1.6,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 5.01,
+   "p": 0.192,
+   "ev": -0.0373,
+   "day": "2026-11-12",
+   "kind": "simple",
+   "created": "2026-11-12T17:26:46.813633+00:00",
+   "result": null
   }
  ],
  "preds": [
@@ -8616,7 +8699,7 @@
    "side": "Over",
    "label": "Over 164.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6406,
+   "p": 0.6407,
    "est": 1.48,
    "result": null
   },
@@ -8911,7 +8994,7 @@
    "side": "Over",
    "label": "Over 166.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6577,
+   "p": 0.6576,
    "est": 1.46,
    "result": null
   },
@@ -9079,7 +9162,7 @@
    "side": "H",
    "label": "1 (-2.5)",
    "group": "Χάντικαπ",
-   "p": 0.6565,
+   "p": 0.6566,
    "est": 1.46,
    "result": null
   },
@@ -9093,7 +9176,7 @@
    "side": "Over",
    "label": "Over 159.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6453,
+   "p": 0.6452,
    "est": 1.48,
    "result": null
   },
@@ -10481,7 +10564,7 @@
    "side": "A",
    "label": "2 (+14.5)",
    "group": "Χάντικαπ",
-   "p": 0.6528,
+   "p": 0.6527,
    "est": 1.47,
    "result": null
   },
@@ -10565,7 +10648,7 @@
    "side": "H",
    "label": "1 (+8.5)",
    "group": "Χάντικαπ",
-   "p": 0.6458,
+   "p": 0.6459,
    "est": 1.48,
    "result": null
   },
@@ -10579,7 +10662,7 @@
    "side": "Over",
    "label": "Over 166.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6597,
+   "p": 0.6596,
    "est": 1.45,
    "result": null
   },
@@ -10593,7 +10676,7 @@
    "side": "Over",
    "label": "Over 162.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6459,
+   "p": 0.6458,
    "est": 1.48,
    "result": null
   },
@@ -10607,7 +10690,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6918,
+   "p": 0.6917,
    "est": 1.4,
    "result": null
   },
@@ -10733,7 +10816,7 @@
    "side": "A",
    "label": "2",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6693,
+   "p": 0.6691,
    "est": 1.45,
    "result": null
   },
@@ -10747,7 +10830,7 @@
    "side": "Over",
    "label": "Over 156.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6632,
+   "p": 0.6634,
    "est": 1.44,
    "result": null
   },
@@ -10761,7 +10844,7 @@
    "side": "Over",
    "label": "Over 168.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6639,
+   "p": 0.6638,
    "est": 1.44,
    "result": null
   },
@@ -10803,7 +10886,7 @@
    "side": "Over",
    "label": "Over 151.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6447,
+   "p": 0.6445,
    "est": 1.49,
    "result": null
   },
@@ -10817,7 +10900,7 @@
    "side": "Over",
    "label": "Over 162.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6584,
+   "p": 0.6586,
    "est": 1.45,
    "result": null
   },
@@ -10831,7 +10914,7 @@
    "side": "Over",
    "label": "Over 167.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6467,
+   "p": 0.6466,
    "est": 1.48,
    "result": null
   },
@@ -10845,7 +10928,7 @@
    "side": "Over",
    "label": "Over 158.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6489,
+   "p": 0.6491,
    "est": 1.48,
    "result": null
   },
@@ -10859,7 +10942,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6784,
+   "p": 0.6782,
    "est": 1.43,
    "result": null
   },
@@ -10873,7 +10956,7 @@
    "side": "Over",
    "label": "Over 161.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6454,
+   "p": 0.6455,
    "est": 1.48,
    "result": null
   },
@@ -10901,7 +10984,7 @@
    "side": "Over",
    "label": "Over 169.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6477,
+   "p": 0.6475,
    "est": 1.48,
    "result": null
   },
@@ -10929,8 +11012,8 @@
    "side": "Over",
    "label": "Over 166.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6582,
-   "est": 1.46,
+   "p": 0.6586,
+   "est": 1.45,
    "result": null
   },
   {
@@ -13096,7 +13179,7 @@
    "side": "Over",
    "label": "Over 178.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6535,
+   "p": 0.6534,
    "est": 1.47,
    "result": null
   },
@@ -13110,7 +13193,7 @@
    "side": "Over",
    "label": "Over 171.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6403,
+   "p": 0.6404,
    "est": 1.5,
    "result": null
   },
@@ -13180,7 +13263,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6858,
+   "p": 0.6857,
    "est": 1.41,
    "result": null
   },
@@ -13194,7 +13277,7 @@
    "side": "Over",
    "label": "Over 168.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6525,
+   "p": 0.6524,
    "est": 1.47,
    "result": null
   },
@@ -13208,7 +13291,7 @@
    "side": "Over",
    "label": "Over 158.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6475,
+   "p": 0.6476,
    "est": 1.48,
    "result": null
   },
@@ -13408,7 +13491,7 @@
    "side": "Over",
    "label": "Over 162.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6567,
+   "p": 0.6568,
    "est": 1.46,
    "result": null
   },
@@ -13422,7 +13505,7 @@
    "side": "Over",
    "label": "Over 161.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6631,
+   "p": 0.663,
    "est": 1.44,
    "result": null
   },
@@ -13436,7 +13519,7 @@
    "side": "Over",
    "label": "Over 149.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6639,
+   "p": 0.664,
    "est": 1.44,
    "result": null
   },
@@ -13688,7 +13771,7 @@
    "side": "Over",
    "label": "Over 156.5",
    "group": "Σύνολο πόντων",
-   "p": 0.663,
+   "p": 0.6633,
    "est": 1.44,
    "result": null
   },
@@ -13702,8 +13785,8 @@
    "side": "Over",
    "label": "Over 158.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6689,
-   "est": 1.45,
+   "p": 0.6696,
+   "est": 1.44,
    "result": null
   },
   {
@@ -13955,6 +14038,20 @@
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
    "p": 0.6487,
+   "est": 1.49,
+   "result": null
+  },
+  {
+   "match_id": "GR-d2685294a6ca7dfb80c9c33d5dfa2653",
+   "comp": "GR",
+   "date": "2026-11-22T17:00:00Z",
+   "home": "Olympiakos Piraeus",
+   "away": "Iraklis FC",
+   "key": "HT_OU2.5",
+   "side": "Under",
+   "label": "Γηπεδούχος Under 2.5",
+   "group": "Γκολ γηπεδούχου",
+   "p": 0.6427,
    "est": 1.49,
    "result": null
   }
@@ -31753,6 +31850,81 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "GR-1d645b37ee998c72af8ad7d2c48a9d6c",
+   "comp": "GR",
+   "date": "2026-11-22T14:00:00Z",
+   "home": "Levadiakos",
+   "away": "Atromitos Athens",
+   "key": "S:sv:1X2",
+   "side": "2",
+   "label": "Περισσότερα αποκρούσεις: Atromitos Athens",
+   "p": 0.6386,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "GR-d2685294a6ca7dfb80c9c33d5dfa2653",
+   "comp": "GR",
+   "date": "2026-11-22T17:00:00Z",
+   "home": "Olympiakos Piraeus",
+   "away": "Iraklis FC",
+   "key": "S:st:T:7.5",
+   "side": "Over",
+   "label": "Σουτ στην εστία Over 7.5",
+   "p": 0.628,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.59,
+   "result": null
+  },
+  {
+   "match_id": "GR-d2685294a6ca7dfb80c9c33d5dfa2653",
+   "comp": "GR",
+   "date": "2026-11-22T17:00:00Z",
+   "home": "Olympiakos Piraeus",
+   "away": "Iraklis FC",
+   "key": "S:sh:H:17.5",
+   "side": "Over",
+   "label": "Olympiakos Piraeus: Σουτ Over 17.5",
+   "p": 0.7095,
+   "kind": "edge",
+   "p_avg": 0.2094,
+   "fair": 1.41,
+   "result": null
+  },
+  {
+   "match_id": "GR-d2685294a6ca7dfb80c9c33d5dfa2653",
+   "comp": "GR",
+   "date": "2026-11-22T17:00:00Z",
+   "home": "Olympiakos Piraeus",
+   "away": "Iraklis FC",
+   "key": "S:sh:A:9.5",
+   "side": "Under",
+   "label": "Iraklis FC: Σουτ Under 9.5",
+   "p": 0.7229,
+   "kind": "edge",
+   "p_avg": 0.4034,
+   "fair": 1.38,
+   "result": null
+  },
+  {
+   "match_id": "GR-d2685294a6ca7dfb80c9c33d5dfa2653",
+   "comp": "GR",
+   "date": "2026-11-22T17:00:00Z",
+   "home": "Olympiakos Piraeus",
+   "away": "Iraklis FC",
+   "key": "S:st:H:5.5",
+   "side": "Over",
+   "label": "Olympiakos Piraeus: Σουτ στην εστία Over 5.5",
+   "p": 0.6227,
+   "kind": "edge",
+   "p_avg": 0.3361,
+   "fair": 1.61,
    "result": null
   }
  ],
