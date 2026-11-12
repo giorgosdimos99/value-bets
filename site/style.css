@@ -365,3 +365,10 @@ table.xt td small.pc { display: block; }
 .absg > div { min-width: 0; }
 .absg .ri-s { white-space: normal; overflow-wrap: anywhere; }
 @media (max-width: 640px) { .absg { grid-template-columns: minmax(0, 1fr); } }
+
+/* κινητό/tablet (μία στήλη): το δελτίο ημέρας πρώτο, όχι στο τέλος της σελίδας */
+@media (max-width: 999px) {
+  .home { display: flex; flex-direction: column; }
+  .home .col { display: contents; }
+  .home .slip-sec { order: -1; }
+}

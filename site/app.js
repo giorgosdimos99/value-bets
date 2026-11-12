@@ -381,8 +381,9 @@
     // 4. Δελτία
     const slips = (state.data.slips || []).filter(s => state.day === "ALL" || s.day === state.day).slice(0, 1);
     if (slips.length && state.comp === "ALL") {
-      R += section("🎫 Δελτίο ημέρας", `${dayLabel(slips[0].day)} · απόδοση 5+ και 20+.`,
-        slips.map(d => `<div class="grid slips">${["simple", "extreme"].map(k => d[k] ? slipCard(d[k], k, d.day) : "").join("")}</div>`).join(""));
+      // στο κινητό (μία στήλη) το δελτίο ανεβαίνει πρώτο: παλιά ήταν στο τέλος της σελίδας και δεν φαινόταν
+      R += `<div class="slip-sec">` + section("🎫 Δελτίο ημέρας", `${dayLabel(slips[0].day)} · απλό (απόδοση 5+) και ακραίο (15+).`,
+        slips.map(d => `<div class="grid slips">${["simple", "extreme"].map(k => d[k] ? slipCard(d[k], k, d.day) : "").join("")}</div>`).join("")) + `</div>`;
     }
     view.innerHTML = h + `<div class="home"><div class="col">${L}</div><div class="col">${R}</div></div>`;
   }
