@@ -285,7 +285,7 @@
     if (!m.ptop || !m.ptop.length) return "";
     return `<h3 class="day-sub">🏀 3 πιθανότερες επιλογές παικτών</h3><div class="list">${m.ptop.map((x, i) => `<div class="ri">
         <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(x.label)}${x.extra >= 1 ? ` <span class="pill value">+${x.extra}' λόγω απουσίας</span>` : ""}</div>
-        <div class="ri-s">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'</div></div>
+        <div class="ri-s">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'${x.freq ? ` · βγήκε ${x.freq[0]}/${x.freq[1]} φορές` : ""}</div></div>
         <div class="ri-r"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><span>συμφέρει από ${f2(x.min_odds)}</span></div></div>`).join("")}</div>
       <div class="wx">Πιθανότητα από τον έλεγχο (ό,τι βγήκε σε παρόμοιες επιλογές), όχι η ωμή του μοντέλου. Γραμμή = εκεί που τη βάζουν συνήθως οι εταιρείες (μέσος όρος 10 αγώνων). Αν η εταιρεία έχει άλλη γραμμή, έλεγξέ την στο 🧾 Δελτίο. Ο έλεγχος δεν έγινε με πραγματικές γραμμές εταιρειών (δεν υπάρχουν δωρεάν): δες το ως «πιθανότερη πλευρά», όχι ως σίγουρη αξία.</div>`;
   }
@@ -668,8 +668,14 @@
     if (!r || r.mu[k] == null) return null;
     // βαθμονόμηση από τον έλεγχο: όσο πιο "υπερβολικά σίγουρο" βγήκε το μοντέλο στη λίγκα, τόσο πιο κοντά στον μ.ό. 10 αγώνων
     const cal = P.cal ?? 1, mu = r.avg10[k] + cal * (r.mu[k] - r.avg10[k]);
-    const po = pOver(nb(mu, P.phi[k] ?? 0.05), L);
-    return { p: side === "Over" ? po : 1 - po, mu: Math.round(mu * 10) / 10, avg10: r.avg10[k], mins: r.mins, extra: r.extra, ok: (P.ok || []).includes(k) };
+    let po = pOver(nb(mu, P.phi[k] ?? 0.05), L);
+    // + πόσες φορές πέρασε πραγματικά τη γραμμή στους τελευταίους 20 αγώνες (βάρος 25%, από την έρευνα)
+    const BASE = ["pts", "reb", "ast", "tpm", "stl", "blk", "tov", "pf"], PARTS = { pra: ["pts", "reb", "ast"], pr: ["pts", "reb"], pa: ["pts", "ast"], ra: ["reb", "ast"] };
+    const hist = (r.h || "").split("|").filter(Boolean).map(g => { const v = g.split(".").map(Number); return (PARTS[k] || [k]).reduce((a, s) => a + (v[BASE.indexOf(s)] || 0), 0); });
+    let freq = null;
+    if (hist.length >= 8) { const c = hist.filter(x => x > L).length; freq = [c, hist.length]; po = 0.75 * po + 0.25 * (c + 1) / (hist.length + 2); }
+    return { p: side === "Over" ? po : 1 - po, mu: Math.round(mu * 10) / 10, avg10: r.avg10[k], mins: r.mins, extra: r.extra, ok: (P.ok || []).includes(k),
+      freq: freq ? (side === "Over" ? freq : [freq[1] - freq[0], freq[1]]) : null };
   }
   // ξαναϋπολογίζει την πιθανότητα με τα τρέχοντα δεδομένα (αν ο αγώνας υπάρχει ακόμα)
   function legNow(l) {
@@ -752,7 +758,7 @@
       if (o) { O *= o; if (ev >= -0.03) { Og *= o; Pg *= l.p; ng++; } } else all = false;
       return `<div class="sx-leg">
         <div class="sx-lt"><b>${esc(l.label)}</b><small>${esc(l.match)}${l.kind === "future" ? "" : ` · ${hhmm(l.date)}`}</small>
-          <small>Πιθανότητα <b>${pct(l.p)}</b> · δίκαιη <b>${f2(1 / l.p)}</b>${l.info ? ` · μοντέλο ${l.info.mu} (μ.ό.10 ${l.info.avg10})${l.info.ok ? "" : " · ⚠️ στατιστικό που δεν πέρασε τον έλεγχο"}` : ""}${mids[l.mid] > 1 ? " · ⚠️ ίδιος αγώνας" : ""}</small></div>
+          <small>Πιθανότητα <b>${pct(l.p)}</b> · δίκαιη <b>${f2(1 / l.p)}</b>${l.info ? ` · μοντέλο ${l.info.mu} (μ.ό.10 ${l.info.avg10})${l.info.freq ? ` · βγήκε ${l.info.freq[0]}/${l.info.freq[1]} φορές` : ""}${l.info.ok ? "" : " · ⚠️ στατιστικό που δεν πέρασε τον έλεγχο"}` : ""}${mids[l.mid] > 1 ? " · ⚠️ ίδιος αγώνας" : ""}</small></div>
         <div class="sx-lr"><input inputmode="decimal" placeholder="απόδοση" value="${esc(l.odds || "")}" data-sxodds="${l.id}">
           <span class="pill ${cls}">${ev == null ? txt : `${txt} ${evTxt(ev)}`}</span>
           <button class="sx-x" data-sxdel="${l.id}" title="Αφαίρεση">✕</button></div></div>`;

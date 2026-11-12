@@ -69,6 +69,25 @@ def _nb_over(mu, phi, line):
     return max(0.0, 1 - c)
 
 
+# Έρευνα 13/11/2026 (engine/props_research2.py, 12.306 εμφανίσεις, έλεγχος στο τελευταίο 40% των ημερομηνιών):
+#  - ένας ακραίος αγώνας (π.χ. 7 λάθη) δεν πρέπει να τραβάει τον μέσο όρο: ο μέσος γίνεται μισός "κανονικός" και
+#    μισός "χωρίς τα άκρα" (το μεγαλύτερο και το μικρότερο των 15 αγώνων κόβονται στο αμέσως επόμενο),
+#  - η πιθανότητα ανακατεύεται με το πόσες φορές πέρασε πραγματικά τη γραμμή στους τελευταίους 20 αγώνες.
+#  Καλύτερο log-loss σε 46 από 48 συνδυασμούς στατιστικού-διοργάνωσης (NBA 0,6228 -> 0,6172, EC 0,6041 -> 0,5928).
+#  Ο ρυθμός/ανισότητα του αγώνα ΔΕΝ πρόσθεσε κάτι πέρα από τον "αντίπαλο" που υπάρχει ήδη (NBA: χειρότερα στον έλεγχο).
+TRIM_W = 0.5      # βάρος του μέσου όρου "χωρίς τα άκρα"
+FREQ_W = 0.25     # βάρος της συχνότητας (πόσες φορές πέρασε τη γραμμή στους 20 τελευταίους)
+FREQ_N = 20
+
+
+def p_over(mu, phi, line, raw=None):
+    """P(τιμή > γραμμή): 75% κατανομή γύρω από την πρόβλεψη + 25% πραγματική συχνότητα στους τελευταίους αγώνες."""
+    p = _nb_over(mu, phi, line)
+    if raw and len(raw) >= 8:
+        p = (1 - FREQ_W) * p + FREQ_W * (sum(1 for x in raw if x > line) + 1) / (len(raw) + 2)
+    return p
+
+
 PROFILE = ("pts", "reb", "ast", "tpm", "blk")  # ρόλος παίκτη: τι κάνει ανά λεπτό (γκαρντ: ασίστ/τρίποντα, ψηλός: ριμπ./κοψ.)
 MIN_BETA, MIN_GAMMA = 0.8, 1.5  # αντικαθίστανται από τον έλεγχο (minutes_research)
 
@@ -302,11 +321,18 @@ class Model:
         if m_exp < MIN_MINS:
             return None
         mins15 = sum(e[4] for e in l15) or 1
+        l20 = h[-FREQ_N:]
+        ok15 = [e for e in l15 if e[4] >= 5]
         out = {}
         for k in STATS:
             rate = sum(e[5][k] for e in l15) / mins15
-            mu = rate * m_exp * self.opp_factor(player, team, opp, k, before) * ((mult or {}).get(k, 1.0))
-            out[k] = (mu, sum(e[5][k] for e in l10) / len(l10))
+            adj = self.opp_factor(player, team, opp, k, before) * ((mult or {}).get(k, 1.0))
+            mu = rate * m_exp * adj
+            if len(ok15) >= 6:  # μέσος χωρίς τα άκρα, με κάθε αγώνα ανηγμένο στα αναμενόμενα λεπτά
+                sc = sorted(e[5][k] / e[4] * m_exp for e in ok15)
+                w = [sc[1]] + sc[1:-1] + [sc[-2]]
+                mu = (1 - TRIM_W) * mu + TRIM_W * sum(w) / len(w) * adj
+            out[k] = (mu, sum(e[5][k] for e in l10) / len(l10), [e[5][k] for e in l20])
         return out, m_exp
 
 
@@ -412,7 +438,7 @@ def research(games, box, usage_scale=None, opp_mode=None):
             continue
         P, _ = pr
         for k in STATS:
-            res[k].append((P[k][0], P[k][1], v[k]))
+            res[k].append((P[k][0], P[k][1], v[k], P[k][2]))
             if extra >= 2 or (mult or {}).get(k, 1) >= 1.05:
                 boost_rows[k].append((P[k][0], P[k][1], v[k]))
     out = {}
@@ -420,21 +446,21 @@ def research(games, box, usage_scale=None, opp_mode=None):
     for k, rows in res.items():
         if len(rows) < 300:
             continue
-        num = sum((x - mu) ** 2 - mu for mu, _, x in rows)
-        den = sum(mu * mu for mu, _, x in rows)
+        num = sum((x - mu) ** 2 - mu for mu, _, x, _r in rows)
+        den = sum(mu * mu for mu, _, x, _r in rows)
         phi = max(num / den, 0.0) if den else 0.0
         # 2) μόνο ισορροπημένες γραμμές (όπως τις βγάζουν οι εταιρείες): P(over | μ.ό.10) 40-60%.
         #    Η εταιρεία τιμολογεί ~ με τον μ.ό.10 + γκανιότ. Το μοντέλο αξίζει μόνο αν η πλευρά του βγαίνει
         #    συχνότερα από ό,τι λέει η τιμή της εταιρείας (p_avg × 1.035 = νεκρό σημείο με ~7% γκανιότ).
         buckets = {}
         mae_m = mae_n = 0.0
-        for mu, n10, x in rows:
+        for mu, n10, x, raw in rows:
             mae_m += abs(x - mu); mae_n += abs(x - n10)
             L = half(n10)
             pn = _nb_over(n10, phi, L)
             if not (BAL[0] <= pn <= BAL[1]):
                 continue
-            pm = _nb_over(mu, phi, L)
+            pm = p_over(mu, phi, L, raw)
             side_over = pm >= pn
             edge = (pm - pn) if side_over else (pn - pm)
             p_avg = pn if side_over else 1 - pn
@@ -501,7 +527,7 @@ def picks(M, check, player_rows, team, opp, before, n=3, absent=(), edge_min=Non
         P, m_exp = pr
         if m_exp < PICK_MINS:
             continue
-        for k, (mu, n10) in P.items():
+        for k, (mu, n10, raw) in P.items():
             c = check.get(k) or {}
             if not c.get("ok"):
                 continue
@@ -511,7 +537,7 @@ def picks(M, check, player_rows, team, opp, before, n=3, absent=(), edge_min=Non
             pn = _nb_over(n10, c["phi"], L)
             if not (BAL[0] <= pn <= BAL[1]):
                 continue
-            pm = _nb_over(mu, c["phi"], L)
+            pm = p_over(mu, c["phi"], L, raw)
             side = "Over" if pm >= pn else "Under"
             edge = abs(pm - pn)
             if edge < (c["ok"]["edge_from"] if edge_min is None else edge_min) - 1e-9:
@@ -525,7 +551,7 @@ def picks(M, check, player_rows, team, opp, before, n=3, absent=(), edge_min=Non
                 LL = L + d
                 if LL <= 0:
                     continue
-                qm = _nb_over(mu, c["phi"], LL)
+                qm = p_over(mu, c["phi"], LL, raw)
                 qm = qm if side == "Over" else 1 - qm
                 qm -= (p_avg + edge) - p_real  # ίδια διόρθωση
                 if 0.45 <= qm <= 0.8 and LL >= MIN_LINE.get(k, 0.5):
@@ -534,6 +560,8 @@ def picks(M, check, player_rows, team, opp, before, n=3, absent=(), edge_min=Non
                         "label": f"{player}: {STATS[k][0]} {side} {L:g}", "p": p_real, "p_avg": round(p_avg, 3),
                         "exp": round(mu, 1), "avg10": round(n10, 1), "mins": round(m_exp, 1),
                         "min_odds": round(1.03 / p_real, 2), "ladder": ladder, "extra": round(extra, 1),
+                        # πόσες φορές βγήκε αυτή η πλευρά στους τελευταίους αγώνες
+                        "freq": [sum(1 for x in raw if (x > L) == (side == "Over")), len(raw)],
                         "hit": c["ok"]["hit"], "n": c["ok"]["n"]})
     out.sort(key=(lambda x: -x["p"]) if by == "p" else (lambda x: -(x["p"] - x["p_avg"])))
     seen, res = set(), []

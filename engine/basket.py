@@ -316,10 +316,10 @@ def build(cid, comp, margins_tbl):
         box = {**{f"p{k}": v for k, v in pbox.items()}, **box}
     # επιλογές παικτών: μοντέλο + εβδομαδιαίος έλεγχος (μόνο στατιστικά που κερδίζουν μένουν)
     PM = props.Model(played_prev + played_cur, box)
-    check = sources._cached(f"props_check2_{cid}.json", 24 * 7)
+    check = sources._cached(f"props_check3_{cid}.json", 24 * 7)
     if check is None:
         check = props.research(played_prev + played_cur, box)
-        sources._save_cache(f"props_check2_{cid}.json", check)
+        sources._save_cache(f"props_check3_{cid}.json", check)
     res["props_check"] = check
 
     injuries = espn.nba_injuries() if comp.get("src") == "espn" else {}
@@ -472,7 +472,10 @@ def build(cid, comp, margins_tbl):
                     continue
                 P, mexp = pr
                 out.append({"name": nice_name(p), "mins": round(mexp, 1), "extra": round(plan.get(p, 0.0), 1),
-                            "mu": {k: round(v[0], 2) for k, v in P.items()}, "avg10": {k: round(v[1], 1) for k, v in P.items()}})
+                            "mu": {k: round(v[0], 2) for k, v in P.items()}, "avg10": {k: round(v[1], 1) for k, v in P.items()},
+                            # τελευταίοι 20 αγώνες (πόντοι.ριμπ.ασίστ.τρίποντα.κλεψ.κοψ.λάθη.φάουλ ανά αγώνα) για τη συχνότητα πάνω από μια γραμμή
+                            "h": "|".join(".".join(str(int(P[k][2][i])) for k in ("pts", "reb", "ast", "tpm", "stl", "blk", "tov", "pf"))
+                                          for i in range(len(P["pts"][2])))})
             return sorted(out, key=lambda x: -x["mins"])
         res["matches"].append({
             "id": f"{cid}-{g['code']}", "comp": cid, "sport": "basketball", "date": g["date"],
