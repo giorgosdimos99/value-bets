@@ -1106,7 +1106,8 @@
    "odds": 1.67,
    "book": "Marathon Bet",
    "ev": 0.039,
-   "result": null
+   "result": null,
+   "closing": 1.67
   }
  ],
  "slips": [
