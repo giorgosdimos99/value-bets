@@ -298,14 +298,32 @@
     (m.props || []).forEach(x => { if (!seen.has(x.player)) { seen.add(x.player); out.push({ ...x, big: true }); } });
     return out.sort((a, b) => b.p - a.p);
   }
+  // ετικέτες στοιχείων μιας επιλογής παίκτη: πόσες φορές βγήκε (σύνολο, εντός, εκτός, τελευταίοι 5), μέσος όρος, πρόβλεψη
+  function statChips(o) {
+    const kv = (k, v, cls = "") => `<span class="kv ${cls}"><i>${k}</i><b>${v}</b></span>`, f = a => `${a[0]}/${a[1]}`;
+    const sp = o.split, out = [];
+    if (o.freq) out.push(kv(`Τελ. ${o.freq[1]}`, f(o.freq), o.freq[0] / o.freq[1] >= 0.65 ? "good" : o.freq[0] / o.freq[1] <= 0.4 ? "bad" : ""));
+    if (sp) {
+      const tot = sp.home[1] + sp.away[1], all = tot ? (sp.home[0] + sp.away[0]) / tot : 0, r5 = sp.last5[1] ? sp.last5[0] / sp.last5[1] : 0;
+      const fire = sp.last5[1] >= 4 && tot >= 10 ? (r5 - all >= 0.2 ? " 🔥" : all - r5 >= 0.2 ? " 🧊" : "") : "";
+      if (sp.home[1]) out.push(kv("Εντός", f(sp.home), sp.at_home === true ? "on" : ""));
+      if (sp.away[1]) out.push(kv("Εκτός", f(sp.away), sp.at_home === false ? "on" : ""));
+      if (sp.last5[1]) out.push(kv("Τελ. 5", f(sp.last5) + fire));
+    }
+    if (o.avg10 != null) out.push(kv("Μ.ό. 10", o.avg10));
+    if (o.exp != null) out.push(kv("Πρόβλεψη", o.exp));
+    if (o.mins != null) out.push(kv("Λεπτά", `${Math.round(o.mins)}'`));
+    if (o.extra >= 1) out.push(kv("Απουσία", `+${o.extra}'`, "good"));
+    return `<div class="kvs">${out.join("")}</div>`;
+  }
   function ptopHtml(m) {
     const list = playerPicks(m);
     if (!list.length) return "";
-    return `<h3 class="day-sub">🏀 Επιλογές παικτών</h3><div class="list">${list.map((x, i) => `<div class="ri">
-        <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(x.label)}${x.big ? ` <span class="pill value">μεγάλη διαφορά από τη γραμμή</span>` : ""}${x.extra >= 1 ? ` <span class="pill value">+${x.extra}' λόγω απουσίας</span>` : ""}</div>
-        <div class="ri-s">${esc(x.team)} · αναμενόμενα ${x.exp} · μ.ό. 10 αγώνων ${x.avg10} · ~${x.mins}'${x.freq ? ` · βγήκε ${x.freq[0]} στους ${x.freq[1]} τελευταίους αγώνες του` : ""}${splitTxt(x.split && { ...x.split, at_home: x.at_home })}</div></div>
-        <div class="ri-r"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><span>συμφέρει από ${f2(x.min_odds)}</span></div></div>`).join("")}</div>
-      <div class="wx">Πιθανότητα από τον έλεγχο (ό,τι βγήκε σε παρόμοιες επιλογές), όχι η ωμή του μοντέλου. Γραμμή = εκεί που τη βάζουν συνήθως οι εταιρείες (μέσος όρος 10 αγώνων). Αν η εταιρεία έχει άλλη γραμμή, έλεγξέ την στο 🧾 Δελτίο. Ο έλεγχος δεν έγινε με πραγματικές γραμμές εταιρειών (δεν υπάρχουν δωρεάν): δες το ως «πιθανότερη πλευρά», όχι ως σίγουρη αξία. Σειρά: από την πιο πιθανή. «Μεγάλη διαφορά από τη γραμμή» = το μοντέλο διαφωνεί πολύ με τον μέσο όρο 10 αγώνων. «Βγήκε Χ στους 20» = οι 20 πιο πρόσφατοι αγώνες του παίκτη με αυτή την ομάδα <b>στην ίδια διοργάνωση</b> (αν φέτος είναι λίγοι, συμπληρώνονται από την περσινή σεζόν της ίδιας διοργάνωσης). Αγώνες σε άλλη διοργάνωση δεν μετράνε. Με έντονα η έδρα του σημερινού αγώνα. 🔥/🧊 = στους 5 τελευταίους το βγάζει πολύ πιο συχνά/σπάνια από ό,τι συνήθως. Η έδρα και η φόρμα είναι πληροφορία: στον έλεγχο δεν βελτίωσαν σταθερά την πρόβλεψη, οπότε δεν αλλάζουν την πιθανότητα.</div>`;
+    return `<h3 class="day-sub">🏀 Επιλογές παικτών</h3><div class="pps">${list.map(x => `<div class="pp">
+        <div class="pp-top"><div class="pp-t">${esc(x.label)}${x.big ? ` <span class="pill value">διαφορά</span>` : ""}<small>${esc(x.team)}</small></div>
+          <div class="pp-p"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><small>από ${f2(x.min_odds)}</small></div></div>
+        ${statChips({ ...x, split: x.split && { ...x.split, at_home: x.at_home } })}</div>`).join("")}</div>
+      <div class="wx">Με πράσινο περίγραμμα η έδρα του σημερινού αγώνα. «Τελ. 20» = οι 20 πιο πρόσφατοι αγώνες του στην ίδια διοργάνωση. 🔥/🧊 = στους 5 τελευταίους το βγάζει πολύ πιο συχνά/σπάνια. «Διαφορά» = το μοντέλο διαφωνεί πολύ με τον μέσο όρο 10 αγώνων. Η γραμμή είναι ο μέσος όρος 10 αγώνων: αν η εταιρεία έχει άλλη, έλεγξέ τη στο 🧾 Δελτίο. Ο έλεγχος δεν έγινε με πραγματικές γραμμές εταιρειών.</div>`;
   }
   function bkDefHtml(m) {
     const C = m.coef;
@@ -381,7 +399,7 @@
     // 2β. Παίκτες μπάσκετ: μόνο επιλογές που πέρασαν τον έλεγχο
     const props = ms.flatMap(m => playerPicks(m).slice(0, 2).map(x => ({ m, x }))).sort((a, b) => b.x.p - a.x.p).slice(0, 6).sort(byTime);
     if (props.length) L += section("🏀 Παίκτες", "Πόντοι, ριμπάουντ, ασίστ κ.ά. μόνο όπου το μοντέλο κέρδισε στον έλεγχο. Παίξ' το αν η απόδοση είναι ≥ «από».",
-      `<div class="list">${props.map(({ m, x }) => ri(m, esc(x.label), "", pct(x.p), `από ${f2(x.min_odds)}`, "", x.p)).join("")}</div>`);
+      `<div class="list">${props.map(({ m, x }) => ri(m, esc(x.label), x.freq ? `<span class="pill muted">${x.freq[0]}/${x.freq[1]}</span>` : "", pct(x.p), `από ${f2(x.min_odds)}`, "", x.p)).join("")}</div>`);
     // 3. Πιθανότερες προβλέψεις: μόνο οι κορυφαίες
     const preds = ms.filter(m => m.top && m.top.length).map(m => ({ m, t: m.top[0] })).sort((a, b) => b.t.p - a.t.p).slice(0, 8).sort(byTime);
     R += section("⭐ Πιθανότερες προβλέψεις", "Οι 8 πιο πιθανές (απόδοση ≥ 1.40), με σειρά ώρας. Πάτα για ανάλυση του αγώνα.",
@@ -601,6 +619,22 @@
       ${team("home", m.home)}${team("away", m.away)}`;
   }
 
+  // Επεξηγήσεις (.note / .wx): μαζεύονται σε ένα "ⓘ" που ανοίγει με πάτημα. Προειδοποιήσεις (με χρώμα) μένουν ορατές.
+  function tidy(root) {
+    root.querySelectorAll(".note, .wx").forEach(el => {
+      if (el.closest("details.inf") || el.style.color || el.classList.contains("keep") || el.querySelector("input,button,select")) return;
+      const d = document.createElement("details");
+      d.className = "inf";
+      d.innerHTML = "<summary>ⓘ</summary>";
+      el.replaceWith(d);
+      d.appendChild(el);
+    });
+  }
+  let tidying = false;
+  const tidyAll = () => { if (tidying) return; tidying = true; try { tidy(view); tidy($("#sheet")); } finally { tidying = false; } };
+  new MutationObserver(tidyAll).observe(view, { childList: true });
+  new MutationObserver(tidyAll).observe($("#sheet"), { childList: true });
+
   function openSheet(html) {
     $("#sheet").innerHTML = html;
     $("#sheet").scrollTop = 0;
@@ -782,7 +816,8 @@
       if (o) { O *= o; if (ev >= -0.03) { Og *= o; Pg *= l.p; ng++; } } else all = false;
       return `<div class="sx-leg">
         <div class="sx-lt"><b>${esc(l.label)}</b><small>${esc(l.match)}${l.kind === "future" ? "" : ` · ${hhmm(l.date)}`}</small>
-          <small>Πιθανότητα <b>${pct(l.p)}</b> · δίκαιη <b>${f2(1 / l.p)}</b>${l.info ? ` · μοντέλο ${l.info.mu} (μ.ό.10 ${l.info.avg10})${l.info.freq ? ` · βγήκε ${l.info.freq[0]} στους ${l.info.freq[1]} τελευταίους αγώνες του σε αυτή τη διοργάνωση` : ""}${splitTxt(l.info.split)}${l.info.few ? " · ⚠️ πιο αβέβαιο (λίγοι αγώνες ή λίγα λεπτά συμμετοχής)" : ""}${l.info.ok ? "" : " · ⚠️ στατιστικό που δεν πέρασε τον έλεγχο"}` : ""}${mids[l.mid] > 1 ? " · ⚠️ ίδιος αγώνας" : ""}</small></div>
+          <small>Πιθανότητα <b>${pct(l.p)}</b> · δίκαιη <b>${f2(1 / l.p)}</b>${l.info && l.info.few ? " · ⚠️ λίγα δεδομένα" : ""}${l.info && !l.info.ok ? " · ⚠️ εκτός ελέγχου" : ""}${mids[l.mid] > 1 ? " · ⚠️ ίδιος αγώνας" : ""}</small>
+          ${l.info ? statChips({ freq: l.info.freq, split: l.info.split, avg10: l.info.avg10, exp: l.info.mu, mins: l.info.mins, extra: l.info.extra }) : ""}</div>
         <div class="sx-lr"><input inputmode="decimal" placeholder="απόδοση" value="${esc(l.odds || "")}" data-sxodds="${l.id}">
           <span class="pill ${cls}">${ev == null ? txt : `${txt} ${evTxt(ev)}`}</span>
           <button class="sx-x" data-sxdel="${l.id}" title="Αφαίρεση">✕</button></div></div>`;
@@ -1182,6 +1217,7 @@
   });
 
   state.tab = store.get("vb_tab", "value"); state.comp = store.get("vb_comp", "ALL");
+  if (!document.querySelector(`#tabs button[data-tab="${state.tab}"]`)) state.tab = "value";
   syncTabs();
   load();
 })();

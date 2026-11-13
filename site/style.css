@@ -372,3 +372,53 @@ table.xt td small.pc { display: block; }
   .home .col { display: contents; }
   .home .slip-sec { order: -1; }
 }
+
+
+/* ===== Ανανέωση εμφάνισης (13/11/2026): μόνο τα απαραίτητα, τίποτα κομμένο ===== */
+/* περιγραφές ενοτήτων και "έλεγχος σε Ν επιλογές": κρυφά, δεν βοηθούν την ώρα του στοιχήματος */
+.sec-sub, .fitline { display: none; }
+/* επεξηγήσεις πίσω από ⓘ */
+details.inf { margin: 8px 0 0; }
+details.inf > summary { list-style: none; display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px;
+  border-radius: 999px; font-size: 13px; color: var(--muted); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+  cursor: pointer; user-select: none; transition: background .15s, color .15s; }
+details.inf > summary::-webkit-details-marker { display: none; }
+details.inf[open] > summary { color: var(--text); background: rgba(63,224,142,.14); border-color: rgba(63,224,142,.3); }
+details.inf > .note, details.inf > .wx { margin-top: 8px; font-size: 12.5px; line-height: 1.5; }
+
+/* κάρτα επιλογής παίκτη */
+.pps { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.pp { background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.07); border-radius: 16px; padding: 12px 14px; }
+.pp-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.pp-t { font-weight: 650; font-size: 14.5px; line-height: 1.3; min-width: 0; overflow-wrap: anywhere; }
+.pp-t small { display: block; margin-top: 2px; font-weight: 400; font-size: 12px; color: var(--muted); }
+.pp-t .pill { font-size: 10px; padding: 2px 7px; vertical-align: 1px; }
+.pp-p { text-align: right; flex: 0 0 auto; }
+.pp-p b { display: block; font-size: 22px; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.pp-p b.hi { color: var(--accent); } .pp-p b.md { color: var(--amber); }
+.pp-p small { font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+.kvs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.kv { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px; padding: 5px 9px; border-radius: 10px; min-width: 52px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
+.kv i { font-style: normal; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.kv b { font-size: 13.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kv.on { border-color: rgba(63,224,142,.55); background: rgba(63,224,142,.08); }
+.kv.good b { color: var(--accent); } .kv.bad b { color: var(--red); }
+.sx-lt .kvs { margin-top: 6px; } .sx-lt .kv { padding: 4px 8px; min-width: 46px; } .sx-lt .kv b { font-size: 12.5px; color: var(--text); }
+
+/* λίστες: η δεύτερη γραμμή δεν κόβεται πια με "..." στο κινητό, αλλάζει γραμμή */
+@media (max-width: 760px) { .ri-s { white-space: normal; overflow: visible; line-height: 1.35; } }
+
+/* καρτέλα αγώνα: το Χ μένει πάντα ορατό όσο κατεβαίνεις */
+.sheet .match-head { margin-top: 34px; }  /* κάτω από τα κουμπιά "Στο δελτίο" / Χ, για να μην πέφτουν πάνω στο κείμενο */
+
+/* κάτω μενού κινητού: 6 καρτέλες, μεγαλύτερα σημεία αφής */
+@media (max-width: 760px) {
+  .tabs button { min-height: 50px; font-size: 10.5px; }
+  .tabs button .lb { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+  .tabs button.active .ic { transform: translateY(-1px) scale(1.12); }
+  .tabs button .ic { transition: transform .15s; }
+}
+/* πιο "ήρεμες" ενότητες */
+.sec { margin-top: 22px; } .sec-h h2 { letter-spacing: -.01em; }
+.day-sub { margin: 18px 0 10px; }
