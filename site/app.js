@@ -313,7 +313,9 @@
   function statChips(o) {
     const sp = o.split;
     if (!o.freq || !sp) return "";
-    return `<div class="kvs">${fourChips(o.freq, sp.home, sp.away, sp.last5, sp.at_home)}</div>`;
+    // παίκτες: και ο μέσος όρος των τελευταίων αγώνων με την πρόβλεψη του μοντέλου (ο χρήστης τα ζήτησε πίσω)
+    const extra = (o.avg10 != null ? kvChip("Μ.ό.", o.avg10) : "") + (o.exp != null ? kvChip("Πρόβλεψη", o.exp, "mdl") : "");
+    return `<div class="kvs">${fourChips(o.freq, sp.home, sp.away, sp.last5, sp.at_home)}${extra}</div>`;
   }
   // Γραμμή ιστορικού ομάδας (engine/run.py team_hist): [εντός, γκολ υπέρ, κατά, ημίχρ. υπέρ, κατά, κόρνερ υ/κ, σουτ υ/κ, στην εστία υ/κ, φάουλ υ/κ, κάρτες υ/κ]
   const FHI = { co: 5, sh: 7, st: 9, fo: 11, ca: 13,                                  // ποδόσφαιρο

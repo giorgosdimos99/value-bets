@@ -436,3 +436,5 @@ html, body { overflow-x: hidden; max-width: 100%; overscroll-behavior-x: none; }
 .kvt { align-self: center; font-size: 11.5px; font-weight: 600; color: var(--muted); min-width: 0; max-width: 112px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 0 0 112px; }
 .pp .kvs + .kvs { margin-top: 6px; }
 @media (max-width: 420px) { .kvt { flex-basis: 88px; max-width: 88px; } }
+
+.kv.mdl b { color: var(--amber); }
