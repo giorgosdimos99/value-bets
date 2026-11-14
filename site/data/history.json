@@ -14898,7 +14898,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6928,
+   "p": 0.6927,
    "est": 1.4,
    "result": null
   },
@@ -14926,7 +14926,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6403,
+   "p": 0.6404,
    "est": 1.49,
    "result": null
   },
@@ -15566,12 +15566,12 @@
    "date": "2026-11-24T17:45:00Z",
    "home": "Galatasaray",
    "away": "Aston Villa",
-   "key": "AT_OU1.5",
-   "side": "Over",
-   "label": "Φιλοξενούμενος Over 1.5",
-   "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6537,
-   "est": 1.46,
+   "key": "OU4.5",
+   "side": "Under",
+   "label": "Under 4.5",
+   "group": "Γκολ Over/Under",
+   "p": 0.6589,
+   "est": 1.45,
    "result": null
   },
   {
@@ -15580,12 +15580,12 @@
    "date": "2026-11-24T17:45:00Z",
    "home": "Bodø/Glimt",
    "away": "LASK",
-   "key": "DC",
-   "side": "1X",
-   "label": "1X",
-   "group": "Διπλή ευκαιρία",
-   "p": 0.6236,
-   "est": 1.5,
+   "key": "OU2.5",
+   "side": "Over",
+   "label": "Over 2.5",
+   "group": "Γκολ Over/Under",
+   "p": 0.6879,
+   "est": 1.41,
    "result": null
   },
   {
@@ -15598,8 +15598,8 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6629,
-   "est": 1.44,
+   "p": 0.6728,
+   "est": 1.42,
    "result": null
   },
   {
@@ -15608,12 +15608,12 @@
    "date": "2026-11-24T20:00:00Z",
    "home": "Man City",
    "away": "Napoli",
-   "key": "HT_OU2.5",
-   "side": "Under",
-   "label": "Γηπεδούχος Under 2.5",
-   "group": "Γκολ γηπεδούχου",
-   "p": 0.6847,
-   "est": 1.4,
+   "key": "AT_OU0.5",
+   "side": "Over",
+   "label": "Φιλοξενούμενος Over 0.5",
+   "group": "Γκολ φιλοξενούμενου",
+   "p": 0.6714,
+   "est": 1.43,
    "result": null
   },
   {
@@ -15622,11 +15622,11 @@
    "date": "2026-11-24T20:00:00Z",
    "home": "Arsenal",
    "away": "Dortmund",
-   "key": "OU1.5",
-   "side": "Over",
-   "label": "Over 1.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6663,
+   "key": "AH-1.5",
+   "side": "A",
+   "label": "2 (+1.5)",
+   "group": "Ασιατικό χάντικαπ",
+   "p": 0.6654,
    "est": 1.44,
    "result": null
   },
@@ -15640,8 +15640,8 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6637,
-   "est": 1.44,
+   "p": 0.6736,
+   "est": 1.42,
    "result": null
   },
   {
@@ -15654,8 +15654,8 @@
    "side": "A",
    "label": "2 (-1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6659,
-   "est": 1.44,
+   "p": 0.6607,
+   "est": 1.45,
    "result": null
   },
   {
@@ -15668,8 +15668,8 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6957,
-   "est": 1.41,
+   "p": 0.6931,
+   "est": 1.42,
    "result": null
   },
   {
@@ -15682,8 +15682,8 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 2.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6738,
-   "est": 1.42,
+   "p": 0.6809,
+   "est": 1.41,
    "result": null
   },
   {
@@ -15934,7 +15934,7 @@
    "side": "A",
    "label": "2 (+2.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6683,
+   "p": 0.6684,
    "est": 1.43,
    "result": null
   },
@@ -15962,7 +15962,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.685,
+   "p": 0.6852,
    "est": 1.4,
    "result": null
   },
@@ -15976,7 +15976,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6554,
+   "p": 0.6555,
    "est": 1.46,
    "result": null
   }
