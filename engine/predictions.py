@@ -11,7 +11,7 @@ MIN_ODDS = 1.40       # κάτω από ~1.40 οι εταιρείες συχνά
 STAT_MIN_ODDS = 1.50  # στα στατιστικά οι εταιρείες βάζουν γραμμές με απόδοση ~1.50-2.20
 
 
-def top(sels, n=3):
+def top(sels, n=5):
     cand = [s for s in sels if s["group"] in GROUPS and s.get("est") and s["est"] >= MIN_ODDS
             and (s["pp"] == 0 or s["key"] == "AH+0")]
     cand.sort(key=lambda s: -s["p"])

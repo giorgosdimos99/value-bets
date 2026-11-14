@@ -301,6 +301,7 @@
   // ετικέτες στοιχείων μιας επιλογής παίκτη: πόσες φορές βγήκε (σύνολο, εντός, εκτός, τελευταίοι 5), μέσος όρος, πρόβλεψη
   // ΚΑΝΟΝΑΣ εμφάνισης: κάθε επιλογή δείχνει ΜΟΝΟ 4 στοιχεία, πάντα με τα ίδια ονόματα:
   // Τελευταία (όλοι οι πρόσφατοι αγώνες) · Εντός · Εκτός · Φόρμα (οι 5 πιο πρόσφατοι). Με πράσινο περίγραμμα η έδρα του σημερινού αγώνα.
+  const MIN_SHOW = 1.40, estP = p => 1 / (p * 1.06);
   const kvChip = (k, v, cls = "") => `<span class="kv ${cls}"><i>${k}</i><b>${v}</b></span>`;
   function fourChips(all, home, away, last5, atHome) {
     const f = a => `${a[0]}/${a[1]}`, r = a => a[1] ? a[0] / a[1] : 0;
@@ -449,17 +450,17 @@
     // 2. Στατιστικά: μόνο οι πιο πιθανές, μία ανά αγώνα
     const seen = new Set();
     const edges = ms.flatMap(m => [...(m.stat_top || []), ...(m.stat_edges || [])].map(e => ({ m, e })))
-      .filter(x => x.e.fit !== -1)
+      .filter(x => x.e.fit !== -1 && x.e.p >= 0.55 && estP(x.e.p) >= MIN_SHOW)
       .sort((a, b) => (b.e.p - a.e.p) || ((b.e.fit ?? 0) - (a.e.fit ?? 0)))
       .filter(x => !seen.has(x.m.id) && seen.add(x.m.id))
       .slice(0, 6).sort(byTime);
     L += section("📊 Στατιστικά", "Οι 6 πιο πιθανές (μία ανά αγώνα), με σειρά ώρας. Παίξ' το αν η απόδοση είναι ≥ «από». Για τα υπόλοιπα άνοιξε τον αγώνα.",
-      edges.length ? `<div class="list">${edges.map(({ m, e }) => ri(m, `${STAT_ICON[e.stat] || ""} ${esc(e.label)}`, (() => { const F = fbFreq(m, e.key, e.side), x = F && (F.h || F.a); return x ? `<span class="pill muted">${x.all[0]}/${x.all[1]}</span>` : ""; })(), pct(e.p), `από ${f2(e.min_odds || 1.03 / e.p)}`, "", e.p)).join("")}</div>`
+      edges.length ? `<div class="list">${edges.map(({ m, e }) => ri(m, `${STAT_ICON[e.stat] || ""} ${esc(e.label)}`, (() => { const F = fbFreq(m, e.key, e.side), x = F && (F.h || F.a); return x ? `<span class="pill muted">${x.all[0]}/${x.all[1]}</span>` : ""; })(), pct(e.p), `από ${f2(1.03 / e.p)}`, "", e.p)).join("")}</div>`
         : `<div class="empty-s">Καμία μεγάλη απόκλιση στους αγώνες που φαίνονται.</div>`);
     // 2β. Παίκτες μπάσκετ: μόνο επιλογές που πέρασαν τον έλεγχο
-    const props = ms.flatMap(m => [...playerPicks(m), ...(m.fptop || [])].slice(0, 2).map(x => ({ m, x }))).sort((a, b) => b.x.p - a.x.p).slice(0, 6).sort(byTime);
+    const props = ms.flatMap(m => [...playerPicks(m), ...(m.fptop || [])].filter(x => x.p >= 0.55 && estP(x.p) >= MIN_SHOW).slice(0, 2).map(x => ({ m, x }))).sort((a, b) => b.x.p - a.x.p).slice(0, 6).sort(byTime);
     if (props.length) L += section("👤 Παίκτες", "Πόντοι, ριμπάουντ, ασίστ κ.ά. μόνο όπου το μοντέλο κέρδισε στον έλεγχο. Παίξ' το αν η απόδοση είναι ≥ «από».",
-      `<div class="list">${props.map(({ m, x }) => ri(m, esc(x.label), x.freq ? `<span class="pill muted">${x.freq[0]}/${x.freq[1]}</span>` : "", pct(x.p), `από ${f2(x.min_odds)}`, "", x.p)).join("")}</div>`);
+      `<div class="list">${props.map(({ m, x }) => ri(m, esc(x.label), x.freq ? `<span class="pill muted">${x.freq[0]}/${x.freq[1]}</span>` : "", pct(x.p), `από ${f2(1.03 / x.p)}`, "", x.p)).join("")}</div>`);
     // 3. Πιθανότερες προβλέψεις: μόνο οι κορυφαίες
     const preds = ms.filter(m => m.top && m.top.length).map(m => ({ m, t: m.top[0] })).sort((a, b) => b.t.p - a.t.p).slice(0, 8).sort(byTime);
     R += section("⭐ Πιθανότερες προβλέψεις", "Οι 8 πιο πιθανές (απόδοση ≥ 1.40), με σειρά ώρας. Πάτα για ανάλυση του αγώνα.",
@@ -489,7 +490,7 @@
       </div>
       <div class="probs" ${bk ? 'style="grid-template-columns:repeat(3,1fr)"' : ""}>${(bk ? ["1", "2"] : ["1", "X", "2"]).map(k => `<div class="prob"><b>${p[k] ? pct(p[k].p) : "—"}</b><span>${k} · ${p[k] ? f2(p[k].fair) : "—"}</span></div>`).join("")}
       ${bk ? `<div class="prob"><b>${(m.xg[0] + m.xg[1]).toFixed(1)}</b><span>σύνολο πόντων</span></div>` : ""}</div>
-      ${bk && m.ptop && m.ptop.length ? `<div class="pt1">🏀 ${esc(m.ptop[0].label)} <b>${pct(m.ptop[0].p)}</b></div>` : ""}
+      ${(() => { const x = [...playerPicks(m), ...(m.fptop || [])].filter(x => x.p >= 0.55 && estP(x.p) >= MIN_SHOW).sort((a, b) => b.p - a.p)[0]; return x ? `<div class="pt1">${bk ? "🏀" : "⚽"} ${esc(x.label)} <b>${pct(x.p)}</b></div>` : ""; })()}
       <div class="tags">${m.values.length ? `<span class="pill value">${m.values.length} value</span>` : ""}
       ${m.has_odds ? "" : `<span class="pill muted">χωρίς αποδόσεις</span>`}
       ${m.confidence !== "υψηλή" ? `<span class="pill muted">αξιοπιστία: ${m.confidence}</span>` : ""}</div></div>`;
@@ -560,21 +561,23 @@
     // --- Σύνοψη ---
     let s1 = bk ? "" : diffHtml(m);
     {
-      // ΚΑΝΟΝΑΣ: δύο κατηγορίες, «Παίκτες» και «Ομάδες». Σε καθεμία το πολύ 5 επιλογές, οι πιο πιθανές (από 55% και πάνω).
-      // Αν δεν υπάρχουν αρκετές καλές, μπαίνουν λιγότερες.
-      const players = [...playerPicks(m), ...(m.fptop || [])].filter(x => x.p >= 0.55).sort((x, y) => y.p - x.p).slice(0, 5);
+      // ΚΑΝΟΝΑΣ: τρεις κατηγορίες: «Γενικά» (νίκη, διπλή ευκαιρία, γκολ/πόντοι, χάντικαπ), «Παίκτες», «Στατιστικά ομάδων».
+      // Σε καθεμία το πολύ 5 επιλογές, οι πιο πιθανές (από 55%), και ΜΟΝΟ όσες δίνουν απόδοση από 1,40 και πάνω.
+      const card = (t, v) => betCard(m, { ...t, pills: v ? ` <span class="pill hot">${evTxt(v.ev)}</span>` : "" });
+      const val = new Map((m.values || []).map(v => [v.key + "|" + v.side, v]));
+      const uniq = l => { const seen = new Set(); return l.filter(t => { const k = t.key + "|" + t.side; return !seen.has(k) && seen.add(k); }); };
+      const general = uniq((m.top || []).filter(t => t.p >= 0.55 && (t.est || 0) >= MIN_SHOW)
+        .map(t => ({ title: esc(nice(m, t.key, t.side, t.label)), p: t.p, sub: `~${f2(t.est)}`, key: t.key, side: t.side }))).sort((x, y) => y.p - x.p).slice(0, 5);
+      if (general.length) s1 += `<h3 class="day-sub">🎯 Γενικά</h3><div class="pps">${general.map(t => card(t, val.get(t.key + "|" + t.side))).join("")}</div>`;
+      const players = [...playerPicks(m), ...(m.fptop || [])].filter(x => x.p >= 0.55 && estP(x.p) >= MIN_SHOW).sort((x, y) => y.p - x.p).slice(0, 5);
       if (players.length) s1 += `<h3 class="day-sub">👤 Παίκτες</h3><div class="pps">${players.map(x => `<div class="pp">
           <div class="pp-top"><div class="pp-t">${esc(x.label)}<small>${esc(x.team)}${x.extra >= 1 ? ` · +${x.extra}' λόγω απουσίας` : ""}</small></div>
-            <div class="pp-p"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><small>από ${f2(x.min_odds)}</small></div></div>
+            <div class="pp-p"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><small>από ${f2(1.03 / x.p)}</small></div></div>
           ${statChips({ ...x, split: x.split && { ...x.split, at_home: x.at_home } })}</div>`).join("")}</div>`;
-      const seenT = new Set(), teams = [
-        ...(m.top || []).map(t => ({ title: esc(nice(m, t.key, t.side, t.label)), p: t.p, sub: `~${f2(t.est)}`, key: t.key, side: t.side })),
-        ...[...(m.stat_top || []), ...(m.stat_edges || [])].map(t => ({ title: esc(t.label), p: t.p, sub: `από ${f2(t.min_odds || 1.03 / t.p)}`, key: t.key, side: t.side })),
-      ].filter(t => { const k = t.key + "|" + t.side; return t.p >= 0.55 && !seenT.has(k) && seenT.add(k); }).sort((x, y) => y.p - x.p).slice(0, 5);
-      const val = new Map((m.values || []).map(v => [v.key + "|" + v.side, v]));
-      if (teams.length) s1 += `<h3 class="day-sub">🛡️ Ομάδες</h3><div class="pps">${teams.map(t => { const v = val.get(t.key + "|" + t.side);
-        return betCard(m, { ...t, pills: v ? ` <span class="pill hot">${evTxt(v.ev)}</span>` : "" }); }).join("")}</div>`;
-      if (!players.length && !teams.length) s1 += `<div class="empty-s">Καμία επιλογή με αρκετή πιθανότητα σε αυτόν τον αγώνα.</div>`;
+      const stats = uniq([...(m.stat_top || []), ...(m.stat_edges || [])].filter(t => t.p >= 0.55 && estP(t.p) >= MIN_SHOW)
+        .map(t => ({ title: esc(t.label), p: t.p, sub: `από ${f2(1.03 / t.p)}`, key: t.key, side: t.side }))).sort((x, y) => y.p - x.p).slice(0, 5);
+      if (stats.length) s1 += `<h3 class="day-sub">📊 Στατιστικά ομάδων</h3><div class="pps">${stats.map(t => card(t)).join("")}</div>`;
+      if (!general.length && !players.length && !stats.length) s1 += `<div class="empty-s">Καμία επιλογή με αρκετή πιθανότητα και απόδοση από 1,40 σε αυτόν τον αγώνα.</div>`;
     }
     if (bk) s1 += bkDefHtml(m);
     if (m.scores) s1 += `<h3 class="day-sub">Πιθανότερα σκορ</h3><div class="scores">${m.scores.map(s => `<span><b>${s.s}</b> ${pct(s.p)}</span>`).join("")}</div>`;

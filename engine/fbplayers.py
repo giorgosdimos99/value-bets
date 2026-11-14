@@ -25,6 +25,7 @@ K_OPP = 8.0
 TRIM_W, FREQ_W, FREQ_N = 0.5, 0.25, 15
 MIN_APPS, MIN_MINS = 5, 45.0
 NEW_PER_RUN = 80
+MAX_P = 1 / (1.40 * 1.06)  # 0,674: πάνω από αυτό η εταιρεία δίνει κάτω από 1,40
 
 
 def _season_start(now=None):
@@ -238,7 +239,8 @@ def for_match(M, check, home, away, when, n=6):
                     for sd, pp in (("Over", po), ("Under", 1 - po)):
                         if sd == "Under":
                             continue  # οι εταιρείες δίνουν στους παίκτες μόνο «Over» (1+ σουτ, 2+ φάουλ...), όχι Under
-                        if 0.55 <= pp <= 0.80 and (best is None or pp > best["p"]):
+                        # απόδοση εταιρείας ~ 1 / (πιθανότητα × 1,06). Κάτω από 1,40 δεν έχει νόημα να προταθεί (π.χ. «1+ σουτ» στο 1,15)
+                        if 0.55 <= pp <= MAX_P and (best is None or pp > best["p"]):
                             lab = {"yc": "Να πάρει κάρτα", "g": "Να σκοράρει", "as": "Να δώσει ασίστ"}.get(k, f"{STATS[k][0]} {sd} {L:g}")
                             best = {"player": p, "team": team, "stat": k, "side": sd, "line": L, "label": f"{p}: {lab}", "p": round(pp, 3),
                                     "exp": round(mu, 2), "avg10": round(a10, 2), "mins": round(m_exp), "min_odds": round(1.03 / pp, 2),

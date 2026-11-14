@@ -527,12 +527,13 @@ def build(cid, comp, margins_tbl):
             x["label"] = f"{x['player']}: {x['name']} {x['side']} {x['line']:g}"
         pk = sorted(pk, key=lambda x: -(x["p"] - x["p_avg"]))[:2]
         # οι 3 πιθανότερες επιλογές παικτών του αγώνα (μικρότερη απαίτηση διαφωνίας, ταξινόμηση κατά πιθανότητα)
-        pt = props.picks(PM, check, ros(h, out_h), h, a, g["date"], n=6, absent=out_h, edge_min=0.04, by="p") +             props.picks(PM, check, ros(a, out_a), a, h, g["date"], n=6, absent=out_a, edge_min=0.04, by="p")
+        pt = props.picks(PM, check, ros(h, out_h), h, a, g["date"], n=12, absent=out_h, edge_min=0.04, by="p") +             props.picks(PM, check, ros(a, out_a), a, h, g["date"], n=12, absent=out_a, edge_min=0.04, by="p")
         for x in pt:
             x["player"] = nice_name(x["player"])
             x["team"] = g["home_short"] if x["team"] == h else g["away_short"]
             x["label"] = f"{x['player']}: {x['name']} {x['side']} {x['line']:g}"
-        pt = sorted(pt, key=lambda x: -x["p"])[:3]
+        # μόνο επιλογές που η εταιρεία δίνει από ~1,40 και πάνω (πιθανότητα έως 67%), οι 5 πιθανότερες
+        pt = sorted((x for x in pt if x["p"] <= 1 / (1.40 * 1.06)), key=lambda x: -x["p"])[:5]
         for x in pk + pt:
             x["at_home"] = x["team"] == g["home_short"]
 
