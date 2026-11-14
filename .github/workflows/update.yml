@@ -2,7 +2,7 @@ name: Ενημέρωση δεδομένων
 
 on:
   schedule:
-    - cron: "0 */3 * * *"   # κάθε 3 ώρες
+    - cron: "17 */2 * * *"   # κάθε 2 ώρες, στο :17 (στην ακριβή ώρα το GitHub καθυστερεί ή παραλείπει τρεξίματα)
   workflow_dispatch: {}      # χειροκίνητα από το GitHub
   push:                      # και όταν αλλάζει ο κώδικας
     branches: [main]
@@ -45,4 +45,17 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
+      # το ανέβασμα της σελίδας αποτυγχάνει πού και πού από την πλευρά του GitHub: δεύτερη και τρίτη προσπάθεια
       - uses: actions/deploy-pages@v4
+        id: deploy1
+        continue-on-error: true
+      - if: steps.deploy1.outcome == 'failure'
+        run: sleep 30
+      - if: steps.deploy1.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        id: deploy2
+        continue-on-error: true
+      - if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
+        run: sleep 60
+      - if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
+        uses: actions/deploy-pages@v4
