@@ -271,7 +271,27 @@ def analyse(m, cid, ctx, books):
         "difficulty": difficulty(m, th, ta, rh, ra, p1, 1 - p1 - p2, p2, ctx, cross),
         "has_odds": bool(books),
         "weather": wx, "ctx_adj": adj and adj["notes"],
+        "fh": {"home": team_hist(th, rh.get("league"), ctx), "away": team_hist(ta, ra.get("league"), ctx)},
     }
+
+
+def team_hist(team, code, ctx, n=12):
+    """Τελευταίοι αγώνες της ομάδας στο πρωτάθλημά της, για το «βγήκε Χ στους Ν» κάθε αγοράς στο ποδόσφαιρο.
+    Γραμμή: [εντός(1/0), γκολ υπέρ, κατά, ημίχρονο υπέρ, κατά, κόρνερ υπέρ, κατά, σουτ υπέρ, κατά, στην εστία υπέρ, κατά,
+             φάουλ υπέρ, κατά, κάρτες υπέρ, κατά]  (-1 = δεν υπάρχει)"""
+    if not team or not code:
+        return []
+    ms = sorted((m for m in ctx.get("results", {}).get(code, []) if team in (m["home"], m["away"]) and m.get("hg") is not None and m.get("date")),
+                key=lambda m: m["date"])[-n:]
+    v = lambda x: -1 if x is None else int(x)
+    out = []
+    for m in ms:
+        h = m["home"] == team
+        pair = lambda a, b: [v(m.get(a)), v(m.get(b))] if h else [v(m.get(b)), v(m.get(a))]
+        ca = [(-1 if m.get("hy") is None else int(m["hy"]) + int(m.get("hr") or 0)), (-1 if m.get("ay") is None else int(m["ay"]) + int(m.get("ar") or 0))]
+        out.append([1 if h else 0] + pair("hg", "ag") + pair("hthg", "htag") + pair("hc", "ac") + pair("hs", "as") + pair("hst", "ast")
+                   + pair("hf", "af") + (ca if h else ca[::-1]))
+    return out
 
 
 def _logit(p):
@@ -598,7 +618,7 @@ def main():
     disp, stat_info = stats.disp_table()
     ctx = {"ratings": ratings, "leagues": leagues, "fx_csv": fx_csv, "refs": refs, "disp": disp,
            "stat_info": stat_info, "margins": margins_tbl, "hist": hist_matches, "goal_factor": {},
-           "coach": coach_info(results), "venues": venue_coords()}
+           "coach": coach_info(results), "venues": venue_coords(), "results": results}
     print(f"  νέοι προπονητές φέτος (λιγότεροι από 8 αγώνες): {len(ctx['coach'])}")
     goal_info = {}
     for cid in config.COMPETITIONS:

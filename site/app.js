@@ -316,6 +316,61 @@
     if (o.extra >= 1) out.push(kv("Απουσία", `+${o.extra}'`, "good"));
     return `<div class="kvs">${out.join("")}</div>`;
   }
+  // Γραμμή ιστορικού ομάδας (engine/run.py team_hist): [εντός, γκολ υπέρ, κατά, ημίχρ. υπέρ, κατά, κόρνερ υ/κ, σουτ υ/κ, στην εστία υ/κ, φάουλ υ/κ, κάρτες υ/κ]
+  const FHI = { co: 5, sh: 7, st: 9, fo: 11, ca: 13,                                  // ποδόσφαιρο
+    tpm: 5, reb: 7, ast: 9, stl: 11, blk: 13, tov: 15, pf: 17 };                       // μπάσκετ (ομάδες)
+  function fbTest(key, side, isHomeTeam) {
+    // επιστρέφει συνάρτηση (γραμμή) -> true/false/null: «βγήκε» η επιλογή σε εκείνον τον αγώνα της ομάδας;
+    const ou = (val, L) => r => { const v = val(r); return v == null ? null : (v > L) === (side === "Over"); };
+    const own = isHomeTeam;  // η ομάδα των γραμμών είναι ο γηπεδούχος του σημερινού αγώνα;
+    const res3 = (f, a) => r => { if (r[f] < 0 || r[a] < 0) return null; const w = r[f] > r[a], d = r[f] === r[a];
+      const mine = own ? "1" : "2";
+      if (key.endsWith("1X2")) return side === "X" ? d : side === mine ? w : !w && !d;
+      return side === "12" ? !d : side.includes(mine) ? (w || d) : !w; };  // διπλή ευκαιρία
+    if (key === "1X2" || key === "DC") return res3(1, 2);
+    if (key === "ML") return r => (r[1] > r[2]) === ((side === "H") === own);
+    if (key.startsWith("AH")) { const L = parseFloat(key.slice(2)); return r => { const v = (own ? r[1] - r[2] : r[2] - r[1]) + L; return v === 0 ? null : (v > 0) === (side === "H"); }; }
+    if (key === "H1:1X2") return res3(3, 4);
+    if (key === "BTTS") return r => (r[1] > 0 && r[2] > 0) === (side === "Yes");
+    if (/^OU\d/.test(key)) return ou(r => r[1] + r[2], parseFloat(key.slice(2)));
+    if (key.startsWith("H1:OU")) return ou(r => r[3] < 0 ? null : r[3] + r[4], parseFloat(key.slice(5)));
+    if (key.startsWith("HT_OU")) return ou(r => own ? r[1] : r[2], parseFloat(key.slice(5)));
+    if (key.startsWith("AT_OU")) return ou(r => own ? r[2] : r[1], parseFloat(key.slice(5)));
+    const sm = key.match(/^S:(\w+):(T|H|A|1X2)(?::([\d.]+))?$/);
+    if (sm) {
+      const [, k, scope, Ls] = sm, i = FHI[k];
+      const f = r => k === "sv" ? (r[10] < 0 ? -1 : Math.max(r[10] - r[2], 0)) : r[i], a = r => k === "sv" ? (r[9] < 0 ? -1 : Math.max(r[9] - r[1], 0)) : r[i + 1];
+      if (scope === "1X2") return r => { if (f(r) < 0 || a(r) < 0) return null; const w = f(r) > a(r), d = f(r) === a(r); return side === "X" ? d : (side === (own ? "1" : "2")) ? w : !w && !d; };
+      const L = parseFloat(Ls);
+      if (scope === "T") return ou(r => f(r) < 0 || a(r) < 0 ? null : f(r) + a(r), L);
+      const mineScope = (scope === "H") === own;  // αφορά τη δική της μετρική ή αυτό που δέχεται
+      return ou(r => { const v = mineScope ? f(r) : a(r); return v < 0 ? null : v; }, L);
+    }
+    return null;
+  }
+  function fbFreq(m, key, side) {
+    if (!m.fh) return null;
+    const one = (rows, isHome) => {
+      const t = fbTest(key, side, isHome); if (!t || !rows || rows.length < 3) return null;
+      const ok = rows.map(r => ({ v: t(r), h: r[0] })).filter(x => x.v !== null); if (ok.length < 3) return null;
+      const cnt = a => [a.filter(x => x.v).length, a.length];
+      return { all: cnt(ok), venue: cnt(ok.filter(x => x.h === (isHome ? 1 : 0))), last5: cnt(ok.slice(-5)) };
+    };
+    const h = one(m.fh.home, true), a = one(m.fh.away, false);
+    return h || a ? { h, a } : null;
+  }
+  function fbChips(m, key, side) {
+    const F = fbFreq(m, key, side); if (!F) return "";
+    const kv = (k, v, cls = "") => `<span class="kv ${cls}"><i>${k}</i><b>${v}</b></span>`, f = a => `${a[0]}/${a[1]}`;
+    const row = (name, x, vl) => !x ? "" : `<div class="kvs"><span class="kvt">${esc(name)}</span>${kv(`Τελ. ${x.all[1]}`, f(x.all), x.all[0] / x.all[1] >= 0.65 ? "good" : x.all[0] / x.all[1] <= 0.35 ? "bad" : "")}${x.venue[1] ? kv(vl, f(x.venue), "on") : ""}${kv("Τελ. 5", f(x.last5))}</div>`;
+    // σε αγορά μίας ομάδας, η γραμμή του αντιπάλου δείχνει πόσες φορές το ΔΕΧΤΗΚΕ
+    const scope = key.startsWith("HT_OU") ? "H" : key.startsWith("AT_OU") ? "A" : (key.match(/^S:\w+:(H|A):/) || [])[1];
+    return row(m.home + (scope === "A" ? " (δέχεται)" : ""), F.h, "Εντός") + row(m.away + (scope === "H" ? " (δέχεται)" : ""), F.a, "Εκτός");
+  }
+  // κάρτα επιλογής (ποδόσφαιρο / ομαδικές αγορές): τίτλος, πιθανότητα, «από», και πόσες φορές βγήκε για κάθε ομάδα
+  const betCard = (m, o) => `<div class="pp"><div class="pp-top"><div class="pp-t">${o.title}${o.pills || ""}</div>
+      <div class="pp-p"><b class="${o.p >= 0.6 ? "hi" : "md"}">${pct(o.p)}</b><small>${o.sub || ""}</small></div></div>${fbChips(m, o.key, o.side)}</div>`;
+
   function ptopHtml(m) {
     const list = playerPicks(m);
     if (!list.length) return "";
@@ -388,13 +443,13 @@
         : `<div class="empty-s">Καμία αυτή τη στιγμή — οι αγορές είναι σωστές τις περισσότερες φορές.</div>`);
     // 2. Στατιστικά: μόνο οι πιο πιθανές, μία ανά αγώνα
     const seen = new Set();
-    const edges = ms.flatMap(m => (m.stat_edges || []).map(e => ({ m, e })))
+    const edges = ms.flatMap(m => [...(m.stat_top || []), ...(m.stat_edges || [])].map(e => ({ m, e })))
       .filter(x => x.e.fit !== -1)
       .sort((a, b) => (b.e.p - a.e.p) || ((b.e.fit ?? 0) - (a.e.fit ?? 0)))
       .filter(x => !seen.has(x.m.id) && seen.add(x.m.id))
       .slice(0, 6).sort(byTime);
     L += section("📊 Στατιστικά", "Οι 6 πιο πιθανές (μία ανά αγώνα), με σειρά ώρας. Παίξ' το αν η απόδοση είναι ≥ «από». Για τα υπόλοιπα άνοιξε τον αγώνα.",
-      edges.length ? `<div class="list">${edges.map(({ m, e }) => ri(m, `${STAT_ICON[e.stat] || ""} ${esc(e.label)}`, fitPill(e), pct(e.p), `από ${f2(e.min_odds)}`, "", e.p)).join("")}</div>`
+      edges.length ? `<div class="list">${edges.map(({ m, e }) => ri(m, `${STAT_ICON[e.stat] || ""} ${esc(e.label)}`, (() => { const F = fbFreq(m, e.key, e.side), x = F && (F.h || F.a); return x ? `<span class="pill muted">${x.all[0]}/${x.all[1]}</span>` : ""; })(), pct(e.p), `από ${f2(e.min_odds || 1.03 / e.p)}`, "", e.p)).join("")}</div>`
         : `<div class="empty-s">Καμία μεγάλη απόκλιση στους αγώνες που φαίνονται.</div>`);
     // 2β. Παίκτες μπάσκετ: μόνο επιλογές που πέρασαν τον έλεγχο
     const props = ms.flatMap(m => playerPicks(m).slice(0, 2).map(x => ({ m, x }))).sort((a, b) => b.x.p - a.x.p).slice(0, 6).sort(byTime);
@@ -500,15 +555,17 @@
     // --- Σύνοψη ---
     let s1 = bk ? ptopHtml(m) + bkDefHtml(m) : diffHtml(m);
     if (m.top && m.top.length) {
-      s1 += `<h3 class="day-sub">Πιθανότερες προβλέψεις</h3><div class="list">` + m.top.map((t, i) => `<div class="ri">
-        <div class="ri-main"><div class="ri-t">${i === 0 ? "★ " : ""}${esc(nice(m, t.key, t.side, t.label))} <span class="pill ${LVL[t.level] || "muted"}">${esc(t.level || "")}</span></div><div class="ri-s">${esc(t.why || t.group)}</div></div>
-        <div class="ri-r"><b>${pct(t.p)}</b><span>~${f2(t.est)} ${mv(t.open, t.best)}</span></div></div>`).join("") + `</div>`;
+      s1 += `<h3 class="day-sub">⭐ Πιθανότερες επιλογές</h3><div class="pps">` + m.top.map(t => betCard(m, { title: esc(nice(m, t.key, t.side, t.label)),
+        p: t.p, sub: `~${f2(t.est)} ${mv(t.open, t.best)}`, key: t.key, side: t.side })).join("") + `</div>`;
     }
-    if (m.values?.length) s1 += `<h3 class="day-sub">💎 Ευκαιρίες</h3><div class="list">` + m.values.map(s => `<div class="ri"><div class="ri-main"><div class="ri-t">${esc(nice(m, s.key, s.side, s.label))} <span class="pill hot">${evTxt(s.ev)}</span></div><div class="ri-s">Η ${esc(s.book)} δίνει πάνω από τη δίκαιη τιμή (${f2(s.fair)})</div></div><div class="ri-r"><b>${f2(s.best)}</b><span>${pct(s.p)} ${mv(s.open, s.best)}</span></div></div>`).join("") + `</div>`;
-    if (m.stat_edges?.length) s1 += `<h3 class="day-sub">📊 Στατιστικά με αξία</h3><div class="grid">${m.stat_edges.map(e => edgeBox(m, e)).join("")}</div>`;
-    if (m.stat_top?.length) s1 += `<h3 class="day-sub">Πιθανότερα στα στατιστικά</h3><div class="list">` + m.stat_top.map(t => `<div class="ri">
-        <div class="ri-main"><div class="ri-t">${esc(t.label)} ${fitPill(t)}</div><div class="ri-s">${esc(t.fit_text || t.why || "")}</div></div>
-        <div class="ri-r"><b>${pct(t.p)}</b><span>από ${f2(1.03 / t.p)}</span></div></div>`).join("") + `</div>`;
+    if (m.values?.length) s1 += `<h3 class="day-sub">💎 Καλή τιμή</h3><div class="pps">` + m.values.map(v => betCard(m, { title: esc(nice(m, v.key, v.side, v.label)),
+      pills: ` <span class="pill hot">${evTxt(v.ev)}</span>`, p: v.p, sub: `${f2(v.best)} ${esc(v.book)}`, key: v.key, side: v.side })).join("") + `</div>`;
+    {  // στατιστικά: οι πιθανότερες επιλογές μία φορά (παλιά "με αξία" και "πιθανότερα" έδειχναν συχνά τα ίδια)
+      const seenS = new Set(), stats = [...(m.stat_top || []), ...(m.stat_edges || [])].filter(t => { const k = t.key + "|" + t.side; return !seenS.has(k) && seenS.add(k); })
+        .sort((x, y) => y.p - x.p).slice(0, 6);
+      if (stats.length) s1 += `<h3 class="day-sub">📊 Στατιστικά</h3><div class="pps">` + stats.map(t => betCard(m, { title: esc(t.label), p: t.p,
+        sub: `από ${f2(t.min_odds || 1.03 / t.p)}`, key: t.key, side: t.side })).join("") + `</div>`;
+    }
     if (m.scores) s1 += `<h3 class="day-sub">Πιθανότερα σκορ</h3><div class="scores">${m.scores.map(s => `<span><b>${s.s}</b> ${pct(s.p)}</span>`).join("")}</div>`;
 
     // --- Στατιστικά ---
@@ -1216,6 +1273,10 @@
     file.text().then(t => { try { const arr = JSON.parse(t); if (Array.isArray(arr)) { saveBets(arr); renderBets(); } } catch { alert("Μη έγκυρο αρχείο"); } });
   });
 
+  // iPhone: όχι zoom με τσίμπημα ή διπλό άγγιγμα (το Safari αγνοεί το user-scalable=no)
+  ["gesturestart", "gesturechange", "gestureend"].forEach(ev => document.addEventListener(ev, e => e.preventDefault(), { passive: false }));
+  let lastTap = 0;
+  document.addEventListener("touchend", e => { const t = Date.now(); if (t - lastTap < 320 && !e.target.closest("input,select,textarea")) e.preventDefault(); lastTap = t; }, { passive: false });
   state.tab = store.get("vb_tab", "value"); state.comp = store.get("vb_comp", "ALL");
   if (!document.querySelector(`#tabs button[data-tab="${state.tab}"]`)) state.tab = "value";
   syncTabs();

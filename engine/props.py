@@ -313,6 +313,62 @@ class Model:
             self._cache[key] = f
         return self._cache[key][k]
 
+    # ---------- στατιστικά ΟΜΑΔΑΣ (τρίποντα, ριμπάουντ, ασίστ, κλεψίματα, κοψίματα, λάθη, φάουλ) ----------
+    TEAM_STATS = ("tpm", "reb", "ast", "stl", "blk", "tov", "pf")
+
+    def _team_rows(self):
+        if hasattr(self, "_trows"):
+            return self._trows
+        tot = {}
+        for d, player, team, opp, mins, v in self.logs:
+            t = tot.setdefault((team, d), {"opp": opp, "s": {k: 0.0 for k in STATS}})
+            for k in STATS:
+                t["s"][k] += v[k]
+        rows = {}
+        for (team, d), t in tot.items():
+            other = tot.get((t["opp"], d))
+            if other:
+                rows.setdefault(team, []).append((d, t["opp"], 1 if (team, d) in self.home_games else 0, t["s"], other["s"]))
+        for t in rows:
+            rows[t].sort(key=lambda r: r[0])
+        self._trows = rows
+        return rows
+
+    def team_mu(self, team, opp, k, before):
+        """Αναμενόμενο στατιστικό ομάδας: μέσος όρος των 15 τελευταίων αγώνων της × τι δίνει ο αντίπαλος."""
+        h = [r for r in self._team_rows().get(team, []) if r[0][:10] < before[:10]][-15:]
+        if len(h) < 5:
+            return None
+        return sum(r[3][k] for r in h) / len(h) * self._opp_factor(opp, k, before)
+
+    def team_phi(self):
+        """Διασπορά ανά στατιστικό από τα λάθη της πρόβλεψης σε όλους τους αγώνες (κάθε αγώνας μόνο με τους προηγούμενους)."""
+        if hasattr(self, "_tphi"):
+            return self._tphi
+        acc = {k: [0.0, 0.0, 0, 0.0, 0.0] for k in self.TEAM_STATS}
+        for team, rows in self._team_rows().items():
+            for d, opp, hm, f, a in rows:
+                for k in self.TEAM_STATS:
+                    mu = self.team_mu(team, opp, k, d)
+                    if mu is None or mu <= 0:
+                        continue
+                    c = acc[k]
+                    c[0] += (f[k] - mu) ** 2 - mu; c[1] += mu * mu; c[2] += 1; c[3] += abs(f[k] - mu); c[4] += mu
+        self._tphi = {k: {"phi": round(max(c[0] / c[1], 0.0), 4) if c[1] else 0.0, "n": c[2],
+                          "mae": round(c[3] / c[2], 2) if c[2] else None} for k, c in acc.items()}
+        return self._tphi
+
+    def team_hist(self, team, before, n=12):
+        """Τελευταίοι αγώνες ομάδας για το «βγήκε Χ στους Ν»: [εντός, πόντοι υπέρ, κατά, -1, -1, τρίποντα υ/κ, ριμπ. υ/κ,
+        ασίστ υ/κ, κλεψ. υ/κ, κοψ. υ/κ, λάθη υ/κ, φάουλ υ/κ] (ίδια διάταξη με το ποδόσφαιρο στις 5 πρώτες θέσεις)."""
+        out = []
+        for d, opp, hm, f, a in [r for r in self._team_rows().get(team, []) if r[0][:10] < before[:10]][-n:]:
+            row = [hm, int(f["pts"]), int(a["pts"]), -1, -1]
+            for k in self.TEAM_STATS:
+                row += [int(f[k]), int(a[k])]
+            out.append(row)
+        return out
+
     def recent_home(self, player, team, before):
         """Για τους τελευταίους αγώνες του παίκτη (ίδια σειρά με τις τιμές του predict): 1 = εντός, 0 = εκτός."""
         h = [e for e in self.by_player.get((player, team), []) if e[0][:10] < before[:10]][-FREQ_N:]

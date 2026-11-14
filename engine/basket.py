@@ -14,7 +14,7 @@ import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 
-from . import bcl, esake, config, espn, injuries, markets, model, predictions, props, sources
+from . import bcl, esake, config, espn, injuries, markets, model, predictions, props, sources, stats as stx
 
 FEED = "https://feeds.incrowdsports.com/provider/euroleague-feeds/v2/competitions/{c}/seasons/{s}/games?limit=400"
 BOX = "https://api-live.euroleague.net/v2/competitions/{c}/seasons/{s}/games/{g}/stats"
@@ -468,6 +468,35 @@ def build(cid, comp, margins_tbl):
             for s in selections(market_pts[0], market_pts[1], R["sd_margin"], R["sd_total"], lines):
                 book_view[(s["key"], s["side"])] = (s["pw"], s["pp"])
         sels = markets.price(sels, books, book_view, margins_tbl)
+        # στατιστικά ομάδων (τρίποντα, ριμπάουντ, ασίστ, κλεψίματα, κοψίματα, λάθη, φάουλ): ομάδα × τι δίνει ο αντίπαλος
+        TN = {"tpm": "Τρίποντα", "reb": "Ριμπάουντ", "ast": "Ασίστ", "stl": "Κλεψίματα", "blk": "Κοψίματα", "tov": "Λάθη", "pf": "Φάουλ"}
+        tphi = PM.team_phi() if box else {}
+        bstats = []
+        for k, nm in TN.items():
+            if (tphi.get(k) or {}).get("n", 0) < 100:
+                continue
+            mu_h, mu_a = PM.team_mu(h, a, k, g["date"]), PM.team_mu(a, h, k, g["date"])
+            if mu_h is None or mu_a is None:
+                continue
+            ph = tphi[k]["phi"]
+            for scope, mu, who in (("H", mu_h, g["home_short"] or h), ("A", mu_a, g["away_short"] or a), ("T", mu_h + mu_a, "Σύνολο")):
+                for L in ((_half(mu),) if scope != "T" else (_half(mu) - 1, _half(mu), _half(mu) + 1)):
+                    if L <= 0:
+                        continue
+                    po = props._nb_over(mu, ph if scope != "T" else ph / 2, L)
+                    if not 0.2 <= po <= 0.8:
+                        continue
+                    grp = f"{nm} ομάδων"
+                    for side, p_ in (("Over", po), ("Under", 1 - po)):
+                        bstats.append({**stx._s(grp, f"S:{k}:{scope}:{L:g}", side, f"{who}: {nm.lower()} {side} {L:g}", p_),
+                                       "exp": round(mu, 1), "min_odds": round(1.03 / p_, 2), "value": False})
+        sels = sels + bstats
+        seen_k, btop = set(), []
+        for s_ in sorted(bstats, key=lambda x: -x["p"]):  # οι πιθανότερες: μία ανά στατιστικό και ομάδα
+            kk = s_["key"].rsplit(":", 1)[0]
+            if kk in seen_k or s_["p"] > 0.75:
+                continue
+            seen_k.add(kk); btop.append(s_)
         hg_, ag_ = team_games(h), team_games(a)
         # χωρίς αποδόσεις αγοράς το μοντέλο δεν ελέγχεται από κάπου -> το πολύ "μέτρια"
         conf = "υψηλή" if len(hg_) >= 5 and len(ag_) >= 5 and books else "μέτρια"
@@ -544,6 +573,7 @@ def build(cid, comp, margins_tbl):
             "markets": sels,
             "values": sorted([s for s in sels if s["value"]], key=lambda s: -s["ev"])[:3],
             "solid": markets.solid(sels), "top": predictions.top(sels), "has_odds": bool(books), "props": pk, "ptop": pt,
+            "stat_top": btop[:6], "fh": {"home": PM.team_hist(h, g["date"]), "away": PM.team_hist(a, g["date"])} if box else None,
             "coef": {side: {"att": round(R["att"][t], 3), "def": round(R["def"][t], 3),
                             "ratt": 1 + sum(1 for x in cur_t if R["att"][x] > R["att"][t] + 1e-9),
                             "rdef": 1 + sum(1 for x in cur_t if R["def"][x] < R["def"][t] - 1e-9),

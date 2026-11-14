@@ -422,3 +422,17 @@ details.inf > .note, details.inf > .wx { margin-top: 8px; font-size: 12.5px; lin
 /* πιο "ήρεμες" ενότητες */
 .sec { margin-top: 22px; } .sec-h h2 { letter-spacing: -.01em; }
 .day-sub { margin: 18px 0 10px; }
+
+
+/* ===== Κινητό: σταθερή οθόνη (14/11/2026) =====
+   Το iPhone κάνει μόνο του zoom όταν πατάς πεδίο με γράμματα κάτω από 16px, και μετά η σελίδα μένει μετατοπισμένη. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html, body { overflow-x: hidden; max-width: 100%; overscroll-behavior-x: none; }
+* { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@media (max-width: 999px) {
+  input, select, textarea, body .sx-q, body .sx-plg input, body .sx-plg select, body .sx-lr input, body .sx-act input, body .cp-q, .mk input { font-size: 16px !important; }
+}
+
+.kvt { align-self: center; font-size: 11.5px; font-weight: 600; color: var(--muted); min-width: 0; max-width: 112px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 0 0 112px; }
+.pp .kvs + .kvs { margin-top: 6px; }
+@media (max-width: 420px) { .kvt { flex-basis: 88px; max-width: 88px; } }

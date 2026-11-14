@@ -44,7 +44,7 @@ def _legs(matches, rule):
                 if s["p"] >= rule["leg_p"] and s.get("est") and lo <= s["est"] <= hi
                 and s["pp"] == 0 and s.get("est_ev") is not None and s["est_ev"] >= MIN_LEG_EV
                 and (s.get("p_book") is None or abs(s["p"] - s["p_book"]) <= MAX_DISAGREE)
-                and s["key"][:2] not in ("CO", "KO")]  # κόρνερ/κάρτες: χωρίς δεδομένα αγοράς
+                and s["key"][:2] not in ("CO", "KO", "S:")]  # κόρνερ/κάρτες: χωρίς δεδομένα αγοράς
         # ανά αγώνα: η πιθανότερη επιλογή και η πιθανότερη με απόδοση ≥ 1.6 (για να "ανεβαίνει" το δελτίο)
         cand.sort(key=lambda s: -s["p"])
         pick = cand[:1] + [s for s in cand if s["est"] >= 1.6][:1]
