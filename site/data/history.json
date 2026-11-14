@@ -14898,7 +14898,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6929,
+   "p": 0.6928,
    "est": 1.4,
    "result": null
   },
@@ -14912,7 +14912,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.641,
+   "p": 0.6407,
    "est": 1.49,
    "result": null
   },
@@ -15528,7 +15528,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6528,
+   "p": 0.653,
    "est": 1.47,
    "result": null
   },
@@ -15542,7 +15542,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6802,
+   "p": 0.68,
    "est": 1.41,
    "result": null
   },
@@ -15640,7 +15640,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6636,
+   "p": 0.6637,
    "est": 1.44,
    "result": null
   },
@@ -15906,7 +15906,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6528,
+   "p": 0.6529,
    "est": 1.47,
    "result": null
   },
@@ -15948,7 +15948,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.675,
+   "p": 0.6749,
    "est": 1.42,
    "result": null
   },
