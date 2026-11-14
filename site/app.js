@@ -299,22 +299,20 @@
     return out.sort((a, b) => b.p - a.p);
   }
   // ετικέτες στοιχείων μιας επιλογής παίκτη: πόσες φορές βγήκε (σύνολο, εντός, εκτός, τελευταίοι 5), μέσος όρος, πρόβλεψη
+  // ΚΑΝΟΝΑΣ εμφάνισης: κάθε επιλογή δείχνει ΜΟΝΟ 4 στοιχεία, πάντα με τα ίδια ονόματα:
+  // Τελευταία (όλοι οι πρόσφατοι αγώνες) · Εντός · Εκτός · Φόρμα (οι 5 πιο πρόσφατοι). Με πράσινο περίγραμμα η έδρα του σημερινού αγώνα.
+  const kvChip = (k, v, cls = "") => `<span class="kv ${cls}"><i>${k}</i><b>${v}</b></span>`;
+  function fourChips(all, home, away, last5, atHome) {
+    const f = a => `${a[0]}/${a[1]}`, r = a => a[1] ? a[0] / a[1] : 0;
+    const fire = last5[1] >= 4 && all[1] >= 8 ? (r(last5) - r(all) >= 0.2 ? " 🔥" : r(all) - r(last5) >= 0.2 ? " 🧊" : "") : "";
+    return kvChip("Τελευταία", f(all), r(all) >= 0.65 ? "good" : r(all) <= 0.35 ? "bad" : "")
+      + (home[1] ? kvChip("Εντός", f(home), atHome === true ? "on" : "") : "") + (away[1] ? kvChip("Εκτός", f(away), atHome === false ? "on" : "") : "")
+      + (last5[1] ? kvChip("Φόρμα", f(last5) + fire) : "");
+  }
   function statChips(o) {
-    const kv = (k, v, cls = "") => `<span class="kv ${cls}"><i>${k}</i><b>${v}</b></span>`, f = a => `${a[0]}/${a[1]}`;
-    const sp = o.split, out = [];
-    if (o.freq) out.push(kv(`Τελ. ${o.freq[1]}`, f(o.freq), o.freq[0] / o.freq[1] >= 0.65 ? "good" : o.freq[0] / o.freq[1] <= 0.4 ? "bad" : ""));
-    if (sp) {
-      const tot = sp.home[1] + sp.away[1], all = tot ? (sp.home[0] + sp.away[0]) / tot : 0, r5 = sp.last5[1] ? sp.last5[0] / sp.last5[1] : 0;
-      const fire = sp.last5[1] >= 4 && tot >= 10 ? (r5 - all >= 0.2 ? " 🔥" : all - r5 >= 0.2 ? " 🧊" : "") : "";
-      if (sp.home[1]) out.push(kv("Εντός", f(sp.home), sp.at_home === true ? "on" : ""));
-      if (sp.away[1]) out.push(kv("Εκτός", f(sp.away), sp.at_home === false ? "on" : ""));
-      if (sp.last5[1]) out.push(kv("Τελ. 5", f(sp.last5) + fire));
-    }
-    if (o.avg10 != null) out.push(kv("Μ.ό. 10", o.avg10));
-    if (o.exp != null) out.push(kv("Πρόβλεψη", o.exp));
-    if (o.mins != null) out.push(kv("Λεπτά", `${Math.round(o.mins)}'`));
-    if (o.extra >= 1) out.push(kv("Απουσία", `+${o.extra}'`, "good"));
-    return `<div class="kvs">${out.join("")}</div>`;
+    const sp = o.split;
+    if (!o.freq || !sp) return "";
+    return `<div class="kvs">${fourChips(o.freq, sp.home, sp.away, sp.last5, sp.at_home)}</div>`;
   }
   // Γραμμή ιστορικού ομάδας (engine/run.py team_hist): [εντός, γκολ υπέρ, κατά, ημίχρ. υπέρ, κατά, κόρνερ υ/κ, σουτ υ/κ, στην εστία υ/κ, φάουλ υ/κ, κάρτες υ/κ]
   const FHI = { co: 5, sh: 7, st: 9, fo: 11, ca: 13,                                  // ποδόσφαιρο
@@ -354,18 +352,17 @@
       const t = fbTest(key, side, isHome); if (!t || !rows || rows.length < 3) return null;
       const ok = rows.map(r => ({ v: t(r), h: r[0] })).filter(x => x.v !== null); if (ok.length < 3) return null;
       const cnt = a => [a.filter(x => x.v).length, a.length];
-      return { all: cnt(ok), venue: cnt(ok.filter(x => x.h === (isHome ? 1 : 0))), last5: cnt(ok.slice(-5)) };
+      return { all: cnt(ok), home: cnt(ok.filter(x => x.h === 1)), away: cnt(ok.filter(x => x.h === 0)), last5: cnt(ok.slice(-5)) };
     };
     const h = one(m.fh.home, true), a = one(m.fh.away, false);
     return h || a ? { h, a } : null;
   }
   function fbChips(m, key, side) {
     const F = fbFreq(m, key, side); if (!F) return "";
-    const kv = (k, v, cls = "") => `<span class="kv ${cls}"><i>${k}</i><b>${v}</b></span>`, f = a => `${a[0]}/${a[1]}`;
-    const row = (name, x, vl) => !x ? "" : `<div class="kvs"><span class="kvt">${esc(name)}</span>${kv(`Τελ. ${x.all[1]}`, f(x.all), x.all[0] / x.all[1] >= 0.65 ? "good" : x.all[0] / x.all[1] <= 0.35 ? "bad" : "")}${x.venue[1] ? kv(vl, f(x.venue), "on") : ""}${kv("Τελ. 5", f(x.last5))}</div>`;
+    const row = (name, x, atHome) => !x ? "" : `<div class="kvs"><span class="kvt">${esc(name)}</span>${fourChips(x.all, x.home, x.away, x.last5, atHome)}</div>`;
     // σε αγορά μίας ομάδας, η γραμμή του αντιπάλου δείχνει πόσες φορές το ΔΕΧΤΗΚΕ
     const scope = key.startsWith("HT_OU") ? "H" : key.startsWith("AT_OU") ? "A" : (key.match(/^S:\w+:(H|A):/) || [])[1];
-    return row(m.home + (scope === "A" ? " (δέχεται)" : ""), F.h, "Εντός") + row(m.away + (scope === "H" ? " (δέχεται)" : ""), F.a, "Εκτός");
+    return row(m.home + (scope === "A" ? " (δέχεται)" : ""), F.h, true) + row(m.away + (scope === "H" ? " (δέχεται)" : ""), F.a, false);
   }
   // κάρτα επιλογής (ποδόσφαιρο / ομαδικές αγορές): τίτλος, πιθανότητα, «από», και πόσες φορές βγήκε για κάθε ομάδα
   const betCard = (m, o) => `<div class="pp"><div class="pp-top"><div class="pp-t">${o.title}${o.pills || ""}</div>
@@ -379,6 +376,14 @@
           <div class="pp-p"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><small>από ${f2(x.min_odds)}</small></div></div>
         ${statChips({ ...x, split: x.split && { ...x.split, at_home: x.at_home } })}</div>`).join("")}</div>
       <div class="wx">Με πράσινο περίγραμμα η έδρα του σημερινού αγώνα. «Τελ. 20» = οι 20 πιο πρόσφατοι αγώνες του στην ίδια διοργάνωση. 🔥/🧊 = στους 5 τελευταίους το βγάζει πολύ πιο συχνά/σπάνια. «Διαφορά» = το μοντέλο διαφωνεί πολύ με τον μέσο όρο 10 αγώνων. Η γραμμή είναι ο μέσος όρος 10 αγώνων: αν η εταιρεία έχει άλλη, έλεγξέ τη στο 🧾 Δελτίο. Ο έλεγχος δεν έγινε με πραγματικές γραμμές εταιρειών.</div>`;
+  }
+  function fptopHtml(m) {
+    if (!m.fptop || !m.fptop.length) return "";
+    return `<h3 class="day-sub">⚽ Επιλογές παικτών</h3><div class="pps">${m.fptop.map(x => `<div class="pp">
+        <div class="pp-top"><div class="pp-t">${esc(x.label)}<small>${esc(x.team)}</small></div>
+          <div class="pp-p"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><small>από ${f2(x.min_odds)}</small></div></div>
+        ${statChips({ ...x, split: x.split && { ...x.split, at_home: x.at_home } })}</div>`).join("")}</div>
+      <div class="wx">Μετράνε μόνο οι αγώνες που ο παίκτης έπαιξε, στην ίδια διοργάνωση. Η επιλογή ισχύει αν ξεκινήσει βασικός: οι ενδεκάδες βγαίνουν ~1 ώρα πριν, δεν τις ξέρω νωρίτερα. Πηγή: ESPN. Για άλλη γραμμή, έλεγξέ τη στο 🧾 Δελτίο.</div>`;
   }
   function bkDefHtml(m) {
     const C = m.coef;
@@ -452,8 +457,8 @@
       edges.length ? `<div class="list">${edges.map(({ m, e }) => ri(m, `${STAT_ICON[e.stat] || ""} ${esc(e.label)}`, (() => { const F = fbFreq(m, e.key, e.side), x = F && (F.h || F.a); return x ? `<span class="pill muted">${x.all[0]}/${x.all[1]}</span>` : ""; })(), pct(e.p), `από ${f2(e.min_odds || 1.03 / e.p)}`, "", e.p)).join("")}</div>`
         : `<div class="empty-s">Καμία μεγάλη απόκλιση στους αγώνες που φαίνονται.</div>`);
     // 2β. Παίκτες μπάσκετ: μόνο επιλογές που πέρασαν τον έλεγχο
-    const props = ms.flatMap(m => playerPicks(m).slice(0, 2).map(x => ({ m, x }))).sort((a, b) => b.x.p - a.x.p).slice(0, 6).sort(byTime);
-    if (props.length) L += section("🏀 Παίκτες", "Πόντοι, ριμπάουντ, ασίστ κ.ά. μόνο όπου το μοντέλο κέρδισε στον έλεγχο. Παίξ' το αν η απόδοση είναι ≥ «από».",
+    const props = ms.flatMap(m => [...playerPicks(m), ...(m.fptop || [])].slice(0, 2).map(x => ({ m, x }))).sort((a, b) => b.x.p - a.x.p).slice(0, 6).sort(byTime);
+    if (props.length) L += section("👤 Παίκτες", "Πόντοι, ριμπάουντ, ασίστ κ.ά. μόνο όπου το μοντέλο κέρδισε στον έλεγχο. Παίξ' το αν η απόδοση είναι ≥ «από».",
       `<div class="list">${props.map(({ m, x }) => ri(m, esc(x.label), x.freq ? `<span class="pill muted">${x.freq[0]}/${x.freq[1]}</span>` : "", pct(x.p), `από ${f2(x.min_odds)}`, "", x.p)).join("")}</div>`);
     // 3. Πιθανότερες προβλέψεις: μόνο οι κορυφαίες
     const preds = ms.filter(m => m.top && m.top.length).map(m => ({ m, t: m.top[0] })).sort((a, b) => b.t.p - a.t.p).slice(0, 8).sort(byTime);
@@ -553,19 +558,25 @@
       <div class="seg">${tabs.map(([k, l], i) => `<button data-pane-btn="${k}" class="${i ? "" : "active"}">${l}</button>`).join("")}</div>`;
 
     // --- Σύνοψη ---
-    let s1 = bk ? ptopHtml(m) + bkDefHtml(m) : diffHtml(m);
-    if (m.top && m.top.length) {
-      s1 += `<h3 class="day-sub">⭐ Πιθανότερες επιλογές</h3><div class="pps">` + m.top.map(t => betCard(m, { title: esc(nice(m, t.key, t.side, t.label)),
-        p: t.p, sub: `~${f2(t.est)} ${mv(t.open, t.best)}`, key: t.key, side: t.side })).join("") + `</div>`;
+    let s1 = bk ? "" : diffHtml(m);
+    {
+      // ΚΑΝΟΝΑΣ: δύο κατηγορίες, «Παίκτες» και «Ομάδες». Σε καθεμία το πολύ 5 επιλογές, οι πιο πιθανές (από 55% και πάνω).
+      // Αν δεν υπάρχουν αρκετές καλές, μπαίνουν λιγότερες.
+      const players = [...playerPicks(m), ...(m.fptop || [])].filter(x => x.p >= 0.55).sort((x, y) => y.p - x.p).slice(0, 5);
+      if (players.length) s1 += `<h3 class="day-sub">👤 Παίκτες</h3><div class="pps">${players.map(x => `<div class="pp">
+          <div class="pp-top"><div class="pp-t">${esc(x.label)}<small>${esc(x.team)}${x.extra >= 1 ? ` · +${x.extra}' λόγω απουσίας` : ""}</small></div>
+            <div class="pp-p"><b class="${x.p >= 0.6 ? "hi" : "md"}">${pct(x.p)}</b><small>από ${f2(x.min_odds)}</small></div></div>
+          ${statChips({ ...x, split: x.split && { ...x.split, at_home: x.at_home } })}</div>`).join("")}</div>`;
+      const seenT = new Set(), teams = [
+        ...(m.top || []).map(t => ({ title: esc(nice(m, t.key, t.side, t.label)), p: t.p, sub: `~${f2(t.est)}`, key: t.key, side: t.side })),
+        ...[...(m.stat_top || []), ...(m.stat_edges || [])].map(t => ({ title: esc(t.label), p: t.p, sub: `από ${f2(t.min_odds || 1.03 / t.p)}`, key: t.key, side: t.side })),
+      ].filter(t => { const k = t.key + "|" + t.side; return t.p >= 0.55 && !seenT.has(k) && seenT.add(k); }).sort((x, y) => y.p - x.p).slice(0, 5);
+      const val = new Map((m.values || []).map(v => [v.key + "|" + v.side, v]));
+      if (teams.length) s1 += `<h3 class="day-sub">🛡️ Ομάδες</h3><div class="pps">${teams.map(t => { const v = val.get(t.key + "|" + t.side);
+        return betCard(m, { ...t, pills: v ? ` <span class="pill hot">${evTxt(v.ev)}</span>` : "" }); }).join("")}</div>`;
+      if (!players.length && !teams.length) s1 += `<div class="empty-s">Καμία επιλογή με αρκετή πιθανότητα σε αυτόν τον αγώνα.</div>`;
     }
-    if (m.values?.length) s1 += `<h3 class="day-sub">💎 Καλή τιμή</h3><div class="pps">` + m.values.map(v => betCard(m, { title: esc(nice(m, v.key, v.side, v.label)),
-      pills: ` <span class="pill hot">${evTxt(v.ev)}</span>`, p: v.p, sub: `${f2(v.best)} ${esc(v.book)}`, key: v.key, side: v.side })).join("") + `</div>`;
-    {  // στατιστικά: οι πιθανότερες επιλογές μία φορά (παλιά "με αξία" και "πιθανότερα" έδειχναν συχνά τα ίδια)
-      const seenS = new Set(), stats = [...(m.stat_top || []), ...(m.stat_edges || [])].filter(t => { const k = t.key + "|" + t.side; return !seenS.has(k) && seenS.add(k); })
-        .sort((x, y) => y.p - x.p).slice(0, 6);
-      if (stats.length) s1 += `<h3 class="day-sub">📊 Στατιστικά</h3><div class="pps">` + stats.map(t => betCard(m, { title: esc(t.label), p: t.p,
-        sub: `από ${f2(t.min_odds || 1.03 / t.p)}`, key: t.key, side: t.side })).join("") + `</div>`;
-    }
+    if (bk) s1 += bkDefHtml(m);
     if (m.scores) s1 += `<h3 class="day-sub">Πιθανότερα σκορ</h3><div class="scores">${m.scores.map(s => `<span><b>${s.s}</b> ${pct(s.p)}</span>`).join("")}</div>`;
 
     // --- Στατιστικά ---
@@ -759,6 +770,8 @@
   // ---------- Δελτίο: γράφεις τις αποδόσεις της εταιρείας, βλέπεις αμέσως πού έχει αξία ----------
   const PSTAT = { pts: "Πόντοι", reb: "Ριμπάουντ", ast: "Ασίστ", tpm: "Τρίποντα", stl: "Κλεψίματα", blk: "Κοψίματα", tov: "Λάθη", pf: "Προσωπικά φάουλ (που κάνει)",
     pra: "Πόντοι+Ριμπ.+Ασίστ", pr: "Πόντοι+Ριμπάουντ", pa: "Πόντοι+Ασίστ", ra: "Ριμπάουντ+Ασίστ" };
+  const pNames = m => (m && m.pmodel && m.pmodel.names) || PSTAT;       // ονόματα στατιστικών του αγώνα
+  const pKey = m => { const n = pNames(m); return n[state.sx.st] ? state.sx.st : Object.keys(n)[0]; };
   const slipLegs = () => store.get("vb_slip", []);
   const saveSlip = l => store.set("vb_slip", l);
   const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -779,14 +792,15 @@
     const cal = P.cal ?? 1, mu = r.avg10[k] + cal * (r.mu[k] - r.avg10[k]);
     let po = pOver(nb(mu, P.phi[k] ?? 0.05), L);
     // + πόσες φορές πέρασε πραγματικά τη γραμμή στους τελευταίους 20 αγώνες (βάρος 25%, από την έρευνα)
-    const BASE = ["pts", "reb", "ast", "tpm", "stl", "blk", "tov", "pf"], PARTS = { pra: ["pts", "reb", "ast"], pr: ["pts", "reb"], pa: ["pts", "ast"], ra: ["reb", "ast"] };
+    const BASE = P.base || ["pts", "reb", "ast", "tpm", "stl", "blk", "tov", "pf"], HI = BASE.length, PARTS = { pra: ["pts", "reb", "ast"], pr: ["pts", "reb"], pa: ["pts", "ast"], ra: ["reb", "ast"] };
     const rowsH = (r.h || "").split("|").filter(Boolean).map(g => g.split(".").map(Number));
     const hist = rowsH.map(v => (PARTS[k] || [k]).reduce((a, s) => a + (v[BASE.indexOf(s)] || 0), 0));
     let freq = null, split = null;
     if (hist.length >= 8) { const c = hist.filter(x => x > L).length; freq = [c, hist.length]; po = 0.75 * po + 0.25 * (c + 1) / (hist.length + 2); }
+    if (P.calk && P.calk[k] != null) { const p0 = (P.basek[k] || {})[String(L)]; if (p0 != null) po = p0 + P.calk[k] * (po - p0); }  // ποδόσφαιρο: βαθμονόμηση από τον έλεγχο
     if (hist.length >= 3) {  // εντός / εκτός / τελευταίοι 5 (πληροφορία, δεν αλλάζει την πιθανότητα)
       const ok = hist.map(x => (x > L) === (side === "Over")), cnt = a => [a.filter(Boolean).length, a.length];
-      split = { home: cnt(ok.filter((_, i) => rowsH[i][8] === 1)), away: cnt(ok.filter((_, i) => rowsH[i][8] === 0)), last5: cnt(ok.slice(-5)),
+      split = { home: cnt(ok.filter((_, i) => rowsH[i][HI] === 1)), away: cnt(ok.filter((_, i) => rowsH[i][HI] === 0)), last5: cnt(ok.slice(-5)),
         at_home: (P.home || []).includes(r) };
     }
     return { p: side === "Over" ? po : 1 - po, mu: Math.round(mu * 10) / 10, avg10: r.avg10[k], mins: r.mins, extra: r.extra, ok: (P.ok || []).includes(k), few: !!r.few, split,
@@ -824,7 +838,7 @@
       const hitsM = ms.filter(x => norm(`${x.home} ${x.away} ${x.home_full || ""} ${x.away_full || ""}`).includes(q)).slice(0, 8);
       const hitsP = ms.flatMap(x => [...(x.pmodel?.home || []), ...(x.pmodel?.away || [])].filter(p => norm(p.name).includes(q)).map(p => ({ m: x, p }))).slice(0, 6);
       L += `<div class="sx-res">${hitsM.map(x => `<button class="sx-r" data-sxm="${esc(x.id)}"><span class="ri-time"><b>${hhmm(x.date)}</b><span>${dayShort(x.date)}</span></span><span class="sx-rt"><b>${esc(x.home)} – ${esc(x.away)}</b><small>${esc(COMP[x.comp] || "")}</small></span></button>`).join("")}
-        ${hitsP.map(({ m: x, p }) => `<button class="sx-r" data-sxm="${esc(x.id)}" data-sxp="${esc(p.name)}"><span class="ri-time"><b>🏀</b><span>${dayShort(x.date)}</span></span><span class="sx-rt"><b>${esc(p.name)}</b><small>${esc(x.home)} – ${esc(x.away)} · ~${p.mins}'</small></span></button>`).join("")}
+        ${hitsP.map(({ m: x, p }) => `<button class="sx-r" data-sxm="${esc(x.id)}" data-sxp="${esc(p.name)}"><span class="ri-time"><b>${isBasket(x) ? "🏀" : "⚽"}</b><span>${dayShort(x.date)}</span></span><span class="sx-rt"><b>${esc(p.name)}</b><small>${esc(x.home)} – ${esc(x.away)} · ~${p.mins}'</small></span></button>`).join("")}
         ${!hitsM.length && !hitsP.length ? `<div class="empty-s">Δεν βρέθηκε. Γράψε μέρος του ονόματος (λατινικά).</div>` : ""}</div>`;
     } else if (!m) {
       L += `<div class="sx-res">${ms.slice(0, 6).map(x => `<button class="sx-r" data-sxm="${esc(x.id)}"><span class="ri-time"><b>${hhmm(x.date)}</b><span>${dayShort(x.date)}</span></span><span class="sx-rt"><b>${esc(x.home)} – ${esc(x.away)}</b><small>${esc(COMP[x.comp] || "")}</small></span></button>`).join("")}</div>`;
@@ -843,14 +857,14 @@
       if (m.pmodel) {
         const players = [...(m.pmodel.home || []).map(p => ({ ...p, t: m.home })), ...(m.pmodel.away || []).map(p => ({ ...p, t: m.away }))];
         const pl = players.find(p => p.name === S.pl) || null;
-        L += `<div class="sx-pl"><div class="sx-sub">🏀 Γραμμή παίκτη (όπως τη δίνει η εταιρεία)</div>
+        L += `<div class="sx-pl"><div class="sx-sub">${isBasket(m) ? "🏀" : "⚽"} Γραμμή παίκτη (όπως τη δίνει η εταιρεία)</div>
           <div class="sx-plg">
             <select data-sxpl><option value="">Παίκτης…</option>${players.map(p => `<option ${p.name === S.pl ? "selected" : ""}>${esc(p.name)}</option>`).join("")}</select>
-            <select data-sxst>${Object.entries(PSTAT).map(([k, v]) => `<option value="${k}" ${S.st === k ? "selected" : ""}>${v}</option>`).join("")}</select>
+            <select data-sxst>${Object.entries(pNames(m)).map(([k, v]) => `<option value="${k}" ${pKey(m) === k ? "selected" : ""}>${v}</option>`).join("")}</select>
             <span class="sx-half"><input data-sxline inputmode="numeric" pattern="[0-9]*" placeholder="Γραμμή π.χ. 9" value="${esc(S.line || "")}"><b>,5</b></span>
             <input data-sxpodds inputmode="decimal" placeholder="Απόδοση" value="${esc(S.podds || "")}">
           </div>
-          ${pl ? `<div class="sx-plinfo">${esc(pl.name)} (${esc(pl.t)}) · ~${pl.mins}'${pl.extra >= 1 ? ` (+${pl.extra}' λόγω απουσίας)` : ""} · μ.ό. 10: ${pl.avg10[S.st || "pts"]} · μοντέλο: <b>${pl.mu[S.st || "pts"]}</b>${pl.few ? ` · <span class="pill warn">${pl.g < 6 ? `λίγα δεδομένα: ${pl.g} αγώνες` : `παίζει λίγο (~${pl.mins}'): πιο αβέβαιο`}</span>` : ""}</div>` : ""}
+          ${pl ? `<div class="sx-plinfo">${esc(pl.name)} (${esc(pl.t)}) · ~${pl.mins}'${pl.extra >= 1 ? ` (+${pl.extra}' λόγω απουσίας)` : ""} · μ.ό. 10: ${pl.avg10[pKey(m)]} · μοντέλο: <b>${pl.mu[pKey(m)]}</b>${pl.few ? ` · <span class="pill warn">${pl.g < 6 ? `λίγα δεδομένα: ${pl.g} αγώνες` : `παίζει λίγο (~${pl.mins}'): πιο αβέβαιο`}</span>` : ""}</div>` : ""}
           <div class="sx-plb"><button class="btn sm" data-sxadd="Over">+ Over</button><button class="btn sm ghost" data-sxadd="Under">+ Under</button></div></div>`;
       }
       L += `<input class="sx-q sm" data-sxmq placeholder="Φίλτρο αγορών: π.χ. over 2.5, κόρνερ, γκολ-γκολ" value="${esc(S.mq)}">`;
@@ -984,11 +998,11 @@
     }
     const pa = t.closest("[data-sxadd]");
     if (pa) {
-      const m = findMatch(state.sx.mid), S = state.sx, k = S.st || "pts", L = Math.floor(parseFloat(String(S.line || "").replace(",", "."))) + 0.5;  // το ,5 είναι σταθερό: γράφεις μόνο τον ακέραιο
+      const m = findMatch(state.sx.mid), S = state.sx, k = pKey(m), L = Math.floor(parseFloat(String(S.line || "").replace(",", "."))) + 0.5;  // το ,5 είναι σταθερό: γράφεις μόνο τον ακέραιο
       if (!S.pl || !(L > 0)) { alert("Διάλεξε παίκτη και γράψε τη γραμμή (π.χ. 9 για 9,5)."); return; }
       const side = pa.dataset.sxadd, r = playerP(m, S.pl, k, L, side);
       if (!r) { alert("Δεν υπάρχει πρόβλεψη για αυτόν τον παίκτη."); return; }
-      addLeg({ kind: "player", mid: m.id, key: `P:${S.pl}:${k}:${L}`, side, player: S.pl, stat: k, line: L, label: `${S.pl}: ${PSTAT[k]} ${side} ${L}`,
+      addLeg({ kind: "player", mid: m.id, key: `P:${S.pl}:${k}:${L}`, side, player: S.pl, stat: k, line: L, label: `${S.pl}: ${pNames(m)[k]} ${side} ${L}`,
         match: `${m.home} – ${m.away}`, date: m.date, comp: m.comp, p: r.p, pp: 0, odds: S.podds || null });
       S.podds = ""; return renderSlip();
     }

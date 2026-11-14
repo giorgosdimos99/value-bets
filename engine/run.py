@@ -656,6 +656,13 @@ def main():
             matches.append(analyse(m, cid, ctx, books))
         if cid == "PL":
             players.attach_fpl(matches, ctx)
+        try:  # στατιστικά παικτών (σουτ, φάουλ, κάρτες...) από την ESPN
+            from . import fbplayers
+            fp = fbplayers.attach(matches, cid)
+            if fp:
+                print(f"    παίκτες: {fp['matches']} αγώνες με επιλογές ({fp['games']} αγώνες στη βάση)")
+        except Exception as e:
+            print(f"  ! παίκτες {cid}: {e}")
         standings = sources.fdorg_standings(comp["fdorg"]) if comp["fdorg"] else standings_from(results.get(comp["fdcouk"], []))
         teams = []
         if comp["fdcouk"]:

@@ -16,6 +16,7 @@ ALIASES = {
     "norwich city": "norwich", "stoke city": "stoke", "swansea city": "swansea", "cardiff city": "cardiff",
     "afc bournemouth": "bournemouth", "west bromwich albion": "west brom",
     "paris saint germain": "paris sg", "psg": "paris sg", "paris": "paris sg",
+    "1 koln": "cologne", "koln": "cologne", "fc koln": "cologne",
     "bayern munich": "bayern munchen", "bayern": "bayern munchen", "fc bayern munchen": "bayern munchen",
     "borussia dortmund": "dortmund", "bvb": "dortmund", "bayer leverkusen": "leverkusen",
     "bayer 04 leverkusen": "leverkusen", "rb leipzig": "rb leipzig", "leipzig": "rb leipzig",
