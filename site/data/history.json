@@ -6050,7 +6050,8 @@
      "est_src": "m3",
      "best": 1.27,
      "book": "Bet365",
-     "result": null
+     "result": 1,
+     "score": "2-0"
     },
     {
      "match_id": "SC2-2026-11-14-airdrie utd",
@@ -6068,7 +6069,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "2-0"
     },
     {
      "match_id": "EC-2026-11-14-hornchurch",
@@ -6086,7 +6088,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 1,
+     "score": "2-1"
     },
     {
      "match_id": "L1-77721ceba014237d5ab331aad5bd05ac",
@@ -6104,7 +6107,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "3-0"
     },
     {
      "match_id": "UNL-401861165",
@@ -6132,7 +6136,7 @@
    "day": "2026-11-14",
    "kind": "simple",
    "created": "2026-11-14T13:15:03.987151+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -6152,7 +6156,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "2-2"
     },
     {
      "match_id": "UNL-401861180",
@@ -6170,7 +6175,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "1-0"
     },
     {
      "match_id": "UNL-401861183",
@@ -6188,7 +6194,8 @@
      "est_src": "g",
      "best": 2.1,
      "book": "DraftKings",
-     "result": null
+     "result": 1,
+     "score": "2-1"
     },
     {
      "match_id": "UNL-401861186",
@@ -6215,7 +6222,7 @@
    "day": "2026-11-16",
    "kind": "extreme",
    "created": "2026-11-14T13:15:03.987151+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -6235,7 +6242,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "1-0"
     },
     {
      "match_id": "UNL-401861166",
@@ -6272,7 +6280,8 @@
      "est_src": "g",
      "best": null,
      "book": null,
-     "result": null
+     "result": 0,
+     "score": "0-0"
     }
    ],
    "odds": 5.06,
@@ -6281,7 +6290,7 @@
    "day": "2026-11-14",
    "kind": "simple",
    "created": "2026-11-14T17:07:23.360124+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -6624,7 +6633,8 @@
      "est_src": "g",
      "best": 1.833,
      "book": "DraftKings",
-     "result": null
+     "result": 0,
+     "score": "2-2"
     },
     {
      "match_id": "UNL-401861182",
@@ -6642,7 +6652,8 @@
      "est_src": "g",
      "best": 1.625,
      "book": "DraftKings",
-     "result": null
+     "result": 1,
+     "score": "3-0"
     },
     {
      "match_id": "UNL-401861187",
@@ -6669,90 +6680,7 @@
    "day": "2026-11-16",
    "kind": "simple",
    "created": "2026-11-16T09:43:03.437903+00:00",
-   "result": null
-  },
-  {
-   "legs": [
-    {
-     "match_id": "NBA-401909996",
-     "comp": "NBA",
-     "date": "2026-11-17T00:00Z",
-     "home": "Washington Wizards",
-     "away": "Memphis Grizzlies",
-     "key": "AT_OU114.5",
-     "side": "Over",
-     "label": "Φιλοξενούμενος Over 114.5",
-     "group": "Πόντοι φιλοξενούμενος",
-     "p": 0.607,
-     "fair": 1.65,
-     "est": 1.61,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "NBA-401909998",
-     "comp": "NBA",
-     "date": "2026-11-17T00:30Z",
-     "home": "Miami Heat",
-     "away": "Houston Rockets",
-     "key": "AT_OU113.5",
-     "side": "Over",
-     "label": "Φιλοξενούμενος Over 113.5",
-     "group": "Πόντοι φιλοξενούμενος",
-     "p": 0.6245,
-     "fair": 1.6,
-     "est": 1.61,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    },
-    {
-     "match_id": "NBA-401910000",
-     "comp": "NBA",
-     "date": "2026-11-17T01:00Z",
-     "home": "New Orleans Pelicans",
-     "away": "Golden State Warriors",
-     "key": "ML",
-     "side": "A",
-     "label": "2",
-     "group": "Νικητής (με παράταση)",
-     "p": 0.6142,
-     "fair": 1.63,
-     "est": 1.62,
-     "est_src": "g",
-     "best": 1.658,
-     "book": "DraftKings",
-     "result": null
-    },
-    {
-     "match_id": "UNL-401861196",
-     "comp": "UNL",
-     "date": "2026-11-17T19:45Z",
-     "home": "Bosnia-Herzegovina",
-     "away": "Romania",
-     "key": "HT_OU2.5",
-     "side": "Under",
-     "label": "Γηπεδούχος Under 2.5",
-     "group": "Γκολ γηπεδούχου",
-     "p": 0.7651,
-     "fair": 1.31,
-     "est": 1.25,
-     "est_src": "g",
-     "best": null,
-     "book": null,
-     "result": null
-    }
-   ],
-   "odds": 5.25,
-   "p": 0.1781,
-   "ev": -0.065,
-   "day": "2026-11-17",
-   "kind": "simple",
-   "created": "2026-11-16T09:43:03.437903+00:00",
-   "result": null
+   "result": 0
   },
   {
    "legs": [
@@ -6988,6 +6916,89 @@
   {
    "legs": [
     {
+     "match_id": "NBA-401909998",
+     "comp": "NBA",
+     "date": "2026-11-17T00:30Z",
+     "home": "Miami Heat",
+     "away": "Houston Rockets",
+     "key": "AT_OU114.5",
+     "side": "Over",
+     "label": "Φιλοξενούμενος Over 114.5",
+     "group": "Πόντοι φιλοξενούμενος",
+     "p": 0.6195,
+     "fair": 1.61,
+     "est": 1.61,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "NBA-401910000",
+     "comp": "NBA",
+     "date": "2026-11-17T01:00Z",
+     "home": "New Orleans Pelicans",
+     "away": "Golden State Warriors",
+     "key": "AT_OU111.5",
+     "side": "Over",
+     "label": "Φιλοξενούμενος Over 111.5",
+     "group": "Πόντοι φιλοξενούμενος",
+     "p": 0.615,
+     "fair": 1.63,
+     "est": 1.66,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "EL-118",
+     "comp": "EL",
+     "date": "2026-11-17T19:45:00.000Z",
+     "home": "Partizan",
+     "away": "Valencia",
+     "key": "AT_OU91.5",
+     "side": "Under",
+     "label": "Φιλοξενούμενος Under 91.5",
+     "group": "Πόντοι φιλοξενούμενος",
+     "p": 0.6066,
+     "fair": 1.65,
+     "est": 1.64,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    },
+    {
+     "match_id": "UNL-401861191",
+     "comp": "UNL",
+     "date": "2026-11-17T19:45Z",
+     "home": "Hungary",
+     "away": "Northern Ireland",
+     "key": "AH-1.5",
+     "side": "A",
+     "label": "2 (+1.5)",
+     "group": "Ασιατικό χάντικαπ",
+     "p": 0.7659,
+     "fair": 1.31,
+     "est": 1.25,
+     "est_src": "g",
+     "best": null,
+     "book": null,
+     "result": null
+    }
+   ],
+   "odds": 5.48,
+   "p": 0.177,
+   "ev": -0.0302,
+   "day": "2026-11-17",
+   "kind": "simple",
+   "created": "2026-11-16T20:29:42.490324+00:00",
+   "result": null
+  },
+  {
+   "legs": [
+    {
      "match_id": 560646,
      "comp": "PL",
      "date": "2026-11-22T14:00:00Z",
@@ -6997,7 +7008,7 @@
      "side": "Under",
      "label": "Γηπεδούχος Under 1.5",
      "group": "Γκολ γηπεδούχου",
-     "p": 0.7284,
+     "p": 0.7321,
      "fair": 1.37,
      "est": 1.29,
      "est_src": "g",
@@ -7042,17 +7053,17 @@
      "result": null
     },
     {
-     "match_id": 560645,
-     "comp": "PL",
-     "date": "2026-11-22T16:30:00Z",
-     "home": "Liverpool",
-     "away": "Man United",
-     "key": "HT_OU1.5",
-     "side": "Over",
-     "label": "Γηπεδούχος Over 1.5",
-     "group": "Γκολ γηπεδούχου",
-     "p": 0.5886,
-     "fair": 1.7,
+     "match_id": "GR-e57515aa26c7b7599f6f657e824f68c4",
+     "comp": "GR",
+     "date": "2026-11-22T15:30:00Z",
+     "home": "Panathinaikos",
+     "away": "OFI Crete",
+     "key": "AH-1.5",
+     "side": "H",
+     "label": "1 (-1.5)",
+     "group": "Ασιατικό χάντικαπ",
+     "p": 0.5733,
+     "fair": 1.74,
      "est": 1.67,
      "est_src": "g",
      "best": null,
@@ -7061,11 +7072,11 @@
     }
    ],
    "odds": 5.01,
-   "p": 0.168,
-   "ev": -0.1575,
+   "p": 0.1645,
+   "ev": -0.1753,
    "day": "2026-11-22",
    "kind": "simple",
-   "created": "2026-11-16T09:43:03.437903+00:00",
+   "created": "2026-11-16T20:29:42.490324+00:00",
    "result": null
   },
   {
@@ -7094,34 +7105,34 @@
      "date": "2026-11-22T14:00:00Z",
      "home": "Hull City",
      "away": "Brighton Hove",
-     "key": "BTTS",
-     "side": "Yes",
-     "label": "G/G",
-     "group": "Γκολ-Γκολ",
-     "p": 0.5733,
-     "fair": 1.74,
-     "est": 1.72,
+     "key": "AH+1.5",
+     "side": "A",
+     "label": "2 (-1.5)",
+     "group": "Ασιατικό χάντικαπ",
+     "p": 0.4077,
+     "fair": 2.45,
+     "est": 2.33,
      "est_src": "g",
      "best": null,
      "book": null,
      "result": null
     },
     {
-     "match_id": "GR-8bd9a9794beeaf18c6710f910915c2cc",
+     "match_id": "GR-e57515aa26c7b7599f6f657e824f68c4",
      "comp": "GR",
-     "date": "2026-11-22T15:00:00Z",
-     "home": "Panetolikos Agrinio",
-     "away": "Volos FC",
-     "key": "OU2.5",
-     "side": "Over",
-     "label": "Over 2.5",
-     "group": "Γκολ Over/Under",
-     "p": 0.4551,
-     "fair": 2.2,
-     "est": 2.05,
-     "est_src": "m2",
-     "best": 2.05,
-     "book": "Betsson",
+     "date": "2026-11-22T15:30:00Z",
+     "home": "Panathinaikos",
+     "away": "OFI Crete",
+     "key": "BTTS",
+     "side": "Yes",
+     "label": "G/G",
+     "group": "Γκολ-Γκολ",
+     "p": 0.476,
+     "fair": 2.1,
+     "est": 1.98,
+     "est_src": "g",
+     "best": null,
+     "book": null,
      "result": null
     },
     {
@@ -7130,25 +7141,25 @@
      "date": "2026-11-22T16:30:00Z",
      "home": "Liverpool",
      "away": "Man United",
-     "key": "AT_OU1.5",
-     "side": "Over",
-     "label": "Φιλοξενούμενος Over 1.5",
-     "group": "Γκολ φιλοξενούμενου",
-     "p": 0.3661,
-     "fair": 2.73,
-     "est": 2.62,
+     "key": "DC",
+     "side": "X2",
+     "label": "X2",
+     "group": "Διπλή ευκαιρία",
+     "p": 0.473,
+     "fair": 2.11,
+     "est": 1.99,
      "est_src": "g",
      "best": null,
      "book": null,
      "result": null
     }
    ],
-   "odds": 15.24,
-   "p": 0.0556,
-   "ev": -0.152,
+   "odds": 15.15,
+   "p": 0.0535,
+   "ev": -0.1902,
    "day": "2026-11-22",
    "kind": "extreme",
-   "created": "2026-11-16T09:43:03.437903+00:00",
+   "created": "2026-11-16T20:29:42.490324+00:00",
    "result": null
   }
  ],
@@ -9831,7 +9842,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6736,
    "est": 1.42,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SD-908247d5d5cd714de37956edf865668b",
@@ -9845,7 +9857,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6651,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "L1-3af2458dd9984d806bbf46e7bd2d7872",
@@ -9859,7 +9872,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6622,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-b35b9bd8cea60f3228039ca3fc77d4ba",
@@ -9873,7 +9887,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6448,
    "est": 1.46,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -9887,7 +9902,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6585,
    "est": 1.46,
-   "result": null
+   "result": 0,
+   "score": "6-2"
   },
   {
    "match_id": "L1-82da0980dcfc5af1d8436be9c3531d91",
@@ -9943,7 +9959,8 @@
    "group": "Γκολ-Γκολ",
    "p": 0.6286,
    "est": 1.51,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -9957,7 +9974,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6662,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
@@ -9971,7 +9989,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.659,
    "est": 1.45,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "EL-111",
@@ -9997,7 +10016,7 @@
    "side": "Over",
    "label": "Over 158.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6553,
+   "p": 0.6554,
    "est": 1.46,
    "result": null
   },
@@ -10013,7 +10032,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6209,
    "est": 1.53,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -10027,7 +10047,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6171,
    "est": 1.54,
-   "result": null
+   "result": 1,
+   "score": "4-2"
   },
   {
    "match_id": "L2-1cf6ac52aa2dbb22a0eeb97e0bc80579",
@@ -10041,7 +10062,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6875,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -10055,7 +10077,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6671,
    "est": 1.43,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -10069,7 +10092,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6671,
    "est": 1.43,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -10083,7 +10107,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6405,
    "est": 1.51,
-   "result": null
+   "result": 0,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -10097,7 +10122,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6605,
    "est": 1.46,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
@@ -10111,7 +10137,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6491,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -10125,7 +10152,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6917,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "AUT-328536a210997eb2595077031a250747",
@@ -11272,7 +11300,7 @@
    "side": "A",
    "label": "2 (-2.5)",
    "group": "Χάντικαπ",
-   "p": 0.6578,
+   "p": 0.6577,
    "est": 1.47,
    "result": null
   },
@@ -11286,7 +11314,7 @@
    "side": "Over",
    "label": "Over 151.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6478,
+   "p": 0.6482,
    "est": 1.48,
    "result": null
   },
@@ -11302,7 +11330,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6671,
    "est": 1.43,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "PPL-9d545e362d9e690aa8e41b4ccf4d4c78",
@@ -11331,7 +11360,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.657,
    "est": 1.46,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
@@ -11345,7 +11375,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6411,
    "est": 1.49,
-   "result": null
+   "result": 0,
+   "score": "3-3"
   },
   {
    "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
@@ -11359,7 +11390,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.659,
    "est": 1.45,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "BRA-60e79364c168ad0ad22c0cffc02be8a9",
@@ -11373,7 +11405,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6671,
    "est": 1.43,
-   "result": null
+   "result": 0,
+   "score": "0-0"
   },
   {
    "match_id": "EL-112",
@@ -11399,7 +11432,7 @@
    "side": "A",
    "label": "2 (+15.5)",
    "group": "Χάντικαπ",
-   "p": 0.6387,
+   "p": 0.6388,
    "est": 1.5,
    "result": null
   },
@@ -11427,7 +11460,7 @@
    "side": "Over",
    "label": "Over 160.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6416,
+   "p": 0.6417,
    "est": 1.48,
    "result": null
   },
@@ -11455,7 +11488,7 @@
    "side": "Under",
    "label": "Under 182.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6492,
+   "p": 0.6491,
    "est": 1.54,
    "result": null
   },
@@ -11483,7 +11516,7 @@
    "side": "Over",
    "label": "Over 166.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6589,
+   "p": 0.6587,
    "est": 1.45,
    "result": null
   },
@@ -11497,7 +11530,7 @@
    "side": "Over",
    "label": "Over 162.5",
    "group": "Σύνολο πόντων",
-   "p": 0.646,
+   "p": 0.6459,
    "est": 1.48,
    "result": null
   },
@@ -11511,7 +11544,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6849,
+   "p": 0.6848,
    "est": 1.4,
    "result": null
   },
@@ -11583,7 +11616,8 @@
    "group": "Τελικό αποτέλεσμα",
    "p": 0.698,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "MEX-0380db9fc7de24aed0c27138c02467e5",
@@ -11597,7 +11631,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6518,
    "est": 1.47,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
@@ -11611,7 +11646,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6465,
    "est": 1.48,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
@@ -11625,7 +11661,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6321,
    "est": 1.51,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "EL-120",
@@ -11651,7 +11688,7 @@
    "side": "Over",
    "label": "Over 156.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6638,
+   "p": 0.6639,
    "est": 1.44,
    "result": null
   },
@@ -11665,8 +11702,8 @@
    "side": "Over",
    "label": "Over 171.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6532,
-   "est": 1.46,
+   "p": 0.653,
+   "est": 1.47,
    "result": null
   },
   {
@@ -11681,7 +11718,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6662,
    "est": 1.44,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
@@ -11695,7 +11733,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6786,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-113",
@@ -11707,7 +11746,7 @@
    "side": "Over",
    "label": "Over 151.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6455,
+   "p": 0.6457,
    "est": 1.48,
    "result": null
   },
@@ -11735,7 +11774,7 @@
    "side": "Over",
    "label": "Over 167.5",
    "group": "Σύνολο πόντων",
-   "p": 0.646,
+   "p": 0.6459,
    "est": 1.48,
    "result": null
   },
@@ -11763,7 +11802,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6717,
+   "p": 0.6716,
    "est": 1.42,
    "result": null
   },
@@ -11791,7 +11830,7 @@
    "side": "Over",
    "label": "Over 170.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6584,
+   "p": 0.6581,
    "est": 1.45,
    "result": null
   },
@@ -11805,7 +11844,7 @@
    "side": "Over",
    "label": "Over 169.5",
    "group": "Σύνολο πόντων",
-   "p": 0.647,
+   "p": 0.6469,
    "est": 1.48,
    "result": null
   },
@@ -11833,7 +11872,7 @@
    "side": "Over",
    "label": "Over 166.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6574,
+   "p": 0.6572,
    "est": 1.46,
    "result": null
   },
@@ -12734,7 +12773,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6831,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "UNL-401861181",
@@ -12748,7 +12788,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6321,
    "est": 1.51,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "UNL-401861183",
@@ -12762,7 +12803,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6835,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "UNL-401861182",
@@ -12776,7 +12818,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6674,
    "est": 1.43,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "UNL-401861184",
@@ -12790,7 +12833,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.5457,
    "est": 1.75,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "UNL-401861185",
@@ -12872,8 +12916,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.643,
-   "est": 1.49,
+   "p": 0.6604,
+   "est": 1.45,
    "result": null
   },
   {
@@ -12886,8 +12930,8 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6522,
-   "est": 1.47,
+   "p": 0.6633,
+   "est": 1.44,
    "result": null
   },
   {
@@ -12900,8 +12944,8 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6505,
-   "est": 1.47,
+   "p": 0.6481,
+   "est": 1.48,
    "result": null
   },
   {
@@ -12910,12 +12954,12 @@
    "date": "2026-11-17T19:45Z",
    "home": "Israel",
    "away": "Austria",
-   "key": "AH+1.5",
-   "side": "H",
-   "label": "1 (+1.5)",
-   "group": "Ασιατικό χάντικαπ",
-   "p": 0.6806,
-   "est": 1.41,
+   "key": "HT_OU0.5",
+   "side": "Over",
+   "label": "Γηπεδούχος Over 0.5",
+   "group": "Γκολ γηπεδούχου",
+   "p": 0.6704,
+   "est": 1.43,
    "result": null
   },
   {
@@ -12942,8 +12986,8 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.658,
-   "est": 1.45,
+   "p": 0.6676,
+   "est": 1.43,
    "result": null
   },
   {
@@ -12956,8 +13000,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6604,
-   "est": 1.45,
+   "p": 0.643,
+   "est": 1.49,
    "result": null
   },
   {
@@ -13978,7 +14022,7 @@
    "side": "H",
    "label": "1 (+6.5)",
    "group": "Χάντικαπ",
-   "p": 0.6799,
+   "p": 0.68,
    "est": 1.41,
    "result": null
   },
@@ -13992,7 +14036,7 @@
    "side": "Over",
    "label": "Over 159.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6499,
+   "p": 0.65,
    "est": 1.47,
    "result": null
   },
@@ -14006,7 +14050,7 @@
    "side": "H",
    "label": "1 (-1.5)",
    "group": "Χάντικαπ",
-   "p": 0.6615,
+   "p": 0.6614,
    "est": 1.45,
    "result": null
   },
@@ -14020,7 +14064,7 @@
    "side": "A",
    "label": "2",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6665,
+   "p": 0.6662,
    "est": 1.44,
    "result": null
   },
@@ -14048,7 +14092,7 @@
    "side": "Under",
    "label": "Under 185.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6343,
+   "p": 0.6344,
    "est": 1.51,
    "result": null
   },
@@ -14122,7 +14166,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.7102,
+   "p": 0.7101,
    "est": 1.44,
    "result": null
   },
@@ -14136,7 +14180,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6626,
+   "p": 0.6625,
    "est": 1.8,
    "result": null
   },
@@ -14150,7 +14194,7 @@
    "side": "Over",
    "label": "Over 158.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6497,
+   "p": 0.6498,
    "est": 1.47,
    "result": null
   },
@@ -14343,7 +14387,7 @@
    "side": "Over",
    "label": "Over 163.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6727,
+   "p": 0.6723,
    "est": 1.42,
    "result": null
   },
@@ -14357,7 +14401,7 @@
    "side": "Over",
    "label": "Over 162.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6563,
+   "p": 0.6561,
    "est": 1.46,
    "result": null
   },
@@ -14371,7 +14415,7 @@
    "side": "Over",
    "label": "Over 161.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6628,
+   "p": 0.6627,
    "est": 1.44,
    "result": null
   },
@@ -14385,7 +14429,7 @@
    "side": "Over",
    "label": "Over 149.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6661,
+   "p": 0.6666,
    "est": 1.44,
    "result": null
   },
@@ -14646,7 +14690,7 @@
    "side": "Over",
    "label": "Over 156.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6637,
+   "p": 0.6638,
    "est": 1.44,
    "result": null
   },
@@ -14674,7 +14718,7 @@
    "side": "A",
    "label": "2",
    "group": "Νικητής (με παράταση)",
-   "p": 0.678,
+   "p": 0.6774,
    "est": 1.41,
    "result": null
   },
@@ -14702,7 +14746,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.643,
+   "p": 0.6405,
    "est": 1.52,
    "result": null
   },
@@ -14712,12 +14756,12 @@
    "date": "2026-11-22T16:30:00Z",
    "home": "Liverpool",
    "away": "Man United",
-   "key": "OU2.5",
-   "side": "Over",
-   "label": "Over 2.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6356,
-   "est": 1.55,
+   "key": "AT_OU1.5",
+   "side": "Under",
+   "label": "Φιλοξενούμενος Under 1.5",
+   "group": "Γκολ φιλοξενούμενου",
+   "p": 0.6518,
+   "est": 1.47,
    "result": null
   },
   {
@@ -14730,7 +14774,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6676,
+   "p": 0.6674,
    "est": 1.43,
    "result": null
   },
@@ -14740,12 +14784,12 @@
    "date": "2026-11-18T23:00:00Z",
    "home": "Remo",
    "away": "Chapecoense",
-   "key": "AH-1.5",
-   "side": "A",
-   "label": "2 (+1.5)",
-   "group": "Ασιατικό χάντικαπ",
-   "p": 0.6585,
-   "est": 1.45,
+   "key": "OU3.5",
+   "side": "Under",
+   "label": "Under 3.5",
+   "group": "Γκολ Over/Under",
+   "p": 0.6661,
+   "est": 1.44,
    "result": null
   },
   {
@@ -14754,12 +14798,12 @@
    "date": "2026-11-18T23:30:00Z",
    "home": "Flamengo",
    "away": "Atletico Paranaense",
-   "key": "OU4.5",
-   "side": "Under",
-   "label": "Under 4.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6114,
-   "est": 1.57,
+   "key": "HT_OU2.5",
+   "side": "Over",
+   "label": "Γηπεδούχος Over 2.5",
+   "group": "Γκολ γηπεδούχου",
+   "p": 0.6849,
+   "est": 1.4,
    "result": null
   },
   {
@@ -14772,7 +14816,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6706,
+   "p": 0.67,
    "est": 1.43,
    "result": null
   },
@@ -14786,8 +14830,8 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6611,
-   "est": 1.41,
+   "p": 0.6579,
+   "est": 1.42,
    "result": null
   },
   {
@@ -14800,8 +14844,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6162,
-   "est": 1.55,
+   "p": 0.6211,
+   "est": 1.54,
    "result": null
   },
   {
@@ -14931,7 +14975,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 2.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6434,
+   "p": 0.6437,
    "est": 1.49,
    "result": null
   },
@@ -14945,7 +14989,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6842,
+   "p": 0.6844,
    "est": 1.4,
    "result": null
   },
@@ -15000,12 +15044,12 @@
    "date": "2026-11-19T22:30:00Z",
    "home": "Vitoria",
    "away": "Bragantino-SP",
-   "key": "OU1.5",
+   "key": "HT_OU0.5",
    "side": "Over",
-   "label": "Over 1.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6848,
-   "est": 1.4,
+   "label": "Γηπεδούχος Over 0.5",
+   "group": "Γκολ γηπεδούχου",
+   "p": 0.6564,
+   "est": 1.46,
    "result": null
   },
   {
@@ -15018,8 +15062,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6583,
-   "est": 1.45,
+   "p": 0.6431,
+   "est": 1.49,
    "result": null
   },
   {
@@ -15087,12 +15131,12 @@
    "date": "2026-11-20T00:30:00Z",
    "home": "Sao Paulo",
    "away": "Fluminense",
-   "key": "HT_OU0.5",
-   "side": "Over",
-   "label": "Γηπεδούχος Over 0.5",
+   "key": "HT_OU1.5",
+   "side": "Under",
+   "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6859,
-   "est": 1.4,
+   "p": 0.6772,
+   "est": 1.41,
    "result": null
   },
   {
@@ -15105,7 +15149,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6631,
+   "p": 0.6628,
    "est": 1.44,
    "result": null
   },
@@ -15178,7 +15222,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6926,
+   "p": 0.6922,
    "est": 1.4,
    "result": null
   },
@@ -15192,7 +15236,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6396,
+   "p": 0.6397,
    "est": 1.5,
    "result": null
   },
@@ -15206,7 +15250,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6394,
+   "p": 0.6398,
    "est": 1.5,
    "result": null
   },
@@ -15234,7 +15278,7 @@
    "side": "Under",
    "label": "Under 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.582,
+   "p": 0.5817,
    "est": 1.65,
    "result": null
   },
@@ -15248,7 +15292,7 @@
    "side": "H",
    "label": "1 (-1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6821,
+   "p": 0.6815,
    "est": 1.4,
    "result": null
   },
@@ -15262,7 +15306,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6516,
+   "p": 0.6515,
    "est": 1.47,
    "result": null
   },
@@ -15276,7 +15320,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6642,
+   "p": 0.6645,
    "est": 1.44,
    "result": null
   },
@@ -15290,8 +15334,8 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6651,
-   "est": 1.44,
+   "p": 0.6607,
+   "est": 1.45,
    "result": null
   },
   {
@@ -15304,7 +15348,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6852,
+   "p": 0.6851,
    "est": 1.4,
    "result": null
   },
@@ -15332,7 +15376,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6415,
+   "p": 0.6416,
    "est": 1.49,
    "result": null
   },
@@ -15342,12 +15386,12 @@
    "date": "2026-11-20T19:30:00Z",
    "home": "Andorra CF",
    "away": "Leganés",
-   "key": "AT_OU1.5",
+   "key": "HT_OU2.5",
    "side": "Under",
-   "label": "Φιλοξενούμενος Under 1.5",
-   "group": "Γκολ φιλοξενούμενου",
-   "p": 0.683,
-   "est": 1.4,
+   "label": "Γηπεδούχος Under 2.5",
+   "group": "Γκολ γηπεδούχου",
+   "p": 0.6735,
+   "est": 1.42,
    "result": null
   },
   {
@@ -15360,7 +15404,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6224,
+   "p": 0.6226,
    "est": 1.54,
    "result": null
   },
@@ -15374,7 +15418,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.67,
+   "p": 0.6699,
    "est": 1.43,
    "result": null
   },
@@ -15388,7 +15432,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6686,
+   "p": 0.6685,
    "est": 1.43,
    "result": null
   },
@@ -15402,7 +15446,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6354,
+   "p": 0.6356,
    "est": 1.51,
    "result": null
   },
@@ -15416,7 +15460,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6766,
+   "p": 0.6765,
    "est": 1.41,
    "result": null
   },
@@ -15432,7 +15476,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6996,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "EC-2026-11-14-eastleigh",
@@ -15446,7 +15491,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6767,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "EC-2026-11-14-gateshead",
@@ -15460,7 +15506,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6686,
    "est": 1.44,
-   "result": null
+   "result": 0,
+   "score": "0-3"
   },
   {
    "match_id": "EC-2026-11-14-harrogate",
@@ -15474,7 +15521,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6825,
    "est": 1.4,
-   "result": null
+   "result": 0,
+   "score": "4-0"
   },
   {
    "match_id": "EC-2026-11-14-hartlepool",
@@ -15488,7 +15536,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6517,
    "est": 1.48,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-hornchurch",
@@ -15502,7 +15551,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6629,
    "est": 1.46,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-kidderminster",
@@ -15516,7 +15566,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6449,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-scunthorpe",
@@ -15530,7 +15581,8 @@
    "group": "Γκολ-Γκολ",
    "p": 0.6714,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-southend",
@@ -15544,7 +15596,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6836,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-sutton",
@@ -15558,7 +15611,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.6607,
    "est": 1.46,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "EC-2026-11-14-yeovil",
@@ -15572,7 +15626,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6881,
    "est": 1.41,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "SC1-2026-11-14-ayr",
@@ -15586,7 +15641,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6321,
    "est": 1.51,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "SC1-2026-11-14-livingston",
@@ -15600,7 +15656,8 @@
    "group": "Ασιατικό χάντικαπ",
    "p": 0.6493,
    "est": 1.47,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SC1-2026-11-14-partick",
@@ -15614,7 +15671,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6638,
    "est": 1.44,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "SC1-2026-11-14-stenhousemuir",
@@ -15628,7 +15686,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6094,
    "est": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SC2-2026-11-14-airdrie utd",
@@ -15642,7 +15701,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6713,
    "est": 1.43,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SC2-2026-11-14-cove rangers",
@@ -15656,7 +15716,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6304,
    "est": 1.52,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SC2-2026-11-14-east fife",
@@ -15670,7 +15731,8 @@
    "group": "Διπλή ευκαιρία",
    "p": 0.6449,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SC2-2026-11-14-east kilbride",
@@ -15684,7 +15746,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6834,
    "est": 1.4,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "SC2-2026-11-14-hamilton",
@@ -15698,7 +15761,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.6737,
    "est": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SC3-2026-11-14-dumbarton",
@@ -15712,7 +15776,8 @@
    "group": "Γκολ φιλοξενούμενου",
    "p": 0.6482,
    "est": 1.48,
-   "result": null
+   "result": 0,
+   "score": "0-5"
   },
   {
    "match_id": "SC3-2026-11-14-edinburgh city",
@@ -15726,7 +15791,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.654,
    "est": 1.46,
-   "result": null
+   "result": 0,
+   "score": "2-6"
   },
   {
    "match_id": "SC3-2026-11-14-forfar",
@@ -15740,7 +15806,8 @@
    "group": "Γκολ γηπεδούχου",
    "p": 0.677,
    "est": 1.41,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SC3-2026-11-14-kelty hearts",
@@ -15754,7 +15821,8 @@
    "group": "Γκολ Over/Under",
    "p": 0.636,
    "est": 1.5,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SC3-2026-11-14-stirling",
@@ -15768,7 +15836,8 @@
    "group": "Γκολ-Γκολ",
    "p": 0.6243,
    "est": 1.53,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "DNK-02d5f40630d0280cd520175f22b7a25c",
@@ -15780,7 +15849,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.67,
+   "p": 0.6702,
    "est": 1.43,
    "result": null
   },
@@ -15794,7 +15863,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6793,
+   "p": 0.679,
    "est": 1.41,
    "result": null
   },
@@ -15808,8 +15877,8 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6531,
-   "est": 1.47,
+   "p": 0.6532,
+   "est": 1.46,
    "result": null
   },
   {
@@ -15822,7 +15891,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.68,
+   "p": 0.6799,
    "est": 1.41,
    "result": null
   },
@@ -15836,7 +15905,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6836,
+   "p": 0.6834,
    "est": 1.4,
    "result": null
   },
@@ -15850,7 +15919,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6538,
+   "p": 0.6543,
    "est": 1.46,
    "result": null
   },
@@ -15864,7 +15933,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6228,
+   "p": 0.6225,
    "est": 1.5,
    "result": null
   },
@@ -15878,8 +15947,8 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.663,
-   "est": 1.44,
+   "p": 0.6621,
+   "est": 1.45,
    "result": null
   },
   {
@@ -15892,7 +15961,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 2.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6846,
+   "p": 0.684,
    "est": 1.4,
    "result": null
   },
@@ -15906,8 +15975,8 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6825,
-   "est": 1.4,
+   "p": 0.6779,
+   "est": 1.41,
    "result": null
   },
   {
@@ -15920,7 +15989,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6635,
+   "p": 0.6629,
    "est": 1.44,
    "result": null
   },
@@ -15934,7 +16003,7 @@
    "side": "A",
    "label": "2 (-1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6657,
+   "p": 0.6659,
    "est": 1.44,
    "result": null
   },
@@ -15962,7 +16031,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 2.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6729,
+   "p": 0.6719,
    "est": 1.42,
    "result": null
   },
@@ -15976,7 +16045,7 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6846,
+   "p": 0.6847,
    "est": 1.4,
    "result": null
   },
@@ -15986,12 +16055,12 @@
    "date": "2026-11-21T01:00:00Z",
    "home": "Puebla",
    "away": "Atlético San Luis",
-   "key": "AT_OU0.5",
-   "side": "Over",
-   "label": "Φιλοξενούμενος Over 0.5",
+   "key": "AT_OU1.5",
+   "side": "Under",
+   "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6829,
-   "est": 1.4,
+   "p": 0.6774,
+   "est": 1.41,
    "result": null
   },
   {
@@ -16004,7 +16073,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6693,
+   "p": 0.6697,
    "est": 1.43,
    "result": null
   },
@@ -16018,8 +16087,8 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.64,
-   "est": 1.5,
+   "p": 0.6416,
+   "est": 1.49,
    "result": null
   },
   {
@@ -16042,11 +16111,11 @@
    "date": "2026-11-17T00:00Z",
    "home": "Cleveland Cavaliers",
    "away": "Chicago Bulls",
-   "key": "OU236.5",
+   "key": "OU235.5",
    "side": "Over",
-   "label": "Over 236.5",
+   "label": "Over 235.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6513,
+   "p": 0.6547,
    "est": 1.49,
    "result": null
   },
@@ -16056,11 +16125,11 @@
    "date": "2026-11-17T00:00Z",
    "home": "Washington Wizards",
    "away": "Memphis Grizzlies",
-   "key": "OU223.5",
+   "key": "OU227.5",
    "side": "Over",
-   "label": "Over 223.5",
+   "label": "Over 227.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6511,
+   "p": 0.6385,
    "est": 1.49,
    "result": null
   },
@@ -16070,11 +16139,11 @@
    "date": "2026-11-17T00:30Z",
    "home": "Brooklyn Nets",
    "away": "Philadelphia 76ers",
-   "key": "OU219.5",
-   "side": "Over",
-   "label": "Over 219.5",
-   "group": "Σύνολο πόντων",
-   "p": 0.6381,
+   "key": "ML",
+   "side": "A",
+   "label": "2",
+   "group": "Νικητής (με παράταση)",
+   "p": 0.638,
    "est": 1.49,
    "result": null
   },
@@ -16084,11 +16153,11 @@
    "date": "2026-11-17T00:30Z",
    "home": "Miami Heat",
    "away": "Houston Rockets",
-   "key": "OU224.5",
+   "key": "OU225.5",
    "side": "Over",
-   "label": "Over 224.5",
+   "label": "Over 225.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6603,
+   "p": 0.6571,
    "est": 1.49,
    "result": null
   },
@@ -16098,11 +16167,11 @@
    "date": "2026-11-17T01:00Z",
    "home": "Minnesota Timberwolves",
    "away": "Portland Trail Blazers",
-   "key": "OU222.5",
+   "key": "OU221.5",
    "side": "Over",
-   "label": "Over 222.5",
+   "label": "Over 221.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6381,
+   "p": 0.6413,
    "est": 1.49,
    "result": null
   },
@@ -16112,11 +16181,11 @@
    "date": "2026-11-17T01:00Z",
    "home": "New Orleans Pelicans",
    "away": "Golden State Warriors",
-   "key": "OU219.5",
+   "key": "OU217.5",
    "side": "Over",
-   "label": "Over 219.5",
+   "label": "Over 217.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6663,
+   "p": 0.6725,
    "est": 1.49,
    "result": null
   },
@@ -16126,11 +16195,11 @@
    "date": "2026-11-17T02:00Z",
    "home": "Denver Nuggets",
    "away": "Phoenix Suns",
-   "key": "OU221.5",
+   "key": "OU223.5",
    "side": "Over",
-   "label": "Over 221.5",
+   "label": "Over 223.5",
    "group": "Σύνολο πόντων",
-   "p": 0.647,
+   "p": 0.6409,
    "est": 1.49,
    "result": null
   },
@@ -16144,7 +16213,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.674,
+   "p": 0.6741,
    "est": 1.42,
    "result": null
   },
@@ -16158,7 +16227,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6782,
+   "p": 0.6786,
    "est": 1.41,
    "result": null
   },
@@ -16172,7 +16241,7 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6956,
+   "p": 0.695,
    "est": 1.41,
    "result": null
   },
@@ -16186,7 +16255,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6527,
+   "p": 0.6529,
    "est": 1.47,
    "result": null
   },
@@ -16200,7 +16269,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6674,
+   "p": 0.6675,
    "est": 1.43,
    "result": null
   },
@@ -16214,7 +16283,7 @@
    "side": "A",
    "label": "2 (+2.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.67,
+   "p": 0.6692,
    "est": 1.43,
    "result": null
   },
@@ -16242,7 +16311,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6833,
+   "p": 0.6841,
    "est": 1.4,
    "result": null
   },
@@ -16256,7 +16325,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6551,
+   "p": 0.6554,
    "est": 1.46,
    "result": null
   },
@@ -16284,7 +16353,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6736,
+   "p": 0.6735,
    "est": 1.42,
    "result": null
   },
@@ -16298,7 +16367,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6654,
+   "p": 0.6655,
    "est": 1.44,
    "result": null
   },
@@ -16368,7 +16437,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6815,
+   "p": 0.6812,
    "est": 1.42,
    "result": null
   },
@@ -16382,7 +16451,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6413,
+   "p": 0.6418,
    "est": 1.49,
    "result": null
   },
@@ -16396,8 +16465,8 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6518,
-   "est": 1.47,
+   "p": 0.6699,
+   "est": 1.43,
    "result": null
   },
   {
@@ -16410,8 +16479,8 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.676,
-   "est": 1.42,
+   "p": 0.6691,
+   "est": 1.43,
    "result": null
   },
   {
@@ -16420,12 +16489,12 @@
    "date": "2026-11-21T13:00:00Z",
    "home": "Sabadell FC",
    "away": "Granada CF",
-   "key": "HT_OU1.5",
-   "side": "Under",
-   "label": "Γηπεδούχος Under 1.5",
+   "key": "HT_OU0.5",
+   "side": "Over",
+   "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6587,
-   "est": 1.45,
+   "p": 0.6698,
+   "est": 1.43,
    "result": null
   },
   {
@@ -16438,7 +16507,7 @@
    "side": "Under",
    "label": "Under 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.5785,
+   "p": 0.5783,
    "est": 1.66,
    "result": null
   },
@@ -16452,7 +16521,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6499,
+   "p": 0.6498,
    "est": 1.47,
    "result": null
   },
@@ -16466,7 +16535,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6898,
+   "p": 0.6897,
    "est": 1.4,
    "result": null
   },
@@ -16480,7 +16549,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6456,
+   "p": 0.6452,
    "est": 1.48,
    "result": null
   },
@@ -16508,7 +16577,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6383,
+   "p": 0.6386,
    "est": 1.5,
    "result": null
   },
@@ -16522,7 +16591,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6759,
+   "p": 0.6761,
    "est": 1.42,
    "result": null
   },
@@ -16536,7 +16605,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 2.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6849,
+   "p": 0.6851,
    "est": 1.4,
    "result": null
   },
@@ -16550,7 +16619,7 @@
    "side": "2",
    "label": "2",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6864,
+   "p": 0.6859,
    "est": 1.43,
    "result": null
   },
@@ -16564,7 +16633,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6839,
+   "p": 0.6836,
    "est": 1.4,
    "result": null
   },
@@ -16578,7 +16647,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6306,
+   "p": 0.6305,
    "est": 1.52,
    "result": null
   },
@@ -16592,7 +16661,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6721,
+   "p": 0.6723,
    "est": 1.42,
    "result": null
   },
@@ -16606,7 +16675,7 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6681,
+   "p": 0.6679,
    "est": 1.4,
    "result": null
   },
@@ -16620,7 +16689,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6739,
+   "p": 0.6735,
    "est": 1.42,
    "result": null
   },
@@ -16634,7 +16703,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6316,
+   "p": 0.6314,
    "est": 1.52,
    "result": null
   },
@@ -16743,10 +16812,10 @@
    "home": "Swansea City",
    "away": "West Bromwich Albion",
    "key": "DC",
-   "side": "X2",
-   "label": "X2",
+   "side": "1X",
+   "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6367,
+   "p": 0.6347,
    "est": 1.47,
    "result": null
   },
@@ -16760,7 +16829,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6535,
+   "p": 0.6536,
    "est": 1.46,
    "result": null
   },
@@ -16774,7 +16843,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6829,
+   "p": 0.6828,
    "est": 1.42,
    "result": null
   },
@@ -16788,7 +16857,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6845,
+   "p": 0.6848,
    "est": 1.4,
    "result": null
   },
@@ -16816,7 +16885,7 @@
    "side": "A",
    "label": "2 (+2.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6683,
+   "p": 0.6687,
    "est": 1.43,
    "result": null
   },
@@ -16830,7 +16899,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6483,
+   "p": 0.6482,
    "est": 1.48,
    "result": null
   },
@@ -16844,7 +16913,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6829,
+   "p": 0.6827,
    "est": 1.4,
    "result": null
   },
@@ -16854,12 +16923,12 @@
    "date": "2026-11-21T15:00:00Z",
    "home": "Bradford City",
    "away": "Doncaster Rovers",
-   "key": "OU1.5",
-   "side": "Over",
-   "label": "Over 1.5",
+   "key": "OU2.5",
+   "side": "Under",
+   "label": "Under 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6429,
-   "est": 1.49,
+   "p": 0.6388,
+   "est": 1.5,
    "result": null
   },
   {
@@ -16886,8 +16955,8 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6518,
-   "est": 1.47,
+   "p": 0.6554,
+   "est": 1.46,
    "result": null
   },
   {
@@ -16900,8 +16969,8 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6771,
-   "est": 1.41,
+   "p": 0.6844,
+   "est": 1.4,
    "result": null
   },
   {
@@ -16914,8 +16983,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.5975,
-   "est": 1.6,
+   "p": 0.581,
+   "est": 1.65,
    "result": null
   },
   {
@@ -16924,12 +16993,12 @@
    "date": "2026-11-21T15:00:00Z",
    "home": "Mansfield Town",
    "away": "Milton Keynes Dons",
-   "key": "OU3.5",
-   "side": "Under",
-   "label": "Under 3.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6293,
-   "est": 1.52,
+   "key": "BTTS",
+   "side": "Yes",
+   "label": "G/G",
+   "group": "Γκολ-Γκολ",
+   "p": 0.6403,
+   "est": 1.49,
    "result": null
   },
   {
@@ -16956,8 +17025,8 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6517,
-   "est": 1.47,
+   "p": 0.6562,
+   "est": 1.46,
    "result": null
   },
   {
@@ -16970,7 +17039,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6489,
+   "p": 0.6518,
    "est": 1.47,
    "result": null
   },
@@ -16984,7 +17053,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6469,
+   "p": 0.6471,
    "est": 1.48,
    "result": null
   },
@@ -16998,7 +17067,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6748,
+   "p": 0.675,
    "est": 1.42,
    "result": null
   },
@@ -17012,7 +17081,7 @@
    "side": "Under",
    "label": "Under 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6718,
+   "p": 0.6715,
    "est": 1.44,
    "result": null
   },
@@ -17026,7 +17095,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6758,
+   "p": 0.6756,
    "est": 1.42,
    "result": null
   },
@@ -17040,7 +17109,7 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6673,
+   "p": 0.6675,
    "est": 1.43,
    "result": null
   },
@@ -17054,7 +17123,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6907,
+   "p": 0.6904,
    "est": 1.4,
    "result": null
   },
@@ -17068,8 +17137,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6558,
-   "est": 1.46,
+   "p": 0.6681,
+   "est": 1.43,
    "result": null
   },
   {
@@ -17082,8 +17151,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.657,
-   "est": 1.46,
+   "p": 0.677,
+   "est": 1.41,
    "result": null
   },
   {
@@ -17096,8 +17165,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6394,
-   "est": 1.5,
+   "p": 0.643,
+   "est": 1.49,
    "result": null
   },
   {
@@ -17106,12 +17175,12 @@
    "date": "2026-11-21T15:00:00Z",
    "home": "Accrington Stanley",
    "away": "Salford City",
-   "key": "AT_OU0.5",
-   "side": "Over",
-   "label": "Φιλοξενούμενος Over 0.5",
-   "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6704,
-   "est": 1.43,
+   "key": "DC",
+   "side": "1X",
+   "label": "1X",
+   "group": "Διπλή ευκαιρία",
+   "p": 0.6745,
+   "est": 1.4,
    "result": null
   },
   {
@@ -17120,12 +17189,12 @@
    "date": "2026-11-21T15:00:00Z",
    "home": "Barnet",
    "away": "Port Vale",
-   "key": "AT_OU0.5",
-   "side": "Over",
-   "label": "Φιλοξενούμενος Over 0.5",
+   "key": "AT_OU1.5",
+   "side": "Under",
+   "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6535,
-   "est": 1.46,
+   "p": 0.6699,
+   "est": 1.43,
    "result": null
   },
   {
@@ -17134,12 +17203,12 @@
    "date": "2026-11-21T15:00:00Z",
    "home": "Cheltenham Town",
    "away": "Bristol Rovers",
-   "key": "OU3.5",
-   "side": "Under",
-   "label": "Under 3.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.683,
-   "est": 1.4,
+   "key": "DC",
+   "side": "1X",
+   "label": "1X",
+   "group": "Διπλή ευκαιρία",
+   "p": 0.6645,
+   "est": 1.41,
    "result": null
   },
   {
@@ -17152,8 +17221,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.657,
-   "est": 1.46,
+   "p": 0.6394,
+   "est": 1.5,
    "result": null
   },
   {
@@ -17162,12 +17231,12 @@
    "date": "2026-11-21T15:00:00Z",
    "home": "Oldham Athletic",
    "away": "Exeter City",
-   "key": "HT_OU0.5",
-   "side": "Over",
-   "label": "Γηπεδούχος Over 0.5",
-   "group": "Γκολ γηπεδούχου",
-   "p": 0.6737,
-   "est": 1.42,
+   "key": "OU2.5",
+   "side": "Under",
+   "label": "Under 2.5",
+   "group": "Γκολ Over/Under",
+   "p": 0.6902,
+   "est": 1.4,
    "result": null
   },
   {
@@ -17176,12 +17245,12 @@
    "date": "2026-11-21T15:00:00Z",
    "home": "Grimsby Town",
    "away": "Rotherham United",
-   "key": "OU2.5",
-   "side": "Over",
-   "label": "Over 2.5",
-   "group": "Γκολ Over/Under",
-   "p": 0.6754,
-   "est": 1.43,
+   "key": "1X2",
+   "side": "1",
+   "label": "1",
+   "group": "Τελικό αποτέλεσμα",
+   "p": 0.691,
+   "est": 1.42,
    "result": null
   },
   {
@@ -17190,12 +17259,12 @@
    "date": "2026-11-21T15:00:00Z",
    "home": "Northampton Town",
    "away": "Rochdale",
-   "key": "OU1.5",
-   "side": "Over",
-   "label": "Over 1.5",
+   "key": "OU2.5",
+   "side": "Under",
+   "label": "Under 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6454,
-   "est": 1.48,
+   "p": 0.6631,
+   "est": 1.44,
    "result": null
   },
   {
@@ -17208,8 +17277,8 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6304,
-   "est": 1.52,
+   "p": 0.6411,
+   "est": 1.49,
    "result": null
   },
   {
@@ -17222,7 +17291,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6835,
+   "p": 0.6836,
    "est": 1.4,
    "result": null
   },
@@ -17250,7 +17319,7 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6823,
+   "p": 0.682,
    "est": 1.44,
    "result": null
   },
@@ -17264,7 +17333,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6849,
+   "p": 0.6848,
    "est": 1.4,
    "result": null
   },
@@ -17278,7 +17347,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6277,
+   "p": 0.6276,
    "est": 1.52,
    "result": null
   },
@@ -17292,7 +17361,7 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6752,
+   "p": 0.675,
    "est": 1.45,
    "result": null
   },
@@ -17306,7 +17375,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6888,
+   "p": 0.6885,
    "est": 1.4,
    "result": null
   },
@@ -17320,7 +17389,7 @@
    "side": "Under",
    "label": "Under 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6435,
+   "p": 0.6433,
    "est": 1.49,
    "result": null
   },
@@ -17334,7 +17403,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6831,
+   "p": 0.6833,
    "est": 1.4,
    "result": null
   },
@@ -17348,7 +17417,7 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6666,
+   "p": 0.6664,
    "est": 1.4,
    "result": null
   },
@@ -17376,7 +17445,7 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6795,
+   "p": 0.6796,
    "est": 1.41,
    "result": null
   },
@@ -17390,8 +17459,8 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.5706,
-   "est": 1.68,
+   "p": 0.5715,
+   "est": 1.67,
    "result": null
   },
   {
@@ -17404,7 +17473,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.671,
+   "p": 0.6712,
    "est": 1.43,
    "result": null
   },
@@ -17418,8 +17487,8 @@
    "side": "Over",
    "label": "Over 180.5",
    "group": "Σύνολο πόντων",
-   "p": 0.649,
-   "est": 1.47,
+   "p": 0.6487,
+   "est": 1.48,
    "result": null
   },
   {
@@ -17432,7 +17501,7 @@
    "side": "H",
    "label": "1 (-7.5)",
    "group": "Χάντικαπ",
-   "p": 0.6485,
+   "p": 0.6483,
    "est": 1.48,
    "result": null
   },
@@ -17460,7 +17529,7 @@
    "side": "A",
    "label": "2 (+4.5)",
    "group": "Χάντικαπ",
-   "p": 0.6503,
+   "p": 0.6502,
    "est": 1.47,
    "result": null
   },
@@ -17474,7 +17543,7 @@
    "side": "H",
    "label": "1 (-13.5)",
    "group": "Χάντικαπ",
-   "p": 0.6388,
+   "p": 0.6386,
    "est": 1.5,
    "result": null
   },
@@ -17502,7 +17571,7 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6846,
+   "p": 0.6844,
    "est": 1.43,
    "result": null
   },
@@ -17516,7 +17585,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6807,
+   "p": 0.681,
    "est": 1.41,
    "result": null
   },
@@ -17530,7 +17599,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6447,
+   "p": 0.6445,
    "est": 1.48,
    "result": null
   },
@@ -17544,7 +17613,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6833,
+   "p": 0.6835,
    "est": 1.4,
    "result": null
   },
@@ -17572,7 +17641,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6651,
+   "p": 0.6648,
    "est": 1.44,
    "result": null
   },
@@ -17586,7 +17655,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6252,
+   "p": 0.6251,
    "est": 1.53,
    "result": null
   },
@@ -17600,7 +17669,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6691,
+   "p": 0.6693,
    "est": 1.43,
    "result": null
   },
@@ -17628,7 +17697,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6618,
+   "p": 0.6616,
    "est": 1.45,
    "result": null
   },
@@ -17642,7 +17711,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6621,
+   "p": 0.6622,
    "est": 1.45,
    "result": null
   },
@@ -17656,7 +17725,7 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6647,
+   "p": 0.6644,
    "est": 1.45,
    "result": null
   },
@@ -17670,7 +17739,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6828,
+   "p": 0.6825,
    "est": 1.4,
    "result": null
   },
@@ -17698,7 +17767,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6634,
+   "p": 0.6633,
    "est": 1.44,
    "result": null
   },
@@ -17712,7 +17781,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6564,
+   "p": 0.6562,
    "est": 1.46,
    "result": null
   },
@@ -17726,7 +17795,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6649,
+   "p": 0.665,
    "est": 1.44,
    "result": null
   },
@@ -17740,7 +17809,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6584,
+   "p": 0.6583,
    "est": 1.45,
    "result": null
   },
@@ -17754,8 +17823,8 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6401,
-   "est": 1.49,
+   "p": 0.6596,
+   "est": 1.45,
    "result": null
   },
   {
@@ -17764,12 +17833,12 @@
    "date": "2026-11-21T20:00:00Z",
    "home": "Tenerife",
    "away": "Mallorca",
-   "key": "AT_OU1.5",
-   "side": "Under",
-   "label": "Φιλοξενούμενος Under 1.5",
+   "key": "AT_OU0.5",
+   "side": "Over",
+   "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6739,
-   "est": 1.42,
+   "p": 0.6833,
+   "est": 1.4,
    "result": null
   },
   {
@@ -17782,7 +17851,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6689,
+   "p": 0.6691,
    "est": 1.43,
    "result": null
   },
@@ -17796,8 +17865,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6604,
-   "est": 1.45,
+   "p": 0.6737,
+   "est": 1.42,
    "result": null
   },
   {
@@ -17810,8 +17879,8 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6593,
-   "est": 1.42,
+   "p": 0.6626,
+   "est": 1.41,
    "result": null
   },
   {
@@ -17824,7 +17893,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6727,
+   "p": 0.6725,
    "est": 1.44,
    "result": null
   },
@@ -17838,7 +17907,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6523,
+   "p": 0.6526,
    "est": 1.47,
    "result": null
   },
@@ -17852,7 +17921,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6606,
+   "p": 0.6605,
    "est": 1.45,
    "result": null
   },
@@ -17866,8 +17935,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6199,
-   "est": 1.54,
+   "p": 0.6249,
+   "est": 1.53,
    "result": null
   },
   {
@@ -17894,7 +17963,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6774,
+   "p": 0.6775,
    "est": 1.41,
    "result": null
   },
@@ -17908,7 +17977,7 @@
    "side": "Under",
    "label": "Under 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6779,
+   "p": 0.6778,
    "est": 1.43,
    "result": null
   },
@@ -17922,7 +17991,7 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6523,
+   "p": 0.6525,
    "est": 1.44,
    "result": null
   },
@@ -17950,7 +18019,7 @@
    "side": "A",
    "label": "2 (+14.5)",
    "group": "Χάντικαπ",
-   "p": 0.6504,
+   "p": 0.6505,
    "est": 1.47,
    "result": null
   },
@@ -17964,7 +18033,7 @@
    "side": "Over",
    "label": "Over 173.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6487,
+   "p": 0.6486,
    "est": 1.48,
    "result": null
   },
@@ -17992,8 +18061,8 @@
    "side": "A",
    "label": "2 (+7.5)",
    "group": "Χάντικαπ",
-   "p": 0.6358,
-   "est": 1.51,
+   "p": 0.6359,
+   "est": 1.5,
    "result": null
   },
   {
@@ -18006,7 +18075,7 @@
    "side": "Over",
    "label": "Over 155.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6417,
+   "p": 0.6419,
    "est": 1.49,
    "result": null
   },
@@ -18020,7 +18089,7 @@
    "side": "No",
    "label": "N/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.5353,
+   "p": 0.5348,
    "est": 1.79,
    "result": null
   },
@@ -18034,7 +18103,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6395,
+   "p": 0.6389,
    "est": 1.5,
    "result": null
   },
@@ -18048,7 +18117,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6634,
+   "p": 0.6629,
    "est": 1.44,
    "result": null
   },
@@ -18062,7 +18131,7 @@
    "side": "H",
    "label": "1 (-1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6804,
+   "p": 0.6809,
    "est": 1.41,
    "result": null
   },
@@ -18076,7 +18145,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6416,
+   "p": 0.6421,
    "est": 1.49,
    "result": null
   },
@@ -18090,8 +18159,8 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6879,
-   "est": 1.41,
+   "p": 0.6885,
+   "est": 1.4,
    "result": null
   },
   {
@@ -18104,7 +18173,7 @@
    "side": "2",
    "label": "2",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6548,
+   "p": 0.6546,
    "est": 1.47,
    "result": null
   },
@@ -18118,7 +18187,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6657,
+   "p": 0.6659,
    "est": 1.44,
    "result": null
   },
@@ -18132,7 +18201,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.679,
+   "p": 0.6793,
    "est": 1.41,
    "result": null
   },
@@ -18142,12 +18211,12 @@
    "date": "2026-11-22T00:00:00Z",
    "home": "Chapecoense",
    "away": "Cruzeiro",
-   "key": "HT_OU1.5",
-   "side": "Under",
-   "label": "Γηπεδούχος Under 1.5",
+   "key": "HT_OU0.5",
+   "side": "Over",
+   "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6638,
-   "est": 1.44,
+   "p": 0.671,
+   "est": 1.43,
    "result": null
   },
   {
@@ -18170,12 +18239,12 @@
    "date": "2026-11-21T22:50:00Z",
    "home": "Pachuca",
    "away": "Toluca",
-   "key": "DC",
-   "side": "1X",
-   "label": "1X",
-   "group": "Διπλή ευκαιρία",
-   "p": 0.6505,
-   "est": 1.44,
+   "key": "BTTS",
+   "side": "Yes",
+   "label": "G/G",
+   "group": "Γκολ-Γκολ",
+   "p": 0.6503,
+   "est": 1.47,
    "result": null
   },
   {
@@ -18188,7 +18257,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6713,
+   "p": 0.6683,
    "est": 1.43,
    "result": null
   },
@@ -18202,8 +18271,8 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6731,
-   "est": 1.4,
+   "p": 0.664,
+   "est": 1.41,
    "result": null
   },
   {
@@ -18216,7 +18285,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 2.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6851,
+   "p": 0.6813,
    "est": 1.4,
    "result": null
   },
@@ -18230,7 +18299,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6518,
+   "p": 0.6517,
    "est": 1.47,
    "result": null
   },
@@ -18244,7 +18313,7 @@
    "side": "Over",
    "label": "Over 211.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6414,
+   "p": 0.6415,
    "est": 1.49,
    "result": null
   },
@@ -18258,7 +18327,7 @@
    "side": "Over",
    "label": "Over 221.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6338,
+   "p": 0.634,
    "est": 1.51,
    "result": null
   },
@@ -18272,7 +18341,7 @@
    "side": "Over",
    "label": "Over 219.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6407,
+   "p": 0.6406,
    "est": 1.49,
    "result": null
   },
@@ -18286,7 +18355,7 @@
    "side": "H",
    "label": "1",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6543,
+   "p": 0.6541,
    "est": 1.46,
    "result": null
   },
@@ -18314,7 +18383,7 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6788,
+   "p": 0.6785,
    "est": 1.45,
    "result": null
   },
@@ -18328,7 +18397,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 2.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6545,
+   "p": 0.6547,
    "est": 1.46,
    "result": null
   },
@@ -18342,7 +18411,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6728,
+   "p": 0.673,
    "est": 1.42,
    "result": null
   },
@@ -18356,7 +18425,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6615,
+   "p": 0.6617,
    "est": 1.45,
    "result": null
   },
@@ -18370,7 +18439,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.655,
+   "p": 0.6548,
    "est": 1.46,
    "result": null
   },
@@ -18384,7 +18453,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.683,
+   "p": 0.6828,
    "est": 1.4,
    "result": null
   },
@@ -18398,7 +18467,7 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6732,
+   "p": 0.6729,
    "est": 1.46,
    "result": null
   },
@@ -18412,8 +18481,8 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6443,
-   "est": 1.49,
+   "p": 0.628,
+   "est": 1.52,
    "result": null
   },
   {
@@ -18426,7 +18495,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 2.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6525,
+   "p": 0.6519,
    "est": 1.47,
    "result": null
   },
@@ -18440,7 +18509,7 @@
    "side": "Under",
    "label": "Φιλοξενούμενος Under 1.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6748,
+   "p": 0.6746,
    "est": 1.42,
    "result": null
   },
@@ -18454,7 +18523,7 @@
    "side": "H",
    "label": "1 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6711,
+   "p": 0.6713,
    "est": 1.43,
    "result": null
   },
@@ -18468,7 +18537,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6535,
+   "p": 0.6538,
    "est": 1.46,
    "result": null
   },
@@ -18482,7 +18551,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6594,
+   "p": 0.6593,
    "est": 1.45,
    "result": null
   },
@@ -18496,7 +18565,7 @@
    "side": "H",
    "label": "1 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6763,
+   "p": 0.6764,
    "est": 1.41,
    "result": null
   },
@@ -18510,7 +18579,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6468,
+   "p": 0.647,
    "est": 1.48,
    "result": null
   },
@@ -18524,8 +18593,8 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6314,
-   "est": 1.52,
+   "p": 0.6318,
+   "est": 1.51,
    "result": null
   },
   {
@@ -18538,7 +18607,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6423,
+   "p": 0.6424,
    "est": 1.49,
    "result": null
   },
@@ -18566,7 +18635,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6303,
+   "p": 0.6305,
    "est": 1.48,
    "result": null
   },
@@ -18580,7 +18649,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6647,
+   "p": 0.6648,
    "est": 1.44,
    "result": null
   },
@@ -18590,12 +18659,12 @@
    "date": "2026-11-22T13:00:00Z",
    "home": "Córdoba",
    "away": "Oviedo",
-   "key": "BTTS",
-   "side": "Yes",
-   "label": "G/G",
-   "group": "Γκολ-Γκολ",
-   "p": 0.6537,
-   "est": 1.46,
+   "key": "OU2.5",
+   "side": "Over",
+   "label": "Over 2.5",
+   "group": "Γκολ Over/Under",
+   "p": 0.6859,
+   "est": 1.41,
    "result": null
   },
   {
@@ -18608,8 +18677,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6248,
-   "est": 1.53,
+   "p": 0.6232,
+   "est": 1.54,
    "result": null
   },
   {
@@ -18622,8 +18691,8 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6712,
-   "est": 1.43,
+   "p": 0.6716,
+   "est": 1.42,
    "result": null
   },
   {
@@ -18636,7 +18705,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6837,
+   "p": 0.6841,
    "est": 1.4,
    "result": null
   },
@@ -18650,7 +18719,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6749,
+   "p": 0.675,
    "est": 1.42,
    "result": null
   },
@@ -18664,7 +18733,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6751,
+   "p": 0.6752,
    "est": 1.42,
    "result": null
   },
@@ -18678,7 +18747,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6313,
+   "p": 0.6315,
    "est": 1.52,
    "result": null
   },
@@ -18692,7 +18761,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6749,
+   "p": 0.6751,
    "est": 1.42,
    "result": null
   },
@@ -18706,7 +18775,7 @@
    "side": "1",
    "label": "1",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.679,
+   "p": 0.6787,
    "est": 1.45,
    "result": null
   },
@@ -18720,7 +18789,7 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6679,
+   "p": 0.6678,
    "est": 1.41,
    "result": null
   },
@@ -18734,7 +18803,7 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6721,
+   "p": 0.6722,
    "est": 1.42,
    "result": null
   },
@@ -18762,7 +18831,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6635,
+   "p": 0.6637,
    "est": 1.44,
    "result": null
   },
@@ -18776,7 +18845,7 @@
    "side": "1X",
    "label": "1X",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6682,
+   "p": 0.6683,
    "est": 1.41,
    "result": null
   },
@@ -18790,7 +18859,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6792,
+   "p": 0.6791,
    "est": 1.41,
    "result": null
   },
@@ -18804,7 +18873,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6682,
+   "p": 0.6683,
    "est": 1.43,
    "result": null
   },
@@ -18818,7 +18887,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6833,
+   "p": 0.6836,
    "est": 1.4,
    "result": null
   },
@@ -18832,7 +18901,7 @@
    "side": "Over",
    "label": "Over 159.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6391,
+   "p": 0.639,
    "est": 1.5,
    "result": null
   },
@@ -18846,7 +18915,7 @@
    "side": "A",
    "label": "2 (-4.5)",
    "group": "Χάντικαπ",
-   "p": 0.6406,
+   "p": 0.6404,
    "est": 1.49,
    "result": null
   },
@@ -18860,7 +18929,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6738,
+   "p": 0.6736,
    "est": 1.42,
    "result": null
   },
@@ -18870,11 +18939,11 @@
    "date": "2026-11-22T20:00:00Z",
    "home": "Getafe",
    "away": "Atlético Madrid",
-   "key": "OU2.5",
-   "side": "Under",
-   "label": "Under 2.5",
+   "key": "OU1.5",
+   "side": "Over",
+   "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6386,
+   "p": 0.6385,
    "est": 1.5,
    "result": null
   },
@@ -18888,7 +18957,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6822,
+   "p": 0.6825,
    "est": 1.4,
    "result": null
   },
@@ -18902,7 +18971,7 @@
    "side": "Over",
    "label": "Over 2.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6798,
+   "p": 0.6797,
    "est": 1.42,
    "result": null
   },
@@ -18916,7 +18985,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 2.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6583,
+   "p": 0.6584,
    "est": 1.45,
    "result": null
   },
@@ -18944,7 +19013,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6834,
+   "p": 0.6836,
    "est": 1.4,
    "result": null
   },
@@ -18958,7 +19027,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6335,
+   "p": 0.6333,
    "est": 1.51,
    "result": null
   },
@@ -18972,7 +19041,7 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.675,
+   "p": 0.6752,
    "est": 1.42,
    "result": null
   },
@@ -18986,7 +19055,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6644,
+   "p": 0.6643,
    "est": 1.44,
    "result": null
   },
@@ -19000,7 +19069,7 @@
    "side": "Under",
    "label": "Under 4.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6742,
+   "p": 0.6746,
    "est": 1.42,
    "result": null
   },
@@ -19028,8 +19097,8 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6375,
-   "est": 1.5,
+   "p": 0.6508,
+   "est": 1.47,
    "result": null
   },
   {
@@ -19042,8 +19111,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.654,
-   "est": 1.46,
+   "p": 0.6318,
+   "est": 1.51,
    "result": null
   },
   {
@@ -19056,8 +19125,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.5887,
-   "est": 1.63,
+   "p": 0.6058,
+   "est": 1.58,
    "result": null
   },
   {
@@ -19070,7 +19139,7 @@
    "side": "2",
    "label": "2",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6551,
+   "p": 0.6546,
    "est": 1.47,
    "result": null
   },
@@ -19084,7 +19153,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6788,
+   "p": 0.6787,
    "est": 1.41,
    "result": null
   },
@@ -19098,7 +19167,7 @@
    "side": "2",
    "label": "2",
    "group": "Τελικό αποτέλεσμα",
-   "p": 0.6352,
+   "p": 0.6348,
    "est": 1.52,
    "result": null
   },
@@ -19112,7 +19181,7 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6412,
+   "p": 0.6413,
    "est": 1.49,
    "result": null
   },
@@ -19126,7 +19195,7 @@
    "side": "X2",
    "label": "X2",
    "group": "Διπλή ευκαιρία",
-   "p": 0.6474,
+   "p": 0.6473,
    "est": 1.44,
    "result": null
   },
@@ -19140,7 +19209,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6504,
+   "p": 0.6501,
    "est": 1.47,
    "result": null
   },
@@ -19154,7 +19223,7 @@
    "side": "Over",
    "label": "Γηπεδούχος Over 0.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6478,
+   "p": 0.6482,
    "est": 1.48,
    "result": null
   },
@@ -19168,7 +19237,7 @@
    "side": "Under",
    "label": "Under 3.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6352,
+   "p": 0.6357,
    "est": 1.51,
    "result": null
   },
@@ -19182,7 +19251,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 1.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6483,
+   "p": 0.6462,
    "est": 1.48,
    "result": null
   },
@@ -19203,14 +19272,14 @@
   {
    "match_id": "ARG-08d2a1ac62f06510d528e357ff1dbdc5",
    "comp": "ARG",
-   "date": "2026-11-22T21:00:00Z",
+   "date": "2026-11-23T20:00:00Z",
    "home": "Gimnasia La Plata",
    "away": "Newells Old Boys",
    "key": "OU1.5",
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6684,
+   "p": 0.6682,
    "est": 1.43,
    "result": null
   },
@@ -19252,7 +19321,7 @@
    "side": "H",
    "label": "1 (+5.5)",
    "group": "Χάντικαπ",
-   "p": 0.6495,
+   "p": 0.6496,
    "est": 1.47,
    "result": null
   },
@@ -19266,7 +19335,7 @@
    "side": "Over",
    "label": "Over 170.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6466,
+   "p": 0.6465,
    "est": 1.48,
    "result": null
   },
@@ -19280,8 +19349,8 @@
    "side": "A",
    "label": "2 (+1.5)",
    "group": "Ασιατικό χάντικαπ",
-   "p": 0.6634,
-   "est": 1.44,
+   "p": 0.6763,
+   "est": 1.41,
    "result": null
   },
   {
@@ -19294,8 +19363,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6669,
-   "est": 1.44,
+   "p": 0.6729,
+   "est": 1.42,
    "result": null
   },
   {
@@ -19322,7 +19391,7 @@
    "side": "Over",
    "label": "Over 1.5",
    "group": "Γκολ Over/Under",
-   "p": 0.6819,
+   "p": 0.6821,
    "est": 1.4,
    "result": null
   },
@@ -19336,8 +19405,8 @@
    "side": "Yes",
    "label": "G/G",
    "group": "Γκολ-Γκολ",
-   "p": 0.6352,
-   "est": 1.51,
+   "p": 0.6382,
+   "est": 1.5,
    "result": null
   },
   {
@@ -19350,8 +19419,8 @@
    "side": "Over",
    "label": "Φιλοξενούμενος Over 0.5",
    "group": "Γκολ φιλοξενούμενου",
-   "p": 0.6711,
-   "est": 1.43,
+   "p": 0.6629,
+   "est": 1.44,
    "result": null
   },
   {
@@ -19364,7 +19433,7 @@
    "side": "Under",
    "label": "Γηπεδούχος Under 2.5",
    "group": "Γκολ γηπεδούχου",
-   "p": 0.6725,
+   "p": 0.6722,
    "est": 1.42,
    "result": null
   },
@@ -19392,7 +19461,7 @@
    "side": "Over",
    "label": "Over 221.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6356,
+   "p": 0.6353,
    "est": 1.51,
    "result": null
   },
@@ -19406,7 +19475,7 @@
    "side": "Over",
    "label": "Over 229.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6463,
+   "p": 0.6462,
    "est": 1.48,
    "result": null
   },
@@ -19420,7 +19489,7 @@
    "side": "Over",
    "label": "Over 216.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6372,
+   "p": 0.637,
    "est": 1.5,
    "result": null
   },
@@ -19448,7 +19517,7 @@
    "side": "Over",
    "label": "Over 223.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6467,
+   "p": 0.6468,
    "est": 1.48,
    "result": null
   },
@@ -19462,7 +19531,7 @@
    "side": "Over",
    "label": "Over 228.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6407,
+   "p": 0.6406,
    "est": 1.49,
    "result": null
   },
@@ -19518,7 +19587,7 @@
    "side": "Over",
    "label": "Over 224.5",
    "group": "Σύνολο πόντων",
-   "p": 0.6427,
+   "p": 0.6429,
    "est": 1.49,
    "result": null
   },
@@ -19532,8 +19601,134 @@
    "side": "A",
    "label": "2",
    "group": "Νικητής (με παράταση)",
-   "p": 0.6428,
+   "p": 0.6427,
    "est": 1.49,
+   "result": null
+  },
+  {
+   "match_id": "PD-afae1c9d986e4ab2200dc9bd44b6b6c4",
+   "comp": "PD",
+   "date": "2026-11-23T20:00:00Z",
+   "home": "Levante",
+   "away": "Elche CF",
+   "key": "OU3.5",
+   "side": "Under",
+   "label": "Under 3.5",
+   "group": "Γκολ Over/Under",
+   "p": 0.6497,
+   "est": 1.47,
+   "result": null
+  },
+  {
+   "match_id": "SA-99776445d5a5f4ed008f9a6d6a1495b7",
+   "comp": "SA",
+   "date": "2026-11-23T19:45:00Z",
+   "home": "Monza",
+   "away": "Fiorentina",
+   "key": "BTTS",
+   "side": "Yes",
+   "label": "G/G",
+   "group": "Γκολ-Γκολ",
+   "p": 0.6818,
+   "est": 1.4,
+   "result": null
+  },
+  {
+   "match_id": "TUR-c1958a1dcd4f8228f4d09148fd6ea216",
+   "comp": "TUR",
+   "date": "2026-11-23T17:00:00Z",
+   "home": "Basaksehir",
+   "away": "Çorum FK",
+   "key": "HT_OU1.5",
+   "side": "Under",
+   "label": "Γηπεδούχος Under 1.5",
+   "group": "Γκολ γηπεδούχου",
+   "p": 0.663,
+   "est": 1.44,
+   "result": null
+  },
+  {
+   "match_id": "SD-f024fef3ca959505d2bc7e75154dbedf",
+   "comp": "SD",
+   "date": "2026-11-23T19:30:00Z",
+   "home": "AD Ceuta FC",
+   "away": "Almería",
+   "key": "HT_OU1.5",
+   "side": "Under",
+   "label": "Γηπεδούχος Under 1.5",
+   "group": "Γκολ γηπεδούχου",
+   "p": 0.6689,
+   "est": 1.43,
+   "result": null
+  },
+  {
+   "match_id": "FL2-87ff23cf75b8a3552d4331f64c818f9c",
+   "comp": "FL2",
+   "date": "2026-11-23T19:45:00Z",
+   "home": "Sochaux",
+   "away": "USL Dunkerque",
+   "key": "HT_OU1.5",
+   "side": "Under",
+   "label": "Γηπεδούχος Under 1.5",
+   "group": "Γκολ γηπεδούχου",
+   "p": 0.66,
+   "est": 1.45,
+   "result": null
+  },
+  {
+   "match_id": "DNK-7f6119974c72b322830f02300a6ea872",
+   "comp": "DNK",
+   "date": "2026-11-23T18:00:00Z",
+   "home": "Brondby IF",
+   "away": "FC Midtjylland",
+   "key": "DC",
+   "side": "X2",
+   "label": "X2",
+   "group": "Διπλή ευκαιρία",
+   "p": 0.6643,
+   "est": 1.41,
+   "result": null
+  },
+  {
+   "match_id": "SWE-4247cf3f5ad70603706059703826171e",
+   "comp": "SWE",
+   "date": "2026-11-23T18:00:00Z",
+   "home": "Hammarby IF",
+   "away": "IFK Goteborg",
+   "key": "1X2",
+   "side": "1",
+   "label": "1",
+   "group": "Τελικό αποτέλεσμα",
+   "p": 0.6702,
+   "est": 1.46,
+   "result": null
+  },
+  {
+   "match_id": "SWE-83a9063e3314d3e820aabb99941483d0",
+   "comp": "SWE",
+   "date": "2026-11-23T18:00:00Z",
+   "home": "Örgryte IS",
+   "away": "Kalmar FF",
+   "key": "AT_OU0.5",
+   "side": "Over",
+   "label": "Φιλοξενούμενος Over 0.5",
+   "group": "Γκολ φιλοξενούμενου",
+   "p": 0.6475,
+   "est": 1.48,
+   "result": null
+  },
+  {
+   "match_id": "POL-73d2a041ea30b098a5826806dc784eb4",
+   "comp": "POL",
+   "date": "2026-11-23T18:00:00Z",
+   "home": "Wieczysta Kraków",
+   "away": "Motor Lublin",
+   "key": "OU2.5",
+   "side": "Over",
+   "label": "Over 2.5",
+   "group": "Γκολ Over/Under",
+   "p": 0.6797,
+   "est": 1.42,
    "result": null
   }
  ],
@@ -24586,7 +24781,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-3af2458dd9984d806bbf46e7bd2d7872",
@@ -24601,7 +24797,8 @@
    "kind": "edge",
    "p_avg": 0.4766,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-3af2458dd9984d806bbf46e7bd2d7872",
@@ -24616,7 +24813,8 @@
    "kind": "edge",
    "p_avg": 0.519,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-3af2458dd9984d806bbf46e7bd2d7872",
@@ -24631,7 +24829,8 @@
    "kind": "edge",
    "p_avg": 0.4691,
    "fair": 1.59,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-3af2458dd9984d806bbf46e7bd2d7872",
@@ -24646,7 +24845,8 @@
    "kind": "edge",
    "p_avg": 0.5227,
    "fair": 1.5,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-b35b9bd8cea60f3228039ca3fc77d4ba",
@@ -24661,7 +24861,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L1-b35b9bd8cea60f3228039ca3fc77d4ba",
@@ -24676,7 +24877,8 @@
    "kind": "edge",
    "p_avg": 0.5234,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L1-b35b9bd8cea60f3228039ca3fc77d4ba",
@@ -24691,7 +24893,8 @@
    "kind": "edge",
    "p_avg": 0.4983,
    "fair": 1.56,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "L1-b35b9bd8cea60f3228039ca3fc77d4ba",
@@ -24706,7 +24909,8 @@
    "kind": "edge",
    "p_avg": 0.5541,
    "fair": 1.46,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -24721,7 +24925,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "6-2"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -24736,7 +24941,8 @@
    "kind": "edge",
    "p_avg": 0.4426,
    "fair": 1.78,
-   "result": null
+   "result": 1,
+   "score": "6-2"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -24751,7 +24957,8 @@
    "kind": "edge",
    "p_avg": 0.4501,
    "fair": 1.81,
-   "result": null
+   "result": 0,
+   "score": "6-2"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -24766,7 +24973,8 @@
    "kind": "edge",
    "p_avg": 0.481,
    "fair": 1.72,
-   "result": null
+   "result": 0,
+   "score": "6-2"
   },
   {
    "match_id": "L1-82da0980dcfc5af1d8436be9c3531d91",
@@ -24976,7 +25184,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "L1-77721ceba014237d5ab331aad5bd05ac",
@@ -24991,7 +25200,8 @@
    "kind": "edge",
    "p_avg": 0.4961,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "L1-77721ceba014237d5ab331aad5bd05ac",
@@ -25006,7 +25216,8 @@
    "kind": "edge",
    "p_avg": 0.4691,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "L1-77721ceba014237d5ab331aad5bd05ac",
@@ -25021,7 +25232,8 @@
    "kind": "edge",
    "p_avg": 0.4426,
    "fair": 1.7,
-   "result": null
+   "result": 0,
+   "score": "3-0"
   },
   {
    "match_id": "L1-77721ceba014237d5ab331aad5bd05ac",
@@ -25036,7 +25248,8 @@
    "kind": "edge",
    "p_avg": 0.46,
    "fair": 1.68,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -25051,7 +25264,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -25066,7 +25280,8 @@
    "kind": "edge",
    "p_avg": 0.5541,
    "fair": 1.21,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -25081,7 +25296,8 @@
    "kind": "edge",
    "p_avg": 0.5309,
    "fair": 1.28,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -25096,7 +25312,8 @@
    "kind": "edge",
    "p_avg": 0.519,
    "fair": 1.34,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -25111,7 +25328,8 @@
    "kind": "edge",
    "p_avg": 0.5234,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -26286,7 +26504,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SD-fed29050dc7e99c7dd6b3b4580f142b7",
@@ -26301,7 +26520,8 @@
    "kind": "edge",
    "p_avg": 0.4701,
    "fair": 1.71,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SD-908247d5d5cd714de37956edf865668b",
@@ -26316,7 +26536,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "SD-908247d5d5cd714de37956edf865668b",
@@ -26331,7 +26552,8 @@
    "kind": "edge",
    "p_avg": 0.5235,
    "fair": 1.32,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-908247d5d5cd714de37956edf865668b",
@@ -26346,7 +26568,8 @@
    "kind": "edge",
    "p_avg": 0.538,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-908247d5d5cd714de37956edf865668b",
@@ -26361,7 +26584,8 @@
    "kind": "edge",
    "p_avg": 0.4763,
    "fair": 1.69,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
@@ -26376,7 +26600,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
@@ -26391,7 +26616,8 @@
    "kind": "edge",
    "p_avg": 0.5058,
    "fair": 1.33,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
@@ -26406,7 +26632,8 @@
    "kind": "edge",
    "p_avg": 0.4701,
    "fair": 1.61,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -27765,7 +27992,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-b35b9bd8cea60f3228039ca3fc77d4ba",
@@ -27780,7 +28008,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -27795,7 +28024,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "6-2"
   },
   {
    "match_id": "L1-82da0980dcfc5af1d8436be9c3531d91",
@@ -27870,7 +28100,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -27885,7 +28116,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -28202,7 +28434,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SD-fed29050dc7e99c7dd6b3b4580f142b7",
@@ -28217,7 +28450,8 @@
    "kind": "edge",
    "p_avg": 0.4523,
    "fair": 1.68,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "SD-908247d5d5cd714de37956edf865668b",
@@ -28232,7 +28466,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-908247d5d5cd714de37956edf865668b",
@@ -28247,7 +28482,8 @@
    "kind": "edge",
    "p_avg": 0.5314,
    "fair": 1.59,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
@@ -28262,7 +28498,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -28293,7 +28530,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-7bf0d1f95bb9b2b6003386c82ba96b6a",
@@ -28308,7 +28546,8 @@
    "kind": "edge",
    "p_avg": 0.5073,
    "fair": 1.34,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-7bf0d1f95bb9b2b6003386c82ba96b6a",
@@ -28323,7 +28562,8 @@
    "kind": "edge",
    "p_avg": 0.5369,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-7bf0d1f95bb9b2b6003386c82ba96b6a",
@@ -28338,7 +28578,8 @@
    "kind": "edge",
    "p_avg": 0.5243,
    "fair": 1.44,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "L2-7bf0d1f95bb9b2b6003386c82ba96b6a",
@@ -28353,7 +28594,8 @@
    "kind": "edge",
    "p_avg": 0.5811,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -28368,7 +28610,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "4-2"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -28383,7 +28626,8 @@
    "kind": "edge",
    "p_avg": 0.443,
    "fair": 1.5,
-   "result": null
+   "result": 0,
+   "score": "4-2"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -28398,7 +28642,8 @@
    "kind": "edge",
    "p_avg": 0.5048,
    "fair": 1.43,
-   "result": null
+   "result": 0,
+   "score": "4-2"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -28413,7 +28658,8 @@
    "kind": "edge",
    "p_avg": 0.4951,
    "fair": 1.52,
-   "result": null
+   "result": 0,
+   "score": "4-2"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -28428,7 +28674,8 @@
    "kind": "edge",
    "p_avg": 0.5122,
    "fair": 1.5,
-   "result": null
+   "result": 0,
+   "score": "4-2"
   },
   {
    "match_id": "L2-1cf6ac52aa2dbb22a0eeb97e0bc80579",
@@ -28443,7 +28690,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "L2-1cf6ac52aa2dbb22a0eeb97e0bc80579",
@@ -28458,7 +28706,8 @@
    "kind": "edge",
    "p_avg": 0.557,
    "fair": 1.24,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "L2-1cf6ac52aa2dbb22a0eeb97e0bc80579",
@@ -28473,7 +28722,8 @@
    "kind": "edge",
    "p_avg": 0.4757,
    "fair": 1.55,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "L2-1cf6ac52aa2dbb22a0eeb97e0bc80579",
@@ -28488,7 +28738,8 @@
    "kind": "edge",
    "p_avg": 0.5595,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "L2-1cf6ac52aa2dbb22a0eeb97e0bc80579",
@@ -28503,7 +28754,8 @@
    "kind": "edge",
    "p_avg": 0.4927,
    "fair": 1.66,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -28518,7 +28770,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -28533,7 +28786,8 @@
    "kind": "edge",
    "p_avg": 0.443,
    "fair": 1.35,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -28548,7 +28802,8 @@
    "kind": "edge",
    "p_avg": 0.4951,
    "fair": 1.43,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -28563,7 +28818,8 @@
    "kind": "edge",
    "p_avg": 0.5073,
    "fair": 1.63,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -28578,7 +28834,8 @@
    "kind": "edge",
    "p_avg": 0.3639,
    "fair": 2.14,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -28593,7 +28850,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -28608,7 +28866,8 @@
    "kind": "edge",
    "p_avg": 0.4951,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -28623,7 +28882,8 @@
    "kind": "edge",
    "p_avg": 0.443,
    "fair": 1.6,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -28638,7 +28898,8 @@
    "kind": "edge",
    "p_avg": 0.5255,
    "fair": 1.5,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -28653,7 +28914,8 @@
    "kind": "edge",
    "p_avg": 0.4757,
    "fair": 1.67,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -28668,7 +28930,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -28683,7 +28946,8 @@
    "kind": "edge",
    "p_avg": 0.4927,
    "fair": 1.24,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -28698,7 +28962,8 @@
    "kind": "edge",
    "p_avg": 0.557,
    "fair": 1.17,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -28713,7 +28978,8 @@
    "kind": "edge",
    "p_avg": 0.4631,
    "fair": 1.33,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -28728,7 +28994,8 @@
    "kind": "edge",
    "p_avg": 0.5049,
    "fair": 1.26,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -28743,7 +29010,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -28758,7 +29026,8 @@
    "kind": "edge",
    "p_avg": 0.443,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -28773,7 +29042,8 @@
    "kind": "edge",
    "p_avg": 0.5243,
    "fair": 1.41,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -28788,7 +29058,8 @@
    "kind": "edge",
    "p_avg": 0.5073,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -28803,7 +29074,8 @@
    "kind": "edge",
    "p_avg": 0.5369,
    "fair": 1.52,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
@@ -28818,7 +29090,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
@@ -28833,7 +29106,8 @@
    "kind": "edge",
    "p_avg": 0.4951,
    "fair": 1.56,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
@@ -28848,7 +29122,8 @@
    "kind": "edge",
    "p_avg": 0.4757,
    "fair": 1.61,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
@@ -28863,7 +29138,8 @@
    "kind": "edge",
    "p_avg": 0.5571,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -28878,7 +29154,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -28893,7 +29170,8 @@
    "kind": "edge",
    "p_avg": 0.4927,
    "fair": 1.25,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -28908,7 +29186,8 @@
    "kind": "edge",
    "p_avg": 0.557,
    "fair": 1.25,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -28923,7 +29202,8 @@
    "kind": "edge",
    "p_avg": 0.4631,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -28938,7 +29218,8 @@
    "kind": "edge",
    "p_avg": 0.5049,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "AUT-328536a210997eb2595077031a250747",
@@ -32555,7 +32836,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-b35b9bd8cea60f3228039ca3fc77d4ba",
@@ -32570,7 +32852,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -32585,7 +32868,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "6-2"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -32600,7 +32884,8 @@
    "kind": "edge",
    "p_avg": 0.5259,
    "fair": 1.55,
-   "result": null
+   "result": 1,
+   "score": "6-2"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -32615,7 +32900,8 @@
    "kind": "edge",
    "p_avg": 0.5979,
    "fair": 1.45,
-   "result": null
+   "result": 0,
+   "score": "6-2"
   },
   {
    "match_id": "L1-82da0980dcfc5af1d8436be9c3531d91",
@@ -32690,7 +32976,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "L1-77721ceba014237d5ab331aad5bd05ac",
@@ -32705,7 +32992,8 @@
    "kind": "edge",
    "p_avg": 0.5646,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "L1-77721ceba014237d5ab331aad5bd05ac",
@@ -32720,7 +33008,8 @@
    "kind": "edge",
    "p_avg": 0.5612,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "L1-77721ceba014237d5ab331aad5bd05ac",
@@ -32735,7 +33024,8 @@
    "kind": "edge",
    "p_avg": 0.5259,
    "fair": 1.55,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -32750,7 +33040,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -32765,7 +33056,8 @@
    "kind": "edge",
    "p_avg": 0.3992,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -32780,7 +33072,8 @@
    "kind": "edge",
    "p_avg": 0.4021,
    "fair": 1.55,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -32795,7 +33088,8 @@
    "kind": "edge",
    "p_avg": 0.4388,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "BL2-e02e046c5d6a79723c46af703304de02",
@@ -33319,7 +33613,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.61,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SD-fed29050dc7e99c7dd6b3b4580f142b7",
@@ -33334,7 +33629,8 @@
    "kind": "edge",
    "p_avg": 0.5248,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "SD-fed29050dc7e99c7dd6b3b4580f142b7",
@@ -33349,7 +33645,8 @@
    "kind": "edge",
    "p_avg": 0.5779,
    "fair": 1.45,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SD-908247d5d5cd714de37956edf865668b",
@@ -33364,7 +33661,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-908247d5d5cd714de37956edf865668b",
@@ -33379,7 +33677,8 @@
    "kind": "edge",
    "p_avg": 0.4404,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
@@ -33394,7 +33693,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
@@ -33409,7 +33709,8 @@
    "kind": "edge",
    "p_avg": 0.3985,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
@@ -33424,7 +33725,8 @@
    "kind": "edge",
    "p_avg": 0.5779,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "FL2-b34ca990cb7daf96d0a96dc33f609250",
@@ -33487,7 +33789,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-7bf0d1f95bb9b2b6003386c82ba96b6a",
@@ -33502,7 +33805,8 @@
    "kind": "edge",
    "p_avg": 0.4114,
    "fair": 1.51,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -33517,7 +33821,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "4-2"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -33532,7 +33837,8 @@
    "kind": "edge",
    "p_avg": 0.5736,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "4-2"
   },
   {
    "match_id": "L2-1cf6ac52aa2dbb22a0eeb97e0bc80579",
@@ -33547,7 +33853,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 1,
+   "score": "0-2"
   },
   {
    "match_id": "L2-1cf6ac52aa2dbb22a0eeb97e0bc80579",
@@ -33562,7 +33869,8 @@
    "kind": "edge",
    "p_avg": 0.4448,
    "fair": 1.4,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -33577,7 +33885,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -33592,7 +33901,8 @@
    "kind": "edge",
    "p_avg": 0.338,
    "fair": 1.54,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -33607,7 +33917,8 @@
    "kind": "edge",
    "p_avg": 0.5992,
    "fair": 1.43,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -33622,7 +33933,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -33637,7 +33949,8 @@
    "kind": "edge",
    "p_avg": 0.5552,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -33652,7 +33965,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -33667,7 +33981,8 @@
    "kind": "edge",
    "p_avg": 0.3171,
    "fair": 1.44,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -33682,7 +33997,8 @@
    "kind": "edge",
    "p_avg": 0.3338,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -33697,7 +34013,8 @@
    "kind": "edge",
    "p_avg": 0.2841,
    "fair": 1.62,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -33712,7 +34029,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -33727,7 +34045,8 @@
    "kind": "edge",
    "p_avg": 0.5992,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
@@ -33742,7 +34061,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
@@ -33757,7 +34077,8 @@
    "kind": "edge",
    "p_avg": 0.5736,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
@@ -33772,7 +34093,8 @@
    "kind": "edge",
    "p_avg": 0.592,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -33787,7 +34109,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -33802,7 +34125,8 @@
    "kind": "edge",
    "p_avg": 0.3171,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -33817,7 +34141,8 @@
    "kind": "edge",
    "p_avg": 0.4448,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "AUT-6e465d9ae10bd171c96eba029985473e",
@@ -34505,7 +34830,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-b8c1674ee9357dafd107c231c7d8277e",
@@ -34520,7 +34846,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-b8c1674ee9357dafd107c231c7d8277e",
@@ -34535,7 +34862,8 @@
    "kind": "edge",
    "p_avg": 0.4952,
    "fair": 1.42,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "L2-b8c1674ee9357dafd107c231c7d8277e",
@@ -34550,7 +34878,8 @@
    "kind": "edge",
    "p_avg": 0.5073,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-b8c1674ee9357dafd107c231c7d8277e",
@@ -34565,7 +34894,8 @@
    "kind": "edge",
    "p_avg": 0.5867,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": 560636,
@@ -34770,7 +35100,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SD-570ec7734e1f7d9e813ab0013291f5f5",
@@ -34785,7 +35116,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-570ec7734e1f7d9e813ab0013291f5f5",
@@ -34800,7 +35132,8 @@
    "kind": "edge",
    "p_avg": 0.4952,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-570ec7734e1f7d9e813ab0013291f5f5",
@@ -34815,7 +35148,8 @@
    "kind": "edge",
    "p_avg": 0.5734,
    "fair": 1.38,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-570ec7734e1f7d9e813ab0013291f5f5",
@@ -34830,7 +35164,8 @@
    "kind": "edge",
    "p_avg": 0.529,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
@@ -34845,7 +35180,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-3"
   },
   {
    "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
@@ -34860,7 +35196,8 @@
    "kind": "edge",
    "p_avg": 0.4952,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "3-3"
   },
   {
    "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
@@ -34875,7 +35212,8 @@
    "kind": "edge",
    "p_avg": 0.5248,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "3-3"
   },
   {
    "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
@@ -34890,7 +35228,8 @@
    "kind": "edge",
    "p_avg": 0.5782,
    "fair": 1.49,
-   "result": null
+   "result": 0,
+   "score": "3-3"
   },
   {
    "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
@@ -34905,7 +35244,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
@@ -34920,7 +35260,8 @@
    "kind": "edge",
    "p_avg": 0.471,
    "fair": 1.53,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
@@ -34935,7 +35276,8 @@
    "kind": "edge",
    "p_avg": 0.5248,
    "fair": 1.59,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
@@ -34950,7 +35292,8 @@
    "kind": "edge",
    "p_avg": 0.6081,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "BRA-60e79364c168ad0ad22c0cffc02be8a9",
@@ -35300,7 +35643,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "3-3"
   },
   {
    "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
@@ -35315,7 +35659,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
@@ -35330,7 +35675,8 @@
    "kind": "edge",
    "p_avg": 0.4523,
    "fair": 1.47,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
@@ -35345,7 +35691,8 @@
    "kind": "edge",
    "p_avg": 0.4708,
    "fair": 1.45,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "DED-bf796f8b2085a46e0be2b6c6ece5c340",
@@ -35391,7 +35738,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SD-570ec7734e1f7d9e813ab0013291f5f5",
@@ -35406,7 +35754,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
@@ -35421,7 +35770,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
@@ -35436,7 +35786,8 @@
    "kind": "edge",
    "p_avg": 0.523,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
@@ -35451,7 +35802,8 @@
    "kind": "edge",
    "p_avg": 0.5237,
    "fair": 1.55,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
@@ -35466,7 +35818,8 @@
    "kind": "edge",
    "p_avg": 0.6004,
    "fair": 1.41,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -35481,7 +35834,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SD-f52b83a74c511828f6155889d751d191",
@@ -35512,7 +35866,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
@@ -35527,7 +35882,8 @@
    "kind": "edge",
    "p_avg": 0.4218,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
@@ -35542,7 +35898,8 @@
    "kind": "edge",
    "p_avg": 0.4401,
    "fair": 1.42,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
@@ -35557,7 +35914,8 @@
    "kind": "edge",
    "p_avg": 0.4953,
    "fair": 1.44,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
@@ -35572,7 +35930,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
@@ -35587,7 +35946,8 @@
    "kind": "edge",
    "p_avg": 0.4751,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
@@ -35602,7 +35962,8 @@
    "kind": "edge",
    "p_avg": 0.529,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
@@ -35617,7 +35978,8 @@
    "kind": "edge",
    "p_avg": 0.5047,
    "fair": 1.5,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "L2-e637ea0237f583a1b24ab839d809d3e5",
@@ -35756,7 +36118,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.6,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SD-fed29050dc7e99c7dd6b3b4580f142b7",
@@ -35771,7 +36134,8 @@
    "kind": "edge",
    "p_avg": 0.574,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "SD-d5b0e0c0934f6a58410410bd573a5065",
@@ -35786,7 +36150,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "SD-570ec7734e1f7d9e813ab0013291f5f5",
@@ -35801,7 +36166,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
@@ -35816,7 +36182,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "3-3"
   },
   {
    "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
@@ -35831,7 +36198,8 @@
    "kind": "edge",
    "p_avg": 0.5647,
    "fair": 1.51,
-   "result": null
+   "result": 0,
+   "score": "3-3"
   },
   {
    "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
@@ -35846,7 +36214,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
@@ -35861,7 +36230,8 @@
    "kind": "edge",
    "p_avg": 0.5043,
    "fair": 1.61,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
@@ -35876,7 +36246,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
@@ -35891,7 +36262,8 @@
    "kind": "edge",
    "p_avg": 0.5258,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
@@ -35906,7 +36278,8 @@
    "kind": "edge",
    "p_avg": 0.5191,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
@@ -35921,7 +36294,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
@@ -35936,7 +36310,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "L1-d90bee9d1425fb4cebbb391add66d0ed",
@@ -35966,7 +36341,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "SD-c52bb6ace02b521be96df8fba8806037",
@@ -36056,7 +36432,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L1-b35b9bd8cea60f3228039ca3fc77d4ba",
@@ -36071,7 +36448,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L1-e315dc04bd19f74df3199a20acf38004",
@@ -36131,7 +36509,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-6bc4aff371a2a5eaf38c73700a5c14d4",
@@ -36146,7 +36525,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-3"
   },
   {
    "match_id": "SD-b8308c8150f5ad55e242d7671adaffbd",
@@ -36161,7 +36541,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
@@ -36176,7 +36557,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
@@ -36191,7 +36573,8 @@
    "kind": "edge",
    "p_avg": 0.4532,
    "fair": 1.49,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
@@ -36206,7 +36589,8 @@
    "kind": "edge",
    "p_avg": 0.5216,
    "fair": 1.35,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -36221,7 +36605,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "L1-3af2458dd9984d806bbf46e7bd2d7872",
@@ -36236,7 +36621,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-d90bee9d1425fb4cebbb391add66d0ed",
@@ -36266,7 +36652,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
@@ -36281,7 +36668,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -36296,7 +36684,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "4-2"
   },
   {
    "match_id": 560643,
@@ -36761,7 +37150,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "GR-9bc9862a1b87e02742feb33a5bb1a49a",
@@ -36851,7 +37241,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": 560646,
@@ -37301,7 +37692,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.59,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SD-beaf0bb6252d3b1d42a720aa385e9414",
@@ -37316,7 +37708,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "L2-e637ea0237f583a1b24ab839d809d3e5",
@@ -38006,7 +38399,8 @@
    "kind": "edge",
    "p_avg": 0.5612,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "L1-56de4f6858f896d0278456d0f2f8988a",
@@ -38021,7 +38415,8 @@
    "kind": "edge",
    "p_avg": 0.4751,
    "fair": 1.7,
-   "result": null
+   "result": 1,
+   "score": "6-2"
   },
   {
    "match_id": "L1-371f8125767427c4b599eab458bb5549",
@@ -38036,7 +38431,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "L1-deb5feb11ba6d2e87bcf2f4183b255f3",
@@ -38291,7 +38687,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SD-f241b0cec31506c2eb749ff9be97667c",
@@ -38306,7 +38703,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
@@ -38321,7 +38719,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
@@ -38336,7 +38735,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SD-12b34c0f22c4208647c5a5472269b735",
@@ -38351,7 +38751,8 @@
    "kind": "edge",
    "p_avg": 0.3944,
    "fair": 1.47,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "SD-fabb494cc1ebe6de14b1d38f9a34b091",
@@ -38726,7 +39127,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L2-fe8130a05bb9c0ca21e120279f2291de",
@@ -38741,7 +39143,8 @@
    "kind": "edge",
    "p_avg": 0.581,
    "fair": 1.4,
-   "result": null
+   "result": 0,
+   "score": "4-2"
   },
   {
    "match_id": "L2-1cf6ac52aa2dbb22a0eeb97e0bc80579",
@@ -38756,7 +39159,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "L2-f6d830e8821f774883ee2ac32d083bd9",
@@ -38771,7 +39175,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "L2-f71d831db05c678e7208a069210cd59d",
@@ -38786,7 +39191,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "L2-8861bc687f5c3eab3ddd9ad6fec487ee",
@@ -38801,7 +39207,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-4"
   },
   {
    "match_id": "L2-8c883d569a4f4682e918e8b2b37f65ea",
@@ -38816,7 +39223,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "L2-0e3335b3ccccc54d5457fca8f68a7c16",
@@ -38831,7 +39239,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "L2-c85f68dde3ac31fe8f0da78b1ddca180",
@@ -38846,7 +39255,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "L2-b8c1674ee9357dafd107c231c7d8277e",
@@ -38861,7 +39271,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "EC-2026-11-14-carlisle",
@@ -38876,7 +39287,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "EC-2026-11-14-carlisle",
@@ -38891,7 +39303,8 @@
    "kind": "edge",
    "p_avg": 0.2894,
    "fair": 1.55,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "EC-2026-11-14-carlisle",
@@ -38906,7 +39319,8 @@
    "kind": "edge",
    "p_avg": 0.4206,
    "fair": 1.35,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "EC-2026-11-14-carlisle",
@@ -38921,7 +39335,8 @@
    "kind": "edge",
    "p_avg": 0.4586,
    "fair": 1.41,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "EC-2026-11-14-eastleigh",
@@ -38936,7 +39351,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "EC-2026-11-14-eastleigh",
@@ -38951,7 +39367,8 @@
    "kind": "edge",
    "p_avg": 0.4072,
    "fair": 1.54,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "EC-2026-11-14-eastleigh",
@@ -38966,7 +39383,8 @@
    "kind": "edge",
    "p_avg": 0.4756,
    "fair": 1.45,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "EC-2026-11-14-eastleigh",
@@ -38981,7 +39399,8 @@
    "kind": "edge",
    "p_avg": 0.5365,
    "fair": 1.37,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "EC-2026-11-14-gateshead",
@@ -38996,7 +39415,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-3"
   },
   {
    "match_id": "EC-2026-11-14-gateshead",
@@ -39011,7 +39431,8 @@
    "kind": "edge",
    "p_avg": 0.2668,
    "fair": 1.52,
-   "result": null
+   "result": 0,
+   "score": "0-3"
   },
   {
    "match_id": "EC-2026-11-14-gateshead",
@@ -39026,7 +39447,8 @@
    "kind": "edge",
    "p_avg": 0.3621,
    "fair": 1.51,
-   "result": null
+   "result": 0,
+   "score": "0-3"
   },
   {
    "match_id": "EC-2026-11-14-gateshead",
@@ -39041,7 +39463,8 @@
    "kind": "edge",
    "p_avg": 0.4072,
    "fair": 1.44,
-   "result": null
+   "result": 0,
+   "score": "0-3"
   },
   {
    "match_id": "EC-2026-11-14-harrogate",
@@ -39056,7 +39479,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "4-0"
   },
   {
    "match_id": "EC-2026-11-14-harrogate",
@@ -39071,7 +39495,8 @@
    "kind": "edge",
    "p_avg": 0.3919,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "4-0"
   },
   {
    "match_id": "EC-2026-11-14-harrogate",
@@ -39086,7 +39511,8 @@
    "kind": "edge",
    "p_avg": 0.431,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "4-0"
   },
   {
    "match_id": "EC-2026-11-14-harrogate",
@@ -39101,7 +39527,8 @@
    "kind": "edge",
    "p_avg": 0.4206,
    "fair": 1.5,
-   "result": null
+   "result": 1,
+   "score": "4-0"
   },
   {
    "match_id": "EC-2026-11-14-hartlepool",
@@ -39116,7 +39543,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-hartlepool",
@@ -39131,7 +39559,8 @@
    "kind": "edge",
    "p_avg": 0.6374,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-hornchurch",
@@ -39146,7 +39575,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-hornchurch",
@@ -39161,7 +39591,8 @@
    "kind": "edge",
    "p_avg": 0.4809,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-hornchurch",
@@ -39176,7 +39607,8 @@
    "kind": "edge",
    "p_avg": 0.5124,
    "fair": 1.38,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-hornchurch",
@@ -39191,7 +39623,8 @@
    "kind": "edge",
    "p_avg": 0.5188,
    "fair": 1.52,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-kidderminster",
@@ -39206,7 +39639,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-kidderminster",
@@ -39221,7 +39655,8 @@
    "kind": "edge",
    "p_avg": 0.4072,
    "fair": 1.61,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-kidderminster",
@@ -39236,7 +39671,8 @@
    "kind": "edge",
    "p_avg": 0.4756,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-kidderminster",
@@ -39251,7 +39687,8 @@
    "kind": "edge",
    "p_avg": 0.5046,
    "fair": 1.49,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-scunthorpe",
@@ -39266,7 +39703,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-scunthorpe",
@@ -39281,7 +39719,8 @@
    "kind": "edge",
    "p_avg": 0.4116,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-scunthorpe",
@@ -39296,7 +39735,8 @@
    "kind": "edge",
    "p_avg": 0.4635,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-scunthorpe",
@@ -39311,7 +39751,8 @@
    "kind": "edge",
    "p_avg": 0.5582,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-southend",
@@ -39326,7 +39767,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-southend",
@@ -39341,7 +39783,8 @@
    "kind": "edge",
    "p_avg": 0.3259,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-southend",
@@ -39356,7 +39799,8 @@
    "kind": "edge",
    "p_avg": 0.431,
    "fair": 1.46,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-southend",
@@ -39371,7 +39815,8 @@
    "kind": "edge",
    "p_avg": 0.4954,
    "fair": 1.44,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "EC-2026-11-14-sutton",
@@ -39386,7 +39831,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "EC-2026-11-14-sutton",
@@ -39401,7 +39847,8 @@
    "kind": "edge",
    "p_avg": 0.4116,
    "fair": 1.53,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "EC-2026-11-14-sutton",
@@ -39416,7 +39863,8 @@
    "kind": "edge",
    "p_avg": 0.5191,
    "fair": 1.39,
-   "result": null
+   "result": 0,
+   "score": "0-2"
   },
   {
    "match_id": "EC-2026-11-14-yeovil",
@@ -39431,7 +39879,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "EC-2026-11-14-yeovil",
@@ -39446,7 +39895,8 @@
    "kind": "edge",
    "p_avg": 0.3689,
    "fair": 1.41,
-   "result": null
+   "result": 0,
+   "score": "2-2"
   },
   {
    "match_id": "EC-2026-11-14-yeovil",
@@ -39461,7 +39911,8 @@
    "kind": "edge",
    "p_avg": 0.3917,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "EC-2026-11-14-yeovil",
@@ -39476,7 +39927,8 @@
    "kind": "edge",
    "p_avg": 0.4072,
    "fair": 1.56,
-   "result": null
+   "result": 1,
+   "score": "2-2"
   },
   {
    "match_id": "SC1-2026-11-14-ayr",
@@ -39491,7 +39943,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SC1-2026-11-14-ayr",
@@ -39506,7 +39959,8 @@
    "kind": "edge",
    "p_avg": 0.3137,
    "fair": 1.52,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "SC1-2026-11-14-ayr",
@@ -39521,7 +39975,8 @@
    "kind": "edge",
    "p_avg": 0.4776,
    "fair": 1.45,
-   "result": null
+   "result": 1,
+   "score": "3-1"
   },
   {
    "match_id": "SC1-2026-11-14-ayr",
@@ -39536,7 +39991,8 @@
    "kind": "edge",
    "p_avg": 0.451,
    "fair": 1.62,
-   "result": null
+   "result": 0,
+   "score": "3-1"
   },
   {
    "match_id": "SC1-2026-11-14-livingston",
@@ -39551,7 +40007,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SC1-2026-11-14-livingston",
@@ -39566,7 +40023,8 @@
    "kind": "edge",
    "p_avg": 0.227,
    "fair": 1.46,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SC1-2026-11-14-livingston",
@@ -39581,7 +40039,8 @@
    "kind": "edge",
    "p_avg": 0.4636,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SC1-2026-11-14-livingston",
@@ -39596,7 +40055,8 @@
    "kind": "edge",
    "p_avg": 0.5431,
    "fair": 1.35,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SC1-2026-11-14-partick",
@@ -39611,7 +40071,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "3-2"
   },
   {
    "match_id": "SC1-2026-11-14-partick",
@@ -39626,7 +40087,8 @@
    "kind": "edge",
    "p_avg": 0.5576,
    "fair": 1.46,
-   "result": null
+   "result": 0,
+   "score": "3-2"
   },
   {
    "match_id": "SC1-2026-11-14-partick",
@@ -39641,7 +40103,8 @@
    "kind": "edge",
    "p_avg": 0.5364,
    "fair": 1.52,
-   "result": null
+   "result": 0,
+   "score": "3-2"
   },
   {
    "match_id": "SC1-2026-11-14-partick",
@@ -39656,7 +40119,8 @@
    "kind": "edge",
    "p_avg": 0.59,
    "fair": 1.41,
-   "result": null
+   "result": 0,
+   "score": "3-2"
   },
   {
    "match_id": "SC1-2026-11-14-stenhousemuir",
@@ -39671,7 +40135,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SC1-2026-11-14-stenhousemuir",
@@ -39686,7 +40151,8 @@
    "kind": "edge",
    "p_avg": 0.532,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SC1-2026-11-14-stenhousemuir",
@@ -39701,7 +40167,8 @@
    "kind": "edge",
    "p_avg": 0.5224,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SC1-2026-11-14-stenhousemuir",
@@ -39716,7 +40183,8 @@
    "kind": "edge",
    "p_avg": 0.5576,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SC2-2026-11-14-airdrie utd",
@@ -39731,7 +40199,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SC2-2026-11-14-airdrie utd",
@@ -39746,7 +40215,8 @@
    "kind": "edge",
    "p_avg": 0.4566,
    "fair": 1.5,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SC2-2026-11-14-airdrie utd",
@@ -39761,7 +40231,8 @@
    "kind": "edge",
    "p_avg": 0.5043,
    "fair": 1.48,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SC2-2026-11-14-airdrie utd",
@@ -39776,7 +40247,8 @@
    "kind": "edge",
    "p_avg": 0.5503,
    "fair": 1.51,
-   "result": null
+   "result": 0,
+   "score": "2-0"
   },
   {
    "match_id": "SC2-2026-11-14-cove rangers",
@@ -39791,7 +40263,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "3-0"
   },
   {
    "match_id": "SC2-2026-11-14-east fife",
@@ -39806,7 +40279,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-0"
   },
   {
    "match_id": "SC2-2026-11-14-east fife",
@@ -39821,7 +40295,8 @@
    "kind": "edge",
    "p_avg": 0.4613,
    "fair": 1.39,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SC2-2026-11-14-east fife",
@@ -39836,7 +40311,8 @@
    "kind": "edge",
    "p_avg": 0.5434,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SC2-2026-11-14-east fife",
@@ -39851,7 +40327,8 @@
    "kind": "edge",
    "p_avg": 0.4957,
    "fair": 1.53,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "SC2-2026-11-14-east kilbride",
@@ -39866,7 +40343,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 0,
+   "score": "4-1"
   },
   {
    "match_id": "SC2-2026-11-14-east kilbride",
@@ -39881,7 +40359,8 @@
    "kind": "edge",
    "p_avg": 0.3038,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "SC2-2026-11-14-east kilbride",
@@ -39896,7 +40375,8 @@
    "kind": "edge",
    "p_avg": 0.5075,
    "fair": 1.37,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "SC2-2026-11-14-east kilbride",
@@ -39911,7 +40391,8 @@
    "kind": "edge",
    "p_avg": 0.4876,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "4-1"
   },
   {
    "match_id": "SC2-2026-11-14-hamilton",
@@ -39926,7 +40407,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-2"
   },
   {
    "match_id": "SC2-2026-11-14-hamilton",
@@ -39941,7 +40423,8 @@
    "kind": "edge",
    "p_avg": 0.3227,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SC2-2026-11-14-hamilton",
@@ -39956,7 +40439,8 @@
    "kind": "edge",
    "p_avg": 0.3214,
    "fair": 1.72,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SC2-2026-11-14-hamilton",
@@ -39971,7 +40455,8 @@
    "kind": "edge",
    "p_avg": 0.4146,
    "fair": 1.63,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SC3-2026-11-14-dumbarton",
@@ -39986,7 +40471,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "0-5"
   },
   {
    "match_id": "SC3-2026-11-14-dumbarton",
@@ -40001,7 +40487,8 @@
    "kind": "edge",
    "p_avg": 0.5604,
    "fair": 1.4,
-   "result": null
+   "result": 0,
+   "score": "0-5"
   },
   {
    "match_id": "SC3-2026-11-14-dumbarton",
@@ -40016,7 +40503,8 @@
    "kind": "edge",
    "p_avg": 0.5346,
    "fair": 1.47,
-   "result": null
+   "result": 1,
+   "score": "0-5"
   },
   {
    "match_id": "SC3-2026-11-14-dumbarton",
@@ -40031,7 +40519,8 @@
    "kind": "edge",
    "p_avg": 0.4457,
    "fair": 1.7,
-   "result": null
+   "result": 1,
+   "score": "0-5"
   },
   {
    "match_id": "SC3-2026-11-14-edinburgh city",
@@ -40046,7 +40535,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-6"
   },
   {
    "match_id": "SC3-2026-11-14-edinburgh city",
@@ -40061,7 +40551,8 @@
    "kind": "edge",
    "p_avg": 0.5328,
    "fair": 1.4,
-   "result": null
+   "result": 0,
+   "score": "2-6"
   },
   {
    "match_id": "SC3-2026-11-14-edinburgh city",
@@ -40076,7 +40567,8 @@
    "kind": "edge",
    "p_avg": 0.6027,
    "fair": 1.36,
-   "result": null
+   "result": 1,
+   "score": "2-6"
   },
   {
    "match_id": "SC3-2026-11-14-edinburgh city",
@@ -40091,7 +40583,8 @@
    "kind": "edge",
    "p_avg": 0.5722,
    "fair": 1.42,
-   "result": null
+   "result": 1,
+   "score": "2-6"
   },
   {
    "match_id": "SC3-2026-11-14-forfar",
@@ -40106,7 +40599,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SC3-2026-11-14-forfar",
@@ -40121,7 +40615,8 @@
    "kind": "edge",
    "p_avg": 0.4435,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SC3-2026-11-14-forfar",
@@ -40136,7 +40631,8 @@
    "kind": "edge",
    "p_avg": 0.4396,
    "fair": 1.63,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "SC3-2026-11-14-forfar",
@@ -40151,7 +40647,8 @@
    "kind": "edge",
    "p_avg": 0.5397,
    "fair": 1.4,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SC3-2026-11-14-kelty hearts",
@@ -40166,7 +40663,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SC3-2026-11-14-kelty hearts",
@@ -40181,7 +40679,8 @@
    "kind": "edge",
    "p_avg": 0.5143,
    "fair": 1.43,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SC3-2026-11-14-kelty hearts",
@@ -40196,7 +40695,8 @@
    "kind": "edge",
    "p_avg": 0.5673,
    "fair": 1.41,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SC3-2026-11-14-kelty hearts",
@@ -40211,7 +40711,8 @@
    "kind": "edge",
    "p_avg": 0.6383,
    "fair": 1.31,
-   "result": null
+   "result": 1,
+   "score": "0-1"
   },
   {
    "match_id": "SC3-2026-11-14-stirling",
@@ -40226,7 +40727,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "SC3-2026-11-14-stirling",
@@ -40241,7 +40743,8 @@
    "kind": "edge",
    "p_avg": 0.4857,
    "fair": 1.44,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "SC3-2026-11-14-stirling",
@@ -40256,7 +40759,8 @@
    "kind": "edge",
    "p_avg": 0.5427,
    "fair": 1.36,
-   "result": null
+   "result": 0,
+   "score": "2-1"
   },
   {
    "match_id": "SC3-2026-11-14-stirling",
@@ -40271,7 +40775,8 @@
    "kind": "edge",
    "p_avg": 0.4396,
    "fair": 1.63,
-   "result": null
+   "result": 1,
+   "score": "2-1"
   },
   {
    "match_id": "DNK-02d5f40630d0280cd520175f22b7a25c",
@@ -42536,7 +43041,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-0"
   },
   {
    "match_id": "L1-5c4d02e6c33579685bbf2dc7d4681777",
@@ -42656,7 +43162,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "1-2"
   },
   {
    "match_id": "SD-e2ef8588ac865f58030ef2d5a0ceea79",
@@ -42836,7 +43343,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "EC-2026-11-14-kidderminster",
@@ -42851,7 +43359,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.58,
-   "result": null
+   "result": 1,
+   "score": "1-1"
   },
   {
    "match_id": "EC-2026-11-14-scunthorpe",
@@ -42866,7 +43375,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 0,
+   "score": "1-1"
   },
   {
    "match_id": "NOR-c72d6aa66f46a3a8b8ebe13ed9c954ce",
@@ -47366,7 +47876,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-976d20d0bdfd5ebae5800d5ec4f8dedf",
@@ -47381,7 +47892,8 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.57,
-   "result": null
+   "result": 1,
+   "score": "2-0"
   },
   {
    "match_id": "SD-ba701174c6f1be511c4e1c9bb8e64da0",
@@ -52061,6 +52573,1161 @@
    "kind": "top",
    "p_avg": null,
    "fair": 1.51,
+   "result": null
+  },
+  {
+   "match_id": "PD-afae1c9d986e4ab2200dc9bd44b6b6c4",
+   "comp": "PD",
+   "date": "2026-11-23T20:00:00Z",
+   "home": "Levante",
+   "away": "Elche CF",
+   "key": "S:st:A:4.5",
+   "side": "Under",
+   "label": "Elche CF: σουτ στην εστία Under 4.5",
+   "p": 0.6368,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SA-bf921a2780e2a25201da8a3bfece84c4",
+   "comp": "SA",
+   "date": "2026-11-21T14:00:00Z",
+   "home": "Lazio",
+   "away": "Lecce",
+   "key": "S:sh:A:11.5",
+   "side": "Under",
+   "label": "Lecce: σουτ Under 11.5",
+   "p": 0.6389,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SA-be2fcabc408be29ca01ce92ab266f8b7",
+   "comp": "SA",
+   "date": "2026-11-22T11:30:00Z",
+   "home": "Juventus",
+   "away": "Venezia",
+   "key": "S:sh:T:26.5",
+   "side": "Over",
+   "label": "Σουτ Over 26.5",
+   "p": 0.632,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "SA-99776445d5a5f4ed008f9a6d6a1495b7",
+   "comp": "SA",
+   "date": "2026-11-23T19:45:00Z",
+   "home": "Monza",
+   "away": "Fiorentina",
+   "key": "S:sv:H:2.5",
+   "side": "Over",
+   "label": "Monza: αποκρούσεις Over 2.5",
+   "p": 0.6379,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SA-99776445d5a5f4ed008f9a6d6a1495b7",
+   "comp": "SA",
+   "date": "2026-11-23T19:45:00Z",
+   "home": "Monza",
+   "away": "Fiorentina",
+   "key": "S:fo:H:11.5",
+   "side": "Over",
+   "label": "Monza: Φάουλ Over 11.5",
+   "p": 0.6882,
+   "kind": "edge",
+   "p_avg": 0.443,
+   "fair": 1.45,
+   "result": null
+  },
+  {
+   "match_id": "SA-99776445d5a5f4ed008f9a6d6a1495b7",
+   "comp": "SA",
+   "date": "2026-11-23T19:45:00Z",
+   "home": "Monza",
+   "away": "Fiorentina",
+   "key": "S:fo:T:22.5",
+   "side": "Over",
+   "label": "Φάουλ Over 22.5",
+   "p": 0.6923,
+   "kind": "edge",
+   "p_avg": 0.4873,
+   "fair": 1.44,
+   "result": null
+  },
+  {
+   "match_id": "SA-99776445d5a5f4ed008f9a6d6a1495b7",
+   "comp": "SA",
+   "date": "2026-11-23T19:45:00Z",
+   "home": "Monza",
+   "away": "Fiorentina",
+   "key": "S:st:A:4.5",
+   "side": "Over",
+   "label": "Fiorentina: Σουτ στην εστία Over 4.5",
+   "p": 0.6084,
+   "kind": "edge",
+   "p_avg": 0.4657,
+   "fair": 1.64,
+   "result": null
+  },
+  {
+   "match_id": "BL-cae480fb1195f0032554a268cb80eb44",
+   "comp": "BL",
+   "date": "2026-11-20T19:30:00Z",
+   "home": "Bayern Munich",
+   "away": "1. FC Köln",
+   "key": "S:fo:T:16.5",
+   "side": "Over",
+   "label": "Φάουλ Over 16.5",
+   "p": 0.633,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "FL1-98fae24771271c96d5dd364e535405d2",
+   "comp": "FL1",
+   "date": "2026-11-22T19:45:00Z",
+   "home": "Marseille",
+   "away": "Le Mans FC",
+   "key": "S:fo:H:9.5",
+   "side": "Over",
+   "label": "Marseille: φάουλ Over 9.5",
+   "p": 0.6367,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "ELC-bed1f20084169c36d30d63f283640f79",
+   "comp": "ELC",
+   "date": "2026-11-21T12:30:00Z",
+   "home": "Norwich City",
+   "away": "Cardiff City",
+   "key": "S:sv:A:4.5",
+   "side": "Under",
+   "label": "Cardiff City: αποκρούσεις Under 4.5",
+   "p": 0.6321,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "DED-a620a95dde2d702247e888f21e2b1cf7",
+   "comp": "DED",
+   "date": "2026-11-21T17:45:00Z",
+   "home": "FC Utrecht",
+   "away": "SC Cambuur",
+   "key": "S:fo:T:26.5",
+   "side": "Over",
+   "label": "Φάουλ Over 26.5",
+   "p": 0.6385,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "DED-f73ffb41e418d1a67544b0fbf261693a",
+   "comp": "DED",
+   "date": "2026-11-22T11:15:00Z",
+   "home": "FC Twente Enschede",
+   "away": "Willem II",
+   "key": "S:sh:H:20.5",
+   "side": "Over",
+   "label": "FC Twente Enschede: Σουτ Over 20.5",
+   "p": 0.8,
+   "kind": "edge",
+   "p_avg": 0.1984,
+   "fair": 1.25,
+   "result": null
+  },
+  {
+   "match_id": "DED-8e33c1a370f9763723426e4f0aa0fdd0",
+   "comp": "DED",
+   "date": "2026-11-22T13:30:00Z",
+   "home": "Sparta Rotterdam",
+   "away": "AZ Alkmaar",
+   "key": "S:sv:1X2",
+   "side": "1",
+   "label": "Περισσότερα αποκρούσεις: Sparta Rotterdam",
+   "p": 0.6388,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "TUR-bc405017f004bace7b944216134e1660",
+   "comp": "TUR",
+   "date": "2026-11-21T10:30:00Z",
+   "home": "Genclerbirligi SK",
+   "away": "Gazişehir Gaziantep",
+   "key": "S:sh:H:15.5",
+   "side": "Under",
+   "label": "Genclerbirligi SK: σουτ Under 15.5",
+   "p": 0.6387,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "TUR-c1958a1dcd4f8228f4d09148fd6ea216",
+   "comp": "TUR",
+   "date": "2026-11-23T17:00:00Z",
+   "home": "Basaksehir",
+   "away": "Çorum FK",
+   "key": "H1:1X2",
+   "side": "2",
+   "label": "Ημίχρονο 2",
+   "p": 0.3654,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 2.74,
+   "result": null
+  },
+  {
+   "match_id": "L1-deb5feb11ba6d2e87bcf2f4183b255f3",
+   "comp": "L1",
+   "date": "2026-11-20T20:00:00Z",
+   "home": "Barnsley",
+   "away": "Sheffield Wednesday",
+   "key": "S:co:H:7.5",
+   "side": "Under",
+   "label": "Barnsley: κόρνερ Under 7.5",
+   "p": 0.6292,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.59,
+   "result": null
+  },
+  {
+   "match_id": "L1-fdf73f409e6889c50c880086f9e22463",
+   "comp": "L1",
+   "date": "2026-11-21T12:30:00Z",
+   "home": "Reading",
+   "away": "Bromley FC",
+   "key": "S:st:T:8.5",
+   "side": "Over",
+   "label": "Σουτ στην εστία Over 8.5",
+   "p": 0.6356,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L1-cdd23827ef6ca68facc8bc816be1071f",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Bradford City",
+   "away": "Doncaster Rovers",
+   "key": "S:fo:T:23.5",
+   "side": "Over",
+   "label": "Φάουλ Over 23.5",
+   "p": 0.6886,
+   "kind": "edge",
+   "p_avg": 0.5116,
+   "fair": 1.45,
+   "result": null
+  },
+  {
+   "match_id": "L1-fe5c6cab2661eeee81206fc4b0a45146",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Burton Albion",
+   "away": "Luton",
+   "key": "S:co:1X2",
+   "side": "2",
+   "label": "Περισσότερα κόρνερ: Luton",
+   "p": 0.6386,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L1-2d2417d5502911e6fb9d07bd2ab55c61",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Cambridge United",
+   "away": "Stockport County FC",
+   "key": "S:st:H:3.5",
+   "side": "Over",
+   "label": "Cambridge United: σουτ στην εστία Over 3.5",
+   "p": 0.636,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L1-52aeec897cf4ca72271d885db60fc912",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Huddersfield Town",
+   "away": "Leicester City",
+   "key": "H1:OU1.5",
+   "side": "Under",
+   "label": "Α' ημίχρονο Under 1.5",
+   "p": 0.6379,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L1-52aeec897cf4ca72271d885db60fc912",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Huddersfield Town",
+   "away": "Leicester City",
+   "key": "S:sh:A:12.5",
+   "side": "Under",
+   "label": "Leicester City: Σουτ Under 12.5",
+   "p": 0.6437,
+   "kind": "edge",
+   "p_avg": 0.5342,
+   "fair": 1.55,
+   "result": null
+  },
+  {
+   "match_id": "L1-3fc3d00fb5c3e8331f6f83ad2615c569",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Leyton Orient",
+   "away": "Wimbledon",
+   "key": "S:co:T:9.5",
+   "side": "Over",
+   "label": "Κόρνερ Over 9.5",
+   "p": 0.6345,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "L1-3fc3d00fb5c3e8331f6f83ad2615c569",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Leyton Orient",
+   "away": "Wimbledon",
+   "key": "S:sh:A:12.5",
+   "side": "Under",
+   "label": "Wimbledon: Σουτ Under 12.5",
+   "p": 0.635,
+   "kind": "edge",
+   "p_avg": 0.5342,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L1-8b0a9e9635075014926f341e23a85adb",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Mansfield Town",
+   "away": "Milton Keynes Dons",
+   "key": "S:st:A:4.5",
+   "side": "Under",
+   "label": "Milton Keynes Dons: σουτ στην εστία Under 4.5",
+   "p": 0.6356,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L1-2a5df2ced869a93c689d1912080887c5",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Oxford United",
+   "away": "Wycombe Wanderers",
+   "key": "S:co:T:12.5",
+   "side": "Under",
+   "label": "Κόρνερ Under 12.5",
+   "p": 0.6278,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.59,
+   "result": null
+  },
+  {
+   "match_id": "L1-2a5df2ced869a93c689d1912080887c5",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Oxford United",
+   "away": "Wycombe Wanderers",
+   "key": "S:fo:T:24.5",
+   "side": "Over",
+   "label": "Φάουλ Over 24.5",
+   "p": 0.6778,
+   "kind": "edge",
+   "p_avg": 0.4343,
+   "fair": 1.48,
+   "result": null
+  },
+  {
+   "match_id": "L1-2a5df2ced869a93c689d1912080887c5",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Oxford United",
+   "away": "Wycombe Wanderers",
+   "key": "S:fo:H:10.5",
+   "side": "Over",
+   "label": "Oxford United: Φάουλ Over 10.5",
+   "p": 0.7294,
+   "kind": "edge",
+   "p_avg": 0.5906,
+   "fair": 1.37,
+   "result": null
+  },
+  {
+   "match_id": "L1-f437c9bc8352d36878e3117027ab142f",
+   "comp": "L1",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Plymouth Argyle",
+   "away": "Peterborough United",
+   "key": "S:fo:A:9.5",
+   "side": "Over",
+   "label": "Peterborough United: φάουλ Over 9.5",
+   "p": 0.6331,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "BL2-1773ac462fd3a3c4f0106f744117a936",
+   "comp": "BL2",
+   "date": "2026-11-22T12:30:00Z",
+   "home": "Karlsruher SC",
+   "away": "VfL Osnabrück",
+   "key": "S:fo:T:24.5",
+   "side": "Under",
+   "label": "Φάουλ Under 24.5",
+   "p": 0.639,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-fabb494cc1ebe6de14b1d38f9a34b091",
+   "comp": "SD",
+   "date": "2026-11-20T19:30:00Z",
+   "home": "Andorra CF",
+   "away": "Leganés",
+   "key": "S:sv:H:2.5",
+   "side": "Under",
+   "label": "Andorra CF: αποκρούσεις Under 2.5",
+   "p": 0.6327,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "SD-fabb494cc1ebe6de14b1d38f9a34b091",
+   "comp": "SD",
+   "date": "2026-11-20T19:30:00Z",
+   "home": "Andorra CF",
+   "away": "Leganés",
+   "key": "S:sh:A:11.5",
+   "side": "Under",
+   "label": "Leganés: Σουτ Under 11.5",
+   "p": 0.7349,
+   "kind": "edge",
+   "p_avg": 0.5132,
+   "fair": 1.36,
+   "result": null
+  },
+  {
+   "match_id": "SD-e2ef8588ac865f58030ef2d5a0ceea79",
+   "comp": "SD",
+   "date": "2026-11-21T13:00:00Z",
+   "home": "Sabadell FC",
+   "away": "Granada CF",
+   "key": "S:co:1X2",
+   "side": "1",
+   "label": "Περισσότερα κόρνερ: Sabadell FC",
+   "p": 0.635,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-c69ef5cf8bce018e5b2bcea9872e54b3",
+   "comp": "SD",
+   "date": "2026-11-21T15:15:00Z",
+   "home": "Real Sociedad B",
+   "away": "Cádiz CF",
+   "key": "S:co:1X2",
+   "side": "1",
+   "label": "Περισσότερα κόρνερ: Real Sociedad B",
+   "p": 0.6379,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-ba701174c6f1be511c4e1c9bb8e64da0",
+   "comp": "SD",
+   "date": "2026-11-21T17:30:00Z",
+   "home": "CD Castellón",
+   "away": "CD Eldense",
+   "key": "S:co:T:10.5",
+   "side": "Under",
+   "label": "Κόρνερ Under 10.5",
+   "p": 0.6375,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-ba701174c6f1be511c4e1c9bb8e64da0",
+   "comp": "SD",
+   "date": "2026-11-21T17:30:00Z",
+   "home": "CD Castellón",
+   "away": "CD Eldense",
+   "key": "S:sh:T:26.5",
+   "side": "Under",
+   "label": "Σουτ Under 26.5",
+   "p": 0.6821,
+   "kind": "edge",
+   "p_avg": 0.5351,
+   "fair": 1.47,
+   "result": null
+  },
+  {
+   "match_id": "SD-43f5122119133c6e63f2d99176c555e6",
+   "comp": "SD",
+   "date": "2026-11-21T20:00:00Z",
+   "home": "Tenerife",
+   "away": "Mallorca",
+   "key": "S:fo:A:15.5",
+   "side": "Under",
+   "label": "Mallorca: φάουλ Under 15.5",
+   "p": 0.6359,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-43f5122119133c6e63f2d99176c555e6",
+   "comp": "SD",
+   "date": "2026-11-21T20:00:00Z",
+   "home": "Tenerife",
+   "away": "Mallorca",
+   "key": "S:sh:H:13.5",
+   "side": "Under",
+   "label": "Tenerife: Σουτ Under 13.5",
+   "p": 0.7389,
+   "kind": "edge",
+   "p_avg": 0.4454,
+   "fair": 1.35,
+   "result": null
+  },
+  {
+   "match_id": "SD-a71098c545fa2df8b0c32df17d8a7458",
+   "comp": "SD",
+   "date": "2026-11-22T13:00:00Z",
+   "home": "Córdoba",
+   "away": "Oviedo",
+   "key": "S:sh:T:26.5",
+   "side": "Over",
+   "label": "Σουτ Over 26.5",
+   "p": 0.7051,
+   "kind": "edge",
+   "p_avg": 0.4649,
+   "fair": 1.42,
+   "result": null
+  },
+  {
+   "match_id": "SD-ee7af5aaba39b23210e98e1cb8faadf1",
+   "comp": "SD",
+   "date": "2026-11-22T15:15:00Z",
+   "home": "Sporting Gijón",
+   "away": "Las Palmas",
+   "key": "S:sv:H:1.5",
+   "side": "Over",
+   "label": "Sporting Gijón: αποκρούσεις Over 1.5",
+   "p": 0.6328,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "SD-ee7af5aaba39b23210e98e1cb8faadf1",
+   "comp": "SD",
+   "date": "2026-11-22T15:15:00Z",
+   "home": "Sporting Gijón",
+   "away": "Las Palmas",
+   "key": "S:sh:A:11.5",
+   "side": "Under",
+   "label": "Las Palmas: Σουτ Under 11.5",
+   "p": 0.7128,
+   "kind": "edge",
+   "p_avg": 0.5132,
+   "fair": 1.4,
+   "result": null
+  },
+  {
+   "match_id": "SD-ee7af5aaba39b23210e98e1cb8faadf1",
+   "comp": "SD",
+   "date": "2026-11-22T15:15:00Z",
+   "home": "Sporting Gijón",
+   "away": "Las Palmas",
+   "key": "S:fo:T:27.5",
+   "side": "Under",
+   "label": "Φάουλ Under 27.5",
+   "p": 0.6834,
+   "kind": "edge",
+   "p_avg": 0.5484,
+   "fair": 1.46,
+   "result": null
+  },
+  {
+   "match_id": "SD-d1a26f1644faa09a236a5037423f976a",
+   "comp": "SD",
+   "date": "2026-11-22T17:30:00Z",
+   "home": "Celta Fortuna",
+   "away": "Real Valladolid CF",
+   "key": "H1:OU1.5",
+   "side": "Over",
+   "label": "Α' ημίχρονο Over 1.5",
+   "p": 0.3523,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 2.84,
+   "result": null
+  },
+  {
+   "match_id": "SD-b05eb76c85a149aae6c592e1cacc348c",
+   "comp": "SD",
+   "date": "2026-11-22T17:30:00Z",
+   "home": "Girona FC",
+   "away": "SD Eibar",
+   "key": "S:sh:T:30.5",
+   "side": "Under",
+   "label": "Σουτ Under 30.5",
+   "p": 0.6336,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "SD-b05eb76c85a149aae6c592e1cacc348c",
+   "comp": "SD",
+   "date": "2026-11-22T17:30:00Z",
+   "home": "Girona FC",
+   "away": "SD Eibar",
+   "key": "S:fo:H:13.5",
+   "side": "Under",
+   "label": "Girona FC: Φάουλ Under 13.5",
+   "p": 0.7393,
+   "kind": "edge",
+   "p_avg": 0.5338,
+   "fair": 1.35,
+   "result": null
+  },
+  {
+   "match_id": "SD-3de909cc36eaaa664e934686e6b26105",
+   "comp": "SD",
+   "date": "2026-11-22T20:00:00Z",
+   "home": "Burgos CF",
+   "away": "Albacete",
+   "key": "S:sh:A:12.5",
+   "side": "Under",
+   "label": "Albacete: Σουτ Under 12.5",
+   "p": 0.7105,
+   "kind": "edge",
+   "p_avg": 0.605,
+   "fair": 1.41,
+   "result": null
+  },
+  {
+   "match_id": "SD-f024fef3ca959505d2bc7e75154dbedf",
+   "comp": "SD",
+   "date": "2026-11-23T19:30:00Z",
+   "home": "AD Ceuta FC",
+   "away": "Almería",
+   "key": "S:st:H:3.5",
+   "side": "Over",
+   "label": "AD Ceuta FC: σουτ στην εστία Over 3.5",
+   "p": 0.6386,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "SD-f024fef3ca959505d2bc7e75154dbedf",
+   "comp": "SD",
+   "date": "2026-11-23T19:30:00Z",
+   "home": "AD Ceuta FC",
+   "away": "Almería",
+   "key": "S:fo:A:13.5",
+   "side": "Over",
+   "label": "Almería: Φάουλ Over 13.5",
+   "p": 0.6762,
+   "kind": "edge",
+   "p_avg": 0.4988,
+   "fair": 1.48,
+   "result": null
+  },
+  {
+   "match_id": "SD-f024fef3ca959505d2bc7e75154dbedf",
+   "comp": "SD",
+   "date": "2026-11-23T19:30:00Z",
+   "home": "AD Ceuta FC",
+   "away": "Almería",
+   "key": "S:fo:T:26.5",
+   "side": "Over",
+   "label": "Φάουλ Over 26.5",
+   "p": 0.6819,
+   "kind": "edge",
+   "p_avg": 0.524,
+   "fair": 1.47,
+   "result": null
+  },
+  {
+   "match_id": "SD-f024fef3ca959505d2bc7e75154dbedf",
+   "comp": "SD",
+   "date": "2026-11-23T19:30:00Z",
+   "home": "AD Ceuta FC",
+   "away": "Almería",
+   "key": "S:sh:H:13.5",
+   "side": "Over",
+   "label": "AD Ceuta FC: Σουτ Over 13.5",
+   "p": 0.7121,
+   "kind": "edge",
+   "p_avg": 0.5546,
+   "fair": 1.4,
+   "result": null
+  },
+  {
+   "match_id": "FL2-230a224cafcb332f3a1951e80d09f886",
+   "comp": "FL2",
+   "date": "2026-11-20T19:00:00Z",
+   "home": "Nancy",
+   "away": "Dijon",
+   "key": "S:st:1X2",
+   "side": "1",
+   "label": "Περισσότερα σουτ στην εστία: Nancy",
+   "p": 0.6381,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "FL2-87ff23cf75b8a3552d4331f64c818f9c",
+   "comp": "FL2",
+   "date": "2026-11-23T19:45:00Z",
+   "home": "Sochaux",
+   "away": "USL Dunkerque",
+   "key": "S:co:T:10.5",
+   "side": "Under",
+   "label": "Κόρνερ Under 10.5",
+   "p": 0.638,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "FL2-87ff23cf75b8a3552d4331f64c818f9c",
+   "comp": "FL2",
+   "date": "2026-11-23T19:45:00Z",
+   "home": "Sochaux",
+   "away": "USL Dunkerque",
+   "key": "S:fo:A:15.5",
+   "side": "Under",
+   "label": "USL Dunkerque: Φάουλ Under 15.5",
+   "p": 0.6778,
+   "kind": "edge",
+   "p_avg": 0.5337,
+   "fair": 1.48,
+   "result": null
+  },
+  {
+   "match_id": "L2-5eda3cdc5ba1baa4ff196fd8ff66aa11",
+   "comp": "L2",
+   "date": "2026-11-21T12:30:00Z",
+   "home": "Gillingham",
+   "away": "Crewe Alexandra",
+   "key": "S:st:T:8.5",
+   "side": "Under",
+   "label": "Σουτ στην εστία Under 8.5",
+   "p": 0.6389,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L2-897f4fab3b843d48bd848f4b355f8985",
+   "comp": "L2",
+   "date": "2026-11-21T12:30:00Z",
+   "home": "Newport County",
+   "away": "Swindon Town",
+   "key": "S:co:H:7.5",
+   "side": "Under",
+   "label": "Newport County: κόρνερ Under 7.5",
+   "p": 0.6342,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "L2-897f4fab3b843d48bd848f4b355f8985",
+   "comp": "L2",
+   "date": "2026-11-21T12:30:00Z",
+   "home": "Newport County",
+   "away": "Swindon Town",
+   "key": "S:sh:H:12.5",
+   "side": "Over",
+   "label": "Newport County: Σουτ Over 12.5",
+   "p": 0.7298,
+   "kind": "edge",
+   "p_avg": 0.5723,
+   "fair": 1.37,
+   "result": null
+  },
+  {
+   "match_id": "L2-bfc8aeef6b6797f9109caa13fb3ba1e3",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Accrington Stanley",
+   "away": "Salford City",
+   "key": "S:sh:A:13.5",
+   "side": "Under",
+   "label": "Salford City: σουτ Under 13.5",
+   "p": 0.6354,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L2-bfc8aeef6b6797f9109caa13fb3ba1e3",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Accrington Stanley",
+   "away": "Salford City",
+   "key": "S:fo:H:11.5",
+   "side": "Over",
+   "label": "Accrington Stanley: Φάουλ Over 11.5",
+   "p": 0.7319,
+   "kind": "edge",
+   "p_avg": 0.4684,
+   "fair": 1.37,
+   "result": null
+  },
+  {
+   "match_id": "L2-e3fa0f24bc7295cf598f156d7d489407",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Barnet",
+   "away": "Port Vale",
+   "key": "S:fo:T:24.5",
+   "side": "Over",
+   "label": "Φάουλ Over 24.5",
+   "p": 0.6325,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "L2-e3fa0f24bc7295cf598f156d7d489407",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Barnet",
+   "away": "Port Vale",
+   "key": "S:sh:A:12.5",
+   "side": "Under",
+   "label": "Port Vale: Σουτ Under 12.5",
+   "p": 0.7351,
+   "kind": "edge",
+   "p_avg": 0.5979,
+   "fair": 1.36,
+   "result": null
+  },
+  {
+   "match_id": "L2-5f4b862a78fca34eabfd8dcb2b5f5c77",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Cheltenham Town",
+   "away": "Bristol Rovers",
+   "key": "S:ca:A:2.5",
+   "side": "Under",
+   "label": "Bristol Rovers: κάρτες Under 2.5",
+   "p": 0.6387,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L2-5f4b862a78fca34eabfd8dcb2b5f5c77",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Cheltenham Town",
+   "away": "Bristol Rovers",
+   "key": "S:sh:H:11.5",
+   "side": "Under",
+   "label": "Cheltenham Town: Σουτ Under 11.5",
+   "p": 0.6763,
+   "kind": "edge",
+   "p_avg": 0.3419,
+   "fair": 1.48,
+   "result": null
+  },
+  {
+   "match_id": "L2-b417271a895e80add1563e925438076b",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Chesterfield FC",
+   "away": "Shrewsbury Town",
+   "key": "S:sh:T:22.5",
+   "side": "Over",
+   "label": "Σουτ Over 22.5",
+   "p": 0.6314,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "L2-b417271a895e80add1563e925438076b",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Chesterfield FC",
+   "away": "Shrewsbury Town",
+   "key": "S:co:A:4.5",
+   "side": "Under",
+   "label": "Shrewsbury Town: Κόρνερ Under 4.5",
+   "p": 0.6889,
+   "kind": "edge",
+   "p_avg": 0.5423,
+   "fair": 1.45,
+   "result": null
+  },
+  {
+   "match_id": "L2-b417271a895e80add1563e925438076b",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Chesterfield FC",
+   "away": "Shrewsbury Town",
+   "key": "S:sh:A:12.5",
+   "side": "Under",
+   "label": "Shrewsbury Town: Σουτ Under 12.5",
+   "p": 0.7187,
+   "kind": "edge",
+   "p_avg": 0.5979,
+   "fair": 1.39,
+   "result": null
+  },
+  {
+   "match_id": "L2-4ca3c019f8f2a4433bc49a45fa1f83a7",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Tranmere Rovers",
+   "away": "Colchester United",
+   "key": "S:fo:T:22.5",
+   "side": "Over",
+   "label": "Φάουλ Over 22.5",
+   "p": 0.6375,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L2-5339921d3854c4fa1250acaeb92ed143",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Crawley Town",
+   "away": "Fleetwood Town",
+   "key": "S:sh:A:15.5",
+   "side": "Under",
+   "label": "Fleetwood Town: σουτ Under 15.5",
+   "p": 0.6324,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "L2-5339921d3854c4fa1250acaeb92ed143",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Crawley Town",
+   "away": "Fleetwood Town",
+   "key": "S:co:A:3.5",
+   "side": "Over",
+   "label": "Fleetwood Town: Κόρνερ Over 3.5",
+   "p": 0.7137,
+   "kind": "edge",
+   "p_avg": 0.6233,
+   "fair": 1.4,
+   "result": null
+  },
+  {
+   "match_id": "L2-db5354b1f258971c55fdbff9e66be409",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Oldham Athletic",
+   "away": "Exeter City",
+   "key": "S:co:T:10.5",
+   "side": "Under",
+   "label": "Κόρνερ Under 10.5",
+   "p": 0.6382,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L2-d33f731519d5a31acdc68c540fd09b0c",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Grimsby Town",
+   "away": "Rotherham United",
+   "key": "S:ca:1X2",
+   "side": "2",
+   "label": "Περισσότερα κάρτες: Rotherham United",
+   "p": 0.6311,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.58,
+   "result": null
+  },
+  {
+   "match_id": "L2-d33f731519d5a31acdc68c540fd09b0c",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Grimsby Town",
+   "away": "Rotherham United",
+   "key": "S:sh:H:14.5",
+   "side": "Over",
+   "label": "Grimsby Town: Σουτ Over 14.5",
+   "p": 0.6836,
+   "kind": "edge",
+   "p_avg": 0.4034,
+   "fair": 1.46,
+   "result": null
+  },
+  {
+   "match_id": "L2-8dc06a818c2ebd92bac4885d985fdc77",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Northampton Town",
+   "away": "Rochdale",
+   "key": "S:sh:H:17.5",
+   "side": "Under",
+   "label": "Northampton Town: σουτ Under 17.5",
+   "p": 0.6389,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.57,
+   "result": null
+  },
+  {
+   "match_id": "L2-8dc06a818c2ebd92bac4885d985fdc77",
+   "comp": "L2",
+   "date": "2026-11-21T15:00:00Z",
+   "home": "Northampton Town",
+   "away": "Rochdale",
+   "key": "S:st:A:2.5",
+   "side": "Under",
+   "label": "Rochdale: Σουτ στην εστία Under 2.5",
+   "p": 0.537,
+   "kind": "edge",
+   "p_avg": 0.3323,
+   "fair": 1.86,
+   "result": null
+  },
+  {
+   "match_id": "DNK-7f6119974c72b322830f02300a6ea872",
+   "comp": "DNK",
+   "date": "2026-11-23T18:00:00Z",
+   "home": "Brondby IF",
+   "away": "FC Midtjylland",
+   "key": "H1:OU1.5",
+   "side": "Under",
+   "label": "Α' ημίχρονο Under 1.5",
+   "p": 0.6013,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.66,
+   "result": null
+  },
+  {
+   "match_id": "SWE-4247cf3f5ad70603706059703826171e",
+   "comp": "SWE",
+   "date": "2026-11-23T18:00:00Z",
+   "home": "Hammarby IF",
+   "away": "IFK Goteborg",
+   "key": "H1:1X2",
+   "side": "1",
+   "label": "Ημίχρονο 1",
+   "p": 0.4823,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 2.07,
+   "result": null
+  },
+  {
+   "match_id": "SWE-83a9063e3314d3e820aabb99941483d0",
+   "comp": "SWE",
+   "date": "2026-11-23T18:00:00Z",
+   "home": "Örgryte IS",
+   "away": "Kalmar FF",
+   "key": "H1:1X2",
+   "side": "1",
+   "label": "Ημίχρονο 1",
+   "p": 0.3438,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 2.91,
+   "result": null
+  },
+  {
+   "match_id": "POL-73d2a041ea30b098a5826806dc784eb4",
+   "comp": "POL",
+   "date": "2026-11-23T18:00:00Z",
+   "home": "Wieczysta Kraków",
+   "away": "Motor Lublin",
+   "key": "H1:OU1.5",
+   "side": "Under",
+   "label": "Α' ημίχρονο Under 1.5",
+   "p": 0.5441,
+   "kind": "top",
+   "p_avg": null,
+   "fair": 1.84,
    "result": null
   }
  ],
